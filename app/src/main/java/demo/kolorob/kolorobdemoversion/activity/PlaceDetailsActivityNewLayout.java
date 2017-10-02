@@ -1,14 +1,11 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -79,7 +76,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -125,6 +121,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
+import static demo.kolorob.kolorobdemoversion.R.id.compare_layoutedu;
 
 
 /**
@@ -137,232 +134,122 @@ import tourguide.tourguide.ToolTip;
 /*
 * Debug to understand this activity. It has all the codes no fragment been used for search/bazar or compare or map.Since earlier structure
 * got changed multiple times so it would be wise to check which part is doing what using debug*/
+
+
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
-ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
-    ArrayList<StoredArea>storedAreaArrayListall=new ArrayList<>();
-    ArrayList<StoredArea>storedAreas=new ArrayList<>();
-    EduNewDBTableMain educationNewTable;
-    ArrayList<EduNewModel> firstDataSet;
-    boolean mainedcalled=false;
-    TextView welcometext;
-    CheckedTextView ChangeArea;
-    int buttonHeights;
-    String[] left_part;
-    boolean doubleBackToExitPressedOnce = false;
-    TextView uptext;
-    LinearLayout wholeLayout;
-    String[] right_part;
-    String[] health_header;
-    private ListView health_compare_list, education_compare_list;
-    ArrayList<EduNewModel> secondDataSet;
-    ArrayList<HealthNewDBModelMain> firstDataSetHealth;
-    ArrayList<HealthNewDBModelMain> secondDataSetHealth;
-    ToggleButton toggleButton;
-
-    ProgressDialog dialog;
-
-    Double screenSize;
-
-    private static final int ANIM_INTERVAL = 150;
-    private static double VIEW_WIDTH;
-    private static boolean mapcalledstatus;
-    private LinearLayout llCatListHolder,svholder;
-    CategoryItem ci;
-    private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
-
-    private static FrameLayout map;
-
-    private int height;
-
-    private int spinCounter=0,spinCounter1=0;
-    private int primaryIconWidth;
-    private int locationNameId,subcategory;
-    private String locationName;
-    private String comapreData;
-    ScrollView sv;
-    ImageView compare_logo_image;
-    String firstData="",SecondData="";
-    Boolean InCompare=false;
-    private HealthNewDBTableMain healthServiceProviderTableNew;
-    private LinearLayout compare_layout;
-    CheckBox checkBox,checkBox2,checkLeft,checkRight;
-    LinearLayout compare_layoutedu;
-    boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,ngoclicked, jobclicked,religiousclicked=false;
-    private Toolbar toolbar;
-    TextView health_name2,health_name3,edu_name_ban,edu_name_ban22;
-
-
-    //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
-
-    Boolean Reviewgiven=false;
-    private DrawerLayout drawer;
-
-    Context context;
-    ArrayList <String>Headerholder=new ArrayList<>();
-GeoPoint location;
-
-    public GeoPoint getLocation() {
-        return location;
-    }
-
-    public void setLocation(GeoPoint location) {
-        this.location = location;
-    }
-
-    int[] flag2 =new int[15];
-
-    public void setCi(CategoryItem ci) {
-        this.ci = ci;
-    }
-
-    public static int currentCategoryID;
-
-    private String placeChoice;
-
-    private ImageButton MapButton,ListButton,SearchButton,CompareButton;
-
-    ArrayList<CategoryItem> categoryList;
-    Boolean SearchClicked=false,MapClicked=true,ListClicked=false,CompareClicked=false;
     private Context con;
 
-    public String getPlaceChoice() {
-        return placeChoice;
-    }
-    String usernames = "kolorobapp";
-    String password = "2Jm!4jFe3WgBZKEN";
-    public void setPlaceChoice(String placeChoice) {
-        this.placeChoice = placeChoice;
-    }
-    EditText Searchall;
+    String username = "kolorobapp", password = "2Jm!4jFe3WgBZKEN";
 
+    ArrayList <StoredArea> storedAreaArrayList = new ArrayList<>();
+    ArrayList <StoredArea> storedAreaArrayListall = new ArrayList<>();
+    ArrayList <StoredArea> storedAreas = new ArrayList<>();
+    ArrayList <EduNewModel> firstDataSetEdu, secondDataSetEdu;
+    ArrayList <HealthNewDBModelMain> firstDataSetHealth, secondDataSetHealth;
+    ArrayList <CategoryItem> categoryList;
+
+    ArrayList <String> headerHolder = new ArrayList<>();
+    ArrayList <String> clicked = new ArrayList<>();
+    ArrayList <String> filter = new ArrayList<>();
+    ArrayList <String> filter2 = new ArrayList<>();
+
+    ArrayList <AllHolder> allHolders = new ArrayList<>();
+    ArrayList <AllHolder> catHolders = new ArrayList<>();
+    ArrayList <AllHolder> subcatHolders = new ArrayList<>();
+    private ArrayList <Subcatholder> tagHolders = new ArrayList<>();
+
+    private ArrayList <FinancialNewDBModel> fetchedFin;
+    private ArrayList <EduNewModel> fetchedEdu;
+    private ArrayList <LegalAidNewDBModel> fetchedLegal;
+    private ArrayList <EntertainmentNewDBModel> fetchedEnt;
+    private ArrayList <HealthNewDBModelMain> fetchedHealth;
+    public ArrayList <GovernmentNewDBModel> fetchedGov;
+    private ArrayList <NGONewDBModel> fetchedNgo;
+    private ArrayList <ReligiousNewDBModel> fetchedReligious;
+
+
+    TextView welcomeText, upText;
+    TextView health_name1, health_name2, edu_name1, edu_name2;
+    TextView tvName;
+
+    CheckedTextView changeArea;
+
+    private int primaryIconWidth;
+    private int subcategory;
+
+    String [] left_part, right_part, health_header;
+
+    boolean doubleBackToExitPressedOnce, reviewGiven, selected, inCompare;
+    boolean eduClicked, healthClicked, entClicked, finClicked, govClicked, legalClicked, ngoClicked, shelterClicked;
+    Boolean searchClicked, listClicked, compareClicked, mapClicked = true;
+    boolean filterClicked, catStatus;
+    Boolean firstRun, firstRunUpdate;
+    Boolean navigationCalled, navigationCalledOnce;
+
+    LinearLayout wholeLayout, compare_layout, compare_layout_edu;
+    LinearLayout fHolder, fLeft, fRight;
+    private LinearLayout llCatListHolder, svHolder;
+
+    RelativeLayout catHolder, searchViewHolder, filterHolder;
+
+    private ListView health_compare_list, education_compare_list;
+    ListView allItemList;
+
+    ToggleButton toggleButton;
+    Double screenSize;
+    private static final int ANIM_INTERVAL = 150;
+    private static double VIEW_WIDTH;
+
+    private static boolean mapcalledstatus;
+
+
+    private static FrameLayout map;
+    ScrollView sv;
+    private String comapareData, firstData = "", secondData = "";
+
+
+    CheckBox checkBox1, checkBox2, checkLeft, checkRight;
+    CheckBox negotiable;
+    private Toolbar toolbar;
+    private DrawerLayout drawer;
+
+    GeoPoint location;
+
+
+    int[] flag2 = new int[15];
+
+    public static int currentCategoryID;
+    private String placeChoice, filterWord, checkNum;
+    private ImageButton mapButton, listButton, searchButton, compareButton;
+
+
+    EditText searchAll, filterText;
     ListViewAdapterAllCategories adapter;
-    EditText filterText;
-    ListView allitemList;
-    String filterword;
 
     private int smal;
-
-    int snumber=0;
-
+    int value, height, width, sNumber, buttonHeight, buttonWidth;
 
 
-    public int getSnumber() {
-        return snumber;
-    }
+    String id1, id2, id3, id4;
 
-    public void setSnumber(int snumber) {
-        this.snumber = snumber;
-    }
-
-
-    TextView tvName;
-    public void setFilterword(String filterword) {
-        this.filterword = filterword;
-    }
-
-    boolean catstatus=false;
-    int filcatid;
-    RelativeLayout catholder;
-
-    Boolean NavigationCalled,NavigationCalledOnce;
-    LinearLayout fholder,fleft,fright;
-    RelativeLayout searchviewholder,filterholder;
-    ArrayList<AllHolder>allHolders=new ArrayList<>();
-    ArrayList<AllHolder>catHolders=new ArrayList<>();
-    ArrayList<AllHolder>subcatHolders=new ArrayList<>();
-    private ArrayList<FinancialNewDBModel>fetchedfin;
-    private ArrayList<EduNewModel>fetchededu;
-    private ArrayList<LegalAidNewDBModel>fetchedleg;
-    private ArrayList<EntertainmentNewDBModel>fetchedent;
-    private ArrayList<HealthNewDBModelMain>fetchedhel;
-    public ArrayList<GovernmentNewDBModel>fetchedgov;
-    private ArrayList<Subcatholder>subholders=new ArrayList<>();
-    private ArrayList<NGONewDBModel> fetchedngo;
-    private ArrayList<ReligiousNewDBModel> fetchedreligious;
-
-
-    RadioGroup fgrp1,fgrp2;
-    NavigationView navigationView;
-    int va;
-    ArrayList<String>filter=new ArrayList<>();
-    ArrayList<String>filter2=new ArrayList<>();
-    public int getFilcatid() {
-        return filcatid;
-    }
-
-    public void setFilcatid(int filcatid) {
-        this.filcatid = filcatid;
-    }
-
-    int val;
-    String checknum;
     Boolean flag;
-    boolean filterclicked=false;
-    int width;
+    boolean mapFirst = true;
 
-    int buttonWidth=0;
-    String idx,idxx,idxxx,idxxxx;
-   // ArrayList<HealthNewDBModelMain> HEL=new ArrayList<>();
-    //ArrayList<LegalAidNewDBModel>LEG=new ArrayList<>();
-    //ArrayList<EntertainmentNewDBModel>ENT =new ArrayList<>();
-   // ArrayList<FinancialNewDBModel>FIN=new ArrayList<>();
-   // ArrayList<GovernmentNewDBModel>GOV=new ArrayList<>();
-   ActionBar ab;
-    boolean mapfirst=true;
-    ArrayList <String>clicked=new ArrayList<>();
     String comment = "";
     MapFragmentOSM mapFragment;
-    CheckBox negotiable;
-    String wardId;
-    View view,view2;
-    String Areakeyword;
-    String lat, lon;
-    String AreaName;
+
+    String wardId, areaKeyword, lat, lon, areaName;
+    View view, view2;
+
     ActionBarDrawerToggle toggle;
-    Boolean firstRun, firstRunUpdate;
-    StoredAreaTable storedAreaTable;
 
-    public String getAreaName() {
-        return AreaName;
-    }
-
-    public void setAreaName(String areaName) {
-        AreaName = areaName;
-    }
+    RadioGroup leftGroup, rightGroup;
+    NavigationView navigationView;
 
     private Animation mEnterAnimation, mExitAnimation;
-    /*public String getMergedLocation() {
-        return mergedLocation;
-    }
 
-    public void setMergedLocation(String mergedLocation) {
-        this.mergedLocation = mergedLocation;
-    }*/
 
-    public ArrayList<StoredArea> getStoredAreaArrayList() {
-        return storedAreaArrayList;
-    }
-
-    public void setStoredAreaArrayList(ArrayList<StoredArea> storedAreaArrayList) {
-        this.storedAreaArrayList = storedAreaArrayList;
-    }
-
-    public String getLat() {
-        return lat;
-    }
-
-    public void setLat(String lat) {
-        this.lat = lat;
-    }
-
-    public String getLon() {
-        return lon;
-    }
-
-    public void setLon(String lon) {
-        this.lon = lon;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -409,23 +296,23 @@ GeoPoint location;
             //String[] locsplit = mergedLocation.split(":");
             setLocation(new GeoPoint(Double.parseDouble(storedAreas.get(0).getLat()), Double.parseDouble(storedAreas.get(0).getLon())));
 
-            NavigationCalled = false;
-            NavigationCalledOnce = false;
+            navigationCalled = false;
+            navigationCalledOnce = false;
 
-            val = settings.getInt("KValue", 0);
-            Log.e("ASinplaceDetails", String.valueOf(val));
+            value = settings.getInt("KValue", 0);
+            Log.e("ASinplaceDetails", String.valueOf(value));
             DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
             width = displayMetrics.widthPixels;
             height = displayMetrics.heightPixels;
             setContentView(R.layout.activity_place_detailnew);
-            fholder = (LinearLayout) findViewById(R.id.LinearLayoutfilter);
+            fHolder = (LinearLayout) findViewById(R.id.LinearLayoutfilter);
             con = this;
             MapButton = (ImageButton) findViewById(R.id.mapbutton);
             ListButton = (ImageButton) findViewById(R.id.listbutton);
             SearchButton = (ImageButton) findViewById(R.id.searchbutton);
             CompareButton = (ImageButton) findViewById(R.id.compare);
-            searchviewholder = (RelativeLayout) findViewById(R.id.searchholder);
+            searchViewHolder = (RelativeLayout) findViewById(R.id.searchholder);
 
 
             buttonWidth = width / 4;
@@ -446,7 +333,7 @@ GeoPoint location;
             // frameLayouts.setEnabled(false);
 
             // explist=(LinearLayout)findViewById(R.id.explist);
-            catholder = (RelativeLayout) findViewById(R.id.categoryfilterholder);
+            catHolder = (RelativeLayout) findViewById(R.id.categoryfilterholder);
             // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
             //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
             final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
@@ -521,7 +408,7 @@ GeoPoint location;
             Searchall = (EditText) findViewById(R.id.searchall);
 
 
-            filterholder = (RelativeLayout) findViewById(R.id.filterholder);
+            filterHolder = (RelativeLayout) findViewById(R.id.filterholder);
             uptext=(TextView)findViewById(R.id.textView15);
             ChangeArea=(CheckedTextView)findViewById(R.id.changearea);
             uptext.setText("মেনু");
@@ -603,33 +490,33 @@ GeoPoint location;
             String AREA=getAreaName();
             AREA= AREA.replace(' ','\n');
             welcometext.setText(AREA);
-            health_name2 = (TextView) findViewById(R.id.health_name3);
-            health_name3 = (TextView) findViewById(R.id.health_name2);
-            edu_name_ban = (TextView) findViewById(R.id.edu_name_ban3);
-            edu_name_ban22 = (TextView) findViewById(R.id.edu_name_ban22);
+            health_name1 = (TextView) findViewById(R.id.health_name3);
+            health_name2 = (TextView) findViewById(R.id.health_name2);
+            edu_name1 = (TextView) findViewById(R.id.edu_name_ban3);
+            edu_name2 = (TextView) findViewById(R.id.edu_name_ban22);
             int size_b = 20;
             int size_s = 14;
             if (screenSize > 6.5) {
+                health_name1.setTextSize(size_b);
+                edu_name1.setTextSize(size_b);
+                edu_name2.setTextSize(size_b);
                 health_name2.setTextSize(size_b);
-                edu_name_ban.setTextSize(size_b);
-                edu_name_ban22.setTextSize(size_b);
-                health_name3.setTextSize(size_b);
             } else {
+                health_name1.setTextSize(size_s);
+                edu_name1.setTextSize(size_s);
+                edu_name2.setTextSize(size_s);
                 health_name2.setTextSize(size_s);
-                edu_name_ban.setTextSize(size_s);
-                edu_name_ban22.setTextSize(size_s);
-                health_name3.setTextSize(size_s);
             }
             compare_layout = (LinearLayout) findViewById(R.id.compare_layout);
-            compare_layoutedu = (LinearLayout) findViewById(R.id.compare_layoutedu);
+            compare_layoutedu = (LinearLayout) findViewById(compare_layoutedu);
             map = (FrameLayout) findViewById(R.id.map_fragment);
             map.setVisibility(View.VISIBLE);
             VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
 
             primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
 
-            fleft = (LinearLayout) findViewById(R.id.linearLayout1);
-            fright = (LinearLayout) findViewById(R.id.linearLayout2);
+            fLeft = (LinearLayout) findViewById(R.id.linearLayout1);
+            fRight = (LinearLayout) findViewById(R.id.linearLayout2);
 
             //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
             llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
@@ -725,14 +612,14 @@ GeoPoint location;
                         toggleButton.setVisibility(View.VISIBLE);
                         compare_layout.setVisibility(View.GONE);
                         compare_layoutedu.setVisibility(View.GONE);
-                        searchviewholder.setVisibility(View.VISIBLE);
+                        searchViewHolder.setVisibility(View.VISIBLE);
                     }
                     if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true || ngoclicked == true|| religiousclicked == true) {
 
-                        filterholder.setVisibility(View.VISIBLE);
+                        filterHolder.setVisibility(View.VISIBLE);
                         toggleButton.setVisibility(View.VISIBLE);
                     } else {
-                        filterholder.setVisibility(View.GONE);
+                        filterHolder.setVisibility(View.GONE);
                     }
                     svholder.setVisibility(View.VISIBLE);
                     sv.setVisibility(View.VISIBLE);
@@ -789,7 +676,7 @@ GeoPoint location;
 
 //                    subCatItemList.setVisibility(View.GONE);
 
-                        searchviewholder.setVisibility(View.GONE);
+                        searchViewHolder.setVisibility(View.GONE);
                         compare_layout.setVisibility(View.GONE);
                         compare_layoutedu.setVisibility(View.GONE);
                     }
@@ -813,7 +700,7 @@ GeoPoint location;
                         InCompare = false;
                         ListClicked = true;
                         CompareClicked = false;
-                        searchviewholder.setVisibility(View.GONE);
+                        searchViewHolder.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.VISIBLE);
 
                         if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
@@ -851,7 +738,7 @@ GeoPoint location;
                             map.setVisibility(View.VISIBLE);
                         }
 
-                        searchviewholder.setVisibility(View.GONE);
+                        searchViewHolder.setVisibility(View.GONE);
                         compare_layout.setVisibility(View.GONE);
                         compare_layoutedu.setVisibility(View.GONE);
 
@@ -972,7 +859,7 @@ GeoPoint location;
                                     .into(SearchButton);
                             map.setVisibility(View.GONE);
                             llCatListHolder.setVisibility(View.GONE);
-                            searchviewholder.setVisibility(View.GONE);
+                            searchViewHolder.setVisibility(View.GONE);
 
                             sv.setVisibility(View.GONE);
                             svholder.setVisibility(View.GONE);
@@ -1021,9 +908,9 @@ GeoPoint location;
     {
         if(currentCategoryID==10000)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
-            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+            comapareData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
             String delims = "[,]";
-            String[] tokens = comapreData.split(delims);
+            String[] tokens = comapareData.split(delims);
             firstData=tokens[0];
             SecondData=tokens[1];
             compare_layout.setVisibility(View.GONE);
@@ -1034,9 +921,9 @@ GeoPoint location;
 
         else {
             compare_layout.setVisibility(View.VISIBLE);
-            comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-            int size=comapreData.length();
-            String DataSet[]= comapreData.split(",");
+            comapareData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+            int size= comapareData.length();
+            String DataSet[]= comapareData.split(",");
             firstData=DataSet[0];
             SecondData=DataSet[1];
             compareHealth();
@@ -1140,7 +1027,7 @@ GeoPoint location;
                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Datas.split(",");
                             compare_Datas = multipule[1];
-                            idx=multipule[0];
+                            id1 =multipule[0];
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
                         }
                     }
@@ -1155,7 +1042,7 @@ GeoPoint location;
                         else {
                             String compare_Datac="";
                             compare_Datac=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-                            compare_Datac = compare_Datac+","+idx;
+                            compare_Datac = compare_Datac+","+ id1;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datac, 2);
                         }
                     }
@@ -1190,9 +1077,9 @@ GeoPoint location;
                 }
             }*/
             if(!healthServiceProviderItemNew.getCommonModel().getNameBn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getCommonModel().getNameBn().equals(""))
-                health_name3.setText(healthServiceProviderItemNew.getCommonModel().getNameBn());
+                health_name2.setText(healthServiceProviderItemNew.getCommonModel().getNameBn());
             else
-                health_name3.setText("তথ্য পাওয়া যায় নি ");
+                health_name2.setText("তথ্য পাওয়া যায় নি ");
 
             String time2="";
             time2=timeConverter(healthServiceProviderItemNew.getCommonModel().getOpeningTime());
@@ -1219,7 +1106,7 @@ GeoPoint location;
                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Datas.split(",");
                             compare_Datas = multipule[0];
-                            idxx=multipule[1];
+                            id2 =multipule[1];
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
                         }
 
@@ -1234,7 +1121,7 @@ GeoPoint location;
 
                             String compare_Data="";
                             compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-                            compare_Data =idxx+","+ compare_Data;
+                            compare_Data = id2 +","+ compare_Data;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
                         }
                     }
@@ -1250,9 +1137,9 @@ GeoPoint location;
 
 
             if(!healthServiceProviderItemNewx.getCommonModel().getNameBn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getCommonModel().getNameBn().equals(""))
-                health_name2.setText(healthServiceProviderItemNewx.getCommonModel().getNameBn());
+                health_name1.setText(healthServiceProviderItemNewx.getCommonModel().getNameBn());
             else
-                health_name2.setText("তথ্য পাওয়া যায় নি ");
+                health_name1.setText("তথ্য পাওয়া যায় নি ");
 
 
 
@@ -1301,7 +1188,7 @@ GeoPoint location;
                             compare_Data=SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Data.split(",");
                             compare_Data = multipule[1];
-                            idxxx=multipule[0];
+                            id3 =multipule[0];
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 1);
                         }
 
@@ -1317,7 +1204,7 @@ GeoPoint location;
                             String compare_Data="";
                             compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
 
-                            compare_Data = compare_Data+","+idxxx;
+                            compare_Data = compare_Data+","+ id3;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
                         }
                     }
@@ -1333,9 +1220,9 @@ GeoPoint location;
             health_header=new String []{ "প্রতিষ্ঠানের ধরন", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখ্যা","শিক্ষক সংখ্যা ","শাখা","রেটিং"
             };
             if(educationNewItem.getCommonModel().getNameBn()==null || educationNewItem.getCommonModel().getNameBn().equalsIgnoreCase("null")|| educationNewItem.getCommonModel().getNameBn().equals(""))
-                edu_name_ban22.setText("তথ্য পাওয়া যায় নি ");
+                edu_name2.setText("তথ্য পাওয়া যায় নি ");
             else
-                edu_name_ban22.setText(educationNewItem.getCommonModel().getNameBn());
+                edu_name2.setText(educationNewItem.getCommonModel().getNameBn());
 
             left_part = new String []{educationNewItem.getEducationType(),English_to_bengali_number_conversion(educationNewItem.getAverageStudentPerClass()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentNo())),
@@ -1357,7 +1244,7 @@ GeoPoint location;
                             compare_Data=SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Data.split(",");
                             compare_Data = multipule[0];
-                            idxxxx=multipule[1];
+                            id4 =multipule[1];
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 1);
                         }
 
@@ -1371,7 +1258,7 @@ GeoPoint location;
                         else {
                             String compare_Data="";
                             compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
-                            compare_Data = compare_Data+","+idxxxx;
+                            compare_Data = compare_Data+","+ id4;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
                         }
                     }
@@ -1389,9 +1276,9 @@ GeoPoint location;
                     English_to_bengali_number_conversion(educationNewItem.getTeachersNo()),
                     educationNewItem.getShift(),educationNewItem.getCommonModel().getRatings()};
             if(educationNewItem.getCommonModel().getNameBn()==null || educationNewItem.getCommonModel().getNameBn().equalsIgnoreCase("null")|| educationNewItem.getCommonModel().getNameBn().equals(""))
-                edu_name_ban.setText("তথ্য পাওয়া যায় নি ");
+                edu_name1.setText("তথ্য পাওয়া যায় নি ");
             else
-                edu_name_ban.setText(educationNewItem.getCommonModel().getNameBn());
+                edu_name1.setText(educationNewItem.getCommonModel().getNameBn());
         }
 
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
@@ -1406,12 +1293,12 @@ GeoPoint location;
     {
 
         ImageButton more=(ImageButton)findViewById(R.id.morebutton);
-        catholder.setVisibility(View.VISIBLE);
+        catHolder.setVisibility(View.VISIBLE);
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 filterclicked=true;
-                fholder.setVisibility(View.VISIBLE);
+                fHolder.setVisibility(View.VISIBLE);
                 populatefilterwords(currentCategoryID);
 
             }
@@ -1426,47 +1313,47 @@ GeoPoint location;
     public void populatefilterwords(int filcatid)
     {
         SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-        subholders.clear();
-        subholders=subCategoryTable.getcatSubCategories(filcatid);
+        tagHolders.clear();
+        tagHolders =subCategoryTable.getcatSubCategories(filcatid);
 
-        int upto=subholders.size()/2;
+        int upto = tagHolders.size()/2;
         filter.clear();
         filter2.clear();
-        fleft.removeAllViews();
-        fright.removeAllViews();
-        for (int f=0;f<subholders.size();f++)
+        fLeft.removeAllViews();
+        fRight.removeAllViews();
+        for (int f=0;f<tagHolders.size();f++)
         {
             if (f>=upto)
-                filter2.add(subholders.get(f).getSubcatname());
+                filter2.add(tagHolders.get(f).getSubcatname());
             else
             {
-                filter.add(subholders.get(f).getSubcatname());
+                filter.add(tagHolders.get(f).getSubcatname());
             }
         }
         final RadioButton[] rb = new RadioButton[30];
-        fgrp1 = new RadioGroup(this); //create the RadioGroup
-        fgrp1.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+        leftGroup = new RadioGroup(this); //create the RadioGroup
+        leftGroup.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
         for(int i=0; i<filter.size(); i++){
             rb[i]  = new RadioButton(this);
-            fgrp1.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+            leftGroup.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
             rb[i].setText(filter.get(i).toString());
             rb[i].setTextColor(Color.WHITE);
         }
-        fgrp2 = new RadioGroup(this); //create the RadioGroup
-        fgrp2.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+        rightGroup = new RadioGroup(this); //create the RadioGroup
+        rightGroup.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
         for(int i=0; i<filter2.size(); i++){
             rb[i]  = new RadioButton(this);
-            fgrp2.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+            rightGroup.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
             rb[i].setText(filter2.get(i).toString());
             rb[i].setTextColor(Color.WHITE);
 
         }
-        fleft.addView(fgrp1);
-        fright.addView(fgrp2);//you add the w
+        fLeft.addView(leftGroup);
+        fRight.addView(rightGroup);//you add the w
 
-        fgrp1.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
-        fgrp2.clearCheck();
-        fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        leftGroup.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
+        rightGroup.clearCheck();
+        leftGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -1477,7 +1364,7 @@ GeoPoint location;
             }
         });
 
-        fgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rightGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -1919,7 +1806,7 @@ GeoPoint location;
         llCatListHolder.removeAllViews();
         Collections.sort(categoryList2);
         for ( CategoryItem ci : categoryList2) {
-            setCi(ci);
+            setCategoryItem(ci);
             llCatListHolder.addView(getCategoryListItemView(ci, dwPercentage));
 
 
@@ -1977,8 +1864,8 @@ GeoPoint location;
                 Arrays.fill(flag2,1);
                 clicked.clear();
                 filterclicked=false;
-                fholder.setVisibility(View.GONE);
-                Headerholder.clear();
+                fHolder.setVisibility(View.GONE);
+                headerHolder.clear();
                 currentCategoryID = ci.getId();
 
                 for(int i= 0; i < llCatListHolder.getChildCount(); i++){
@@ -2014,9 +1901,9 @@ GeoPoint location;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        catstatus=true;
+                        catStatus =true;
                         setFilcatid(currentCategoryID);
-                        calladapter(catstatus);
+                        calladapter(catStatus);
 
 
 
@@ -2031,7 +1918,7 @@ GeoPoint location;
 
                         if(SearchClicked)
                         {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
 
@@ -2050,12 +1937,12 @@ GeoPoint location;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        catstatus=true;
+                        catStatus =true;
                         setFilcatid(currentCategoryID);
-                        calladapter(catstatus);
+                        calladapter(catStatus);
                         if(SearchClicked)
                         {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
 
@@ -2089,11 +1976,11 @@ GeoPoint location;
                         govclicked=false;
                         jobclicked=false;
                         setFilcatid(currentCategoryID);
-                        catstatus=true;
-                        calladapter(catstatus);
+                        catStatus =true;
+                        calladapter(catStatus);
                         if(SearchClicked)
                         {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
 
@@ -2133,11 +2020,11 @@ GeoPoint location;
                         jobclicked=false;
                         setFilcatid(currentCategoryID);
 
-                        catstatus=true;
-                        calladapter(catstatus);
+                        catStatus =true;
+                        calladapter(catStatus);
                         if(SearchClicked)
                         {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
 
@@ -2189,11 +2076,11 @@ GeoPoint location;
                         govclicked=false;
                         jobclicked=false;
                         setFilcatid(currentCategoryID);
-                        catstatus=true;
-                        calladapter(catstatus);
+                        catStatus =true;
+                        calladapter(catStatus);
                         if(SearchClicked)
                         {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
 
@@ -2219,11 +2106,11 @@ GeoPoint location;
                         govclicked=false;
                         jobclicked=false;
                         setFilcatid(currentCategoryID);
-                        catstatus=true;
-                        calladapter(catstatus);
+                        catStatus =true;
+                        calladapter(catStatus);
                         if(SearchClicked)
                         {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
                         ivIcon.setImageResource(0);
@@ -2249,10 +2136,10 @@ GeoPoint location;
                         govclicked = false;
                         jobclicked = false;
                         setFilcatid(currentCategoryID);
-                        catstatus = true;
-                        calladapter(catstatus);
+                        catStatus = true;
+                        calladapter(catStatus);
                         if (SearchClicked) {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
                         ivIcon.setImageResource(0);
@@ -2281,10 +2168,10 @@ GeoPoint location;
                         govclicked = false;
                         jobclicked = false;
                         setFilcatid(currentCategoryID);
-                        catstatus = true;
-                        calladapter(catstatus);
+                        catStatus = true;
+                        calladapter(catStatus);
                         if (SearchClicked) {
-                            filterholder.setVisibility(View.VISIBLE);
+                            filterHolder.setVisibility(View.VISIBLE);
                             populatefilterwords(getFilcatid());
                         }
                         ivIcon.setImageResource(0);
@@ -2392,7 +2279,7 @@ GeoPoint location;
         tvName.setTextSize(12);
         flag=true;
         //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
-        va=0;
+        unknown =0;
 /**************************
  **
  *
@@ -2870,16 +2757,16 @@ GeoPoint location;
 
         //  need to fix later
 
-        /*fetchedent=entertainmentServiceProviderTable.getAllEntertainmentinfo(wardId,Areakeyword);
-        fetchedfin=financialServiceProviderTable.getAllFinancial(wardId,Areakeyword);
-        fetchedleg=legalAidServiceProviderTable.getAllLegal(wardId,Areakeyword);
-        fetchedhel=healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
-        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(wardId,Areakeyword);
-        fetchedgov=governmentNewTable.getAllGov(wardId,Areakeyword);
-        fetchedngo = ngoServiceProviderTable.getAllNGO(wardId, Areakeyword);
-        fetchedreligious = religiousServiceProviderTable.getAllReligious(wardId, Areakeyword);
+        fetchedEnt =entertainmentServiceProviderTable.getAllEntertainmentinfo(wardId,Areakeyword);
+        fetchedFin =financialServiceProviderTable.getAllFinancial(wardId,Areakeyword);
+        fetchedLegal =legalAidServiceProviderTable.getAllLegal(wardId,Areakeyword);
+        fetchedHealth =healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
+        fetchedEdu =educationServiceProviderTable.getAllEducationSubCategoriesInfo(wardId,Areakeyword);
+        fetchedGov =governmentNewTable.getAllGov(wardId,Areakeyword);
+        fetchedNgo = ngoServiceProviderTable.getAllNGO(wardId, Areakeyword);
+        fetchedReligious = religiousServiceProviderTable.getAllReligious(wardId, Areakeyword);
 
-        */
+
         String nameen;
         String namebn;
 
@@ -2888,62 +2775,62 @@ GeoPoint location;
 
         // need to fix later
 
-        /*
-        for (int i=0;i<fetchededu.size();i++)
+
+        for (int i = 0; i< fetchedEdu.size(); i++)
         {
 
-            nameen=fetchededu.get(i).getNameen();
-            node=fetchededu.get(i).getEduId();
-            refname=fetchededu.get(i).getRefnumm();
-            namebn=fetchededu.get(i).getNamebn();
+            nameen= fetchedEdu.get(i).getNameen();
+            node= fetchedEdu.get(i).getEduId();
+            refname= fetchedEdu.get(i).getRefnumm();
+            namebn= fetchedEdu.get(i).getNamebn();
 
             AllHolder all=new AllHolder(node,refname,nameen,namebn,10000);
             allHolders.add(all);
         }
 
 
-        for (int i=0;i<fetchedhel.size();i++)
+        for (int i = 0; i< fetchedHealth.size(); i++)
         {
 
-            nameen=fetchedhel.get(i).getNameen();
-            node= fetchedhel.get(i).getHealthid();
-            refname=fetchedhel.get(i).getRefnumm();
-            namebn=fetchedhel.get(i).getNamebn();
+            nameen= fetchedHealth.get(i).getNameen();
+            node= fetchedHealth.get(i).getHealthid();
+            refname= fetchedHealth.get(i).getRefnumm();
+            namebn= fetchedHealth.get(i).getNamebn();
 
             AllHolder all=new AllHolder(node,refname,nameen,namebn,20000);
             allHolders.add(all);
         }
 
 
-        for (int i=0;i<fetchedleg.size();i++)
+        for (int i = 0; i< fetchedLegal.size(); i++)
         {
 
-            nameen=fetchedleg.get(i).getNameen();
-            node= fetchedleg.get(i).getLegalid();
-            refname=fetchedleg.get(i).getRefnumm();
-            namebn=fetchedleg.get(i).getNamebn();
+            nameen= fetchedLegal.get(i).getNameen();
+            node= fetchedLegal.get(i).getLegalid();
+            refname= fetchedLegal.get(i).getRefnumm();
+            namebn= fetchedLegal.get(i).getNamebn();
 
             AllHolder all=new AllHolder(node,refname,nameen,namebn,50000);
             allHolders.add(all);
         }
-        for (int i=0;i<fetchedent.size();i++)
+        for (int i = 0; i< fetchedEnt.size(); i++)
         {
 
-            nameen=fetchedent.get(i).getNameen();
-            node= fetchedent.get(i).getEntid();
-            refname=fetchedent.get(i).getRefnumm();
-            namebn=fetchedent.get(i).getNamebn();
+            nameen= fetchedEnt.get(i).getNameen();
+            node= fetchedEnt.get(i).getEntid();
+            refname= fetchedEnt.get(i).getRefnumm();
+            namebn= fetchedEnt.get(i).getNamebn();
 
             AllHolder all=new AllHolder(node,refname,nameen,namebn,30000);
             allHolders.add(all);
         }
-        for (int i=0;i<fetchedfin.size();i++)
+        for (int i = 0; i< fetchedFin.size(); i++)
         {
 
-            nameen=fetchedfin.get(i).getNameen();
-            node=fetchedfin.get(i).getFinid();
-            refname=fetchedfin.get(i).getRefnumm();
-            namebn=fetchedfin.get(i).getNamebn();
+            nameen= fetchedFin.get(i).getNameen();
+            node= fetchedFin.get(i).getFinid();
+            refname= fetchedFin.get(i).getRefnumm();
+            namebn= fetchedFin.get(i).getNamebn();
 
             AllHolder all=new AllHolder(node,refname,nameen,namebn,60000);
             allHolders.add(all);
@@ -2951,13 +2838,13 @@ GeoPoint location;
 
         }
 
-        for (int i=0;i<fetchedgov.size();i++)
+        for (int i = 0; i< fetchedGov.size(); i++)
         {
 
-            nameen=fetchedgov.get(i).getNameen();
-            node=fetchedgov.get(i).getGovid();
-            refname=fetchedgov.get(i).getRefnumm();
-            namebn=fetchedgov.get(i).getNamebn();
+            nameen= fetchedGov.get(i).getNameen();
+            node= fetchedGov.get(i).getGovid();
+            refname= fetchedGov.get(i).getRefnumm();
+            namebn= fetchedGov.get(i).getNamebn();
 
             AllHolder all=new AllHolder(node,refname,nameen,namebn,40000);
             allHolders.add(all);
@@ -2966,12 +2853,12 @@ GeoPoint location;
         }
 
         /////// ngo /////
-        for (int i = 0; i < fetchedngo.size(); i++) {
+        for (int i = 0; i < fetchedNgo.size(); i++) {
 
-            nameen = fetchedngo.get(i).getNameen();
-            node = fetchedngo.get(i).getNgoid();
-            refname = fetchedngo.get(i).getRefnumm();
-            namebn = fetchedngo.get(i).getNamebn();
+            nameen = fetchedNgo.get(i).getNameen();
+            node = fetchedNgo.get(i).getNgoid();
+            refname = fetchedNgo.get(i).getRefnumm();
+            namebn = fetchedNgo.get(i).getNamebn();
 
             AllHolder all = new AllHolder(node, refname, nameen, namebn, 70000);
             allHolders.add(all);
@@ -2983,16 +2870,16 @@ GeoPoint location;
 
 
         /////// religious /////
-        for (int i = 0; i < fetchedreligious.size(); i++) {
+        for (int i = 0; i < fetchedReligious.size(); i++) {
 
-            nameen = fetchedreligious.get(i).getNameen();
-            node = fetchedreligious.get(i).getReligousid();
-            refname = fetchedreligious.get(i).getRefnumm();
-            namebn = fetchedreligious.get(i).getNamebn();
+            nameen = fetchedReligious.get(i).getNameen();
+            node = fetchedReligious.get(i).getReligousid();
+            refname = fetchedReligious.get(i).getRefnumm();
+            namebn = fetchedReligious.get(i).getNamebn();
 
             AllHolder all = new AllHolder(node, refname, nameen, namebn, 80000);
             allHolders.add(all);
-        }*/
+        }
 
         /////// religious /////
 
@@ -3194,14 +3081,14 @@ GeoPoint location;
     }
     /*fun1 and fun2 is for selecting only one item from two radiogroup to get the filter id.*/
     public void fun1() {
-        fgrp2.setOnCheckedChangeListener(null);
-        fgrp2.clearCheck();
-        fgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rightGroup.setOnCheckedChangeListener(null);
+        rightGroup.clearCheck();
+        rightGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 fun2();
-                int buttonId=fgrp2.getCheckedRadioButtonId();
+                int buttonId= rightGroup.getCheckedRadioButtonId();
                 RadioButton radioButton=(RadioButton)findViewById(buttonId);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
@@ -3217,15 +3104,15 @@ GeoPoint location;
 
 
     public void fun2() {
-        fgrp1.setOnCheckedChangeListener(null);
-        fgrp1.clearCheck();
-        fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        leftGroup.setOnCheckedChangeListener(null);
+        leftGroup.clearCheck();
+        leftGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // TODO Auto-generated method stub
                 fun1();
-                int buttonId=fgrp1.getCheckedRadioButtonId();
+                int buttonId= leftGroup.getCheckedRadioButtonId();
                 RadioButton radioButton=(RadioButton)findViewById(buttonId);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
@@ -3238,11 +3125,11 @@ GeoPoint location;
     }
     private int Findsubcatid(String filterword){
 
-        for (int s=0;s<=subholders.size();s++)
+        for (int s=0;s<=>>tagHolders.size();s++)
         {
-            if (subholders.get(s).getSubcatname().equals(filterword))
+            if (>>tagHolders.get(s).getSubcatname().equals(filterword))
             {
-                setSnumber(subholders.get(s).getSubcatid());
+                setSnumber(>> tagHolders.get(s).getSubcatid());
                 break;
             }
         }
