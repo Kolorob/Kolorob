@@ -102,7 +102,7 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
     }
 
 
-    public ArrayList <EntertainmentNewDBModel> getDetailsByCommonId(int commonId) {
+    public EntertainmentNewDBModel getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 

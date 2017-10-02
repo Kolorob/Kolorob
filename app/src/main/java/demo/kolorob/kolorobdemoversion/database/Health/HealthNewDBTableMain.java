@@ -121,7 +121,7 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
     }
 
 
-    public ArrayList <HealthNewDBModelMain> getDetailsByCommonId(int commonId) {
+    public HealthNewDBModelMain getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 

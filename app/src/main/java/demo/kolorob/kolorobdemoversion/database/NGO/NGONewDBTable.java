@@ -158,7 +158,7 @@ public class NGONewDBTable extends BaseDBTable <NGONewDBModel> {
     }
 
 
-    public ArrayList <NGONewDBModel> getDetailsByCommonId(int commonId) {
+    public NGONewDBModel getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 

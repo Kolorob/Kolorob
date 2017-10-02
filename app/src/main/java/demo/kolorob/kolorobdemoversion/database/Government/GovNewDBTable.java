@@ -135,7 +135,7 @@ public class GovNewDBTable extends BaseDBTable <GovernmentNewDBModel> {
     }
 
 
-    public ArrayList <GovernmentNewDBModel> getDetailsByCommonId (int commonId) {
+    public GovernmentNewDBModel getDetailsByCommonId (int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 

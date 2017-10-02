@@ -137,7 +137,7 @@ public class LegalAidNewDBTable extends BaseDBTable <LegalAidNewDBModel> {
     }
 
 
-    public ArrayList <LegalAidNewDBModel> getDetailsByCommonId(int commonId) {
+    public LegalAidNewDBModel getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 

@@ -259,6 +259,25 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
         return list;
     }
 
+    public ArrayList <CommonModel> getAllCommonByAreaCategory(String ward, String place, int category) {
+
+        ArrayList <CommonModel> list = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery ("SELECT * FROM " +  TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + " = " + category + " AND " + KEY_WARD + " = '"+ ward + "' AND " + "(" + KEY_AREA + "  = '" + place + "')" + " OR " + "(" + KEY_PARENT_AREA + "  =  '" + place + "')", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                list.add(cursorToModel(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return list;
+    }
+
     public ArrayList <CommonModel> getDataListFromId(int id){
         return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }

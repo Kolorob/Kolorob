@@ -123,9 +123,10 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
     }
 
 
-    public ArrayList <EduNewModel> getDetailsByCommonId(int commonId) {     // getAllEducationSubCategoriesInfo
+    public EduNewModel getDetailsByCommonId(int commonId) {     // getAllEducationSubCategoriesInfo
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
+
 
     public void delete(int id){
         super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);

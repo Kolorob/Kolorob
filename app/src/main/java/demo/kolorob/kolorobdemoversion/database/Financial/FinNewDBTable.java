@@ -94,7 +94,7 @@ public class FinNewDBTable extends BaseDBTable <FinancialNewDBModel> {
     }
 
 
-    public ArrayList <FinancialNewDBModel> getDetailsByCommonId(int commonId) {
+    public FinancialNewDBModel getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 

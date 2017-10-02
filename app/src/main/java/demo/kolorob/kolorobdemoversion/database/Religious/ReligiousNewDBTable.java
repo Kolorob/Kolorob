@@ -171,7 +171,7 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
     }
 
 
-    public ArrayList <ReligiousNewDBModel> getDetailsByCommonId(int commonId) {
+    public ReligiousNewDBModel getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
