@@ -6,13 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
-
-import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
@@ -46,10 +43,10 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by HP on 5/14/2016.
  */
 public class MyInfoWindow extends InfoWindow {
-    String titlemarker,contact2,node,address;
+    String titleMarker,contact2,node,address;
     int n;
-    //EducationServiceProviderItem nulledu;
-    ArrayList<EduNewModel> nulledu2=new ArrayList<>();
+
+    EduNewModel nulledu;
     GovernmentNewDBModel nullgov;
     HealthNewDBModelMain nullhel;
     EntertainmentNewDBModel nullent;
@@ -59,8 +56,7 @@ public class MyInfoWindow extends InfoWindow {
     ReligiousNewDBModel nullreligious;
     Activity con;
     GeoPoint pp;
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
+
 
     int catid;
     String referenceid, service_type, services, religion;
@@ -69,7 +65,7 @@ public class MyInfoWindow extends InfoWindow {
         super(layoutResId, mapView);
         this.con=con;
         this.pp=point;
-        this.titlemarker=title;
+        this.titleMarker =title;
         this.contact2=contact;
         this.n=Node;
         this.catid=categoryid;
@@ -83,7 +79,7 @@ public class MyInfoWindow extends InfoWindow {
         super(layoutResId, mapView);
         this.con=con;
         this.pp=point;
-        this.titlemarker=title;
+        this.titleMarker =title;
         this.contact2=contact;
         this.n=Node;
         this.catid=categoryid;
@@ -96,7 +92,7 @@ public class MyInfoWindow extends InfoWindow {
         super(layoutResId, mapView);
         this.con=con;
         this.pp=point;
-        this.titlemarker=title;
+        this.titleMarker =title;
         this.contact2=contact;
         this.n=Node;
         this.catid=categoryid;
@@ -122,7 +118,7 @@ public class MyInfoWindow extends InfoWindow {
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
         contact2 = English_to_bengali_number_conversion(contact2);
         if(contact2==null||contact2.equals(" ")||contact2.equals("null"))contact2="পাওয়া যায় নি";
-        txtTitle.setText(titlemarker);
+        txtTitle.setText(titleMarker);
         //txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
 
         /*if(service_type!=null || services!=null) {
@@ -160,9 +156,9 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                          EduNewDBTableMain educationNewTable = new EduNewDBTableMain(MyInfoWindow.this.con);
 
-                        nulledu2 = educationNewTable.geteduNode2(n);
+                        nulledu = educationNewTable.getDataFromId(n);
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
-                        iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
+                        iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu);
                         MyInfoWindow.this.con.startActivity(iiedu);
 
                         break;
@@ -173,7 +169,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         GovNewDBTable governmentNewTable = new GovNewDBTable(MyInfoWindow.this.con);
 
-                        nullgov = governmentNewTable.getgovNode2(n);
+                        nullgov = governmentNewTable.getDataFromId(n);
                         Intent iigov = new Intent(MyInfoWindow.this.con, DetailsLayoutGovernment.class);
                         iigov.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
                         MyInfoWindow.this.con.startActivity(iigov);
@@ -185,7 +181,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                      //   Log.d("Value of N","======="+node);
                         HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(MyInfoWindow.this.con);
-                        nullhel = healthServiceProviderTable.gethelNode2(n);
+                        nullhel = healthServiceProviderTable.getDataFromId(n);
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
                         iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
@@ -196,7 +192,7 @@ public class MyInfoWindow extends InfoWindow {
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on ent", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(MyInfoWindow.this.con);
-                        nullent = entertainmentServiceProviderTableNew.getentNode2(n);
+                        nullent = entertainmentServiceProviderTableNew.getDataFromId(n);
                         Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainmentNew.class);
                         iientt.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
                         MyInfoWindow.this.con.startActivity(iientt);
@@ -207,7 +203,7 @@ public class MyInfoWindow extends InfoWindow {
                       //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         LegalAidNewDBTable legalAidServiceProviderTableNew = new LegalAidNewDBTable(MyInfoWindow.this.con);
-                        nullleg = legalAidServiceProviderTableNew.getlegNode2(n);
+                        nullleg = legalAidServiceProviderTableNew.getDataFromId(n);
                         Intent iileg = new Intent(MyInfoWindow.this.con, DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
@@ -218,7 +214,7 @@ public class MyInfoWindow extends InfoWindow {
                        // Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         FinNewDBTable financialServiceNewTable = new FinNewDBTable(MyInfoWindow.this.con);
-                        nullfin = financialServiceNewTable.getfinNode2(n);
+                        nullfin = financialServiceNewTable.getDataFromId(n);
                         Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutFinance.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
@@ -230,7 +226,7 @@ public class MyInfoWindow extends InfoWindow {
                         //Toast.makeText(MyInfoWindow.this.con, "Tapped on NGO", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         NGONewDBTable ngoServiceProviderTableNew = new NGONewDBTable(MyInfoWindow.this.con);
-                        nullngo = ngoServiceProviderTableNew.getngoNode2(n);
+                        nullngo = ngoServiceProviderTableNew.getDataFromId(n);
                         Intent iingo = new Intent(MyInfoWindow.this.con, DetailsInfoActivityNGO.class);
                         iingo.putExtra(AppConstants.KEY_DETAILS_NGO, nullngo);
                         MyInfoWindow.this.con.startActivity(iingo);
@@ -246,7 +242,7 @@ public class MyInfoWindow extends InfoWindow {
                         //Toast.makeText(MyInfoWindow.this.con, "Tapped on RS", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         ReligiousNewDBTable religiousServiceProviderTableNew = new ReligiousNewDBTable(MyInfoWindow.this.con);
-                        nullreligious = religiousServiceProviderTableNew.getreligiousNode2(n);
+                        nullreligious = religiousServiceProviderTableNew.getDataFromId(n);
                         Intent iireligious = new Intent(MyInfoWindow.this.con, DetailsInfoActivityReligious.class);
                         iireligious.putExtra(AppConstants.KEY_DETAILS_RELIGIOUS, nullreligious);
                         MyInfoWindow.this.con.startActivity(iireligious);
