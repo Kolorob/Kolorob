@@ -57,9 +57,9 @@ public abstract class BaseDBTable <ModelType>  {
 
     }
 
-    protected ArrayList <ModelType> getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID){
+    protected ModelType getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID){
 
-        return getDataListFromId(commonId, TABLE_NAME, KEY_COMMON_ID);
+        return getDataFromId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
 
