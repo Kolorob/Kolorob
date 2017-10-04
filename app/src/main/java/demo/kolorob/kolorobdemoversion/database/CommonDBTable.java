@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
@@ -264,7 +266,7 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
         ArrayList <CommonModel> list = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery ("SELECT * FROM " +  TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + " = " + category + " AND " + KEY_WARD + " = '"+ ward + "' AND " + "(" + KEY_AREA + "  = '" + place + "')" + " OR " + "(" + KEY_PARENT_AREA + "  =  '" + place + "')", null);
+        Cursor cursor = db.rawQuery ("SELECT * FROM " +  TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + " = " + category + " AND " + KEY_WARD + " = '"+ ward + "' AND " + "(" + KEY_AREA + "  = '" + place  + "' OR "  + KEY_PARENT_AREA + "  =  '" + place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -293,6 +295,7 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
 
     public CommonModel getNodeInfo(int Node) {
 
+        Log.e(" ", "GetNodeInfo common " + Node);
         SQLiteDatabase db = openDB();
         CommonModel commonModel = null;
 
