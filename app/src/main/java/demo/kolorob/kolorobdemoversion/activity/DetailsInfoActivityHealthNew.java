@@ -43,7 +43,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
         viewBaseLayout(health.getCommonModel());
         displayUniqueProperties();
         displayCommonProperties(health.getCommonModel());
-        compare();
+        //compare();
     }
 
 
