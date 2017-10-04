@@ -3,6 +3,8 @@ package demo.kolorob.kolorobdemoversion.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
@@ -20,6 +22,8 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract long insertItem(ModelType modelType);
     public abstract ModelType getNodeInfo(int node);
     public abstract ModelType cursorToModel(Cursor cursor);
+    public abstract ModelType getDataFromId(int id);
+
 
 
     protected SQLiteDatabase openDB() {
@@ -52,6 +56,7 @@ public abstract class BaseDBTable <ModelType>  {
 
 
     protected CommonModel getCommonModelFromId(int commonId){
+        Log.e("", "getCommonModelById " + commonId);
         CommonDBTable commonDBTable = new CommonDBTable(tContext);
         return commonDBTable.getNodeInfo(commonId);
 
@@ -59,11 +64,28 @@ public abstract class BaseDBTable <ModelType>  {
 
     protected ModelType getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID){
 
-        return getDataFromId(commonId, TABLE_NAME, KEY_COMMON_ID);
+        Log.e("", "Parent: getDetailsByCommonId " + commonId);
+        return getRowFromForeignKey(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
 
-    protected ModelType getDataFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID){
+    protected ModelType getRowFromForeignKey(int key, String TABLE_NAME, String KEY_COMMON_ID){
+
+        Log.e("", "getRowFromForeignKey " + key);
+        ModelType model = null;
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + key, null);
+
+        if (cursor.moveToFirst()) {
+                model = cursorToModel(cursor);
+        }
+        cursor.close();
+        closeDB();
+        return model;
+    }
+
+
+    public ModelType getDataFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID){
 
 
         ModelType model = null;
