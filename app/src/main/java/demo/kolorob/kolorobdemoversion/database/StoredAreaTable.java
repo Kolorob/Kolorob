@@ -46,7 +46,7 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
                 + AREANAMEBN + " TEXT, "
                 + PARENTAREA + " TEXT, "
                 + LAT + " TEXT, " // 1 - tex// 2 - text
-                + LON + " TEXT, "
+                + LON + " TEXT "
                 + " )";
 
 
