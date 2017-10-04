@@ -306,7 +306,7 @@ public class AreaUpgrade extends AppCompatActivity {
                     }
                      if (jsonObject2.has("education_school")) {
                         JSONObject school = jsonObject2.getJSONObject("education_school");
-                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
+                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school);
                         eduNewDBTableSchool.insertItem(eduNewSchoolModel);
                     }
 
