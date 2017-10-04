@@ -66,8 +66,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     String concatened;
     private String locationName;
     private int locationNameId;
-    private static double VIEW_WIDTH;
-    private int primaryIconWidth;
+
+
     boolean firstRun;
     String refid2;
     private ArrayList<HealthNewDBModelMain> healthServiceProvider = null;
@@ -86,11 +86,10 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     String first;
     private Animation mEnterAnimation, mExitAnimation;
     ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
-    ArrayAdapter arrayAdapter;
+
     String lat, lon;
     double latDouble, longDouble;
-    int i = 0;
-    Date today = Calendar.getInstance().getTime();
+
     int subcategotyId;
     String subcategotyId2;
     View rootView;
@@ -197,7 +196,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     }
 
 
-    byte[] bytes;
+
 
     public void setFinancialServiceProvider(ArrayList<FinancialNewDBModel> et) {
         this.financialServiceProvider = et;
@@ -219,8 +218,6 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.healthServiceProvider = et;
     }
 
-    SimpleDateFormat simpleDateFormat =
-            new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -233,8 +230,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
-        VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
-        primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
+
+
         mapView = (MapView) rootView.findViewById(R.id.mapview);
         setMapView(mapView);
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -265,26 +262,17 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             editor.putBoolean("firstRunUp", true);
             editor.apply();
         } else {
-            //OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
 
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
             mapView.setTileSource(TileSourceFactory.MAPNIK);
 
-            //mapView.setTileSource(TileSourceFactory.MAPNIK);
+
         }
-      /*  mapView.setTilesScaledToDpi(true);
-        // Test code
-        float density = mapView.isTilesScaledToDpi() ? mapView.getResources().getDisplayMetrics().density : 1;
-        density *= 1.5;
-        ITileSource aTileSource = mapView.getTileProvider().getTileSource();
-        TileSystem.setTileSize((int) (aTileSource.getTileSizePixels() * density));
-        System.out.println("density: " + density);*/
-        // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
-        //    mapView.getOverlays().add(mMyLocationOverlay);
+
         mapViewController = mapView.getController();
         mapViewController.setZoom(15);
-        //String[] partlocation = getLOCATIONFROMMAP().split(":");
+      
         Log.e("", "Lat: " + getLat() +" " + "Lon: " + getLon());
         mapViewController.setCenter(new GeoPoint(Float.parseFloat(getLat()), Float.parseFloat(getLon())));
         result = new StringBuilder();

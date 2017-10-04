@@ -20,6 +20,7 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityReligious;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
@@ -45,6 +46,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 public class MyInfoWindow extends InfoWindow {
     String titleMarker,contact2,node,address;
     int n;
+
+    LinearLayout layout;
 
     EduNewModel nulledu;
     GovernmentNewDBModel nullgov;
@@ -108,7 +111,7 @@ public class MyInfoWindow extends InfoWindow {
     public void onOpen(Object arg0) {
         MyInfoWindow.closeAllInfoWindowsOn(mMapView);
 
-        final LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
+        layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
         Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
         final TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
         txtTitle.setTextSize(20);
@@ -150,11 +153,9 @@ public class MyInfoWindow extends InfoWindow {
             public void onClick(View v) {
                 switch (catid) {
                     case AppConstants.EDUCATION:
-                        // Override Marker's onClick behaviour here
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on edu", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
-                         EduNewDBTableMain educationNewTable = new EduNewDBTableMain(MyInfoWindow.this.con);
+                        EduNewDBTableMain educationNewTable = new EduNewDBTableMain(MyInfoWindow.this.con);
 
                         nulledu = educationNewTable.getDataFromId(n);
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
@@ -163,9 +164,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         break;
                     case AppConstants.GOVERNMENT:
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on gov", Toast.LENGTH_SHORT).show();
-                        // Override Marker's onClick behaviour here
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
                         GovNewDBTable governmentNewTable = new GovNewDBTable(MyInfoWindow.this.con);
 
@@ -176,10 +175,9 @@ public class MyInfoWindow extends InfoWindow {
 
                         break;
                     case AppConstants.HEALTH:
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on health", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
-                     //   Log.d("Value of N","======="+node);
+
                         HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(MyInfoWindow.this.con);
                         nullhel = healthServiceProviderTable.getDataFromId(n);
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
@@ -188,8 +186,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         break;
                     case AppConstants.ENTERTAINMENT:
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on ent", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
                         EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(MyInfoWindow.this.con);
                         nullent = entertainmentServiceProviderTableNew.getDataFromId(n);
@@ -199,8 +196,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         break;
                     case AppConstants.LEGAL:
-                       // Toast.makeText(MyInfoWindow.this.con, "Tap on legal", Toast.LENGTH_SHORT).show();
-                      //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
                         LegalAidNewDBTable legalAidServiceProviderTableNew = new LegalAidNewDBTable(MyInfoWindow.this.con);
                         nullleg = legalAidServiceProviderTableNew.getDataFromId(n);
@@ -210,8 +206,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         break;
                     case AppConstants.FINANCIAL:
-                        //Toast.makeText(MyInfoWindow.this.con, "Tap on fin", Toast.LENGTH_SHORT).show();
-                       // Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
                         FinNewDBTable financialServiceNewTable = new FinNewDBTable(MyInfoWindow.this.con);
                         nullfin = financialServiceNewTable.getDataFromId(n);
@@ -223,7 +218,7 @@ public class MyInfoWindow extends InfoWindow {
 
 
                     case AppConstants.NGO:
-                        //Toast.makeText(MyInfoWindow.this.con, "Tapped on NGO", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
                         NGONewDBTable ngoServiceProviderTableNew = new NGONewDBTable(MyInfoWindow.this.con);
                         nullngo = ngoServiceProviderTableNew.getDataFromId(n);
@@ -238,8 +233,7 @@ public class MyInfoWindow extends InfoWindow {
                     ////// Religious ///
 
                     case AppConstants.RELIGIOUS:
-                        //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(MyInfoWindow.this.con, "Tapped on RS", Toast.LENGTH_SHORT).show();
+
                         layout.setVisibility(View.VISIBLE);
                         ReligiousNewDBTable religiousServiceProviderTableNew = new ReligiousNewDBTable(MyInfoWindow.this.con);
                         nullreligious = religiousServiceProviderTableNew.getDataFromId(n);
@@ -288,7 +282,7 @@ public class MyInfoWindow extends InfoWindow {
                 concatResult = concatResult + "/";
             else if(english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
-            else if(english_number.charAt(i)== '+'){
+            else if(english_number.charAt(i) == '+'){
                 concatResult = concatResult + "+";
             }
             else {
@@ -298,5 +292,19 @@ public class MyInfoWindow extends InfoWindow {
         }
         return concatResult;
     }
+
+
+/*
+    public static <Type> void commonOnClick(LinearLayout layout, Activity activity, BaseDBTable <Type> DB, int id, String appConstant){
+
+        layout.setVisibility(View.VISIBLE);
+
+        Type data = DB.getDataFromId(id);
+        Intent iiedu = new Intent(activity, DetailsLayoutEducation.class);
+        iiedu.putExtra(appConstant, data);
+        activity.startActivity(iiedu);
+    }
+
+*/
 
 }
