@@ -71,7 +71,7 @@ public class CategoryItem implements Serializable, Comparable<CategoryItem>{
     public static CategoryItem parseCategoryItem(JSONObject jo) throws JSONException {
         int id = jo.getInt("id");
         String name = jo.getString("name");
-        String nameBn = jo.getString("nameBn");
+        String nameBn = jo.getString("bn_label");
         boolean isActive = jo.getBoolean("active");
 
         return new CategoryItem(id, name, nameBn, isActive);
