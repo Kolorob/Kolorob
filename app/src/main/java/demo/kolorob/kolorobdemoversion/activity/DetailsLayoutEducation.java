@@ -49,7 +49,7 @@ public class DetailsLayoutEducation extends BaseActivity {
         viewBaseLayout(education.getCommonModel());
         displayUniqueProperties();
         displayCommonProperties(education.getCommonModel());
-        compare();
+      //  compare();
     }
 
 
@@ -66,9 +66,9 @@ public class DetailsLayoutEducation extends BaseActivity {
         }
         CheckConcate("শাখা", education.getShift());
 
-        if(!education.equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", English_to_bengali_number_conversion(education.getStudentNo())+" জন");
-        if(!education.getTeachersNo().equals("null")) CheckConcate("শিক্ষক সংখ্যা",  English_to_bengali_number_conversion(education.getTeachersNo())+" জন");
-        if(!education.getAverageStudentPerClass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  English_to_bengali_number_conversion(education.getAverageStudentPerClass())+" জন");
+        if(!education.getStudentNo().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", English_to_bengali_number_conversion(education.getStudentNo()) + " জন");
+        if(!education.getTeachersNo().equals("null")) CheckConcate("শিক্ষক সংখ্যা",  English_to_bengali_number_conversion(education.getTeachersNo()) + " জন");
+        if(!education.getAverageStudentPerClass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  English_to_bengali_number_conversion(education.getAverageStudentPerClass()) + " জন");
         CheckConcate("সুযোগ সুবিধা", education.getFacility());
 
 
@@ -104,7 +104,7 @@ public class DetailsLayoutEducation extends BaseActivity {
 
                 CheckConcate("কোর্সের ব্যাপ্তিকাল (মাস) ", English_to_bengali_number_conversion(training.getCourseduration()));
                 CheckConcate("ট্রেইনিং এর নাম ", training.getTrainingname());
-                CheckConcate("খরচ", training.getCost()+" টাকা");
+                if(!training.getCost().equals("null")) CheckConcate("খরচ", training.getCost()+" টাকা");
                 CheckConcate("কোর্সের নাম", training.getCoursename());
 
             }
