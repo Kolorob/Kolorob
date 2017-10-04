@@ -48,7 +48,9 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
                 + KEY_REF_ID + " INTEGER, "
                 + KEY_REF_NAME_EN + " TEXT, "
                 + KEY_REF_NAME_BN + " TEXT, "
-                + " PRIMARY KEY " + KEY_ID + ")";
+                + " PRIMARY KEY (" + KEY_ID + "))";
+
+      
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
