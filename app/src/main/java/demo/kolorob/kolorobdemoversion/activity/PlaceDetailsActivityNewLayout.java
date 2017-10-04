@@ -160,14 +160,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList <AllHolder> subcatHolders = new ArrayList<>();
     private ArrayList <Subcatholder> tagHolders = new ArrayList<>();
 
-    private ArrayList <FinancialNewDBModel> fetchedFin;
-    private ArrayList <EduNewModel> fetchedEdu;
-    private ArrayList <LegalAidNewDBModel> fetchedLegal;
-    private ArrayList <EntertainmentNewDBModel> fetchedEnt;
-    private ArrayList <HealthNewDBModelMain> fetchedHealth;
-    public ArrayList <GovernmentNewDBModel> fetchedGov;
-    private ArrayList <NGONewDBModel> fetchedNgo;
-    private ArrayList <ReligiousNewDBModel> fetchedReligious;
 
 
     TextView welcomeText, upText;
@@ -185,7 +177,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     boolean doubleBackToExitPressedOnce, reviewGiven, selected, inCompare;
     boolean eduClicked, healthClicked, entClicked, finClicked, govClicked, legalClicked, ngoClicked, shelterClicked;
-    Boolean searchClicked, jobClicked, compareClicked, mapClicked = true;
+    Boolean searchClicked = false, jobClicked, compareClicked, mapClicked = true;
     boolean filterClicked, catStatus, called;
     Boolean firstRun, firstRunUpdate;
     Boolean navigationCalled, navigationCalledOnce;
@@ -410,69 +402,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.tagHolders = tagHolders;
     }
 
-    public ArrayList<FinancialNewDBModel> getFetchedFin() {
-        return fetchedFin;
-    }
-
-    public void setFetchedFin(ArrayList<FinancialNewDBModel> fetchedFin) {
-        this.fetchedFin = fetchedFin;
-    }
-
-    public ArrayList<EduNewModel> getFetchedEdu() {
-        return fetchedEdu;
-    }
-
-    public void setFetchedEdu(ArrayList<EduNewModel> fetchedEdu) {
-        this.fetchedEdu = fetchedEdu;
-    }
-
-    public ArrayList<LegalAidNewDBModel> getFetchedLegal() {
-        return fetchedLegal;
-    }
-
-    public void setFetchedLegal(ArrayList<LegalAidNewDBModel> fetchedLegal) {
-        this.fetchedLegal = fetchedLegal;
-    }
-
-    public ArrayList<EntertainmentNewDBModel> getFetchedEnt() {
-        return fetchedEnt;
-    }
-
-    public void setFetchedEnt(ArrayList<EntertainmentNewDBModel> fetchedEnt) {
-        this.fetchedEnt = fetchedEnt;
-    }
-
-    public ArrayList<HealthNewDBModelMain> getFetchedHealth() {
-        return fetchedHealth;
-    }
-
-    public void setFetchedHealth(ArrayList<HealthNewDBModelMain> fetchedHealth) {
-        this.fetchedHealth = fetchedHealth;
-    }
-
-    public ArrayList<GovernmentNewDBModel> getFetchedGov() {
-        return fetchedGov;
-    }
-
-    public void setFetchedGov(ArrayList<GovernmentNewDBModel> fetchedGov) {
-        this.fetchedGov = fetchedGov;
-    }
-
-    public ArrayList<NGONewDBModel> getFetchedNgo() {
-        return fetchedNgo;
-    }
-
-    public void setFetchedNgo(ArrayList<NGONewDBModel> fetchedNgo) {
-        this.fetchedNgo = fetchedNgo;
-    }
-
-    public ArrayList<ReligiousNewDBModel> getFetchedReligious() {
-        return fetchedReligious;
-    }
-
-    public void setFetchedReligious(ArrayList<ReligiousNewDBModel> fetchedReligious) {
-        this.fetchedReligious = fetchedReligious;
-    }
 
     public TextView getWelcomeText() {
         return welcomeText;
@@ -1655,7 +1584,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
 
-            populateHolder(getPlaceChoice());
+            populateHolder();
             try {
                 callMapFragment(lat, lon);
             } catch (Exception e) {
@@ -3343,13 +3272,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList <EduNewModel> constructEducationListItem() {
 
-        ArrayList <EduNewModel> educationServiceProvider = null;
+        ArrayList <EduNewModel> educationServiceProvider = new ArrayList<>();
         EduNewDBTableMain educationNewTable = new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.EDUCATION);
 
+
         for(CommonModel commonModel : commonModels){
+
+            EduNewModel eduTemp = educationNewTable.getDetailsByCommonId(commonModel.getId());
             educationServiceProvider.add(educationNewTable.getDetailsByCommonId(commonModel.getId()));
+
         }
 
         return educationServiceProvider;
@@ -3501,7 +3434,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     //
      private ArrayList <HealthNewDBModelMain> constructHealthListItem() {
 
-         ArrayList <HealthNewDBModelMain> healthServiceProvider = null;
+         ArrayList <HealthNewDBModelMain> healthServiceProvider = new ArrayList<>();
          HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
          CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
          ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.HEALTH);
@@ -3533,7 +3466,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList<EntertainmentNewDBModel> constructEntertainmentListItem() {
 
-        ArrayList <EntertainmentNewDBModel> entertainmentNewDBModels = null;
+        ArrayList <EntertainmentNewDBModel> entertainmentNewDBModels = new ArrayList<>();
         EntNewDBTable entNewDBTable = new EntNewDBTable(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.ENTERTAINMENT);
@@ -3570,7 +3503,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList <GovernmentNewDBModel> constructGovListItem() {
 
-        ArrayList <GovernmentNewDBModel> governmentNewDBModels = null;
+        ArrayList <GovernmentNewDBModel> governmentNewDBModels = new ArrayList<>();
         GovNewDBTable govNewDBTable = new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.GOVERNMENT);
@@ -3604,7 +3537,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList<LegalAidNewDBModel> constructLegalaidListItem() {
 
-        ArrayList <LegalAidNewDBModel> legalAidNewDBModels = null;
+        ArrayList <LegalAidNewDBModel> legalAidNewDBModels = new ArrayList<>();
         LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.LEGAL);
@@ -3638,7 +3571,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     /**********************************************************Methods for financial**********************************************/
     private ArrayList <FinancialNewDBModel> constructFinancialListItem() {
-        ArrayList <FinancialNewDBModel> financialNewDBModels = null;
+        ArrayList <FinancialNewDBModel> financialNewDBModels = new ArrayList<>();
         FinNewDBTable finNewDBTable = new FinNewDBTable(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.FINANCIAL);
@@ -3671,7 +3604,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     /**********************************************************Methods for NGO***************************************************/
 
     private ArrayList <NGONewDBModel> constructNgoListItem() {
-        ArrayList <NGONewDBModel> ngoNewDBModels = null;
+        ArrayList <NGONewDBModel> ngoNewDBModels = new ArrayList<>();
         NGONewDBTable ngoNewDBTable = new NGONewDBTable(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.NGO);
@@ -3706,7 +3639,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList <ReligiousNewDBModel> constructReligiousListItem() {
 
-        ArrayList <ReligiousNewDBModel> religiousNewDBModels = null;
+        ArrayList <ReligiousNewDBModel> religiousNewDBModels = new ArrayList<>();
         ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(PlaceDetailsActivityNewLayout.this);
         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.RELIGIOUS);
@@ -3748,7 +3681,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 * so that when user taps on education; it can just sort in arraylist rather than querying in database all the time*/
 
 
-    public void populateHolder(String place) {
+    public void populateHolder() {
         filterText = (EditText)findViewById(R.id.searchall);
         filterText.setTextColor(getResources().getColor(R.color.white));
 
