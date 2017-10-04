@@ -571,7 +571,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         frameAnimation.start();
 
         if (firstRun == false || firstRunUpdate == true) {
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories?", new VolleyApiCallback() {
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories_new?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
