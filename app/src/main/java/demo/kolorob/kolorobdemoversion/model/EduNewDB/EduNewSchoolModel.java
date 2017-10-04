@@ -72,9 +72,9 @@ public class EduNewSchoolModel {
         this.college_fees = college_fees;
     }
 
-    public static EduNewSchoolModel parseEduNewSchoolModel(JSONObject jo,int sproviderkey) throws JSONException {
+    public static EduNewSchoolModel parseEduNewSchoolModel(JSONObject jo) throws JSONException {
         int _eduId = jo.getInt("id");
-        int _sproviderId=sproviderkey;
+        int _sproviderId= jo.getInt("id");
         String _stipend = jo.getString("stipend");
         String _primary = jo.getString("primary_fees");
 
