@@ -120,9 +120,17 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
 
     }
 
+    public HealthNewDBModelMain cursorToModel(Cursor cursor, CommonModel _commonModel) {
+        int _healthId = cursor.getInt(0);
+        String _instituteType = cursor.getString(2);
 
-    public HealthNewDBModelMain getDetailsByCommonId(int commonId) {
-        return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
+        return new HealthNewDBModelMain(_healthId, _commonModel, _instituteType);
+
+    }
+
+
+    public HealthNewDBModelMain getDetailsByCommonModel(CommonModel commonModel) {
+        return super.getDetailsByCommonModel(commonModel, TABLE_NAME, KEY_COMMON_ID);
     }
 
     public ArrayList <HealthNewDBModelMain> getDataListFromId(int nodeId){

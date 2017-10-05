@@ -96,8 +96,7 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
     }
     private long updateItem(
             int eduId, int commonId, String educationType, String shift,
-            String studentNo, String teacherNo, String avgStudentPerClass, String facility
-    ) {
+            String studentNo, String teacherNo, String avgStudentPerClass, String facility) {
 
         ContentValues rowValue = new ContentValues();
 
@@ -125,6 +124,10 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
 
     public EduNewModel getDetailsByCommonId(int commonId) {     // getAllEducationSubCategoriesInfo
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
+    }
+
+    public EduNewModel getDetailsByCommonModel(CommonModel commonModel){
+        return super.getDetailsByCommonModel(commonModel, TABLE_NAME, KEY_COMMON_ID);
     }
 
 
@@ -178,7 +181,21 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
 
         CommonModel _commonModel = getCommonModelFromId(_commonId);
 
-       return new EduNewModel(_eduId, _commonModel, _eduType, _shift, _studentNo, _teachersNo, _avgStdPerClass, _facility);
+        return new EduNewModel(_eduId, _commonModel, _eduType, _shift, _studentNo, _teachersNo, _avgStdPerClass, _facility);
+
+    }
+
+    public EduNewModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+
+        int _eduId = cursor.getInt(0);
+        String _eduType = cursor.getString(2);
+        String _shift = cursor.getString(3);
+        String _studentNo = cursor.getString(4);
+        String _teachersNo = cursor.getString(5);
+        String _avgStdPerClass = cursor.getString(6);
+        String _facility = cursor.getString(7);
+
+        return new EduNewModel(_eduId, _commonModel, _eduType, _shift, _studentNo, _teachersNo, _avgStdPerClass, _facility);
 
     }
 

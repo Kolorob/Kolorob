@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 
 /**
@@ -148,6 +149,10 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
         return new HealthNewDBModelPharmacy(_servicecenterid,_davailable,
                 _speciality,_vaccineavailable);
+    }
+
+    public HealthNewDBModelPharmacy cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
 

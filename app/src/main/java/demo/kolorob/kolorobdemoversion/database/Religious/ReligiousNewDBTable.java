@@ -131,6 +131,20 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
 
     }
 
+    public ReligiousNewDBModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+        int _shelterId = cursor.getInt(0);
+
+        String _rsReligion = cursor.getString(2);
+        String _rsServicesFor = cursor.getString(3);
+        String _rsServicesForReligion = cursor.getString(4);
+        String _otherReligion = cursor.getString(5);
+        String _rsTime = cursor.getString(6);
+        String _rsFee = cursor.getString(7);
+
+        return new ReligiousNewDBModel(_shelterId, _commonModel, _rsReligion, _rsServicesFor, _rsServicesForReligion, _otherReligion, _rsTime, _rsFee);
+
+    }
+
     public ReligiousNewDBModel getNodeInfo(int node) {
 
         CommonModel commonModel = getCommonModelFromId(node);

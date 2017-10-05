@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 
 
 /**
@@ -142,6 +144,10 @@ public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
 
         return new EduTrainingModel(_eduId,_sproviderId,
                 _courseduration,_cost,_trainingname,_coursename);
+    }
+
+    public EduTrainingModel cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public EduTrainingModel getNodeInfo(int node){

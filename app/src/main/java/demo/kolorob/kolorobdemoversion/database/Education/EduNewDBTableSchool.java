@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 
 /**
  * Created by israt.jahan on 6/27/2016.
@@ -166,6 +168,10 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
 
         return new EduNewSchoolModel(_eduId,_spid,_stipend,
                 _primary,_secondary,_collage);
+    }
+
+    public EduNewSchoolModel cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
 

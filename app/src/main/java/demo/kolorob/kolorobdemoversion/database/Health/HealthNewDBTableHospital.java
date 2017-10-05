@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 
@@ -153,6 +154,12 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
         return new HealthNewDBModelHospital(_servicecenterid,_eavailable,_enumber,
                 _ambavailable,_ambnumber,_mtravailable,_mtrnum,_mtrprivacy);
     }
+
+    public HealthNewDBModelHospital cursorToModel(Cursor cursor, CommonModel _commonModel){
+        return null;
+    }
+
+
 
     public HealthNewDBModelHospital getNodeInfo(int node) {
 

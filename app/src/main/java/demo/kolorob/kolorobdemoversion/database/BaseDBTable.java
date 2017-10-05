@@ -3,7 +3,6 @@ package demo.kolorob.kolorobdemoversion.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
@@ -22,7 +21,18 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract long insertItem(ModelType modelType);
     public abstract ModelType getNodeInfo(int node);
     public abstract ModelType cursorToModel(Cursor cursor);
+    public abstract ModelType cursorToModel(Cursor cursor, CommonModel commonModel);
     public abstract ModelType getDataFromId(int id);
+
+    /*
+
+    protected CommonModel getCommonModelFromId(int commonId)
+    protected ModelType getDetailsByCommonModel(CommonModel commonModel, String TABLE_NAME, String KEY_COMMON_ID)
+    protected ModelType getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID)
+    protected ModelType getRowFromForeignKey(int key, String TABLE_NAME, String KEY_FOREIGN_KEY)
+
+
+     */
 
 
 
@@ -56,25 +66,27 @@ public abstract class BaseDBTable <ModelType>  {
 
 
     protected CommonModel getCommonModelFromId(int commonId){
-        Log.e("", "getCommonModelById " + commonId);
         CommonDBTable commonDBTable = new CommonDBTable(tContext);
         return commonDBTable.getNodeInfo(commonId);
 
     }
 
+    protected ModelType getDetailsByCommonModel(CommonModel commonModel, String TABLE_NAME, String KEY_COMMON_ID){
+
+        return getRowFromCommonModel(commonModel, TABLE_NAME, KEY_COMMON_ID);
+    }
+
     protected ModelType getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID){
 
-        Log.e("", "Parent: getDetailsByCommonId " + commonId);
         return getRowFromForeignKey(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
 
-    protected ModelType getRowFromForeignKey(int key, String TABLE_NAME, String KEY_COMMON_ID){
+    protected ModelType getRowFromForeignKey(int key, String TABLE_NAME, String KEY_FOREIGN_KEY){
 
-        Log.e("", "getRowFromForeignKey " + key);
         ModelType model = null;
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + key, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_FOREIGN_KEY + " = " + key, null);
 
         if (cursor.moveToFirst()) {
                 model = cursorToModel(cursor);
@@ -84,9 +96,22 @@ public abstract class BaseDBTable <ModelType>  {
         return model;
     }
 
+    protected ModelType getRowFromCommonModel(CommonModel commonModel, String TABLE_NAME, String KEY_COMMON_ID){
+
+        ModelType model = null;
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + commonModel.getId(), null);
+
+        if (cursor.moveToFirst()) {
+            model = cursorToModel(cursor, commonModel);
+        }
+        cursor.close();
+        closeDB();
+        return model;
+    }
+
 
     public ModelType getDataFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID){
-
 
         ModelType model = null;
         SQLiteDatabase db = openDB();

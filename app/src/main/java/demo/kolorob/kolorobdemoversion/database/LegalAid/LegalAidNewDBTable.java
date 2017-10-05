@@ -97,6 +97,15 @@ public class LegalAidNewDBTable extends BaseDBTable <LegalAidNewDBModel> {
 
     }
 
+    public LegalAidNewDBModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+        int _legalId = cursor.getInt(0);
+        String _serviceType = cursor.getString(2);
+
+        return new LegalAidNewDBModel(_legalId, _commonModel, _serviceType);
+
+    }
+
+
     public LegalAidNewDBModel getNodeInfo(int node) {
 
         CommonModel commonModel = getCommonModelFromId(node);

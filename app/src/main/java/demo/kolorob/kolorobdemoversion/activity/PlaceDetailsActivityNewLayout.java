@@ -2967,7 +2967,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         mapcalledstatus = true;
 
-                        callMapFragmentWithHealth(constructHealthListItem(),true);
+                        callMapFragmentWithHealth(constructHealthListItem());
 
                         break;
 
@@ -2996,7 +2996,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
 
                         mapcalledstatus = true;
-                        callMapFragmentWithEntertainment(constructEntertainmentListItem(),true);
+                        callMapFragmentWithEntertainment(constructEntertainmentListItem());
 
                         ivIcon.setImageResource(R.drawable.ic_entertainment);
 
@@ -3279,10 +3279,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
         for(CommonModel commonModel : commonModels){
-
-            EduNewModel eduTemp = educationNewTable.getDetailsByCommonId(commonModel.getId());
-            educationServiceProvider.add(educationNewTable.getDetailsByCommonId(commonModel.getId()));
-
+            educationServiceProvider.add(educationNewTable.getDetailsByCommonModel(commonModel));
         }
 
         return educationServiceProvider;
@@ -3440,13 +3437,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
          ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.HEALTH);
 
          for(CommonModel commonModel : commonModels){
-             healthServiceProvider.add(healthServiceProviderTable.getDetailsByCommonId(commonModel.getId()));
+             healthServiceProvider.add(healthServiceProviderTable.getDetailsByCommonModel(commonModel));
          }
 
          return healthServiceProvider;
     }
 
-    private void callMapFragmentWithHealth(ArrayList<HealthNewDBModelMain> healthServiceProviderItemNews,boolean s) {
+    private void callMapFragmentWithHealth(ArrayList <HealthNewDBModelMain> healthServiceProviderItemNews) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
@@ -3478,7 +3475,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return entertainmentNewDBModels;
     }
 
-    private void callMapFragmentWithEntertainment(ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews,boolean s) {
+    private void callMapFragmentWithEntertainment(ArrayList <EntertainmentNewDBModel> entertainmentServiceProviderItemNews) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
 

@@ -145,6 +145,15 @@ public class FinNewDBTable extends BaseDBTable <FinancialNewDBModel> {
         return new FinancialNewDBModel(_finId, _commonModel, _type, _service);
     }
 
+    public FinancialNewDBModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+
+        int _finId = cursor.getInt(0);
+        String _type = cursor.getString(2);
+        String _service = cursor.getString(3);
+
+        return new FinancialNewDBModel(_finId, _commonModel, _type, _service);
+    }
+
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);

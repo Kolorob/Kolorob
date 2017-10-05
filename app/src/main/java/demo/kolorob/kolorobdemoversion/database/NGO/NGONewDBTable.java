@@ -158,6 +158,21 @@ public class NGONewDBTable extends BaseDBTable <NGONewDBModel> {
     }
 
 
+    public NGONewDBModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+        int _ngoId = cursor.getInt(0);
+        String _ngoServices = cursor.getString(2);
+        String _ngoServicesFor = cursor.getString(3);
+        String _ngoServicesOther = cursor.getString(4);
+        String _serviceType = cursor.getString(5);
+        String _dropTime = cursor.getString(6);
+        String _ngoFee = cursor.getString(7);
+
+        return new NGONewDBModel(_ngoId, _commonModel, _ngoServices, _ngoServicesFor, _ngoServicesOther, _serviceType, _dropTime, _ngoFee);
+
+    }
+
+
+
     public NGONewDBModel getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }

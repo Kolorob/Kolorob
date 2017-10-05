@@ -155,6 +155,17 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
 
     }
 
+    public EntertainmentNewDBModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+
+        int _entId = cursor.getInt(0);
+        String _entType = cursor.getString(2);
+        String _entryFee = cursor.getString(3);
+
+        return new EntertainmentNewDBModel(_entId, _commonModel, _entType, _entryFee);
+
+    }
+
+
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }

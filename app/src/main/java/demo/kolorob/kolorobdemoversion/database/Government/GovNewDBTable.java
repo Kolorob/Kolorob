@@ -126,6 +126,14 @@ public class GovNewDBTable extends BaseDBTable <GovernmentNewDBModel> {
         return new GovernmentNewDBModel(_govId, _commonModel, _serviceName);
     }
 
+    public GovernmentNewDBModel cursorToModel(Cursor cursor, CommonModel _commonModel) {
+
+        int _govId = cursor.getInt(0);
+        String _serviceName = cursor.getString(2);
+
+        return new GovernmentNewDBModel(_govId, _commonModel, _serviceName);
+    }
+
     public void delete(int id){
         super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
