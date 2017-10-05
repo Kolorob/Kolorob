@@ -212,7 +212,7 @@ public class CommonModel implements Serializable {
     }
 
 
-    public CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
+    protected CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
         this.id = id;
         this.nameEn = nameEn;
         this.nameBn = nameBn;
@@ -239,11 +239,12 @@ public class CommonModel implements Serializable {
     }
 
 
-    public static CommonModel parseCommonModel (JSONObject jo) throws JSONException {
+    protected static CommonModel parseCommonModel (JSONObject jo) throws JSONException {
 
         int _id = jo.getInt("id");
         String _nameEn = jo.getString("node_name");
         String _nameBn = jo.getString("node_bn");
+
 
         String _houseNo = jo.getJSONObject("contact_info").getString("house_no");
         String _block = jo.getJSONObject("contact_info").getString("block");
