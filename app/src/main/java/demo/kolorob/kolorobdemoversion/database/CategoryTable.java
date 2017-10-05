@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
  * Created by touhid on 12/26/15.
@@ -97,6 +99,10 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
         String nameBn = cursor.getString(2);
         boolean isActive = cursor.getString(3).equals("true");
         return new CategoryItem(id, name, nameBn, isActive);
+    }
+
+    public CategoryItem cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public CategoryItem getDataFromId(int id){

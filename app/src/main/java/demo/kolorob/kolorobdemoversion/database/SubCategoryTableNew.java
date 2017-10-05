@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
+import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 
 
@@ -154,6 +157,10 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
         String refLabel = cursor.getString(7);
         String refLabelBn = cursor.getString(8);
         return new SubCategoryItemNew(id,cat_id,catname, subcatheaderid,headen,headbn,refid,refLabel,refLabelBn);
+    }
+
+    public SubCategoryItemNew cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public void dropTable() {

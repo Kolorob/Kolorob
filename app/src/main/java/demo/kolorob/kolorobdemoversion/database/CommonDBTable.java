@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -353,6 +355,10 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
                 _lat, _lon,
                 _catId, _subCat, _refNum, _ratings);
 
+    }
+
+    public CommonModel cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public void dropTable() {

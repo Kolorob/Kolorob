@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 
@@ -164,6 +165,10 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
 
        return new StoredArea(_id, _ward, _area, _areaBn, _parentArea, _lat, _lon);
    }
+
+    public StoredArea cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
+    }
 
     public StoredArea getNodeInfo(int node) {
 
