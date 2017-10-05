@@ -11,29 +11,10 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
  * Created by israt.jahan on 1/26/2017.
  */
 
-public class EduNewModel implements Serializable {
-
-    int eduId;
-    CommonModel commonModel;
+public class EduNewModel extends CommonModel implements Serializable {
 
     String educationType, shift, studentNo, teachersNo, averageStudentPerClass, facility;
 
-
-    public int getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(int eduId) {
-        this.eduId = eduId;
-    }
-
-    public CommonModel getCommonModel() {
-        return commonModel;
-    }
-
-    public void setCommonModel(CommonModel commonModel) {
-        this.commonModel = commonModel;
-    }
 
     public String getEducationType() {
         return educationType;
@@ -83,9 +64,8 @@ public class EduNewModel implements Serializable {
         this.facility = facility;
     }
 
-    public EduNewModel(int eduId, CommonModel commonModel, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
-        this.eduId = eduId;
-        this.commonModel = commonModel;
+    public EduNewModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
         this.educationType = educationType;
         this.shift = shift;
         this.studentNo = studentNo;
@@ -94,9 +74,27 @@ public class EduNewModel implements Serializable {
         this.facility = facility;
     }
 
+
+    public EduNewModel(CommonModel cm, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
+        super(cm.getId(), cm.getNameEn(), cm.getNameBn(),
+                cm.getHouseNo(), cm.getBlock(), cm.getRoad(), cm.getArea(), cm.getAreaBn(), cm.getParentArea(), cm.getWard(), cm.getPoliceStation(),
+                cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
+                cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
+                cm.getLat(), cm.getLon(),
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+        this.educationType = educationType;
+        this.shift = shift;
+        this.studentNo = studentNo;
+        this.teachersNo = teachersNo;
+        this.averageStudentPerClass = averageStudentPerClass;
+        this.facility = facility;
+    }
+
+
+
     public static EduNewModel parseEduNewModel (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = CommonModel.parseCommonModel(jo);
+        CommonModel _commonModel = parseCommonModel(jo);
         int _eduId = jo.getInt("id");
         String _educationType = jo.getString("education_type");
         String _shift = jo.getString("shift");
@@ -105,6 +103,6 @@ public class EduNewModel implements Serializable {
         String _avgStudentPerClass = jo.getString("class_size");
         String _facility = jo.getString("facility");
 
-        return new EduNewModel(_eduId, _commonModel, _educationType, _shift, _studentNo, _teachersNo, _avgStudentPerClass, _facility);
+        return new EduNewModel(_commonModel, _educationType, _shift, _studentNo, _teachersNo, _avgStudentPerClass, _facility);
     }
 }
