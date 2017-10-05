@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.model.Area;
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 
@@ -141,6 +142,10 @@ public class AreaTable extends BaseDBTable <Area>{
         String lon = cursor.getString(6);
         int ward_id = cursor.getInt(7);
         return new Area(id, area_en, area_bn, area_keyword, parent_area, lat, lon, ward_id);
+    }
+
+    public Area cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public void dropTable() {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 
 /**
@@ -127,6 +128,10 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         String cc_keyword = cursor.getString(3);
 
         return new CityCorporation(id, cc_en, cc_bn, cc_keyword);
+    }
+
+    public CityCorporation cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public void dropTable() {

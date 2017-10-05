@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 
 /**
@@ -114,6 +116,10 @@ public class WardTable extends BaseDBTable <Ward>{
         String ward_keyword = cursor.getString(3);
         int cc_id = cursor.getInt(4);
         return new Ward(id, ward_en, ward_bn, ward_keyword, cc_id);
+    }
+
+    public Ward cursorToModel(Cursor cursor, CommonModel commonModel){
+        return null;
     }
 
     public Ward getNodeInfo(int node) {
