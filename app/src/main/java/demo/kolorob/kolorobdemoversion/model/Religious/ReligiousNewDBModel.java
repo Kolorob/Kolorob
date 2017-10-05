@@ -9,26 +9,10 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
  * Created by zahid on 2/8/2017.
  */
 
-public class ReligiousNewDBModel implements Serializable {
-    int shelterId;
-    CommonModel commonModel;
+public class ReligiousNewDBModel extends CommonModel implements Serializable {
+
     String rsReligion, rsServicesFor, rsServicesForReligion, otherReligion, rsTime, rsFee;
 
-    public int getShelterId() {
-        return shelterId;
-    }
-
-    public void setShelterId(int shelterId) {
-        this.shelterId = shelterId;
-    }
-
-    public CommonModel getCommonModel() {
-        return commonModel;
-    }
-
-    public void setCommonModel(CommonModel commonModel) {
-        this.commonModel = commonModel;
-    }
 
     public String getRsReligion() {
         return rsReligion;
@@ -78,9 +62,23 @@ public class ReligiousNewDBModel implements Serializable {
         this.rsFee = rsFee;
     }
 
-    public ReligiousNewDBModel(int shelterId, CommonModel commonModel, String rsReligion, String rsServicesFor, String rsServicesForReligion, String otherReligion, String rsTime, String rsFee) {
-        this.shelterId = shelterId;
-        this.commonModel = commonModel;
+    public ReligiousNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String rsReligion, String rsServicesFor, String rsServicesForReligion, String otherReligion, String rsTime, String rsFee) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+        this.rsReligion = rsReligion;
+        this.rsServicesFor = rsServicesFor;
+        this.rsServicesForReligion = rsServicesForReligion;
+        this.otherReligion = otherReligion;
+        this.rsTime = rsTime;
+        this.rsFee = rsFee;
+    }
+
+    public ReligiousNewDBModel(CommonModel cm, String rsReligion, String rsServicesFor, String rsServicesForReligion, String otherReligion, String rsTime, String rsFee){
+        super(cm.getId(), cm.getNameEn(), cm.getNameBn(),
+                cm.getHouseNo(), cm.getBlock(), cm.getRoad(), cm.getArea(), cm.getAreaBn(), cm.getParentArea(), cm.getWard(), cm.getPoliceStation(),
+                cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
+                cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
+                cm.getLat(), cm.getLon(),
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
         this.rsReligion = rsReligion;
         this.rsServicesFor = rsServicesFor;
         this.rsServicesForReligion = rsServicesForReligion;
@@ -91,8 +89,7 @@ public class ReligiousNewDBModel implements Serializable {
 
     public static ReligiousNewDBModel parseReligiousNewDBModel (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = CommonModel.parseCommonModel(jo);
-        int _shelterId = jo.getInt("id");
+        CommonModel _commonModel = parseCommonModel(jo);
 
         String _rsReligion = jo.getString("rs_religion");
         String _rsServicesFor = jo.getString("rs_services_for");
@@ -101,6 +98,6 @@ public class ReligiousNewDBModel implements Serializable {
         String _rsTime = jo.getString("rs_time");
         String _rsFee = jo.getString("rs_fee");
 
-        return new ReligiousNewDBModel(_shelterId, _commonModel, _rsReligion, _rsServicesFor, _rsServicesForReligion, _otherReligion, _rsTime, _rsFee);
+        return new ReligiousNewDBModel(_commonModel, _rsReligion, _rsServicesFor, _rsServicesForReligion, _otherReligion, _rsTime, _rsFee);
     }
 }
