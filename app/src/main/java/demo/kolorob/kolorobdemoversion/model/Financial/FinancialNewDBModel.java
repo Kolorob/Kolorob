@@ -1,12 +1,10 @@
 package demo.kolorob.kolorobdemoversion.model.Financial;
 
-import org.json.JSONArray;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.Serializable;
 
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
  * Created by israt.jahan on 1/29/2017.
