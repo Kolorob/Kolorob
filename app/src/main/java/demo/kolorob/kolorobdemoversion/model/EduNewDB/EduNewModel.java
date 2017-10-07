@@ -95,7 +95,6 @@ public class EduNewModel extends CommonModel implements Serializable {
     public static EduNewModel parseEduNewModel (JSONObject jo) throws JSONException {
 
         CommonModel _commonModel = parseCommonModel(jo);
-        int _eduId = jo.getInt("id");
         String _educationType = jo.getString("education_type");
         String _shift = jo.getString("shift");
         String _studentNo = jo.getString("no_of_students");
