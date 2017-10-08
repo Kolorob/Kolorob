@@ -24,16 +24,16 @@ public class DetailsLayoutFinance extends BaseActivity {
             finance = (FinancialNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIALNEW);
         }
 
-        viewBaseLayout(finance.getCommonModel());
+        viewBaseLayout(finance);
         displayUniqueProperties();
-        displayCommonProperties(finance.getCommonModel());
+        displayCommonProperties(finance);
     }
 
     public void displayUniqueProperties(){
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  finance.getFinType());
-        if(!finance.getFinType().equals(getReferences(finance.getCommonModel()))){
-            CheckConcate("বিশেষত্ব", getReferences(finance.getCommonModel()));
+        if(!finance.getFinType().equals(getReferences(finance))){
+            CheckConcate("বিশেষত্ব", getReferences(finance));
         }
         CheckConcate("সুবিধার ধরণ",  finance.getServiceType());
     }

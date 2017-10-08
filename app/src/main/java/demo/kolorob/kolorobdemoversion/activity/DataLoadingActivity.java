@@ -719,7 +719,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Edu.isNull(i)) {
                         JSONObject jsonObject2 = Edu.getJSONObject(i);
                         EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
-                        commonDBTable.insertItem(eduNewModel.getCommonModel());
                         eduNewDBTableMain.insertItem(eduNewModel);
                         if (jsonObject2.has("training_details")) {
 
@@ -763,7 +762,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    class SaveEntertainmentDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+    class SaveEntertainmentDataTask extends GenericSaveDBTask <JSONArray, Integer, Long> {
         public SaveEntertainmentDataTask(Context ctx) {
             super(ctx);
         }
@@ -771,7 +770,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Ent = jsonArrays[0];
-            CommonDBTable commonDBTable = new CommonDBTable(DataLoadingActivity.this);
+
             EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
 
             int Entcount = Ent.length();
@@ -781,7 +780,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Ent.isNull(i)) {
                         JSONObject jsonObject2 = Ent.getJSONObject(i);
                         EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
-                        commonDBTable.insertItem(entertainmentNewDBModel.getCommonModel());
                         entNewDBTable.insertItem(entertainmentNewDBModel);
                     }
 
@@ -803,7 +801,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Gov = jsonArrays[0];
-            CommonDBTable commonDBTable = new CommonDBTable(DataLoadingActivity.this);
             GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
 
 
@@ -814,7 +811,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Gov.isNull(i)) {
                         JSONObject jsonObject2 = Gov.getJSONObject(i);
                         GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
-                        commonDBTable.insertItem(governmentNewDBModel.getCommonModel());
                         govNewDBTable.insertItem(governmentNewDBModel);
                     }
 
@@ -834,7 +830,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Legal = jsonArrays[0];
-            CommonDBTable commonDBTable = new CommonDBTable(DataLoadingActivity.this);
             LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
 
             int Legalcount = Legal.length();
@@ -844,7 +839,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Legal.isNull(i)) {
                         JSONObject jsonObject2 = Legal.getJSONObject(i);
                         LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
-                        commonDBTable.insertItem(legalAidNewDBModel.getCommonModel());
                         legalAidNewDBTable.insertItem(legalAidNewDBModel);
                     }
 
@@ -867,7 +861,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Fin = jsonArrays[0];
-            CommonDBTable commonDBTable = new CommonDBTable(DataLoadingActivity.this);
             FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
 
 
@@ -879,7 +872,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Fin.isNull(i)) {
                         JSONObject jsonObject2 = Fin.getJSONObject(i);
                         FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
-                        commonDBTable.insertItem(financialNewDBModel.getCommonModel());
                         finNewDBTable.insertItem(financialNewDBModel);
                     }
 
@@ -900,7 +892,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Hel = jsonArrays[0];
-            CommonDBTable commonDBTable = new CommonDBTable(DataLoadingActivity.this);
+
             HealthNewDBTableMain healthNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
             HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
             HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
@@ -913,7 +905,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Hel.isNull(i)) {
                         JSONObject jsonObject2 = Hel.getJSONObject(i);
                         HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
-                        commonDBTable.insertItem(healthNewDBModelMain.getCommonModel());
                         healthNewDBTable.insertItem(healthNewDBModelMain);
 
                         if (jsonObject2.has("health_pharmacy")) {
@@ -943,7 +934,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Ngo = jsonArrays[0];
-            CommonDBTable commonDBTable = new CommonDBTable(DataLoadingActivity.this);
             NGONewDBTable ngoNewDBTable = new NGONewDBTable(DataLoadingActivity.this);
 
             int Ngocount = Ngo.length();
@@ -953,7 +943,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Ngo.isNull(i)) {
                         JSONObject jsonObject2 = Ngo.getJSONObject(i);
                         NGONewDBModel ngoNewDBModel = NGONewDBModel.parseNgoNewDBModel(jsonObject2);
-                        commonDBTable.insertItem(ngoNewDBModel.getCommonModel());
                         ngoNewDBTable.insertItem(ngoNewDBModel);
                     }
 
@@ -986,7 +975,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (!Religious.isNull(i)) {
                         JSONObject jsonObject2 = Religious.getJSONObject(i);
                         ReligiousNewDBModel religiousNewDBModel = ReligiousNewDBModel.parseReligiousNewDBModel(jsonObject2);
-                        commonDBTable.insertItem(religiousNewDBModel.getCommonModel());
                         religiousNewDBTable.insertItem(religiousNewDBModel);
                     }
 

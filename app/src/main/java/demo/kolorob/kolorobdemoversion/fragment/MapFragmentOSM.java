@@ -39,6 +39,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
@@ -322,7 +323,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
     }
 
-    public void eduicons() {
+    public void icons(ArrayList <CommonModel> list) {
 
         mapView.removeAllViewsInLayout();
         mapView.getOverlays().clear();
@@ -330,16 +331,16 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         mapView.getOverlays().add(0, mapEventsOverlay);
         mapView.invalidate();
 
-        if (educationServiceProvider != null) {
+        if (list != null) {
 
 
-            for (EduNewModel et : educationServiceProvider) {
+            for (CommonModel cm : list) {
 
                 //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                subcategotyId2 = et.getCommonModel().getSubcat();
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                subcategotyId2 = cm.getSubcat();
+                latDouble = Double.parseDouble(cm.getLat());
+                ratingavg = cm.getRatings();
+                refid = cm.getRefNum();
 
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
@@ -369,9 +370,65 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
+                longDouble = Double.parseDouble(cm.getLon());
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerEdu(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getEduId(), subcategotyId2, refid2);
+                drawMarkerEdu(point, cm.getNameBn(), ratingavg, cm.getNodeContact(), cm.getId(), subcategotyId2, refid2);
+            }
+        }
+
+
+    }
+
+    public void eduicons() {
+
+        mapView.removeAllViewsInLayout();
+        mapView.getOverlays().clear();
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+        mapView.invalidate();
+
+        if (educationServiceProvider != null) {
+
+
+            for (EduNewModel et : educationServiceProvider) {
+
+                //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                subcategotyId2 = et.getSubcat();
+                latDouble = Double.parseDouble(et.getLat());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
+
+                result.delete(0, result.length());
+                String[] references = refid.split(",");
+                for (int k = 0; k < references.length; k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value = subCategoryItemNews.get(i).getRefId();
+                        if (value == Integer.parseInt(references[k])) {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                    refid2 = "পাওয়া যায় নি";
+                }
+
+                if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
+                    ratingavg = "পাওয়া যায় নি";
+
+                } else {
+                    ratingavgbn = EtoBconversion(ratingavg);
+
+                    ratingavg = ratingavgbn.concat(datevalue);
+                }
+                longDouble = Double.parseDouble(et.getLon());
+                GeoPoint point = new GeoPoint(latDouble, longDouble);
+                drawMarkerEdu(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId2, refid2);
             }
         }
 
@@ -389,11 +446,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             for (HealthNewDBModelMain et : healthServiceProvider) {
 
                 //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                String subcategotyId = et.getCommonModel().getSubcat();
+                String subcategotyId = et.getSubcat();
                 //Log.d("subcategotyId_Legal","=======");
 
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -422,10 +479,10 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerHealth(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getHealthId(), subcategotyId, refid2);
+                drawMarkerHealth(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId, refid2);
             }
         }
 
@@ -443,11 +500,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
             for (EntertainmentNewDBModel et : entertainmentServiceProvider) {
                 //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                String subcategotyId = et.getCommonModel().getSubcat();
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                String subcategotyId = et.getSubcat();
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -478,7 +535,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerEnt(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getEntid(), subcategotyId, refid2);
+                drawMarkerEnt(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId, refid2);
             }
         }
 
@@ -497,11 +554,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             for (GovernmentNewDBModel et : governmentNewItems) {
 
 
-                subcategotyId2 = et.getCommonModel().getSubcat();
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                subcategotyId2 = et.getSubcat();
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -530,7 +587,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerGov(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getGovId(), subcategotyId2, refid2);
+                drawMarkerGov(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId2, refid2);
             }
         }
 
@@ -549,12 +606,12 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
             for (LegalAidNewDBModel et : legalaidServiceProvider) {
 
-                String subcategotyId = et.getCommonModel().getSubcat();
+                String subcategotyId = et.getSubcat();
 
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -583,7 +640,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerLeg(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getLegalId(), subcategotyId, refid2);
+                drawMarkerLeg(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId, refid2);
             }
         }
 
@@ -603,12 +660,12 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
             for (NGONewDBModel et : ngoServiceProvider) {
 
-                String subcategotyId = et.getCommonModel().getSubcat();
+                String subcategotyId = et.getSubcat();
                 Log.e("Sub Cat NGO", subcategotyId);
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 service_type = et.getNgoServiceType();
                 services = et.getNgoServices();
                 result.delete(0, result.length());
@@ -638,7 +695,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerNGO(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getNgoId(), subcategotyId, refid2);
+                drawMarkerNGO(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId, refid2);
             }
         }
 
@@ -658,12 +715,12 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             for (ReligiousNewDBModel et : religiousServiceProvider) {
 
                 //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                String subcategotyId = et.getCommonModel().getSubcat();
+                String subcategotyId = et.getSubcat();
                 Log.e("Sub Cat Religious", subcategotyId);
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 religion = et.getRsReligion();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
@@ -692,7 +749,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerReligious(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getShelterId(), subcategotyId, refid2, et.getRsReligion());
+                drawMarkerReligious(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId, refid2, et.getRsReligion());
             }
         }
 
@@ -715,11 +772,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             for (FinancialNewDBModel et : financialServiceProvider) {
 
                 //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                subcategotyId2 = et.getCommonModel().getSubcat();
-                latDouble = Double.parseDouble(et.getCommonModel().getLat());
-                longDouble = Double.parseDouble(et.getCommonModel().getLon());
-                ratingavg = et.getCommonModel().getRatings();
-                refid = et.getCommonModel().getRefNum();
+                subcategotyId2 = et.getSubcat();
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefNum();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -748,7 +805,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerFin(point, et.getCommonModel().getNameBn(), ratingavg, et.getCommonModel().getNodeContact(), et.getFinId(), subcategotyId2, refid2);
+                drawMarkerFin(point, et.getNameBn(), ratingavg, et.getNodeContact(), et.getId(), subcategotyId2, refid2);
             }
         }
 

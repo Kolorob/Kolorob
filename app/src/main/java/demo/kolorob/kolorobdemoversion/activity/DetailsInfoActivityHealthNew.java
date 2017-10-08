@@ -40,9 +40,9 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
             health = (HealthNewDBModelMain) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
         }
 
-        viewBaseLayout(health.getCommonModel());
+        viewBaseLayout(health);
         displayUniqueProperties();
-        displayCommonProperties(health.getCommonModel());
+        displayCommonProperties(health);
         //compare();
     }
 
@@ -54,11 +54,11 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
         CheckConcate("প্রতিষ্ঠানের ধরণ",  health.getInstituteType());
 
-        if(!health.getInstituteType().equals(getReferences(health.getCommonModel()))){
-            CheckConcate("বিশেষত্ব", getReferences(health.getCommonModel()));
+        if(!health.getInstituteType().equals(getReferences(health))){
+            CheckConcate("বিশেষত্ব", getReferences(health));
         }
 
-        hospitals = hospitalDB.getDataListFromId(health.getCommonModel().getId());
+        hospitals = hospitalDB.getDataListFromId(health.getId());
         int hospitalSize = hospitals.size();
 
         if (hospitalSize != 0) {
@@ -96,7 +96,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
 
         HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(context);
-        pharmacies = pharmacyDB.getDataListFromId(health.getCommonModel().getId());
+        pharmacies = pharmacyDB.getDataListFromId(health.getId());
 
         int pharmacySize = pharmacies.size();
 
@@ -127,11 +127,11 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
         String multipule[] = compare_Data.split(",");
 
-        if(compareValue == 1 && compare_Data.equals(health.getCommonModel().getId())) {
+        if(compareValue == 1 && compare_Data.equals(health.getId())) {
             checkBox.setChecked(true);
         }
 
-        else if(compareValue == 2 && (multipule[0].equals(health.getCommonModel().getId()) || multipule[1].equals(health.getCommonModel().getId()))) {
+        else if(compareValue == 2 && (multipule[0].equals(health.getId()) || multipule[1].equals(health.getId()))) {
             checkBox.setChecked(true);
         }
 
@@ -148,7 +148,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
                     String new_compare_Data = "";
                     compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
                     String multipule[] = compare_Data.split(",");
-                    new_compare_Data = multipule[1] + "," + health.getCommonModel().getId();
+                    new_compare_Data = multipule[1] + "," + health.getId();
                     SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 2);
                 }
                 else {
@@ -164,7 +164,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
             else if (compareValue == 0) {
                 if(isChecked)
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, String.valueOf(health.getCommonModel().getId()), 1);
+                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, String.valueOf(health.getId()), 1);
 
             }
             else if (compareValue == 1) {
@@ -173,7 +173,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
                     String previous_node;
                     previous_node = SharedPreferencesHelper.getComapreDataHealth(context);
-                    previous_node = previous_node + "," + health.getCommonModel().getId();
+                    previous_node = previous_node + "," + health.getId();
                     SharedPreferencesHelper.setCompareDataHealth(context, previous_node, 2);
 
                 }

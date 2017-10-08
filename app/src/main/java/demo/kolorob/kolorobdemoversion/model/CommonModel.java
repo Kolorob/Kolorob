@@ -3,10 +3,8 @@ package demo.kolorob.kolorobdemoversion.model;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.Serializable;
 
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 
 /**
  * Created by shamima.yasmin on 9/21/2017.
@@ -212,7 +210,7 @@ public class CommonModel implements Serializable {
     }
 
 
-    protected CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
+    public CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
         this.id = id;
         this.nameEn = nameEn;
         this.nameBn = nameBn;
@@ -250,7 +248,7 @@ public class CommonModel implements Serializable {
         String _block = jo.getJSONObject("contact_info").getString("block");
         String _road = jo.getJSONObject("contact_info").getString("road");
         String _area = jo.getJSONObject("contact_info").getString("area");
-        String _areaBn=jo.getJSONObject("contact_info").getString("area_bn");
+        String _areaBn = jo.getJSONObject("contact_info").getString("area_bn");
         String _parentArea = jo.getJSONObject("contact_info").getString("parent_area");
         String _ward = jo.getJSONObject("contact_info").getString("ward");
         String _policeStation = jo.getJSONObject("contact_info").getString("police_station");

@@ -25,16 +25,16 @@ public class DetailsInfoActivityLegalNew extends BaseActivity  {
             legal = (LegalAidNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
         }
 
-        viewBaseLayout(legal.getCommonModel());
+        viewBaseLayout(legal);
         displayUniqueProperties();
-        displayCommonProperties(legal.getCommonModel());
+        displayCommonProperties(legal);
     }
 
 
     public void displayUniqueProperties(){
         CheckConcate("প্রতিষ্ঠানের ধরণ",  legal.getService());
-        if(!legal.getService().equals(getReferences(legal.getCommonModel()))){
-            CheckConcate("বিশেষত্ব", getReferences(legal.getCommonModel()));
+        if(!legal.getService().equals(getReferences(legal))){
+            CheckConcate("বিশেষত্ব", getReferences(legal));
         }
     }
 }

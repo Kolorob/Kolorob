@@ -25,9 +25,9 @@ public class DetailsInfoActivityNGO extends BaseActivity {
             ngo = (NGONewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_NGO);
         }
 
-        viewBaseLayout(ngo.getCommonModel());
+        viewBaseLayout(ngo);
         displayUniqueProperties();
-        displayCommonProperties(ngo.getCommonModel());
+        displayCommonProperties(ngo);
     }
 
 

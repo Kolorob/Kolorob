@@ -22,9 +22,9 @@ public class DetailsInfoActivityReligious extends BaseActivity {
             shelter = (ReligiousNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_RELIGIOUS);
         }
 
-        viewBaseLayout(shelter.getCommonModel());
+        viewBaseLayout(shelter);
         displayUniqueProperties();
-        displayCommonProperties(shelter.getCommonModel());
+        displayCommonProperties(shelter);
 
     }
 

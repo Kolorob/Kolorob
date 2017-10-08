@@ -2090,7 +2090,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     else if (compareValue == 0) { /// if their no item for compare
                         if(isChecked)
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNew.getHealthId()), 1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNew.getId()), 1);
                     }
 
 
@@ -2117,15 +2117,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                 }
             }*/
-            if(!healthServiceProviderItemNew.getCommonModel().getNameBn().equalsIgnoreCase("null") && !healthServiceProviderItemNew.getCommonModel().getNameBn().equals(""))
-                health_name2.setText(healthServiceProviderItemNew.getCommonModel().getNameBn());
+            if(!healthServiceProviderItemNew.getNameBn().equalsIgnoreCase("null") && !healthServiceProviderItemNew.getNameBn().equals(""))
+                health_name2.setText(healthServiceProviderItemNew.getNameBn());
             else
                 health_name2.setText("তথ্য পাওয়া যায় নি ");
 
             String time2 = "";
-            time2 = timeConverter(healthServiceProviderItemNew.getCommonModel().getOpeningTime());
+            time2 = timeConverter(healthServiceProviderItemNew.getOpeningTime());
             left_part = new String [] {time2,healthServiceProviderItemNew.getInstituteType()
-                    ,healthServiceProviderItemNew.getCommonModel().getOffDay(),firstSpecialistItemdoc,firstSpecialistItemspe,firstSpecialistItemvac
+                    ,healthServiceProviderItemNew.getOffDay(),firstSpecialistItemdoc,firstSpecialistItemspe,firstSpecialistItemvac
                     };
         }
 
@@ -2163,7 +2163,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     else if (compareValue == 0) {
                         if(isChecked)
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNewx.getCommonModel().getId()), 1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNewx.getId()), 1);
                     }
                 }
             });
@@ -2171,17 +2171,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
 
-            if(!healthServiceProviderItemNewx.getCommonModel().getNameBn().equalsIgnoreCase("null") && !healthServiceProviderItemNewx.getCommonModel().getNameBn().equals(""))
-                health_name1.setText(healthServiceProviderItemNewx.getCommonModel().getNameBn());
+            if(!healthServiceProviderItemNewx.getNameBn().equalsIgnoreCase("null") && !healthServiceProviderItemNewx.getNameBn().equals(""))
+                health_name1.setText(healthServiceProviderItemNewx.getNameBn());
             else
                 health_name1.setText("তথ্য পাওয়া যায় নি ");
 
 
 
             String time1 = "";
-            time1 = timeConverter(healthServiceProviderItemNewx.getCommonModel().getOpeningTime()); //convert the time
+            time1 = timeConverter(healthServiceProviderItemNewx.getOpeningTime()); //convert the time
             right_part = new String [] {time1,healthServiceProviderItemNewx.getInstituteType()
-                    ,healthServiceProviderItemNewx.getCommonModel().getOffDay(),secondSpecialistItemdoc,
+                    ,healthServiceProviderItemNewx.getOffDay(),secondSpecialistItemdoc,
                     secondSpecialistItemspe,secondSpecialistItemvac
             };
         }
@@ -2235,7 +2235,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     else if (compareValue == 0) {
                         if(isChecked)
-                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getEduId()), 1);
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getId()), 1);
 
                     }
                 }
@@ -2243,15 +2243,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
             health_header = new String []{ "প্রতিষ্ঠানের ধরন", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখ্যা","শিক্ষক সংখ্যা ","শাখা","রেটিং"
             };
-            if(educationNewItem.getCommonModel().getNameBn() == null || educationNewItem.getCommonModel().getNameBn().equalsIgnoreCase("null")|| educationNewItem.getCommonModel().getNameBn().equals(""))
+            if(educationNewItem.getNameBn() == null || educationNewItem.getNameBn().equalsIgnoreCase("null")|| educationNewItem.getNameBn().equals(""))
                 edu_name2.setText("তথ্য পাওয়া যায় নি ");
             else
-                edu_name2.setText(educationNewItem.getCommonModel().getNameBn());
+                edu_name2.setText(educationNewItem.getNameBn());
 
             left_part = new String []{educationNewItem.getEducationType(),English_to_bengali_number_conversion(educationNewItem.getAverageStudentPerClass()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentNo())),
                     English_to_bengali_number_conversion(educationNewItem.getTeachersNo()),educationNewItem.getShift(),
-                    educationNewItem.getCommonModel().getRatings()};
+                    educationNewItem.getRatings()};
         }
         for (final EduNewModel educationNewItem: secondDataSetEdu)
         {
@@ -2285,7 +2285,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     else if (compareValue == 0) {
                         if(isChecked)
-                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getEduId()), 1);
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getId()), 1);
                     }
                 }
             });
@@ -2294,11 +2294,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             right_part = new String []{educationNewItem.getEducationType(),English_to_bengali_number_conversion(educationNewItem.getAverageStudentPerClass()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentNo())),
                     English_to_bengali_number_conversion(educationNewItem.getTeachersNo()),
-                    educationNewItem.getShift(),educationNewItem.getCommonModel().getRatings()};
-            if(educationNewItem.getCommonModel().getNameBn()==null || educationNewItem.getCommonModel().getNameBn().equalsIgnoreCase("null")|| educationNewItem.getCommonModel().getNameBn().equals(""))
+                    educationNewItem.getShift(),educationNewItem.getRatings()};
+            if(educationNewItem.getNameBn()==null || educationNewItem.getNameBn().equalsIgnoreCase("null")|| educationNewItem.getNameBn().equals(""))
                 edu_name1.setText("তথ্য পাওয়া যায় নি ");
             else
-                edu_name1.setText(educationNewItem.getCommonModel().getNameBn());
+                edu_name1.setText(educationNewItem.getNameBn());
         }
 
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
@@ -2927,7 +2927,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         calladapter(catStatus);
 
                         mapcalledstatus = true;
-                        callMapFragmentWithEducation(constructEducationListItem(),true);
+                        callMapFragmentWithEducation(constructEducationListItem());
 
 
                         ivIcon.setImageResource(R.drawable.ic_education);
@@ -3289,7 +3289,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 /*
 * call mapfragment functions load fragments of map. based on location */
-    private void callMapFragmentWithEducation(ArrayList<EduNewModel> educationServiceProviderItems,boolean s) {
+    private void callMapFragmentWithEducation(ArrayList <EduNewModel> educationServiceProviderItems) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
 
@@ -3685,41 +3685,41 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         for (EduNewModel edu : constructEducationListItem()) {
 
-            AllHolder all = new AllHolder(edu.getEduId(), edu.getCommonModel().getRefNum(), edu.getCommonModel().getNameEn(), edu.getCommonModel().getNameBn(), AppConstants.EDUCATION);
+            AllHolder all = new AllHolder(edu.getId(), edu.getRefNum(), edu.getNameEn(), edu.getNameBn(), AppConstants.EDUCATION);
             allHolders.add(all);
         }
 
 
         for (HealthNewDBModelMain health : constructHealthListItem()) {
-            AllHolder all = new AllHolder(health.getHealthId(), health.getCommonModel().getRefNum(), health.getCommonModel().getNameEn(), health.getCommonModel().getNameBn(), AppConstants.HEALTH);
+            AllHolder all = new AllHolder(health.getId(), health.getRefNum(), health.getNameEn(), health.getNameBn(), AppConstants.HEALTH);
             allHolders.add(all);
         }
 
 
         for (LegalAidNewDBModel legal : constructLegalaidListItem()) {
 
-            AllHolder all = new AllHolder(legal.getLegalId(), legal.getCommonModel().getRefNum(), legal.getCommonModel().getNameEn(), legal.getCommonModel().getNameBn(), AppConstants.LEGAL);
+            AllHolder all = new AllHolder(legal.getId(), legal.getRefNum(), legal.getNameEn(), legal.getNameBn(), AppConstants.LEGAL);
             allHolders.add(all);
         }
 
 
         for (EntertainmentNewDBModel ent : constructEntertainmentListItem()) {
 
-            AllHolder all = new AllHolder(ent.getEntid(), ent.getCommonModel().getRefNum(), ent.getCommonModel().getNameEn(), ent.getCommonModel().getNameBn(), AppConstants.ENTERTAINMENT);
+            AllHolder all = new AllHolder(ent.getId(), ent.getRefNum(), ent.getNameEn(), ent.getNameBn(), AppConstants.ENTERTAINMENT);
             allHolders.add(all);
         }
 
 
         for (FinancialNewDBModel fin : constructFinancialListItem()) {
 
-            AllHolder all = new AllHolder(fin.getFinId(), fin.getCommonModel().getRefNum(), fin.getCommonModel().getNameEn(), fin.getCommonModel().getNameBn(), AppConstants.FINANCIAL);
+            AllHolder all = new AllHolder(fin.getId(), fin.getRefNum(), fin.getNameEn(), fin.getNameBn(), AppConstants.FINANCIAL);
             allHolders.add(all);
 
         }
 
         for (GovernmentNewDBModel gov : constructGovListItem()) {
 
-            AllHolder all = new AllHolder(gov.getGovId(), gov.getCommonModel().getRefNum(), gov.getCommonModel().getNameEn(), gov.getCommonModel().getNameBn(), AppConstants.GOVERNMENT);
+            AllHolder all = new AllHolder(gov.getId(), gov.getRefNum(), gov.getNameEn(), gov.getNameBn(), AppConstants.GOVERNMENT);
             allHolders.add(all);
 
         }
@@ -3727,14 +3727,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         for (NGONewDBModel ngo : constructNgoListItem()) {
 
-            AllHolder all = new AllHolder(ngo.getNgoId(), ngo.getCommonModel().getRefNum(), ngo.getCommonModel().getNameEn(), ngo.getCommonModel().getNameBn(), AppConstants.NGO);
+            AllHolder all = new AllHolder(ngo.getId(), ngo.getRefNum(), ngo.getNameEn(), ngo.getNameBn(), AppConstants.NGO);
             allHolders.add(all);
         }
 
 
         for (ReligiousNewDBModel religious : constructReligiousListItem()) {
 
-            AllHolder all = new AllHolder(religious.getShelterId(), religious.getCommonModel().getRefNum(), religious.getCommonModel().getNameEn(), religious.getCommonModel().getNameBn(), AppConstants.RELIGIOUS);
+            AllHolder all = new AllHolder(religious.getId(), religious.getRefNum(), religious.getNameEn(), religious.getNameBn(), AppConstants.RELIGIOUS);
             allHolders.add(all);
         }
 

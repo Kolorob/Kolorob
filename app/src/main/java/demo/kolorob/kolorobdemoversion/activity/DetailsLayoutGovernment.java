@@ -25,16 +25,16 @@ public class DetailsLayoutGovernment extends BaseActivity {
             government = (GovernmentNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_GOV);
         }
 
-        viewBaseLayout(government.getCommonModel());
+        viewBaseLayout(government);
         displayUniqueProperties();
-        displayCommonProperties(government.getCommonModel());
+        displayCommonProperties(government);
 
     }
 
     public void displayUniqueProperties(){
         CheckConcate("সুবিধার ধরণ", government.getServiceName());
-        if(!government.getServiceName().equals(getReferences(government.getCommonModel()))){
-            CheckConcate("বিশেষত্ব", getReferences(government.getCommonModel()));
+        if(!government.getServiceName().equals(getReferences(government))){
+            CheckConcate("বিশেষত্ব", getReferences(government));
         }
     }
 }

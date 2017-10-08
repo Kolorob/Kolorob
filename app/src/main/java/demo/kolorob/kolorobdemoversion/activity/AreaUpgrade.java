@@ -63,20 +63,19 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 this activity is for area upgrade/delete/browse. This is almost similar to data loading activity.
  */
 public class AreaUpgrade extends AppCompatActivity {
-    ArrayList<StoredArea>storedAreas=new ArrayList<>();
+    ArrayList <StoredArea> storedAreas = new ArrayList<>();
     RadioGroup rg;
     Button update,delete,browse;
-    int selectedId=-1;
+    int selectedId = -1;
     Context context;
-    Boolean deleted=false;
+    Boolean deleted = false;
     LinearLayout linearLayout;
-    ProgressDialog dialog,dialog2;
-    ArrayList<HealthNewDBModelMain>healthNewDBModelMains=new ArrayList<>();
+    ProgressDialog dialog, dialog2;
     JSONObject allData;
     StoredAreaTable storedAreaTable;
-    ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
+    ArrayList<StoredArea>storedAreaArrayList = new ArrayList<>();
 
-    ArrayList<StoredArea>storedAreaArrayList2=new ArrayList<>();
+    ArrayList<StoredArea>storedAreaArrayList2 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

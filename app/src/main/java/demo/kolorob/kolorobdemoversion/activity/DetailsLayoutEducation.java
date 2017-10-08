@@ -46,9 +46,9 @@ public class DetailsLayoutEducation extends BaseActivity {
             education = (EduNewModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU);
         }
 
-        viewBaseLayout(education.getCommonModel());
+        viewBaseLayout(education);
         displayUniqueProperties();
-        displayCommonProperties(education.getCommonModel());
+        displayCommonProperties(education);
       //  compare();
     }
 
@@ -61,8 +61,8 @@ public class DetailsLayoutEducation extends BaseActivity {
         EducationResultDetailsTable resultDB = new EducationResultDetailsTable(context);
 
         CheckConcate("প্রতিষ্ঠানের ধরণ ", education.getEducationType());
-        if(!education.getEducationType().equals(getReferences(education.getCommonModel()))){
-            CheckConcate("বিশেষত্ব", getReferences(education.getCommonModel()));
+        if(!education.getEducationType().equals(getReferences(education))){
+            CheckConcate("বিশেষত্ব", getReferences(education));
         }
         CheckConcate("শাখা", education.getShift());
 
@@ -72,7 +72,7 @@ public class DetailsLayoutEducation extends BaseActivity {
         CheckConcate("সুযোগ সুবিধা", education.getFacility());
 
 
-        schools = schoolDB.getDataFromForeignKey(education.getCommonModel().getId());
+        schools = schoolDB.getDataFromForeignKey(education.getId());
         int schoolSize = schools.size();
 
         if (schoolSize != 0) {
@@ -86,7 +86,7 @@ public class DetailsLayoutEducation extends BaseActivity {
             }
         }
 
-        results = resultDB.getDataFromForeignKey(education.getCommonModel().getId());
+        results = resultDB.getDataFromForeignKey(education.getId());
         int resultSize = results.size();
         if (resultSize != 0) {
             for (EducationResultItemNew result : results)  {
@@ -97,7 +97,7 @@ public class DetailsLayoutEducation extends BaseActivity {
             }
         }
 
-        trainings = trainingDB.getDataFromForeignKey(education.getCommonModel().getId());
+        trainings = trainingDB.getDataFromForeignKey(education.getId());
         int trainingSize = trainings.size();
         if (trainingSize != 0) {
             for (EduTrainingModel training : trainings) {
@@ -118,11 +118,11 @@ public class DetailsLayoutEducation extends BaseActivity {
         previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this); //check function
         String multipule[] = previous_node.split(",");
 
-        if(compareValue == 1 && previous_node.equals(String.valueOf(education.getCommonModel().getId()))) {
+        if(compareValue == 1 && previous_node.equals(String.valueOf(education.getId()))) {
             checkBox.setChecked(true);
         }
 
-        else if(compareValue == 2 && (multipule[0].equals(String.valueOf(education.getCommonModel().getId())) || multipule[1].equals(String.valueOf(education.getCommonModel().getId())))) {
+        else if(compareValue == 2 && (multipule[0].equals(String.valueOf(education.getId())) || multipule[1].equals(String.valueOf(education.getId())))) {
             checkBox.setChecked(true);
         }
 
@@ -139,7 +139,7 @@ public class DetailsLayoutEducation extends BaseActivity {
                         String compare_Data = "";
                         compare_Data = SharedPreferencesHelper.getComapreData(context);
                         String multipule[] = compare_Data.split(",");
-                        compare_Data = multipule[1] + "," + String.valueOf(education.getCommonModel().getId());
+                        compare_Data = multipule[1] + "," + String.valueOf(education.getId());
                         SharedPreferencesHelper.setComapareEdu(context, compare_Data, 2);
                     } else {
                         String compare_Data = "";
@@ -152,7 +152,7 @@ public class DetailsLayoutEducation extends BaseActivity {
 
                 } else if (compareValue == 0) {
                     if (isChecked)
-                        SharedPreferencesHelper.setComapareEdu(context, String.valueOf(education.getCommonModel().getId()), 1);
+                        SharedPreferencesHelper.setComapareEdu(context, String.valueOf(education.getId()), 1);
 
                 } else if (compareValue == 1) {
 
@@ -160,7 +160,7 @@ public class DetailsLayoutEducation extends BaseActivity {
 
                         String previous_node;
                         previous_node = SharedPreferencesHelper.getComapreData(context);
-                        previous_node = previous_node + "," + String.valueOf(education.getCommonModel().getId());
+                        previous_node = previous_node + "," + String.valueOf(education.getId());
                         SharedPreferencesHelper.setComapareEdu(context, previous_node, 2);
 
                     } else {

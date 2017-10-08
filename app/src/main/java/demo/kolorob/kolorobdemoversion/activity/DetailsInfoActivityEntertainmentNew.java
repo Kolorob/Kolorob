@@ -25,16 +25,16 @@ public class DetailsInfoActivityEntertainmentNew extends BaseActivity{
             entertainment = (EntertainmentNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
         }
 
-        viewBaseLayout(entertainment.getCommonModel());
+        viewBaseLayout(entertainment);
         displayUniqueProperties();
-        displayCommonProperties(entertainment.getCommonModel());
+        displayCommonProperties(entertainment);
     }
 
     public void displayUniqueProperties(){
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ", entertainment.getEntType());
-        if(!entertainment.getEntType().equals(getReferences(entertainment.getCommonModel()))){
-            CheckConcate("বিশেষত্ব", getReferences(entertainment.getCommonModel()));
+        if(!entertainment.getEntType().equals(getReferences(entertainment))){
+            CheckConcate("বিশেষত্ব", getReferences(entertainment));
         }
         if(entertainment.getEntryFee().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
 
