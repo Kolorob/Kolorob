@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 
 
 /**
@@ -56,6 +57,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
     public abstract void insertItem(ContentValues rowValue, ModelType model);
     public abstract void updateItem(ContentValues rowValue, ModelType model);
+    public abstract ArrayList <ModelType> getByAreaCategory(String ward, String area, int category);
 
 
     public CommonDBTable(Context context) {
