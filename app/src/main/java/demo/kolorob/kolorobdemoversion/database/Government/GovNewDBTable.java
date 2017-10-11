@@ -18,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
 
     private static final String TABLE_NAME = DatabaseHelper.GOV_NEW;
-    private static final String KEY_SERVICE_NAME = "service_name"; 
+    private static final String KEY_SERVICE_NAME = "service_name";
 
 
     public GovNewDBTable(Context context) {
@@ -77,10 +77,7 @@ public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
         return new GovernmentNewDBModel(_commonModel, _serviceName);
     }
 
-    public GovernmentNewDBModel cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
-    }
-
+    
     public ArrayList <GovernmentNewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
     }
