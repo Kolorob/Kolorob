@@ -21,7 +21,6 @@ public abstract class BaseDBTable <ModelType>  {
     protected Context tContext;
 
     public abstract void createTable();
-    public abstract ModelType cursorToModel(Cursor cursor, CommonModel commonModel);
     public abstract ModelType cursorToModel(Cursor cursor);
     public abstract boolean isFieldExist(int id);
     public abstract long insertItem(ModelType model, String TABLE_NAME);
