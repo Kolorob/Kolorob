@@ -23,8 +23,8 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract void createTable();
     public abstract ModelType cursorToModel(Cursor cursor);
     public abstract boolean isFieldExist(int id);
-    public abstract long insertItem(ModelType model, String TABLE_NAME);
-    public abstract long updateItem(ModelType model, String TABLE_NAME);
+    public abstract long insertItem(ModelType model);
+    public abstract long updateItem(ModelType model);
     public abstract void delete(int id);
     public abstract void dropTable();
 
