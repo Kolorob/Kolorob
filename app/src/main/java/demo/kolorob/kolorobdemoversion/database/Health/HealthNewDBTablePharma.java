@@ -7,24 +7,24 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
+
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
+
 public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmacy> {
 
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_NEW_DB_PHARMA;
-    private static final String KEY_SERVICE_ID = "_servicecenterid";
-    private static final String KEY_DOC_AVAIL = "_davailable";
-    private static final String KEY_SPECIALITY = "_speciality"; // 1 - text
-    private static final String KEY_VACCINE= "_vaccineavailable"; //
+
+    private static final String KEY_DOC_AVAILABLE = "doctor_available";
+    private static final String KEY_SPECIALITY = "speciality";
+    private static final String KEY_VACCINE = "vaccine_available";
 
 
     public HealthNewDBTablePharma(Context context) {
-        tContext = context;
-        createTable();
+        super(context);
     }
 
     public void createTable() {
@@ -32,10 +32,10 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_SERVICE_ID + " INTEGER , "
-                + KEY_DOC_AVAIL + "  TEXT  , " // 0 - int "
+                + KEY_IDENTIFIER_ID + " INTEGER , "
+                + KEY_DOC_AVAILABLE + "  TEXT  , "
                 + KEY_SPECIALITY + "  TEXT , "
-                + KEY_VACCINE + "  TEXT , PRIMARY KEY(" + KEY_SERVICE_ID + "))";
+                + KEY_VACCINE + "  TEXT , PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -50,13 +50,15 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
             );
         }
-        else {
-            return updateItem(
-                    healthNewDBModelPharmacy.getServicecenterid(), healthNewDBModelPharmacy.getDocavailability(),
-                    healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
+        else return updateItem(healthNewDBModelPharmacy);
+    }
 
-            );
-        }
+
+    public long updateItem(HealthNewDBModelPharmacy healthNewDBModelPharmacy) {
+        return updateItem(
+                healthNewDBModelPharmacy.getServicecenterid(), healthNewDBModelPharmacy.getDocavailability(),
+                healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
+        );
     }
 
     public long insertItem(int serviceproviderId, String docavail, String speciality,
@@ -71,8 +73,8 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
         }
         ContentValues rowValue = new ContentValues();
 
-        rowValue.put(KEY_SERVICE_ID, serviceproviderId);
-        rowValue.put(KEY_DOC_AVAIL, docavail);
+        rowValue.put(KEY_IDENTIFIER_ID, serviceproviderId);
+        rowValue.put(KEY_DOC_AVAILABLE, docavail);
         rowValue.put(KEY_SPECIALITY, speciality);
         rowValue.put(KEY_VACCINE, vaccine);
 
@@ -88,54 +90,29 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
         ContentValues rowValue = new ContentValues();
 
-        rowValue.put(KEY_SERVICE_ID, serviceproviderId);
-        rowValue.put(KEY_DOC_AVAIL, docavail);
+        rowValue.put(KEY_IDENTIFIER_ID, serviceproviderId);
+        rowValue.put(KEY_DOC_AVAILABLE, docavail);
         rowValue.put(KEY_SPECIALITY, speciality);
         rowValue.put(KEY_VACCINE, vaccine);
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_SERVICE_ID + " = ?  ",
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?  ",
                 new String[]{serviceproviderId + ""});
         closeDB();
         return ret;
 
     }
 
-    public ArrayList <HealthNewDBModelPharmacy> getDataFromForeignKey(int id) {
-        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
-    }
-
-
-    public HealthNewDBModelPharmacy getNodeInfo(int node){
-        SQLiteDatabase db = openDB();
-        HealthNewDBModelPharmacy healthNewDBModelPharmacy = null;
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_SERVICE_ID + " = " + node , null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                healthNewDBModelPharmacy = new HealthNewDBModelPharmacy(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return healthNewDBModelPharmacy;
-    }
-
-
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME, KEY_SERVICE_ID);
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     public ArrayList <HealthNewDBModelPharmacy> getDataListFromId(int id) {
-        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+        return super.getDataListFromId(id, TABLE_NAME);
     }
 
-    public HealthNewDBModelPharmacy getDataFromId(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
-    }
 
     public ArrayList <HealthNewDBModelPharmacy> getAllData(){
         return super.getAllData(TABLE_NAME);
@@ -144,20 +121,16 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
     public HealthNewDBModelPharmacy cursorToModel(Cursor cursor) {
         int _servicecenterid = cursor.getInt(0);
         String _davailable = cursor.getString(1);
-        String _speciality= cursor.getString(2);
+        String _speciality = cursor.getString(2);
         String _vaccineavailable = cursor.getString(3);
 
         return new HealthNewDBModelPharmacy(_servicecenterid,_davailable,
                 _speciality,_vaccineavailable);
     }
 
-    public HealthNewDBModelPharmacy cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
-    }
-
 
     public void delete(int id){
-        super.delete(id, TABLE_NAME, KEY_SERVICE_ID);
+        super.delete(id, TABLE_NAME);
     }
 
     public void dropTable() {
