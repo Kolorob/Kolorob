@@ -66,12 +66,7 @@ public class NGONewDBTable extends CommonDBTable<NGONewDBModel> {
 
 
     public void updateItem(ContentValues rowValue, NGONewDBModel ngoNewDBModel){
-        rowValue.put(KEY_NGO_SERVICES, ngoNewDBModel.getNgoServices());
-        rowValue.put(KEY_NGO_SERVICES_FOR, ngoNewDBModel.getNgoServicesFor());
-        rowValue.put(KEY_NGO_SERVICES_OTHER, ngoNewDBModel.getNgoServicesOther());
-        rowValue.put(KEY_NGO_SERVICE_TYPE, ngoNewDBModel.getNgoServiceType());
-        rowValue.put(KEY_DROP_TIME, ngoNewDBModel.getDropTime());
-        rowValue.put(KEY_NGO_FEE, ngoNewDBModel.getNgoFee());
+        insertItem(rowValue, ngoNewDBModel);
     }
 
 
