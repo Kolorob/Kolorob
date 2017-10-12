@@ -132,7 +132,7 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 =cursor.getString(7);
+                String catid2 = cursor.getString(7);
                 int subcatid = cursor.getInt(5);
                 siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());
@@ -140,6 +140,22 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
         cursor.close();
         closeDB();
         return siList;
+    }
+
+    public SubCategoryItemNew getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <SubCategoryItemNew> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public SubCategoryItemNew getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_CAT_ID);
+    }
+
+    public ArrayList <SubCategoryItemNew> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_CAT_ID);
     }
 
     public ArrayList <SubCategoryItemNew> getAllData() {
@@ -164,7 +180,6 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }
-
 
     public void delete(int id){
         super.delete(id, TABLE_NAME);

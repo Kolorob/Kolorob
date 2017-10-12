@@ -101,6 +101,15 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
         return updatedId;
     }
 
+    public CategoryItem getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <CategoryItem> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+
     public ArrayList <CategoryItem> getAllData() {
        return super.getAllData(TABLE_NAME);
     }

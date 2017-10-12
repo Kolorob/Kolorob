@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 
 
@@ -115,21 +116,20 @@ public class WardTable extends BaseDBTable <Ward>{
     }
 
 
-    public Ward getNodeInfo(int node) {
+    public Ward getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
-        SQLiteDatabase db = openDB();
-        Ward ward = null;
+    public ArrayList <Ward> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + node , null);
+    public Ward getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_WARD_CCID);
+    }
 
-        if (cursor.moveToFirst()) {
-            do {
-                ward = new Ward(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return ward;
+    public ArrayList <Ward> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_WARD_CCID);
     }
 
     public void delete(int id){
@@ -139,4 +139,6 @@ public class WardTable extends BaseDBTable <Ward>{
     public void dropTable() {
        super.dropTable(TABLE_NAME);
     }
+
+
 }

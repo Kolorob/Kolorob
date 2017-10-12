@@ -170,11 +170,16 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
         return super.getAllData(TABLE_NAME);
    }
 
-   public ArrayList <StoredArea> getDataListFromId(int id){
-        return super.getDataListFromId(id, TABLE_NAME);
-   }
+    public StoredArea getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
-   public void dropTable() {
+    public ArrayList <StoredArea> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+
+    public void dropTable() {
         super.dropTable(TABLE_NAME);
     }
 

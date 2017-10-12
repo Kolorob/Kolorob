@@ -101,6 +101,15 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         return ret;
     }
 
+    public CityCorporation getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <CityCorporation> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+
     public ArrayList <CityCorporation> getAllData() {
         return super.getAllData(TABLE_NAME);
     }

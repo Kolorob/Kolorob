@@ -138,16 +138,29 @@ public class AreaTable extends BaseDBTable <Area>{
     }
 
 
+    public Area getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <Area> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public Area getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_AREA_WARDID);
+    }
+
+    public ArrayList <Area> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_AREA_WARDID);
+    }
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }
 
-
     public ArrayList <Area> getAllData(){
         return super.getAllData(TABLE_NAME);
     }
-
 
     public void delete(int id){
         super.delete(id, TABLE_NAME);
