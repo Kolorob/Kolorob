@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
+
 
 /**
  * Created by israt.jahan on 6/27/2016.
@@ -17,18 +17,17 @@ import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 public class EducationResultDetailsTable extends BaseDBTable <EducationResultItemNew> {
 
     private static final String TABLE_NAME = DatabaseHelper.EDU_PROVIDER_RESULT_TABLE;
-    private static final String KEY_NODE_ID = "_eduId";
-    private static final String KEY_SERVICE_ID = "_sproviderid";
-    private static final String KEY_EXAM_NAME = "_examname"; // 1 - text
-    private static final String KEY_STUDENT_NO= "_studentno"; //
-    private static final String KEY_PASSED = "_passed"; // 0 -integer
-    private static final String KEY_GOLDEN = "_goldena"; // 1 - text
-    private static final String KEY_APLUS = "_aplus"; //
+
+    private static final String KEY_EDUCATION_ID = "edu_id";
+    private static final String KEY_EXAM_NAME = "exam_name";
+    private static final String KEY_STUDENT_NO = "student_no";
+    private static final String KEY_PASSED = "passed";
+    private static final String KEY_GOLDEN = "golden_a";
+    private static final String KEY_APLUS = "a_plus";
 
 
     public EducationResultDetailsTable(Context context) {
-        tContext = context;
-        createTable();
+        super(context);
     }
 
     public void createTable() {
@@ -36,87 +35,90 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_NODE_ID + " INTEGER , "
-                + KEY_SERVICE_ID + " INTEGER , "
-                + KEY_EXAM_NAME + "  TEXT  , " // 0 - int "
+                + KEY_IDENTIFIER_ID + " INTEGER , "
+                + KEY_EDUCATION_ID + " INTEGER , "
+                + KEY_EXAM_NAME + "  TEXT  , "
                 + KEY_STUDENT_NO + "  TEXT , "
                 + KEY_PASSED   + "  TEXT , "
-                + KEY_GOLDEN + "  TEXT  , " // 0 - int "
-                + KEY_APLUS + "  TEXT , PRIMARY KEY(" + KEY_NODE_ID + "))";
+                + KEY_GOLDEN + "  TEXT  , "
+                + KEY_APLUS + "  TEXT , PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
 
 
-    public long insertItem(EducationResultItemNew educationResultItemNew) {
-        return insertItem(
-                educationResultItemNew.getEduId(),educationResultItemNew.getServiceproviderId(),educationResultItemNew.getExamname(),educationResultItemNew.getStudentno(),
-                educationResultItemNew.getPassed(),educationResultItemNew.getGoldena(),educationResultItemNew.getAplus()
-        );
+    public long insertItem(EducationResultItemNew result) {
+        if(!isFieldExist(result.getId())){
+            return insertItem(
+                    result.getId(), result.getEducationId(), result.getExamname(), result.getStudentno(),
+                    result.getPassed(), result.getGoldena(), result.getAplus()
+            );
+        }
+        else return updateItem(result);
     }
 
 
-    public long insertItem(int eduId, int serviceproviderId, String examname, String studentno,
+    public long insertItem(int id, int educationId, String examname, String studentno,
                            String passed, String goldena, String aplus) {
-        if (isFieldExist(eduId)) {
-            return updateItem(
-                    eduId,serviceproviderId,
-                    examname,
-                    studentno,
-                    passed,
-                    goldena,aplus);
 
-        }
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , eduId);
+
+        rowValue.put(KEY_IDENTIFIER_ID , id);
+        rowValue.put(KEY_EDUCATION_ID, educationId);
         rowValue.put(KEY_EXAM_NAME, examname);
         rowValue.put(KEY_STUDENT_NO, studentno);
         rowValue.put(KEY_PASSED, passed);
         rowValue.put(KEY_GOLDEN, goldena);
-
         rowValue.put(KEY_APLUS , aplus);
 
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
-        return ret;}
+        return ret;
+    }
+    
+
+    public long updateItem(EducationResultItemNew result){
+        return updateItem(result.getId(), result.getEducationId(), result.getExamname(),
+                result.getStudentno(), result.getPassed(), result.getGoldena(), result.getAplus());
+    }
 
 
-    private long updateItem(int eduId, int serviceproviderId, String examname, String studentno,
+    private long updateItem(int id, int educationId, String examname, String studentno,
                             String passed, String goldena, String aplus) {
 
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , eduId);
-        rowValue.put(KEY_SERVICE_ID, serviceproviderId);
+
+        rowValue.put(KEY_IDENTIFIER_ID , id);
+        rowValue.put(KEY_EDUCATION_ID, educationId);
         rowValue.put(KEY_EXAM_NAME, examname);
         rowValue.put(KEY_STUDENT_NO, studentno);
         rowValue.put(KEY_PASSED, passed);
         rowValue.put(KEY_GOLDEN, goldena);
-
         rowValue.put(KEY_APLUS , aplus);
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ?  ",
-                new String[]{eduId + ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?  ",
+                new String[]{id + ""});
         closeDB();
         return ret;
 
     }
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME, KEY_NODE_ID);
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     public void delete(int id){
-        super.delete(id, TABLE_NAME, KEY_NODE_ID);
+        super.delete(id, TABLE_NAME);
     }
 
     public EducationResultItemNew cursorToModel(Cursor cursor) {
-        int _eduId = cursor.getInt(0);
-        int _sproviderId = cursor.getInt(1);
+        int _id = cursor.getInt(0);
+        int _educationId = cursor.getInt(1);
         String _examname= cursor.getString(2);
         String _studentno = cursor.getString(3);
         String _passed = cursor.getString(4);
@@ -124,45 +126,19 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         String _aplus= cursor.getString(6);
 
 
-        return new EducationResultItemNew(_eduId,_sproviderId,
+        return new EducationResultItemNew(_id,_educationId,
                 _examname,_studentno,_passed,_goldena,_aplus);
     }
 
-    public EducationResultItemNew cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
-    }
-
-    public EducationResultItemNew getNodeInfo(int node){
-        SQLiteDatabase db = openDB();
-        EducationResultItemNew educationResultItemNew = null;
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_NODE_ID + " = " + node , null);
-
-        if (cursor.moveToFirst()) {
-            do {
-               educationResultItemNew = new EducationResultItemNew(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return educationResultItemNew;
-    }
 
     public ArrayList <EducationResultItemNew> getAllData(){
         return super.getAllData(TABLE_NAME);
     }
 
     public ArrayList <EducationResultItemNew> getDataListFromId(int id) {
-        return super.getDataListFromId(id, TABLE_NAME, KEY_NODE_ID);
+        return super.getDataListFromId(id, TABLE_NAME);
     }
 
-    public ArrayList <EducationResultItemNew> getDataFromForeignKey(int id){
-        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
-    }
-
-    public EducationResultItemNew getDataFromId(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
-    }
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);
