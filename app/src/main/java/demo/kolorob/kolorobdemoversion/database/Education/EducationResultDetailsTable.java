@@ -135,8 +135,20 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         return super.getAllData(TABLE_NAME);
     }
 
+    public EducationResultItemNew getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
     public ArrayList <EducationResultItemNew> getDataListFromId(int id) {
-        return super.getDataListFromId(id, TABLE_NAME);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public EducationResultItemNew getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_EDUCATION_ID);
+    }
+
+    public ArrayList <EducationResultItemNew> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_EDUCATION_ID);
     }
 
 

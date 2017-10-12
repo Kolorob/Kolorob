@@ -76,8 +76,12 @@ public class EduNewDBTableMain extends CommonDBTable<EduNewModel> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList <EduNewModel> getDataListFromId(int node){
-        return super.getDataListFromId(node, TABLE_NAME);
+    public EduNewModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <EduNewModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 

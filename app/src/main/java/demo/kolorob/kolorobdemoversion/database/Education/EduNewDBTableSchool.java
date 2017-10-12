@@ -117,8 +117,20 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
+    public EduNewSchoolModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
     public ArrayList <EduNewSchoolModel> getDataListFromId(int id) {
-        return super.getDataListFromId(id, TABLE_NAME);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public EduNewSchoolModel getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_EDUCATION_ID);
+    }
+
+    public ArrayList <EduNewSchoolModel> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_EDUCATION_ID);
     }
 
 

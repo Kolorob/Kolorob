@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 
 
 /**
@@ -111,10 +109,21 @@ public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
     }
 
 
-    public ArrayList <EduTrainingModel> getDataListFromId (int id) {
-        return super.getDataListFromId(id, TABLE_NAME);
+    public EduTrainingModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
+    public ArrayList <EduTrainingModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public EduTrainingModel getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_EDUCATION_ID);
+    }
+
+    public ArrayList <EduTrainingModel> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_EDUCATION_ID);
+    }
 
     public ArrayList <EduTrainingModel> getAllData(){
         return super.getAllData(TABLE_NAME);
