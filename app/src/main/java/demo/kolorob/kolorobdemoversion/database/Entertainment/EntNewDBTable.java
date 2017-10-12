@@ -63,8 +63,12 @@ public class EntNewDBTable extends CommonDBTable <EntertainmentNewDBModel> {
     }
 
 
-    public ArrayList <EntertainmentNewDBModel> getDataListFromId(int id){
-        return super.getDataListFromId(id, TABLE_NAME);
+    public EntertainmentNewDBModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <EntertainmentNewDBModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 

@@ -59,8 +59,12 @@ public class LegalAidNewDBTable extends CommonDBTable<LegalAidNewDBModel> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList <LegalAidNewDBModel> getDataListFromId(int node){
-        return super.getDataListFromId(node, TABLE_NAME);
+    public LegalAidNewDBModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <LegalAidNewDBModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 

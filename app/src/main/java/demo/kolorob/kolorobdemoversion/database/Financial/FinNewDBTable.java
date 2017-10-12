@@ -64,8 +64,12 @@ public class FinNewDBTable extends CommonDBTable <FinancialNewDBModel> {
     }
 
 
-    public ArrayList <FinancialNewDBModel> getDataListFromId(int id){
-        return super.getDataListFromId(id, TABLE_NAME);
+    public FinancialNewDBModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <FinancialNewDBModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 

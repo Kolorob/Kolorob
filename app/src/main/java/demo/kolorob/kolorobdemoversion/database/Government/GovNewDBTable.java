@@ -59,8 +59,12 @@ public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList <GovernmentNewDBModel> getDataListFromId(int node){
-        return super.getDataListFromId(node, TABLE_NAME);
+    public GovernmentNewDBModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <GovernmentNewDBModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
@@ -77,7 +81,7 @@ public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
         return new GovernmentNewDBModel(_commonModel, _serviceName);
     }
 
-    
+
     public ArrayList <GovernmentNewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
     }

@@ -74,10 +74,13 @@ public class NGONewDBTable extends CommonDBTable<NGONewDBModel> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList <NGONewDBModel> getDataListFromId(int node){
-        return super.getDataListFromId(node, TABLE_NAME);
+    public NGONewDBModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
+    public ArrayList <NGONewDBModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
     public ArrayList <NGONewDBModel> getAllData(){
         return super.getAllData(TABLE_NAME);

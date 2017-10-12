@@ -272,8 +272,8 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
 
 
-    public ArrayList <ModelType> getDataListFromId(int id, String TABLE_NAME){
-        return super.getDataListFromId(id, TABLE_NAME);
+    protected ArrayList <ModelType> getDataListFromId(int id, String TABLE_NAME, String KEY){
+        return super.getDataListFromId(id, TABLE_NAME, KEY);
     }
 
     public ArrayList <ModelType> getAllData(String TABLE_NAME){
