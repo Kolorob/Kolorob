@@ -8,11 +8,8 @@ import org.json.JSONObject;
  */
 
 public class HealthNewDBModelPharmacy {
-    int id;
-    int healthId;
-    String docavailability;
-    String speciality;
-    String vaccineavailability;
+    int id, healthId;
+    String docavailability, speciality, vaccineavailability;
 
     public HealthNewDBModelPharmacy() {
     }
@@ -23,6 +20,14 @@ public class HealthNewDBModelPharmacy {
         this.docavailability = docavailability;
         this.speciality = speciality;
         this.vaccineavailability = vaccineavailability;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getHealthId() {

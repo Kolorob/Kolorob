@@ -53,7 +53,7 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
     }
 
     public long insertItem(HealthNewDBModelHospital hospital) {
-        if (!isFieldExist(hospital.getHealthId())) {
+        if (!isFieldExist(hospital.getId())) {
             return insertItem(
                     hospital.getId(), hospital.getHealthId(), hospital.getEmergencyavailable(),
                     hospital.getEmergencynumber(), hospital.getAmbulanceavailable(), hospital.getAmbulancenumber(),
@@ -112,7 +112,7 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?  ",
-                new String[]{healthId + ""});
+                new String[]{id + ""});
         closeDB();
         return ret;
 

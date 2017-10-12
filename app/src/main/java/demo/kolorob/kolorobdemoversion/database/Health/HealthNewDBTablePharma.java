@@ -17,7 +17,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmacy> {
 
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_NEW_DB_PHARMA;
-
+    private static final String KEY_HEALTH_ID = "health_id";
     private static final String KEY_DOC_AVAILABLE = "doctor_available";
     private static final String KEY_SPECIALITY = "speciality";
     private static final String KEY_VACCINE = "vaccine_available";
@@ -33,6 +33,7 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_IDENTIFIER_ID + " INTEGER , "
+                + KEY_HEALTH_ID + " INTEGER , "
                 + KEY_DOC_AVAILABLE + "  TEXT  , "
                 + KEY_SPECIALITY + "  TEXT , "
                 + KEY_VACCINE + "  TEXT , PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
@@ -42,38 +43,35 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
     }
 
 
-    public long insertItem(HealthNewDBModelPharmacy healthNewDBModelPharmacy) {
-        if (!isFieldExist(healthNewDBModelPharmacy.getHealthId())) {
+    public long insertItem(HealthNewDBModelPharmacy pharmacy) {
+        if (!isFieldExist(pharmacy.getId())) {
             return insertItem(
-                    healthNewDBModelPharmacy.getHealthId(), healthNewDBModelPharmacy.getDocavailability(),
-                    healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
+                    pharmacy.getId(), pharmacy.getHealthId(), pharmacy.getDocavailability(),
+                    pharmacy.getSpeciality(), pharmacy.getVaccineavailability()
 
             );
         }
-        else return updateItem(healthNewDBModelPharmacy);
+        else return updateItem(pharmacy);
     }
 
 
-    public long updateItem(HealthNewDBModelPharmacy healthNewDBModelPharmacy) {
+    public long updateItem(HealthNewDBModelPharmacy pharmacy) {
         return updateItem(
-                healthNewDBModelPharmacy.getHealthId(), healthNewDBModelPharmacy.getDocavailability(),
-                healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
+                pharmacy.getId(), pharmacy.getHealthId(), pharmacy.getDocavailability(),
+                pharmacy.getSpeciality(), pharmacy.getVaccineavailability()
         );
     }
 
-    public long insertItem(int serviceproviderId, String docavail, String speciality,
+    public long insertItem(int id, int healthId, String docavail, String speciality,
                            String vaccine ) {
-        if (isFieldExist(serviceproviderId)) {
-            return updateItem(
-                   serviceproviderId,
-                    docavail,
-                    speciality,
-                    vaccine);
+        if (isFieldExist(id)) {
+            return updateItem(id, healthId, docavail, speciality, vaccine);
 
         }
         ContentValues rowValue = new ContentValues();
 
-        rowValue.put(KEY_IDENTIFIER_ID, serviceproviderId);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(KEY_HEALTH_ID, healthId);
         rowValue.put(KEY_DOC_AVAILABLE, docavail);
         rowValue.put(KEY_SPECIALITY, speciality);
         rowValue.put(KEY_VACCINE, vaccine);
@@ -85,12 +83,13 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
         return ret;}
 
 
-    private long updateItem(int serviceproviderId, String docavail, String speciality,
+    private long updateItem(int id, int healthId, String docavail, String speciality,
                             String vaccine) {
 
         ContentValues rowValue = new ContentValues();
 
-        rowValue.put(KEY_IDENTIFIER_ID, serviceproviderId);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(KEY_HEALTH_ID, healthId);
         rowValue.put(KEY_DOC_AVAILABLE, docavail);
         rowValue.put(KEY_SPECIALITY, speciality);
         rowValue.put(KEY_VACCINE, vaccine);
@@ -98,7 +97,7 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?  ",
-                new String[]{serviceproviderId + ""});
+                new String[]{id + ""});
         closeDB();
         return ret;
 
@@ -119,12 +118,13 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
     }
 
     public HealthNewDBModelPharmacy cursorToModel(Cursor cursor) {
-        int _servicecenterid = cursor.getInt(0);
-        String _davailable = cursor.getString(1);
-        String _speciality = cursor.getString(2);
-        String _vaccineavailable = cursor.getString(3);
+        int _id = cursor.getInt(0);
+        int _healthId = cursor.getInt(1);
+        String _davailable = cursor.getString(2);
+        String _speciality = cursor.getString(3);
+        String _vaccineavailable = cursor.getString(4);
 
-        return new HealthNewDBModelPharmacy(_servicecenterid,_davailable,
+        return new HealthNewDBModelPharmacy(_id, _healthId, _davailable,
                 _speciality,_vaccineavailable);
     }
 
