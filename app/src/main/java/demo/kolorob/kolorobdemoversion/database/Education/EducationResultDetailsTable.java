@@ -78,7 +78,7 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         closeDB();
         return ret;
     }
-    
+
 
     public long updateItem(EducationResultItemNew result){
         return updateItem(result.getId(), result.getEducationId(), result.getExamname(),
