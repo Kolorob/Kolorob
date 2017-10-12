@@ -8,7 +8,8 @@ import org.json.JSONObject;
  */
 
 public class HealthNewDBModelPharmacy {
-    int servicecenterid;
+    int id;
+    int healthId;
     String docavailability;
     String speciality;
     String vaccineavailability;
@@ -16,19 +17,20 @@ public class HealthNewDBModelPharmacy {
     public HealthNewDBModelPharmacy() {
     }
 
-    public HealthNewDBModelPharmacy(int servicecenterid, String docavailability, String speciality, String vaccineavailability) {
-        this.servicecenterid = servicecenterid;
+    public HealthNewDBModelPharmacy(int id, int healthId, String docavailability, String speciality, String vaccineavailability) {
+        this.id = id;
+        this.healthId = healthId;
         this.docavailability = docavailability;
         this.speciality = speciality;
         this.vaccineavailability = vaccineavailability;
     }
 
-    public int getServicecenterid() {
-        return servicecenterid;
+    public int getHealthId() {
+        return healthId;
     }
 
-    public void setServicecenterid(int servicecenterid) {
-        this.servicecenterid = servicecenterid;
+    public void setHealthId(int healthId) {
+        this.healthId = healthId;
     }
 
     public String getDocavailability() {
@@ -55,13 +57,15 @@ public class HealthNewDBModelPharmacy {
         this.vaccineavailability = vaccineavailability;
     }
     public static HealthNewDBModelPharmacy parseHealthNewDBModelPharmacy(JSONObject jo,int sproviderkey) throws JSONException {
-       int _servicecenterid=sproviderkey;
+
+        int _id = jo.getInt("id");
+        int _healthId = sproviderkey;
         String _davailable = jo.getString("doctor_available");
         String _speciality = jo.getString("speciality");
 
         String _vaccineavailable = jo.getString("vaccine_available");
 
-        return new HealthNewDBModelPharmacy(_servicecenterid,_davailable,
+        return new HealthNewDBModelPharmacy(_id, _healthId,_davailable,
                 _speciality,_vaccineavailable);
     }
 }
