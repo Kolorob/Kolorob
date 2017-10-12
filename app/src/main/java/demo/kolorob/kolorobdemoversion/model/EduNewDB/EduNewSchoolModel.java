@@ -8,12 +8,8 @@ import org.json.JSONObject;
  */
 
 public class EduNewSchoolModel {
-    int id;
-    int spid;
-    String stipend;
-    String primary_fees;
-    String secondary_fees;
-    String college_fees;
+    int id, educationId;
+    String stipend, primary_fees, secondary_fees, college_fees;
 
     public int getId() {
         return id;
@@ -21,6 +17,14 @@ public class EduNewSchoolModel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getEducationId() {
+        return educationId;
+    }
+
+    public void setEducationId(int educationId) {
+        this.educationId = educationId;
     }
 
     public String getStipend() {
@@ -39,14 +43,6 @@ public class EduNewSchoolModel {
         this.primary_fees = primary_fees;
     }
 
-    public int getSpid() {
-        return spid;
-    }
-
-    public void setSpid(int spid) {
-        this.spid = spid;
-    }
-
     public String getSecondary_fees() {
         return secondary_fees;
     }
@@ -63,24 +59,24 @@ public class EduNewSchoolModel {
         this.college_fees = college_fees;
     }
 
-    public EduNewSchoolModel(int id, int spid,String stipend, String primary_fees, String secondary_fees, String college_fees) {
+    public EduNewSchoolModel(int id, int spid, String stipend, String primary_fees, String secondary_fees, String college_fees) {
         this.id = id;
-        this.id=spid;
+        this.educationId = spid;
         this.stipend = stipend;
         this.primary_fees = primary_fees;
         this.secondary_fees = secondary_fees;
         this.college_fees = college_fees;
     }
 
-    public static EduNewSchoolModel parseEduNewSchoolModel(JSONObject jo) throws JSONException {
-        int _eduId = jo.getInt("id");
-        int _sproviderId= jo.getInt("id");
+    public static EduNewSchoolModel parseEduNewSchoolModel(JSONObject jo, int educationId) throws JSONException {
+        int _eduId = educationId;
+        int _id = jo.getInt("id");
         String _stipend = jo.getString("stipend");
         String _primary = jo.getString("primary_fees");
 
         String _secondary = jo.getString("secondary_fees");
         String _college = jo.getString("collage_fees");
-        return new EduNewSchoolModel(_eduId,_sproviderId,_stipend,
+        return new EduNewSchoolModel(_id, _eduId,_stipend,
                 _primary,_secondary,_college);
     }
 }
