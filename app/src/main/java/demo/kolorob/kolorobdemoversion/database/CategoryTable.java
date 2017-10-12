@@ -6,60 +6,70 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
-import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
+
 
 /**
  * Created by touhid on 12/26/15.
  *
  * @author touhid
  */
+
+
 public class CategoryTable extends BaseDBTable <CategoryItem> {
 
     private static final String TABLE_NAME = DatabaseHelper.SERVICE_CATEGORY;
-    private static final String KEY_ID = "_cat_id"; // 0 -integer
-    private static final String KEY_NAME = "_cat_name"; // 1 - text
-    private static final String KEY_NAME_BN = "_cat_nameBn";
-    private static final String KEY_IS_ACTIVE = "_is_active"; // 2 - text
-    // : But boolean value,
-    // for simplicity of the local table
-    // structure it's kept as string.
+
+    private static final String KEY_NAME = "name_en";
+    private static final String KEY_NAME_BN = "name_bn";
+    private static final String KEY_IS_ACTIVE = "is_active";
+
 
 
     public CategoryTable(Context context) {
-        tContext = context;
-        createTable();
+        super(context);
     }
 
     public void createTable() {
+
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_ID + " INTEGER PRIMARY KEY, " // 0 - int
-                + KEY_NAME + " TEXT, "              // 1 - text
+                + KEY_IDENTIFIER_ID + " INTEGER PRIMARY KEY, "
+                + KEY_NAME + " TEXT, "
                 + KEY_NAME_BN + " TEXT, "
-                + KEY_IS_ACTIVE + " TEXT "          // 2 - text
+                + KEY_IS_ACTIVE + " TEXT "
                 + " )";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
 
 
     public long insertItem(CategoryItem categoryItem){
-        return insertItem(
-                categoryItem.getId(),
-                categoryItem.getNameEn(),
-                categoryItem.getNameBn(),
-                categoryItem.isCatActive()
-        );
+        if(!isFieldExist(categoryItem.getId())){
+            return insertItem(
+                    categoryItem.getId(),
+                    categoryItem.getNameEn(),
+                    categoryItem.getNameBn(),
+                    categoryItem.isCatActive()
+            );
+        }
+        else{
+            return updateItem(categoryItem);
+        }
     }
 
-    public long insertItem(int id, String name, String nameBn, boolean isActive) {
-        if (isFieldExist(id)) {
-            return updateItem(id, name, nameBn, isActive);
-        }
+    public long updateItem(CategoryItem categoryItem){
+        return updateItem(categoryItem.getId(),
+                categoryItem.getNameEn(),
+                categoryItem.getNameBn(),
+                categoryItem.isCatActive());
+    }
+
+    private long insertItem(int id, String name, String nameBn, boolean isActive) {
+
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_ID, id);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_NAME, name);
         rowValue.put(KEY_NAME_BN, nameBn);
         rowValue.put(KEY_IS_ACTIVE, isActive);
@@ -72,18 +82,20 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
 
 
     public boolean isFieldExist(int id) {
-       return super.isFieldExist(id, TABLE_NAME, KEY_ID);
+       return super.isFieldExist(id, TABLE_NAME);
     }
 
     private long updateItem(int id, String name, String nameBn, boolean isActive) {
+
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_ID, id);
+
+        rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_NAME, name);
         rowValue.put(KEY_NAME_BN, nameBn);
         rowValue.put(KEY_IS_ACTIVE, isActive + "");
 
         SQLiteDatabase db = openDB();
-        long updatedId = db.update(TABLE_NAME, rowValue, KEY_ID + " = ?",
+        long updatedId = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
                 new String[]{id + ""});
         closeDB();
         return updatedId;
@@ -101,32 +113,13 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
         return new CategoryItem(id, name, nameBn, isActive);
     }
 
-    public CategoryItem cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
+    public void delete(int id){
+        super.delete(id, TABLE_NAME);
     }
 
-    public CategoryItem getDataFromId(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
-    }
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }
 
-    public CategoryItem getNodeInfo(int node) {
-
-        SQLiteDatabase db = openDB();
-        CategoryItem categoryItem = null;
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + node , null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                categoryItem = new CategoryItem(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3).equals("true"));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return categoryItem;
-    }
 }

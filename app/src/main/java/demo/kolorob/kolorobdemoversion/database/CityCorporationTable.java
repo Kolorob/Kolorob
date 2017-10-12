@@ -4,66 +4,72 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
-import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 
 /**
  * Created by shamima.yasmin on 8/23/2017.
  */
 
+
 public class CityCorporationTable extends BaseDBTable <CityCorporation> {
 
 
     private static final String TABLE_NAME = DatabaseHelper.CITYCORPORATIONS;
-    private static final String KEY_ID = "id"; // 0 -integer
+
     private static final String KEY_CC_EN = "cc_en";
     private static final String KEY_CC_BN = "cc_bn";
     private static final String KEY_CC_KEYWORD = "cc_keyword";
 
 
     public CityCorporationTable(Context context) {
-        tContext = context;
-        createTable();
+       super(context);
     }
 
-    public CityCorporationTable() {
-
-    }
 
     public void createTable() {
+
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_ID + " INTEGER PRIMARY KEY, " // 0 - int
-                + KEY_CC_EN + " TEXT, "              // 1 - text
+                + KEY_IDENTIFIER_ID + " INTEGER PRIMARY KEY, "
+                + KEY_CC_EN + " TEXT, "
                 + KEY_CC_BN + " TEXT, "
                 + KEY_CC_KEYWORD + " TEXT "
                 + " )";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
 
 
     public long insertItem(CityCorporation cityCorporation){
+        if(isFieldExist(cityCorporation.getId())){
+            return updateItem(cityCorporation);
+        }
+
         return insertItem(
-                cityCorporation.getId(),
-                cityCorporation.getCityCorporation_name(),
-                cityCorporation.getCityCorporation_bn(),
-                cityCorporation.getCityCorporation_keyword()
+                    cityCorporation.getId(),
+                    cityCorporation.getCityCorporation_name(),
+                    cityCorporation.getCityCorporation_bn(),
+                    cityCorporation.getCityCorporation_keyword()
         );
+
     }
 
-    public long insertItem(int id, String cc_name, String cc_bn, String cc_keyword) {
-        if (isFieldExist(id)) {
-            return updateItem(id, cc_name, cc_bn, cc_keyword);
-        }
+    public long updateItem(CityCorporation cityCorporation){
+        return updateItem(cityCorporation.getId(),
+                cityCorporation.getCityCorporation_name(),
+                cityCorporation.getCityCorporation_bn(),
+                cityCorporation.getCityCorporation_keyword());
+    }
+
+    private long insertItem(int id, String cc_name, String cc_bn, String cc_keyword) {
+
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_ID, id);
+
+        rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_CC_EN, cc_name);
         rowValue.put(KEY_CC_BN, cc_bn);
         rowValue.put(KEY_CC_KEYWORD, cc_keyword);
@@ -77,19 +83,19 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME, KEY_ID);
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     private long updateItem(int id, String cc_en, String cc_bn, String cc_keyword) {
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_ID, id);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_CC_EN, cc_en);
         rowValue.put(KEY_CC_BN, cc_bn);
         rowValue.put(KEY_CC_KEYWORD, cc_keyword);
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_ID + " = ?",
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
                 new String[]{id + ""});
         closeDB();
         return ret;
@@ -97,27 +103,6 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
 
     public ArrayList <CityCorporation> getAllData() {
         return super.getAllData(TABLE_NAME);
-    }
-
-    public CityCorporation getDataFromId(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
-    }
-
-    public CityCorporation getNodeInfo(int node) {
-
-        SQLiteDatabase db = openDB();
-        CityCorporation cityCorporation = null;
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + node , null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                cityCorporation = new CityCorporation(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return cityCorporation;
     }
 
 
@@ -130,8 +115,8 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         return new CityCorporation(id, cc_en, cc_bn, cc_keyword);
     }
 
-    public CityCorporation cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
+    public void delete(int id){
+        super.delete(id, TABLE_NAME);
     }
 
     public void dropTable() {

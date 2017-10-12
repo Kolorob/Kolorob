@@ -4,23 +4,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.model.Area;
-import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
-import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
+
 
 /**
  * Created by shamima.yasmin on 8/23/2017.
  */
 
+
 public class AreaTable extends BaseDBTable <Area>{
 
     private static final String TABLE_NAME = DatabaseHelper.AREAS;
 
-    private static final String KEY_ID = "id"; // 0 -integer
     private static final String KEY_AREA_EN = "area_en"; // 1 - text
     private static final String KEY_AREA_BN = "area_bn"; // 2 - text
     private static final String KEY_AREA_KEYWORD = "area_keyword";
@@ -31,52 +27,63 @@ public class AreaTable extends BaseDBTable <Area>{
 
 
     public AreaTable(Context context) {
-        tContext = context;
-        createTable();
+        super(context);
     }
 
-    public AreaTable() {
-
-    }
 
     public void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_ID + " INTEGER PRIMARY KEY, " // 0 - int
-                + KEY_AREA_EN + " TEXT, "              // 1 - text
+                + KEY_IDENTIFIER_ID + " INTEGER PRIMARY KEY, "
+                + KEY_AREA_EN + " TEXT, "
                 + KEY_AREA_BN + " TEXT, "
                 + KEY_AREA_KEYWORD + " TEXT, "
                 + KEY_PARENT_AREA + " TEXT, "
                 + KEY_LAT + " TEXT, "
                 + KEY_LON + " TEXT, "
                 + KEY_AREA_WARDID + " INTEGER "
-
                 + " )";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
 
 
     public long insertItem(Area area){
-        return insertItem(
-                area.getId(),
+        if(!isFieldExist(area.getId())){
+            return insertItem(
+                    area.getId(),
+                    area.getArea_name(),
+                    area.getArea_bn(),
+                    area.getArea_keyword(),
+                    area.getParentArea(),
+                    area.getLat(),
+                    area.getLon(),
+                    area.getWard_id()
+            );
+        }
+        else{
+            return updateItem(area);
+        }
+    }
+
+    public long updateItem(Area area){
+        return updateItem(area.getId(),
                 area.getArea_name(),
                 area.getArea_bn(),
                 area.getArea_keyword(),
                 area.getParentArea(),
                 area.getLat(),
                 area.getLon(),
-                area.getWard_id()
-        );
+                area.getWard_id());
     }
 
-    public long insertItem(int id, String area_name, String area_bn, String area_keyword, String parent_area, String lat, String lon, int ward_id) {
-        if (isFieldExist(id)) {
-            return updateItem(id, area_name, area_bn, area_keyword, parent_area, lat, lon, ward_id);
-        }
+    private long insertItem(int id, String area_name, String area_bn, String area_keyword, String parent_area, String lat, String lon, int ward_id) {
+
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_ID, id);
+
+        rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_AREA_EN, area_name);
         rowValue.put(KEY_AREA_BN, area_bn);
         rowValue.put(KEY_AREA_KEYWORD, area_keyword);
@@ -92,30 +99,16 @@ public class AreaTable extends BaseDBTable <Area>{
         return ret;
     }
 
-    public ArrayList<String> getAllAreaNameBN(int ward_id) {
-        ArrayList<String> area_bn_list = new ArrayList<>();
 
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ward_id = " + ward_id, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String area_bn = cursor.getString(2);
-                area_bn_list.add(area_bn);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return area_bn_list;
-    }
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME, KEY_ID);
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     private long updateItem(int id, String area_en, String area_bn, String area_keyword, String parent_area, String lat, String lon, int ward_id) {
+
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_ID, id);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_AREA_EN, area_en);
         rowValue.put(KEY_AREA_BN, area_bn);
         rowValue.put(KEY_AREA_KEYWORD, area_keyword);
@@ -125,7 +118,7 @@ public class AreaTable extends BaseDBTable <Area>{
         rowValue.put(KEY_AREA_WARDID, ward_id);
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_ID + " = ?",
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
                 new String[]{id + ""});
         closeDB();
         return ret;
@@ -144,45 +137,20 @@ public class AreaTable extends BaseDBTable <Area>{
         return new Area(id, area_en, area_bn, area_keyword, parent_area, lat, lon, ward_id);
     }
 
-    public Area cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
-    }
+
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }
 
-    public Area getNodeInfo(int node) {
-
-        SQLiteDatabase db = openDB();
-        Area area = null;
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + node , null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                area = new Area(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(6));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return area;
-    }
-
-    public Area getDataFromId(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
-    }
 
     public ArrayList <Area> getAllData(){
         return super.getAllData(TABLE_NAME);
     }
 
-    public ArrayList <Area> getDataFromForeignKey(int ward){
-        return super.getDataListFromId(ward, TABLE_NAME, KEY_AREA_WARDID);
-    }
 
     public void delete(int id){
-        super.delete(id, TABLE_NAME, KEY_ID);
+        super.delete(id, TABLE_NAME);
     }
 
 
