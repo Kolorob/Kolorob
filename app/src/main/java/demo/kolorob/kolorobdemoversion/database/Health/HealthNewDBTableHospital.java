@@ -19,6 +19,7 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
 
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_NEW_DB_HOS;
 
+    private static final String KEY_HEALTH_ID = "health_id";
     private static final String KEY_EMERGENCY_AVAILABLE = "emergency_available";
     private static final String KEY_EMERGENCY_NO = "emergency_number";
     private static final String KEY_AMBULANCE_AVAILABLE = "ambulance_available";
@@ -38,6 +39,7 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_IDENTIFIER_ID + " INTEGER , "
+                + KEY_HEALTH_ID + " INTEGER , "
                 + KEY_EMERGENCY_AVAILABLE + "  TEXT  , "
                 + KEY_EMERGENCY_NO + "  TEXT , "
                 + KEY_AMBULANCE_AVAILABLE + "  TEXT  , "
@@ -50,24 +52,25 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
         closeDB();
     }
 
-    public long insertItem(HealthNewDBModelHospital healthNewDBModelHospital) {
-        if (!isFieldExist(healthNewDBModelHospital.getServicecenterid())) {
+    public long insertItem(HealthNewDBModelHospital hospital) {
+        if (!isFieldExist(hospital.getHealthId())) {
             return insertItem(
-                    healthNewDBModelHospital.getServicecenterid(), healthNewDBModelHospital.getEmergencyavailable(),
-                    healthNewDBModelHospital.getEmergencynumber(), healthNewDBModelHospital.getAmbulanceavailable(), healthNewDBModelHospital.getAmbulancenumber(),
-                    healthNewDBModelHospital.getMaternityavailable(), healthNewDBModelHospital.getMaternitynumber(), healthNewDBModelHospital.getMaternityprivacy()
+                    hospital.getId(), hospital.getHealthId(), hospital.getEmergencyavailable(),
+                    hospital.getEmergencynumber(), hospital.getAmbulanceavailable(), hospital.getAmbulancenumber(),
+                    hospital.getMaternityavailable(), hospital.getMaternitynumber(), hospital.getMaternityprivacy()
 
             );
         }
-        else return updateItem(healthNewDBModelHospital);
+        else return updateItem(hospital);
     }
 
-    public long insertItem(int serviceproviderId, String eavail, String enumber,String ambavail,String ambnumber,
+    public long insertItem(int id, int healthId, String eavail, String enumber,String ambavail,String ambnumber,
                            String materavail,String maternumber,String materprivacy) {
 
         ContentValues rowValue = new ContentValues();
 
-        rowValue.put(KEY_IDENTIFIER_ID, serviceproviderId);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(KEY_HEALTH_ID, healthId);
         rowValue.put(KEY_EMERGENCY_AVAILABLE, eavail);
         rowValue.put(KEY_EMERGENCY_NO, enumber);
         rowValue.put(KEY_AMBULANCE_AVAILABLE, ambavail);
@@ -85,18 +88,19 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
 
     public long updateItem(HealthNewDBModelHospital hospital){
         return updateItem(
-                hospital.getServicecenterid(), hospital.getEmergencyavailable(),
+                hospital.getId(), hospital.getHealthId(), hospital.getEmergencyavailable(),
                 hospital.getEmergencynumber(), hospital.getAmbulanceavailable(), hospital.getAmbulancenumber(),
                 hospital.getMaternityavailable(), hospital.getMaternitynumber(), hospital.getMaternityprivacy()
         );
     }
 
 
-    public long updateItem(int serviceproviderId, String eavail, String enumber,String ambavail,String ambnumber,
+    public long updateItem(int id, int healthId, String eavail, String enumber,String ambavail,String ambnumber,
                             String materavail,String maternumber,String materprivacy) {
 
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_IDENTIFIER_ID, serviceproviderId);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(KEY_HEALTH_ID, healthId);
         rowValue.put(KEY_EMERGENCY_AVAILABLE, eavail);
         rowValue.put(KEY_EMERGENCY_NO, enumber);
         rowValue.put(KEY_AMBULANCE_AVAILABLE, ambavail);
@@ -108,7 +112,7 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?  ",
-                new String[]{serviceproviderId + ""});
+                new String[]{healthId + ""});
         closeDB();
         return ret;
 
@@ -129,16 +133,17 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
     }
 
     public HealthNewDBModelHospital cursorToModel(Cursor cursor) {
-        int _servicecenterid = cursor.getInt(0);
-        String _eavailable = cursor.getString(1);
-        String _enumber= cursor.getString(2);
-        String _ambavailable = cursor.getString(3);
-        String _ambnumber = cursor.getString(4);
-        String _mtravailable= cursor.getString(5);
-        String _mtrnum = cursor.getString(6);
-        String _mtrprivacy = cursor.getString(7);
+        int _id = cursor.getInt(0);
+        int _healthId = cursor.getInt(1);
+        String _eavailable = cursor.getString(2);
+        String _enumber= cursor.getString(3);
+        String _ambavailable = cursor.getString(4);
+        String _ambnumber = cursor.getString(5);
+        String _mtravailable= cursor.getString(6);
+        String _mtrnum = cursor.getString(7);
+        String _mtrprivacy = cursor.getString(8);
 
-        return new HealthNewDBModelHospital(_servicecenterid,_eavailable,_enumber,
+        return new HealthNewDBModelHospital(_id, _healthId,_eavailable,_enumber,
                 _ambavailable,_ambnumber,_mtravailable,_mtrnum,_mtrprivacy);
     }
 

@@ -43,9 +43,9 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
 
     public long insertItem(HealthNewDBModelPharmacy healthNewDBModelPharmacy) {
-        if (!isFieldExist(healthNewDBModelPharmacy.getServicecenterid())) {
+        if (!isFieldExist(healthNewDBModelPharmacy.getHealthId())) {
             return insertItem(
-                    healthNewDBModelPharmacy.getServicecenterid(), healthNewDBModelPharmacy.getDocavailability(),
+                    healthNewDBModelPharmacy.getHealthId(), healthNewDBModelPharmacy.getDocavailability(),
                     healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
 
             );
@@ -56,7 +56,7 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
     public long updateItem(HealthNewDBModelPharmacy healthNewDBModelPharmacy) {
         return updateItem(
-                healthNewDBModelPharmacy.getServicecenterid(), healthNewDBModelPharmacy.getDocavailability(),
+                healthNewDBModelPharmacy.getHealthId(), healthNewDBModelPharmacy.getDocavailability(),
                 healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
         );
     }
