@@ -299,7 +299,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         }
         cursor.close();
         closeDB();
-        return (ModelType) commonModel;
+        return (commonModel instanceof CommonModel) ? (ModelType) commonModel : null;
     }
 
 
@@ -342,9 +342,6 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
     }
 
-    public ModelType cursorToModel(Cursor cursor, CommonModel commonModel){
-        return null;
-    }
 
     public void dropTable(String TABLE_NAME) {
         super.dropTable(TABLE_NAME);
