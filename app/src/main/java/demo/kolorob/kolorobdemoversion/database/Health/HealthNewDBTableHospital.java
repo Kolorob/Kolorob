@@ -118,8 +118,20 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
 
     }
 
+    public HealthNewDBModelHospital getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
     public ArrayList <HealthNewDBModelHospital> getDataListFromId(int id) {
-        return super.getDataListFromId(id, TABLE_NAME);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public HealthNewDBModelHospital getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_HEALTH_ID);
+    }
+
+    public ArrayList <HealthNewDBModelHospital> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_HEALTH_ID);
     }
 
 

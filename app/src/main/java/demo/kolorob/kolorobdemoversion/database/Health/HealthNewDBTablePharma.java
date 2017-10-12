@@ -108,8 +108,20 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
         return super.isFieldExist(id, TABLE_NAME);
     }
 
+    public HealthNewDBModelPharmacy getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
     public ArrayList <HealthNewDBModelPharmacy> getDataListFromId(int id) {
-        return super.getDataListFromId(id, TABLE_NAME);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public HealthNewDBModelPharmacy getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_HEALTH_ID);
+    }
+
+    public ArrayList <HealthNewDBModelPharmacy> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_HEALTH_ID);
     }
 
 

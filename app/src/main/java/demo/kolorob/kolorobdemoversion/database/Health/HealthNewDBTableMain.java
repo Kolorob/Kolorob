@@ -58,10 +58,13 @@ public class HealthNewDBTableMain extends CommonDBTable <HealthNewDBModelMain> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList <HealthNewDBModelMain> getDataListFromId(int node){
-        return super.getDataListFromId(node, TABLE_NAME);
+    public HealthNewDBModelMain getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
+    public ArrayList <HealthNewDBModelMain> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
     public ArrayList <HealthNewDBModelMain> getAllData(){
         return super.getAllData(TABLE_NAME);
