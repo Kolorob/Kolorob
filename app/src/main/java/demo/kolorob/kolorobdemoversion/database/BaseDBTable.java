@@ -25,6 +25,8 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract boolean isFieldExist(int id);
     public abstract long insertItem(ModelType model);
     public abstract long updateItem(ModelType model);
+    public abstract ModelType getNodeInfo(int id);
+    public abstract ArrayList <ModelType> getDataListFromId(int id);
     public abstract void delete(int id);
     public abstract void dropTable();
 
@@ -65,11 +67,11 @@ public abstract class BaseDBTable <ModelType>  {
     }
 
 
-    public ModelType getNodeInfo(int nodeId, String TABLE_NAME){
+    protected ModelType getNodeInfo(int nodeId, String TABLE_NAME, String KEY){
 
         ModelType model = null;
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + nodeId, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY + " = " + nodeId, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -83,12 +85,12 @@ public abstract class BaseDBTable <ModelType>  {
 
 
 
-    protected ArrayList <ModelType> getDataListFromId(int nodeId, String TABLE_NAME) {
+    protected ArrayList <ModelType> getDataListFromId(int nodeId, String TABLE_NAME, String KEY) {
 
         ArrayList <ModelType> list = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + nodeId, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY + " = " + nodeId, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -99,6 +101,8 @@ public abstract class BaseDBTable <ModelType>  {
         closeDB();
         return list;
     }
+
+
 
     protected ArrayList <ModelType> getAllData(String TABLE_NAME) {
 
