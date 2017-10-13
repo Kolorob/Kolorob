@@ -57,6 +57,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
     public abstract void insertItem(ContentValues rowValue, ModelType model);
     public abstract void updateItem(ContentValues rowValue, ModelType model);
+    public abstract ArrayList <ModelType> getByArea(String ward, String area);
     public abstract ArrayList <ModelType> getByAreaCategory(String ward, String area, int category);
 
 
@@ -100,7 +101,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     }
 
 
-    public long insertItem(ModelType model, String TABLE_NAME) {
+    protected long insertItem(ModelType model, String TABLE_NAME) {
         if (!isFieldExist(model.getId())) {
             return insertItem(TABLE_NAME, model, model.getId(), model.getNameEn(), model.getNameBn(),
                     model.getHouseNo(), model.getBlock(), model.getRoad(), model.getArea(), model.getAreaBn(), model.getParentArea(), model.getWard(), model.getPoliceStation(), model.getNodeContact(), model.getNodeEmail(), model.getOtherInfo(),
@@ -118,7 +119,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     }
 
 
-    public long updateItem(ModelType model, String TABLE_NAME){
+    protected long updateItem(ModelType model, String TABLE_NAME){
         return updateItem(TABLE_NAME, model, model.getId(), model.getNameEn(), model.getNameBn(),
                 model.getHouseNo(), model.getBlock(), model.getRoad(), model.getArea(), model.getAreaBn(), model.getParentArea(), model.getWard(), model.getPoliceStation(), model.getNodeContact(), model.getNodeEmail(), model.getOtherInfo(),
                 model.getOpeningTime(), model.getClosingTime(), model.getOffDay(),
@@ -128,7 +129,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
 
 
-    public long insertItem(String TABLE_NAME, ModelType model, int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
+    protected long insertItem(String TABLE_NAME, ModelType model, int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
 
         ContentValues rowValue = new ContentValues();
 
@@ -215,7 +216,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
 
 
-    public ArrayList <ModelType> getByAreaCategory(String ward, String area, int category, String TABLE_NAME) {
+    protected ArrayList <ModelType> getByAreaCategory(String ward, String area, int category, String TABLE_NAME) {
 
         ArrayList <ModelType> list = new ArrayList<>();
 
@@ -235,7 +236,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     }
 
 
-    public void delete(String ward, String area, String TABLE_NAME) {
+    protected void delete(String ward, String area, String TABLE_NAME) {
         DatabaseHelper databaseHelper = new DatabaseHelper(CommonDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         database.delete(TABLE_NAME, KEY_WARD + " = '" + ward + "' AND " + "(" + KEY_AREA + " = '" + area + "')" + " OR " + "(" + KEY_PARENT_AREA + "  =  '" + area + "')", null);
@@ -243,15 +244,15 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         database.close();
     }
 
-    public void delete(int id, String TABLE_NAME){
+    protected void delete(int id, String TABLE_NAME){
         super.delete(id, TABLE_NAME);
     }
 
-    public boolean isFieldExist(int id, String TABLE_NAME) {
+    protected boolean isFieldExist(int id, String TABLE_NAME) {
        return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList <ModelType> getByArea(String ward, String area, String TABLE_NAME) {
+    protected ArrayList <ModelType> getByArea(String ward, String area, String TABLE_NAME) {
 
         ArrayList <ModelType> list = new ArrayList<>();
 
@@ -276,12 +277,12 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         return super.getDataListFromId(id, TABLE_NAME, KEY);
     }
 
-    public ArrayList <ModelType> getAllData(String TABLE_NAME){
+    protected ArrayList <ModelType> getAllData(String TABLE_NAME){
         return super.getAllData(TABLE_NAME);
     }
 
 
-    public ModelType getNodeInfo(int node, String TABLE_NAME) {
+    protected ModelType getNodeInfo(int node, String TABLE_NAME) {
 
         SQLiteDatabase db = openDB();
         CommonModel commonModel = null;
@@ -343,7 +344,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     }
 
 
-    public void dropTable(String TABLE_NAME) {
+    protected void dropTable(String TABLE_NAME) {
         super.dropTable(TABLE_NAME);
     }
 }
