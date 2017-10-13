@@ -26,7 +26,7 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract long insertItem(ModelType model);
     public abstract long updateItem(ModelType model);
     public abstract ModelType getNodeInfo(int id);
-    public abstract ArrayList <ModelType> getDataListFromId(int id)
+    public abstract ArrayList <ModelType> getDataListFromId(int id);
     public abstract void delete(int id);
     public abstract void dropTable();
 
