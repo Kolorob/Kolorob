@@ -87,6 +87,10 @@ public class FinNewDBTable extends CommonDBTable <FinancialNewDBModel> {
         return new FinancialNewDBModel(_commonModel, _type, _service);
     }
 
+    public ArrayList <FinancialNewDBModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
+
     public ArrayList <FinancialNewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
     }

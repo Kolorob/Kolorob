@@ -81,6 +81,9 @@ public class LegalAidNewDBTable extends CommonDBTable<LegalAidNewDBModel> {
         return new LegalAidNewDBModel(_commonModel, _service);
     }
 
+    public ArrayList <LegalAidNewDBModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
 
     public ArrayList <LegalAidNewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);

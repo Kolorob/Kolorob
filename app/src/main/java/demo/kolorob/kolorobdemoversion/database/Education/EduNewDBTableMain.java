@@ -103,6 +103,10 @@ public class EduNewDBTableMain extends CommonDBTable<EduNewModel> {
         return new EduNewModel(_commonModel, _edu_type, _shift, _student_no, _teachers_no, _avg_std_per_class, _facility);
     }
 
+    public ArrayList <EduNewModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
+
     public ArrayList <EduNewModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
     }

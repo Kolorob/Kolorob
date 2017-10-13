@@ -79,6 +79,9 @@ public class HealthNewDBTableMain extends CommonDBTable <HealthNewDBModelMain> {
         return new HealthNewDBModelMain(_commonModel, _institute_type);
     }
 
+    public ArrayList <HealthNewDBModelMain> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
 
     public ArrayList <HealthNewDBModelMain> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);

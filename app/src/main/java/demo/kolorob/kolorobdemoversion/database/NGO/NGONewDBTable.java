@@ -100,6 +100,9 @@ public class NGONewDBTable extends CommonDBTable<NGONewDBModel> {
         return new NGONewDBModel(_commonModel, _services, _services_for, _services_other, _service_type, _drop_time, _ngo_fee);
     }
 
+    public ArrayList <NGONewDBModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
 
     public ArrayList <NGONewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);

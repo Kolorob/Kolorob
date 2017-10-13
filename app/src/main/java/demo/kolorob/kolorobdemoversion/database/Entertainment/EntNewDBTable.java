@@ -86,6 +86,10 @@ public class EntNewDBTable extends CommonDBTable <EntertainmentNewDBModel> {
         return new EntertainmentNewDBModel(_commonModel, _service_type, _entry_fee);
     }
 
+    public ArrayList <EntertainmentNewDBModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
+
     public ArrayList <EntertainmentNewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
     }

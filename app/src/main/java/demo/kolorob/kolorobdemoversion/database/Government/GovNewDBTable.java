@@ -81,6 +81,9 @@ public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
         return new GovernmentNewDBModel(_commonModel, _serviceName);
     }
 
+    public ArrayList <GovernmentNewDBModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
+    }
 
     public ArrayList <GovernmentNewDBModel> getByAreaCategory(String ward, String area, int category){
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
