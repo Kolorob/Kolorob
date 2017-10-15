@@ -311,7 +311,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         });*/
 
         SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(getActivity());
-        subCategoryItemNews = subCategoryTableNew.getDataFromForeignKey(categoryId);
+        subCategoryItemNews = subCategoryTableNew.getDataListFromForeignKey(categoryId);
 
 
         return rootView;
@@ -319,7 +319,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
     public void Setsubcategories(int id) {
         SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(getActivity());
-        subCategoryItemNews = subCategoryTableNew.getDataFromForeignKey(id);
+        subCategoryItemNews = subCategoryTableNew.getDataListFromForeignKey(id);
 
     }
 

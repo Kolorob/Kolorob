@@ -1321,7 +1321,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         storedAreaTable = new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
         storedAreaArrayListall = storedAreaTable.getAllData();
 
-        storedAreas = storedAreaTable.getstoredlocation(wardId, areaKeyword);
+        storedAreas = storedAreaTable.getStoredLocation(wardId, areaKeyword);
         setLat(storedAreas.get(0).getLat());
         setLon(storedAreas.get(0).getLon());
 
@@ -3241,7 +3241,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ArrayList <SubCategoryItemNew> getSubCategoryList(int id) {
         // TODO Get sub-categories from the SUB_CATEGORY local table : NEXT PHASE
         SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-        return subCategoryTable.getDataFromForeignKey(id);
+        return subCategoryTable.getDataListFromForeignKey(id);
     }
 
 
@@ -3272,17 +3272,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList <EduNewModel> constructEducationListItem() {
 
-        ArrayList <EduNewModel> educationServiceProvider = new ArrayList<>();
         EduNewDBTableMain educationNewTable = new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.EDUCATION);
+        return educationNewTable.getByAreaCategory(wardId, areaKeyword, AppConstants.EDUCATION);
 
-
-        for(CommonModel commonModel : commonModels){
-            educationServiceProvider.add(educationNewTable.getDetailsByCommonModel(commonModel));
-        }
-
-        return educationServiceProvider;
     }
 
 
@@ -3431,16 +3423,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     //
      private ArrayList <HealthNewDBModelMain> constructHealthListItem() {
 
-         ArrayList <HealthNewDBModelMain> healthServiceProvider = new ArrayList<>();
          HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
-         CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-         ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.HEALTH);
-
-         for(CommonModel commonModel : commonModels){
-             healthServiceProvider.add(healthServiceProviderTable.getDetailsByCommonModel(commonModel));
-         }
-
-         return healthServiceProvider;
+         return healthServiceProviderTable.getByAreaCategory(wardId, areaKeyword, AppConstants.HEALTH);
     }
 
     private void callMapFragmentWithHealth(ArrayList <HealthNewDBModelMain> healthServiceProviderItemNews) {
@@ -3463,16 +3447,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList<EntertainmentNewDBModel> constructEntertainmentListItem() {
 
-        ArrayList <EntertainmentNewDBModel> entertainmentNewDBModels = new ArrayList<>();
         EntNewDBTable entNewDBTable = new EntNewDBTable(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.ENTERTAINMENT);
-
-        for(CommonModel commonModel : commonModels){
-            entertainmentNewDBModels.add(entNewDBTable.getDetailsByCommonId(commonModel.getId()));
-        }
-
-        return entertainmentNewDBModels;
+        return entNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.ENTERTAINMENT);
     }
 
     private void callMapFragmentWithEntertainment(ArrayList <EntertainmentNewDBModel> entertainmentServiceProviderItemNews) {
@@ -3500,16 +3476,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList <GovernmentNewDBModel> constructGovListItem() {
 
-        ArrayList <GovernmentNewDBModel> governmentNewDBModels = new ArrayList<>();
         GovNewDBTable govNewDBTable = new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.GOVERNMENT);
-
-        for(CommonModel commonModel : commonModels){
-            governmentNewDBModels.add(govNewDBTable.getDetailsByCommonId(commonModel.getId()));
-        }
-
-        return governmentNewDBModels;
+        return govNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.GOVERNMENT);
     }
 
     private void callMapFragmentWithGovernment(ArrayList<GovernmentNewDBModel> governmentNewItems,boolean s) {
@@ -3534,16 +3502,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList<LegalAidNewDBModel> constructLegalaidListItem() {
 
-        ArrayList <LegalAidNewDBModel> legalAidNewDBModels = new ArrayList<>();
         LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.LEGAL);
-
-        for(CommonModel commonModel : commonModels){
-            legalAidNewDBModels.add(legalAidNewDBTable.getDetailsByCommonId(commonModel.getId()));
-        }
-
-        return legalAidNewDBModels;
+        return legalAidNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.LEGAL);
     }
 
     private void callMapFragmentWithLegal(ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews,boolean s) {
@@ -3568,16 +3528,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     /**********************************************************Methods for financial**********************************************/
     private ArrayList <FinancialNewDBModel> constructFinancialListItem() {
-        ArrayList <FinancialNewDBModel> financialNewDBModels = new ArrayList<>();
+
         FinNewDBTable finNewDBTable = new FinNewDBTable(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.FINANCIAL);
-
-        for(CommonModel commonModel : commonModels){
-            financialNewDBModels.add(finNewDBTable.getDetailsByCommonId(commonModel.getId()));
-        }
-
-        return financialNewDBModels;
+        return finNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.FINANCIAL);
     }
 
 
@@ -3601,16 +3554,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     /**********************************************************Methods for NGO***************************************************/
 
     private ArrayList <NGONewDBModel> constructNgoListItem() {
-        ArrayList <NGONewDBModel> ngoNewDBModels = new ArrayList<>();
+
         NGONewDBTable ngoNewDBTable = new NGONewDBTable(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.NGO);
-
-        for(CommonModel commonModel : commonModels){
-            ngoNewDBModels.add(ngoNewDBTable.getDetailsByCommonId(commonModel.getId()));
-        }
-
-        return ngoNewDBModels;
+        return ngoNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.NGO);
     }
 
     private void callMapFragmentWithNgo(ArrayList<NGONewDBModel> ngoServiceProviderItemNews, boolean s) {
@@ -3636,16 +3582,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private ArrayList <ReligiousNewDBModel> constructReligiousListItem() {
 
-        ArrayList <ReligiousNewDBModel> religiousNewDBModels = new ArrayList<>();
         ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(PlaceDetailsActivityNewLayout.this);
-        CommonDBTable commonDBTable = new CommonDBTable(PlaceDetailsActivityNewLayout.this);
-        ArrayList <CommonModel> commonModels = commonDBTable.getAllCommonByAreaCategory(wardId, areaKeyword, AppConstants.RELIGIOUS);
-
-        for(CommonModel commonModel : commonModels){
-            religiousNewDBModels.add(religiousNewDBTable.getDetailsByCommonId(commonModel.getId()));
-        }
-
-        return religiousNewDBModels;
+        return religiousNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.RELIGIOUS);
     }
 
     private void callMapFragmentWithReligious(ArrayList<ReligiousNewDBModel> religiousServiceProviderItemNews, boolean s) {
@@ -3664,8 +3602,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
     }
-
-
 
 
 

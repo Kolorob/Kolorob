@@ -51,7 +51,7 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 
-public abstract class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity <ModelType extends CommonModel> extends AppCompatActivity{
 
     LinearLayout upperHand, service_center_name, left_way, middle_phone, right_email, bottom_bar;
     ImageView route_icon, phone_icon, email_icon, comment_icon, email_btn;
@@ -77,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     abstract void displayUniqueProperties();
 
 
-    protected void viewBaseLayout(CommonModel commonModel) {
+    protected void viewBaseLayout(ModelType model) {
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
@@ -106,7 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         if(width < 500)
             ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
 
-        setRatingBar(commonModel);
+        setRatingBar(model);
 
 
         LinearLayout.LayoutParams params_service_center_name = (LinearLayout.LayoutParams) service_center_name.getLayoutParams();
@@ -145,17 +145,17 @@ public abstract class BaseActivity extends AppCompatActivity{
         //set properties of service center name
         service_name = (TextView) findViewById(R.id.ups_text);
         service_name.setTextSize(27);
-        service_name.setText(commonModel.getNameBn());
+        service_name.setText(model.getNameBn());
         ratingText.setTextSize(23);
     }
 
 
 
 
-    protected void displayCommonProperties(final CommonModel commonModel){
+    protected void displayCommonProperties(final ModelType model){
         CheckConcate("\n", "\n");
-        CheckConcate("ঠিকানা", concatenateAddress(commonModel.getHouseNo(), commonModel.getRoad(), commonModel.getBlock(), commonModel.getAreaBn()));
-        String ward = commonModel.getWard();
+        CheckConcate("ঠিকানা", concatenateAddress(model.getHouseNo(), model.getRoad(), model.getBlock(), model.getAreaBn()));
+        String ward = model.getWard();
         if(ward.contains("_")){
             String[] wardSplitted = ward.split("_");
             if(wardSplitted[1].equals("dakshinkhan"))
@@ -168,13 +168,13 @@ public abstract class BaseActivity extends AppCompatActivity{
 
 
         CheckConcate("ওয়ার্ড", ward);
-        CheckConcate("পুলিশ স্টেশন", commonModel.getPoliceStation());
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(commonModel.getNodeContact()));
-        CheckConcate("ইমেইল", commonModel.getNodeEmail());
-        timeProcessing("খোলার সময়", commonModel.getOpeningTime());
-        timeProcessing("বন্ধের সময়", commonModel.getClosingTime());
-        CheckConcate("সাপ্তাহিক বন্ধ", commonModel.getOffDay());
-        CheckConcate("অন্যান্য তথ্য ", commonModel.getOtherInfo());
+        CheckConcate("পুলিশ স্টেশন", model.getPoliceStation());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(model.getNodeContact()));
+        CheckConcate("ইমেইল", model.getNodeEmail());
+        timeProcessing("খোলার সময়", model.getOpeningTime());
+        timeProcessing("বন্ধের সময়", model.getClosingTime());
+        CheckConcate("সাপ্তাহিক বন্ধ", model.getOffDay());
+        CheckConcate("অন্যান্য তথ্য ", model.getOtherInfo());
 
         //checkConcate method will check null data and concat
 
@@ -193,13 +193,13 @@ public abstract class BaseActivity extends AppCompatActivity{
         email_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (commonModel.getNodeEmail().equals("null") || commonModel.getNodeEmail().equals("")) {
+                if (model.getNodeEmail().equals("null") || model.getNodeEmail().equals("")) {
                     AlertMessage.showMessage(context, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
                     //Helpes method will be used to send Email
-                    Helpes.sendEmail((Activity)context, commonModel.getNodeEmail());
+                    Helpes.sendEmail((Activity)context, model.getNodeEmail());
                 }
             }
         });
@@ -209,9 +209,9 @@ public abstract class BaseActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                if (!commonModel.getNodeContact().equals("null") && !commonModel.getNodeContact().equals("")) {
+                if (!model.getNodeContact().equals("null") && !model.getNodeContact().equals("")) {
 
-                    callIntent.setData(Uri.parse("tel:" + commonModel.getNodeContact()));
+                    callIntent.setData(Uri.parse("tel:" + model.getNodeContact()));
                     if (checkPermission())
                         startActivity(callIntent);
                     else {
@@ -231,12 +231,12 @@ public abstract class BaseActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
-                    String lat = commonModel.getLat();
+                    String lat = model.getLat();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = commonModel.getLon();
+                    String lon = model.getLon();
                     // double longitude = Double.parseDouble(lon);
-                    String name = commonModel.getNameBn();
-                    String node = String.valueOf(commonModel.getId());
+                    String name = model.getNameBn();
+                    String node = String.valueOf(model.getId());
                     boolean fromOrNot = true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -277,7 +277,7 @@ public abstract class BaseActivity extends AppCompatActivity{
 
 
 
-    public void verifyRegistration(View v, CommonModel commonModel) {
+    public void verifyRegistration(ModelType model) {
 
         String  register = SharedPreferencesHelper.getNumber(context);
         phone_num = register;
@@ -285,11 +285,11 @@ public abstract class BaseActivity extends AppCompatActivity{
             requestToRegister();
         }
         else {
-            feedBackAlert(commonModel);
+            feedBackAlert(model);
         }
     }
 
-    public void feedBackAlert(final CommonModel commonModel) {
+    public void feedBackAlert(final ModelType model) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
@@ -319,7 +319,7 @@ public abstract class BaseActivity extends AppCompatActivity{
             status = rb1.getText().toString();
 
             if(AppUtils.isNetConnected(getApplicationContext())) {
-                sendReviewToServer(commonModel);
+                sendReviewToServer(model);
                 alertDialog.cancel();
             }
             else {
@@ -334,7 +334,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
 
-    public void sendReviewToServer(final CommonModel commonModel) {
+    public void sendReviewToServer(final ModelType model) {
 
         String userName = SharedPreferencesHelper.getUname(context);
         uname = userName.replace(' ', '+');
@@ -351,7 +351,7 @@ public abstract class BaseActivity extends AppCompatActivity{
             rating = 5;
 
 
-        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating2/" + commonModel.getId() + "?" + "phone=" + phone_num + "&name=" + uname + "&rating=" + rating + "&username=" + username + "&password=" + password + "";
+        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating2/" + model.getId() + "?" + "phone=" + phone_num + "&name=" + uname + "&rating=" + rating + "&username=" + username + "&password=" + password + "";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
             new Response.Listener<String>() {
@@ -360,7 +360,7 @@ public abstract class BaseActivity extends AppCompatActivity{
                     // Response is true or false
                     try {
                         if (response.equals("true")) {
-                            SharedPreferencesHelper.setIfCommentedAlready(context, String.valueOf(commonModel.getId()), uname, "yes");
+                            SharedPreferencesHelper.setIfCommentedAlready(context, String.valueOf(model.getId()), uname, "yes");
                             AlertMessage.showMessage(context, "মতামতটি গ্রহন করা হয়েছে", "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                         }
                         else
@@ -393,10 +393,10 @@ public abstract class BaseActivity extends AppCompatActivity{
         requestQueue.add(stringRequest);
     }
 
-    public void setRatingBar(CommonModel commonModel) {
+    public void setRatingBar(ModelType model) {
         try {
-            if(commonModel.getRatings() != null)
-                ratingBar.setRating(Float.parseFloat(commonModel.getRatings()));
+            if(model.getRatings() != null)
+                ratingBar.setRating(Float.parseFloat(model.getRatings()));
             else
                 ratingBar.setRating(0.0f);
         }
@@ -601,13 +601,13 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     }
 
-    protected String getReferences(CommonModel commonModel){
+    protected String getReferences(ModelType model){
         String ref;
         StringBuilder result = new StringBuilder();
 
-        setSubcategories(commonModel.getCategoryId());
+        setSubcategories(model.getCategoryId());
 
-        String refid = commonModel.getRefNum();
+        String refid = model.getRefNum();
         result.delete(0, result.length());
         String[] references = refid.split(",");
         for (int k = 0; k < references.length; k++) {
