@@ -51,7 +51,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
     private static final String KEY_CATEGORY_ID = "category_id";
     private static final String KEY_SUBCATEGORY_ID = "subcat_id";
-    private static final String KEY_REFERENCE = "references";
+    private static final String KEY_REFERENCE = "reference";
     private static final String KEY_RATINGS = "rating";
 
 
@@ -93,7 +93,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
 
                 + KEY_CATEGORY_ID + " INTEGER, "
                 + KEY_SUBCATEGORY_ID + " TEXT, "
-                + KEY_REFERENCE+ " TEXT, "
+                + KEY_REFERENCE + " TEXT, "
                 + KEY_RATINGS + " TEXT, ";
 
 
