@@ -185,7 +185,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
     public ArrayList<StoredArea> RetriveLocation(String ward,String area) //last existing location er jonno
     {
-        storedAreaArrayList = storedAreaTable.getstoredlocation(ward,area);
+        storedAreaArrayList = storedAreaTable.getStoredLocation(ward, area);
         return storedAreaArrayList;
     }
     @Override
@@ -282,10 +282,10 @@ public class AreaUpgrade extends AppCompatActivity {
         JSONArray Edu = jo;
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
         EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(AreaUpgrade.this);
-        EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(AreaUpgrade.this);
-        int Govcount = Edu.length();
+        EduNewDBTableSchool eduNewDBTableSchool = new EduNewDBTableSchool(AreaUpgrade.this);
+        EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(AreaUpgrade.this);
 
-        for (int i = 0; i < Govcount; i++) {
+        for (int i = 0; i < Edu.length(); i++) {
             try {
                 if(!Edu.isNull(i)) {
                     JSONObject jsonObject2 = Edu.getJSONObject(i);
@@ -297,16 +297,27 @@ public class AreaUpgrade extends AppCompatActivity {
                         for (int ii = 0; ii < lenoftrain; ii++) {
                             JSONObject train = edutrain.getJSONObject(ii);
 
-
-                            EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
+                            EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train, eduNewModel.getId());
                             eduNewDBTableTraining.insertItem(eduTrainingModel);
                         }
 
                     }
                      if (jsonObject2.has("education_school")) {
                         JSONObject school = jsonObject2.getJSONObject("education_school");
-                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school);
+                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, eduNewModel.getId());
                         eduNewDBTableSchool.insertItem(eduNewSchoolModel);
+                    }
+
+                    if (jsonObject2.has("result_details")) {
+                        JSONArray eduResult = jsonObject2.getJSONArray("result_details");
+
+                        for (int ii = 0; ii < eduResult.length(); ii++) {
+                            JSONObject result = eduResult.getJSONObject(ii);
+
+                            EducationResultItemNew resultItemNew = EducationResultItemNew.parseEducationResultItemNew(result, eduNewModel.getId());
+                            educationResultDetailsTable.insertItem(resultItemNew);
+                        }
+
                     }
 
                 }
@@ -444,12 +455,9 @@ public class AreaUpgrade extends AppCompatActivity {
         }
     }
 
-    public void deleteAll (String ward, String area)
-    {
+    public void deleteAll (String ward, String area) {
 
-        CommonDBTable commonDB = new CommonDBTable(AreaUpgrade.this);
-
-        EduNewDBTableMain educationDB = new EduNewDBTableMain(AreaUpgrade.this);
+        /*EduNewDBTableMain educationDB = new EduNewDBTableMain(AreaUpgrade.this);
         EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(AreaUpgrade.this);
         EducationResultDetailsTable resultDB = new EducationResultDetailsTable(AreaUpgrade.this);
         EduNewDBTableTraining trainingDB = new EduNewDBTableTraining(AreaUpgrade.this);
@@ -547,7 +555,7 @@ public class AreaUpgrade extends AppCompatActivity {
         ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
         ToastMessageDisplay.showText(AreaUpgrade.this);
         deleted=true;
-        radiobuttonsetup();
+        radiobuttonsetup();*/
 
     }
 
