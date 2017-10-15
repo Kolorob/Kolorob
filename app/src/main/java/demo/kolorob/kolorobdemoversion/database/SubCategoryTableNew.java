@@ -132,9 +132,10 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 = cursor.getString(7);
-                int subcatid = cursor.getInt(5);
-                siList.add(new Subcatholder(subcatid,catid2));
+                int subcatid = cursor.getInt(6);
+                String name = cursor.getString(7);
+                String name_bn = cursor.getString(8);
+                siList.add(new Subcatholder(subcatid, name, name_bn));
             } while (cursor.moveToNext());
         }
         cursor.close();

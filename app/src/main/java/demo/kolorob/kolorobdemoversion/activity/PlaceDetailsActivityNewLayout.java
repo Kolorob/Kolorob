@@ -2344,9 +2344,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         for (int f = 0; f < tagHolders.size(); f++) {
             if (f >= upto)
-                filter2.add(tagHolders.get(f).getSubcatname());
+                filter2.add(tagHolders.get(f).getName_bn());
             else
-                filter.add(tagHolders.get(f).getSubcatname());
+                filter.add(tagHolders.get(f).getName_bn());
         }
 
         final RadioButton[] rb = new RadioButton[30];
@@ -3914,9 +3914,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     private int Findsubcatid(String filterword){
 
-        for (int s = 0; s <= tagHolders.size(); s++) {
-            if (tagHolders.get(s).getSubcatname().equals(filterword)) {
-                setsNumber(tagHolders.get(s).getSubcatid());
+        for (int s = 0; s < tagHolders.size(); s++) {
+            if (tagHolders.get(s).getName_bn().equals(filterword)) {
+                setsNumber(tagHolders.get(s).getId());
                 break;
             }
         }
