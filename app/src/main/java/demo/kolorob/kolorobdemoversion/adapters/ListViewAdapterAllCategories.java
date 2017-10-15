@@ -117,7 +117,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 				if (catt==60000) {
 					// Send single item click data to SingleItemView Class
 					FinNewDBTable financialServiceProviderTable = new FinNewDBTable(ListViewAdapterAllCategories.this.mContext);
-					nullfin = financialServiceProviderTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullfin = financialServiceProviderTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsLayoutFinance.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
 					activity.startActivity(iient);
@@ -125,14 +125,14 @@ int catt=worldpopulationlist.get(position).getCatid();
 				}
 				else if (catt==10000) {
 					EduNewDBTableMain educationServiceProviderTable=new EduNewDBTableMain(ListViewAdapterAllCategories.this.mContext);
-					nulledu=educationServiceProviderTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nulledu=educationServiceProviderTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsLayoutEducation.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu);
 					activity.startActivity(iient);
 				}
 				else if (catt==20000) {
 					HealthNewDBTableMain healthServiceProviderTable=new HealthNewDBTableMain(ListViewAdapterAllCategories.this.mContext);
-					nullhel=healthServiceProviderTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullhel=healthServiceProviderTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityHealthNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
 					activity.startActivity(iient);
@@ -140,7 +140,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 				else if (catt==30000) {
 					EntNewDBTable entertainmentServiceProviderTable=new EntNewDBTable(ListViewAdapterAllCategories.this.mContext);
 
-					nullent=entertainmentServiceProviderTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullent=entertainmentServiceProviderTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityEntertainmentNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
 					activity.startActivity(iient);
@@ -149,7 +149,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 				}
 				else if (catt==50000) {
 					LegalAidNewDBTable legalAidServiceProviderTable=new LegalAidNewDBTable(ListViewAdapterAllCategories.this.mContext);
-					nullleg=legalAidServiceProviderTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullleg=legalAidServiceProviderTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityLegalNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
 					activity.startActivity(iient);
@@ -157,7 +157,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 
 				else if (catt==40000) {
 					GovNewDBTable governmentNewTable=new GovNewDBTable(ListViewAdapterAllCategories.this.mContext);
-					nullgov=governmentNewTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullgov=governmentNewTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsLayoutGovernment.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
 					activity.startActivity(iient);
@@ -165,7 +165,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 
 				else if (catt == 70000) {
 					NGONewDBTable ngoNewDBTable = new NGONewDBTable(ListViewAdapterAllCategories.this.mContext);
-					nullNgo = ngoNewDBTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullNgo = ngoNewDBTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityNGO.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_NGO, nullNgo);
 					activity.startActivity(iient);
@@ -173,7 +173,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 
 				else if (catt == 80000) {
 					ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(ListViewAdapterAllCategories.this.mContext);
-					nullReligious = religiousNewDBTable.getDataFromId(worldpopulationlist.get(position).getNodeid());
+					nullReligious = religiousNewDBTable.getNodeInfo(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityReligious.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_RELIGIOUS, nullReligious);
 					activity.startActivity(iient);

@@ -122,27 +122,7 @@ public class MyInfoWindow extends InfoWindow {
         contact2 = English_to_bengali_number_conversion(contact2);
         if(contact2==null||contact2.equals(" ")||contact2.equals("null"))contact2="পাওয়া যায় নি";
         txtTitle.setText(titleMarker);
-        //txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
 
-        /*if(service_type!=null || services!=null) {
-            String[] subServices = new String[20];
-            if(services.contains(",")){
-                subServices = services.split(",");
-            }
-            if(subServices.length <= 3 || !services.contains(",")){
-                txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " + services);
-            }
-            else{
-                txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " + service_type);
-            }
-
-        }
-        else if(religion!=null){
-            txtSubdescription.setText("রেটিং : " + address +"\nধর্মঃ " + religion);
-        }
-        else{
-            txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
-        }*/
         txtSubdescription.setText("রেটিং : " + address);
         adddescription.setText("যোগাযোগ: " + contact2);
         // contact.setText(contact2);
@@ -157,7 +137,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         EduNewDBTableMain educationNewTable = new EduNewDBTableMain(MyInfoWindow.this.con);
 
-                        nulledu = educationNewTable.getDataFromId(n);
+                        nulledu = educationNewTable.getNodeInfo(n);
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
                         iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu);
                         MyInfoWindow.this.con.startActivity(iiedu);
@@ -168,7 +148,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         GovNewDBTable governmentNewTable = new GovNewDBTable(MyInfoWindow.this.con);
 
-                        nullgov = governmentNewTable.getDataFromId(n);
+                        nullgov = governmentNewTable.getNodeInfo(n);
                         Intent iigov = new Intent(MyInfoWindow.this.con, DetailsLayoutGovernment.class);
                         iigov.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
                         MyInfoWindow.this.con.startActivity(iigov);
@@ -179,7 +159,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
 
                         HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(MyInfoWindow.this.con);
-                        nullhel = healthServiceProviderTable.getDataFromId(n);
+                        nullhel = healthServiceProviderTable.getNodeInfo(n);
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
                         iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
@@ -189,7 +169,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         layout.setVisibility(View.VISIBLE);
                         EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(MyInfoWindow.this.con);
-                        nullent = entertainmentServiceProviderTableNew.getDataFromId(n);
+                        nullent = entertainmentServiceProviderTableNew.getNodeInfo(n);
                         Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainmentNew.class);
                         iientt.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
                         MyInfoWindow.this.con.startActivity(iientt);
@@ -199,7 +179,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         layout.setVisibility(View.VISIBLE);
                         LegalAidNewDBTable legalAidServiceProviderTableNew = new LegalAidNewDBTable(MyInfoWindow.this.con);
-                        nullleg = legalAidServiceProviderTableNew.getDataFromId(n);
+                        nullleg = legalAidServiceProviderTableNew.getNodeInfo(n);
                         Intent iileg = new Intent(MyInfoWindow.this.con, DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
@@ -209,7 +189,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         layout.setVisibility(View.VISIBLE);
                         FinNewDBTable financialServiceNewTable = new FinNewDBTable(MyInfoWindow.this.con);
-                        nullfin = financialServiceNewTable.getDataFromId(n);
+                        nullfin = financialServiceNewTable.getNodeInfo(n);
                         Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutFinance.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
@@ -221,7 +201,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         layout.setVisibility(View.VISIBLE);
                         NGONewDBTable ngoServiceProviderTableNew = new NGONewDBTable(MyInfoWindow.this.con);
-                        nullngo = ngoServiceProviderTableNew.getDataFromId(n);
+                        nullngo = ngoServiceProviderTableNew.getNodeInfo(n);
                         Intent iingo = new Intent(MyInfoWindow.this.con, DetailsInfoActivityNGO.class);
                         iingo.putExtra(AppConstants.KEY_DETAILS_NGO, nullngo);
                         MyInfoWindow.this.con.startActivity(iingo);
@@ -236,7 +216,7 @@ public class MyInfoWindow extends InfoWindow {
 
                         layout.setVisibility(View.VISIBLE);
                         ReligiousNewDBTable religiousServiceProviderTableNew = new ReligiousNewDBTable(MyInfoWindow.this.con);
-                        nullreligious = religiousServiceProviderTableNew.getDataFromId(n);
+                        nullreligious = religiousServiceProviderTableNew.getNodeInfo(n);
                         Intent iireligious = new Intent(MyInfoWindow.this.con, DetailsInfoActivityReligious.class);
                         iireligious.putExtra(AppConstants.KEY_DETAILS_RELIGIOUS, nullreligious);
                         MyInfoWindow.this.con.startActivity(iireligious);
