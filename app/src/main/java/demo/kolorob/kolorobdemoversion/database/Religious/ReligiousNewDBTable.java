@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 
 
@@ -77,7 +78,11 @@ public class ReligiousNewDBTable extends CommonDBTable <ReligiousNewDBModel> {
     }
 
     public ArrayList <ReligiousNewDBModel> getDataListFromId(int node){
-        return super.getDataListFromId(node, TABLE_NAME);
+        return super.getDataListFromId(node, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <ReligiousNewDBModel> getByArea(String ward, String area){
+        return super.getByArea(ward, area, TABLE_NAME);
     }
 
 
@@ -97,6 +102,10 @@ public class ReligiousNewDBTable extends CommonDBTable <ReligiousNewDBModel> {
         String _rs_fee = cursor.getString(28);
 
         return new ReligiousNewDBModel(_commonModel, _rs_religion, _rs_services_for, _rs_services_for_religion, _rs_other_religion, _rs_time, _rs_fee);
+    }
+
+    public ReligiousNewDBModel getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
