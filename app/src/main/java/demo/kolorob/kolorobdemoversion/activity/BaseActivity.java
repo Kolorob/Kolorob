@@ -637,7 +637,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     public void setSubcategories(int id) {
 
         SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
-        subCategoryItemNews = subCategoryTableNew.getDataFromForeignKey(id);
+        subCategoryItemNews = subCategoryTableNew.getDataListFromForeignKey(id);
     }
 
 }

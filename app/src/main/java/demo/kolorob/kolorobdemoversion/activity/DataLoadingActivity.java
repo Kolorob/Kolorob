@@ -720,8 +720,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                             for (int ii = 0; ii < edutrain.length(); ii++) {
                                 JSONObject train = edutrain.getJSONObject(ii);
-                                EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train, eduNewModel.getId());
-                                eduNewDBTableTraining.insertItem(eduTrainingModel);
+                                eduNewDBTableTraining.insertItem(EduTrainingModel.parseEduTrainingModel(train, eduNewModel.getId()));
                             }
                         }
                         if (jsonObject2.has("result_details")) {
@@ -730,14 +729,12 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                             for (int ii = 0; ii < eduResult.length(); ii++) {
                                 JSONObject result = eduResult.getJSONObject(ii);
-                                EducationResultItemNew educationResultItemNew = EducationResultItemNew.parseEducationResultItemNew(result, eduNewModel.getId());
-                                resultDetailsTable.insertItem(educationResultItemNew);
+                                resultDetailsTable.insertItem(EducationResultItemNew.parseEducationResultItemNew(result, eduNewModel.getId()));
                             }
                         }
                         if (jsonObject2.has("education_school")) {
                             JSONObject school = jsonObject2.getJSONObject("education_school");
-                            EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, eduNewModel.getId());
-                            eduNewDBTableSchool.insertItem(eduNewSchoolModel);
+                            eduNewDBTableSchool.insertItem(EduNewSchoolModel.parseEduNewSchoolModel(school, eduNewModel.getId()));
                         }
 
                     }
@@ -767,8 +764,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 try {
                     if (!Ent.isNull(i)) {
                         JSONObject jsonObject2 = Ent.getJSONObject(i);
-                        EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
-                        entNewDBTable.insertItem(entertainmentNewDBModel);
+                        entNewDBTable.insertItem(EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2));
                     }
 
                 } catch (JSONException e) {
@@ -796,8 +792,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 try {
                     if (!Gov.isNull(i)) {
                         JSONObject jsonObject2 = Gov.getJSONObject(i);
-                        GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
-                        govNewDBTable.insertItem(governmentNewDBModel);
+                        govNewDBTable.insertItem(GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2));
                     }
 
                 } catch (JSONException e) {
@@ -823,8 +818,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 try {
                     if (!Legal.isNull(i)) {
                         JSONObject jsonObject2 = Legal.getJSONObject(i);
-                        LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
-                        legalAidNewDBTable.insertItem(legalAidNewDBModel);
+                        legalAidNewDBTable.insertItem(LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2));
                     }
 
 
@@ -852,8 +846,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 try {
                     if (!Fin.isNull(i)) {
                         JSONObject jsonObject2 = Fin.getJSONObject(i);
-                        FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
-                        finNewDBTable.insertItem(financialNewDBModel);
+                        finNewDBTable.insertItem(FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2));
                     }
 
                 } catch (JSONException e) {
@@ -890,13 +883,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         if (jsonObject2.has("health_pharmacy")) {
                             JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
-                            HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, healthNewDBModelMain.getId());
-                            healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
+                            healthNewDBTablePharma.insertItem(HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, healthNewDBModelMain.getId()));
                         }
                         if (jsonObject2.has("health_hospital")) {
                             JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
-                            HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, healthNewDBModelMain.getId());
-                            healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
+                            healthNewDBTableHospital.insertItem(HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, healthNewDBModelMain.getId()));
                         }
                     }
                 } catch (JSONException e) {
@@ -921,8 +912,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 try {
                     if (!Ngo.isNull(i)) {
                         JSONObject jsonObject2 = Ngo.getJSONObject(i);
-                        NGONewDBModel ngoNewDBModel = NGONewDBModel.parseNgoNewDBModel(jsonObject2);
-                        ngoNewDBTable.insertItem(ngoNewDBModel);
+                        ngoNewDBTable.insertItem(NGONewDBModel.parseNgoNewDBModel(jsonObject2));
                     }
 
 
@@ -950,8 +940,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 try {
                     if (!Religious.isNull(i)) {
                         JSONObject jsonObject2 = Religious.getJSONObject(i);
-                        ReligiousNewDBModel religiousNewDBModel = ReligiousNewDBModel.parseReligiousNewDBModel(jsonObject2);
-                        religiousNewDBTable.insertItem(religiousNewDBModel);
+                        religiousNewDBTable.insertItem(ReligiousNewDBModel.parseReligiousNewDBModel(jsonObject2));
                     }
 
 
@@ -980,8 +969,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             for (int i = 0; i < categoryArray.length(); i++) {
                 try {
                     JSONObject jo = categoryArray.getJSONObject(i);
-                    CategoryItem ci = CategoryItem.parseCategoryItem(jo);
-                    catTable.insertItem(ci);
+                    catTable.insertItem(CategoryItem.parseCategoryItem(jo));
                 } catch (JSONException e) {
                     e.printStackTrace();
                     return new Long(-1);
