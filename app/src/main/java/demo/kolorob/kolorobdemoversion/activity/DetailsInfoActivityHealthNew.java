@@ -58,7 +58,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
             CheckConcate("বিশেষত্ব", getReferences(health));
         }
 
-        hospitals = hospitalDB.getDataListFromId(health.getId());
+        hospitals = hospitalDB.getDataListFromForeignKey(health.getId());
         int hospitalSize = hospitals.size();
 
         if (hospitalSize != 0) {
@@ -96,7 +96,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
 
         HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(context);
-        pharmacies = pharmacyDB.getDataListFromId(health.getId());
+        pharmacies = pharmacyDB.getDataListFromForeignKey(health.getId());
 
         int pharmacySize = pharmacies.size();
 

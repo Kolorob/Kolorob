@@ -9,6 +9,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -72,7 +73,7 @@ public class DetailsLayoutEducation extends BaseActivity {
         CheckConcate("সুযোগ সুবিধা", education.getFacility());
 
 
-        schools = schoolDB.getDataFromForeignKey(education.getId());
+        schools = schoolDB.getDataListFromForeignKey(education.getId());
         int schoolSize = schools.size();
 
         if (schoolSize != 0) {
@@ -86,7 +87,7 @@ public class DetailsLayoutEducation extends BaseActivity {
             }
         }
 
-        results = resultDB.getDataFromForeignKey(education.getId());
+        results = resultDB.getDataListFromForeignKey(education.getId());
         int resultSize = results.size();
         if (resultSize != 0) {
             for (EducationResultItemNew result : results)  {
@@ -97,7 +98,7 @@ public class DetailsLayoutEducation extends BaseActivity {
             }
         }
 
-        trainings = trainingDB.getDataFromForeignKey(education.getId());
+        trainings = trainingDB.getDataListFromForeignKey(education.getId());
         int trainingSize = trainings.size();
         if (trainingSize != 0) {
             for (EduTrainingModel training : trainings) {
