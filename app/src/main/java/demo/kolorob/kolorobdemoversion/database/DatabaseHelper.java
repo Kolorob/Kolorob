@@ -18,11 +18,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "kolorobupdatedv2.db";
 
     public static  String DB_PATH ;
-    public static final int DB_VERSION = 4;   // changed here
+    public static final int DB_VERSION = 5;   // changed here
 
     public static final String AREASTORED= "areastored";
 
-    public static final String COMMON_DB = "common";
     public static final String EDU_NEW_DB_MAIN= "edu_ndb_main";
     public static final String EDU_NEW_DB_SCHOOL= "edu_ndb_school";
     public static final String EDU_NEW_DB_TRAINING= "edu_ndb_train";
@@ -117,8 +116,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             Log.e("", "NEW version: " + newVersion + "old: " +oldVersion);
 
-
-            db.execSQL("DROP TABLE IF EXISTS " + COMMON_DB);
 
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_MAIN);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_SCHOOL);

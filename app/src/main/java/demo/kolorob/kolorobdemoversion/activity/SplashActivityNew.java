@@ -121,14 +121,16 @@ public class SplashActivityNew extends AppCompatActivity {
             //Toast.makeText(SplashActivityNew.this, "previous: " + previousVersion +" Current: " + currentVersion, Toast.LENGTH_LONG).show();
 
             firstRun = settings.getBoolean("firstRunUp", false);
-            if(isInstallFromUpdate() && !(previousVersion == Float.parseFloat("2.2") && currentVersion == Float.parseFloat("2.22"))){
-                firstRunUpdate = settings.getBoolean("new_update_first_run", true);
+            if(isInstallFromUpdate() && currentVersion >= Float.parseFloat("2.22")){
+                firstRunUpdate = settings.getBoolean("update_first_run", true);
             }
+
+            Log.e("", "First run: " + firstRun + " First run update: " + firstRunUpdate);
 
             //Toast.makeText(SplashActivityNew.this, "firstRun: " + (firstRun==false) + "first run update: " + firstRunUpdate + "firstInstall: " + isFirstInstall() + "fromUpdate: " + isInstallFromUpdate(), Toast.LENGTH_LONG).show();
 
 
-            if(firstRun == false || firstRunUpdate == true){
+            if(!firstRun || firstRunUpdate){
                 getRequest(SplashActivityNew.this, "http://kolorob.net/kolorob-new-demo/api/getAreaList?", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
@@ -202,7 +204,7 @@ public class SplashActivityNew extends AppCompatActivity {
         }
 
 
-        if (firstRun==false || firstRunUpdate==true)//if running for first time
+        if (!firstRun || firstRunUpdate)//if running for first time
         {
             //SharedPreferences.Editor editor = settings.edit();
 
@@ -243,7 +245,7 @@ public class SplashActivityNew extends AppCompatActivity {
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putBoolean("firstRunUp", false);
                         if(isInstallFromUpdate()){
-                            editor.putBoolean("new_update_first_run", true);
+                            editor.putBoolean("update_first_run", true);
                         }
                         editor.apply();
                         finish();

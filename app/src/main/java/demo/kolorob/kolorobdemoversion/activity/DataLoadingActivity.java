@@ -197,7 +197,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         firstRun = settings.getBoolean("firstRunUp", false);
-        firstRunUpdate = settings.getBoolean("new_update_first_run", true);
+        firstRunUpdate = settings.getBoolean("update_first_run", true);
 
 
 
@@ -611,7 +611,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             if(firstRunUpdate == true){
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("new_update_first_run", false).apply();
+                editor.putBoolean("update_first_run", false).apply();
             }
         }
         getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
