@@ -105,7 +105,7 @@ public class DetailsLayoutEducation extends BaseActivity {
 
                 CheckConcate("কোর্সের ব্যাপ্তিকাল (মাস) ", English_to_bengali_number_conversion(training.getCourseduration()));
                 CheckConcate("ট্রেইনিং এর নাম ", training.getTrainingname());
-                if(!training.getCost().equals("null")) CheckConcate("খরচ", training.getCost()+" টাকা");
+                if(!training.getCost().equals("null")) CheckConcate("খরচ", English_to_bengali_number_conversion(training.getCost()) + " টাকা");
                 CheckConcate("কোর্সের নাম", training.getCoursename());
 
             }
