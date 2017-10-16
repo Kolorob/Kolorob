@@ -85,7 +85,6 @@ import demo.kolorob.kolorobdemoversion.adapters.CompareAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
-import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
@@ -98,7 +97,6 @@ import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
@@ -1311,7 +1309,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         editor.putInt("ValueD", 23);
         editor.apply();
         firstRun = settings.getBoolean("firstRunUp", false);
-        firstRunUpdate = settings.getBoolean("new_update_first_run", true);
+        firstRunUpdate = settings.getBoolean("update_first_run", true);
 
         wardId = settings.getString("_ward", null);
         areaKeyword = settings.getString("areakeyword", null);
@@ -1386,18 +1384,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             smal = (int) Math.round(d);
             params.height = larg;
             compare_layout = (LinearLayout) findViewById(R.id.compare_layout);
-
-//        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
- /*           ImageView compare_logo_imagex = (ImageView) findViewById(R.id.compare_logo_imagex);
-            compare_logo_imagex.getLayoutParams().width = width / 20;
-
-            compare_logo_imagex.getLayoutParams().height = height / 20;
-            compare_logo_image = (ImageView) findViewById(R.id.compare_logo_images);
-            compare_logo_image.getLayoutParams().width = width / 20;
-            Log.d("Test width Height", "=======");
-            compare_logo_image.getLayoutParams().height = height / 20;*/
-//        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
-//        scrolling_partc.setMargins(0,0,0,smal);
 
 
             LinearLayout.LayoutParams com_layout = (LinearLayout.LayoutParams) compare_layout.getLayoutParams();
@@ -1827,14 +1813,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
-                       // Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this, DisplayAllJobsActivity.class);
-                       // startActivity(intentJ);
-                      //  map.setVisibility(View.GONE);
-                   // } else {
-                     //   AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই।", "অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
-
-                  //  }
-
 
                 }
 
@@ -2099,24 +2077,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             });
 
 
-          /*  healthService1=healthServiceProviderItemNew.getFamily_privacy();
-            if(!healthService1.equals(""))
-            {
-                for (int i=0;i<healthService1.length();i++)
-                {
-                    if(healthService1.charAt(i)=='1')
-                    {
-                        health_service_data1=health_service_data1+"Emergency Service,";
-                    }
-                    else if(healthService1.charAt(i)=='2')
-                    {
-                        health_service_data1=health_service_data1 +" Ambulance Service,";
-                    }
-                    else
-                        health_service_data1=health_service_data1 +" Maternity Service";
 
-                }
-            }*/
             if(!healthServiceProviderItemNew.getNameBn().equalsIgnoreCase("null") && !healthServiceProviderItemNew.getNameBn().equals(""))
                 health_name2.setText(healthServiceProviderItemNew.getNameBn());
             else
@@ -3030,7 +2991,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         mapcalledstatus = true;
 
-                        callMapFragmentWithGovernment(constructGovListItem(), true);
+                        callMapFragmentWithGovernment(constructGovListItem());
 
 
 
@@ -3077,7 +3038,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         mapcalledstatus = true;
 
-                        callMapFragmentWithLegal(constructLegalaidListItem(),true);
+                        callMapFragmentWithLegal(constructLegalaidListItem());
                         break;
 
 
@@ -3127,7 +3088,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_ngos);
 
-                        callMapFragmentWithNgo(constructNgoListItem(), true);
+                        callMapFragmentWithNgo(constructNgoListItem());
                         mapcalledstatus = true;
                         break;
 
@@ -3152,7 +3113,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.shelter);
 
-                        callMapFragmentWithReligious(constructReligiousListItem(), true);
+                        callMapFragmentWithReligious(constructReligiousListItem());
                         mapcalledstatus = true;
                         break;
 
@@ -3290,8 +3251,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
             fragment.setCategoryId(currentCategoryID);
             fragment.Setsubcategories(currentCategoryID);
-            fragment.setEducationServiceProvider(educationServiceProviderItems);
-            fragment.eduicons();
+            fragment.populateIcons(educationServiceProviderItems);
 
             called = true;
 
@@ -3326,101 +3286,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             mapFirst=false;
         }
 
-/*
-        MapFragmentOSM prev_fragment = (MapFragmentOSM) getFragmentManager().findFragmentByTag("MAP");
-        if(prev_fragment!=null&&prev_fragment.getMapViewController() != null)
-        {
-            if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-            else  if(locationNameId==2) prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-            else prev_fragment.getMapViewController().setCenter(AppConstants.TWELVE);
 
-            prev_fragment.getMapViewController().setZoom(16);
-            if (mapcalledstatus) {
-                Arrays.fill(flag2,1);
-                if(currentCategoryID==1){
-                    educlicked=false;
-                    prev_fragment.setCategoryId(1);
-                    ArrayList<EduNewModel> educationServiceProviderItems;
-                    educationServiceProviderItems = constructEducationListItem();
-                    prev_fragment.setEducationServiceProvider(educationServiceProviderItems);
-                    prev_fragment.eduicons();
-                    prev_fragment.Drawedu(-1,true);
-
-                }
-                else if(currentCategoryID==2){
-                    helclicked=false;
-                    mapFragment.setCategoryId(2);
-                    ArrayList<HealthNewDBModelMain> healthServiceProviderItems;
-                    healthServiceProviderItems = constructHealthListItem();
-                    mapFragment.setHealthServiceProvider(healthServiceProviderItems);
-                    prev_fragment.healthicons();
-                    prev_fragment.Drawhel(-1,true);
-                }
-                else if(currentCategoryID==3){
-                    entclicked=false;
-                    mapFragment.setCategoryId(3);
-                    ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItems;
-                    entertainmentServiceProviderItems = constructEntertainmentListItem();
-                    mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
-                    prev_fragment.enticons();
-                    prev_fragment.enticons();
-                    prev_fragment.Drawent(-1,true);
-                }
-                else if(currentCategoryID==4) {
-                    govclicked = false;
-                    mapFragment.setCategoryId(4);
-                    ArrayList<GovernmentNewItem> governmentNewItems;
-                    governmentNewItems = constructgovListItem();
-                    if (governmentNewItems.size() == 0) {
-
-                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
-
-
-//                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
-//
-//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-//                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-//                                new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        alertDialog2.dismiss();
-//                                    }
-//                                });
-//                        alertDialog2.getWindow().setLayout(200, 300);
-//                        alertDialog2.show();
-                    }
-                    mapFragment.setGovernmentNewItems(governmentNewItems);
-                    prev_fragment.govicons();
-                    prev_fragment.Drawgov(-1,true);
-
-                }
-                else if(currentCategoryID==5){
-                    legclicked=false;
-                    mapFragment.setCategoryId(5);
-                    ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
-                    legalAidServiceProviderItems = constructlegalaidListItem(5);
-                    mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
-                    prev_fragment.legicons();
-                    prev_fragment.Drawleg(-1,true);
-                }
-                else if(currentCategoryID==6){
-                    finclicked=false;
-                    mapFragment.setCategoryId(6);
-                    ArrayList<FinancialNewItem> financialNewItems;
-                    financialNewItems = constructfinancialListItem();
-                    mapFragment.setFinancialServiceProvider(financialNewItems);
-                    prev_fragment.finicons();
-                    prev_fragment.Drawfin(-1,true);
-                }
-                ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
-              }
-
-        }*/
     }
 
     /***********************************************************Methods for Health*************************************************/
 
-    // need to fix later
-    //
+
      private ArrayList <HealthNewDBModelMain> constructHealthListItem() {
 
          HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
@@ -3434,8 +3305,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         fragment.getMapViewController().setZoom(15);
         fragment.Setsubcategories(currentCategoryID);
         fragment.setCategoryId(currentCategoryID);
-        fragment.setHealthServiceProvider(healthServiceProviderItemNews);
-        fragment.healthicons();
+        fragment.populateIcons(healthServiceProviderItemNews);
 
         called = true;
 
@@ -3459,13 +3329,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         fragment.getMapViewController().setCenter(getLocation());
 
 
-            fragment.setCategoryId(currentCategoryID);
+        fragment.setCategoryId(currentCategoryID);
         fragment.Setsubcategories(currentCategoryID);
-            fragment.setEntertainmentServiceProvider(entertainmentServiceProviderItemNews);
-            fragment.enticons();
 
-            called = true;
+        fragment.populateIcons(entertainmentServiceProviderItemNews);
 
+        called = true;
 
     }
 
@@ -3480,7 +3349,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return govNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.GOVERNMENT);
     }
 
-    private void callMapFragmentWithGovernment(ArrayList<GovernmentNewDBModel> governmentNewItems,boolean s) {
+    private void callMapFragmentWithGovernment(ArrayList<GovernmentNewDBModel> governmentNewItems) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
@@ -3488,9 +3357,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
             fragment.setCategoryId(currentCategoryID);
-            fragment.setGovernmentNewItems(governmentNewItems);
             fragment.Setsubcategories(currentCategoryID);
-            fragment.govicons();
+            fragment.populateIcons(governmentNewItems);
             called = true;
 
 
@@ -3506,7 +3374,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return legalAidNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.LEGAL);
     }
 
-    private void callMapFragmentWithLegal(ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews,boolean s) {
+    private void callMapFragmentWithLegal(ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
@@ -3514,9 +3382,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
         fragment.setCategoryId(currentCategoryID);
-        fragment.setLegalaidServiceProvider(legalAidServiceProviderItemNews);
         fragment.Setsubcategories(currentCategoryID);
-        fragment.legicons();
+        fragment.populateIcons(legalAidServiceProviderItemNews);
 
         called = true;
 
@@ -3541,12 +3408,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         fragment.getMapViewController().setZoom(15);
 
 
-            fragment.setCategoryId(currentCategoryID);
-            fragment.Setsubcategories(currentCategoryID);
-            fragment.setFinancialServiceProvider(financialNewItems);
-            fragment.finicons();
+        fragment.setCategoryId(currentCategoryID);
+        fragment.Setsubcategories(currentCategoryID);
+        fragment.populateIcons(financialNewItems);
 
-            called = true;
+        called = true;
 
     }
 
@@ -3559,7 +3425,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return ngoNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.NGO);
     }
 
-    private void callMapFragmentWithNgo(ArrayList<NGONewDBModel> ngoServiceProviderItemNews, boolean s) {
+    private void callMapFragmentWithNgo(ArrayList<NGONewDBModel> ngoServiceProviderItemNews) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
@@ -3567,9 +3433,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
         fragment.setCategoryId(currentCategoryID);
-        fragment.setNgoServiceProvider(ngoServiceProviderItemNews);
         fragment.Setsubcategories(currentCategoryID);
-        fragment.ngoicons();
+        fragment.populateIcons(ngoServiceProviderItemNews);
 
         called = true;
 
@@ -3586,7 +3451,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return religiousNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.RELIGIOUS);
     }
 
-    private void callMapFragmentWithReligious(ArrayList<ReligiousNewDBModel> religiousServiceProviderItemNews, boolean s) {
+    private void callMapFragmentWithReligious(ArrayList<ReligiousNewDBModel> religiousServiceProviderItemNews) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
@@ -3594,9 +3459,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
         fragment.setCategoryId(currentCategoryID);
-        fragment.setReligiousServiceProvider(religiousServiceProviderItemNews);
         fragment.Setsubcategories(currentCategoryID);
-        fragment.religiousicons();
+        fragment.populateIcons(religiousServiceProviderItemNews);
 
         called = true;
 
@@ -3749,48 +3613,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return concatResult;
     }
 
-    private static String translateCategory(String catName){
-        String banglaName = "";
-        switch(catName){
-            case "Education": banglaName += "শিক্ষা";
-                break;
-            case "Health": banglaName += "স্বাস্থ্য";
-                break;
-            case "Entertainment": banglaName += "বিনোদন";
-                break;
-            case "Government": banglaName += "সরকারী সেবা";
-                break;
-            case "Legal": banglaName += "আইনী";
-                break;
-            case "Finance" : banglaName += "অর্থনৈতিক";
-                break;
-            case "NGO": banglaName += "এনজিও";
-                break;
-            case "Religious Shelter": banglaName += "আশ্রয়কেন্দ্র";
-                break;
-            default: banglaName += "অন্যান্য";
-        }
 
-        return banglaName;
-    }
-
-    public static boolean moreThanOnce(ArrayList<Integer> list, int searched) {
-
-        int numCount = 0;
-        boolean more = false;
-
-        for (int thisNum : list) {
-            if (thisNum == searched) {
-                numCount ++ ;
-            }
-        }
-
-        if (numCount > 1) {
-            more = true;
-        }
-
-        return more;
-    }
 
     /*if user has already selected any category; then allHolders been filtered using the category id/sub cat id*/
 

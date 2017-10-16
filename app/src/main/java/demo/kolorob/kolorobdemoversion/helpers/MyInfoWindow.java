@@ -44,7 +44,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by HP on 5/14/2016.
  */
 public class MyInfoWindow extends InfoWindow {
-    String titleMarker,contact2,node,address;
+    String titleMarker, contact2, address;
     int n;
 
     LinearLayout layout;
@@ -62,7 +62,7 @@ public class MyInfoWindow extends InfoWindow {
 
 
     int catid;
-    String referenceid, service_type, services, religion;
+    String referenceid;
 
     public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
         super(layoutResId, mapView);
@@ -74,34 +74,6 @@ public class MyInfoWindow extends InfoWindow {
         this.catid=categoryid;
         this.address=add;
         this.referenceid=rid;
-    }
-
-    //  Overloaded constructors
-
-    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid, String service_type, String services) {
-        super(layoutResId, mapView);
-        this.con=con;
-        this.pp=point;
-        this.titleMarker =title;
-        this.contact2=contact;
-        this.n=Node;
-        this.catid=categoryid;
-        this.address=add;
-        this.referenceid=rid;
-        this.service_type = service_type;
-        this.services = services;
-    }
-    public MyInfoWindow(String religion, int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
-        super(layoutResId, mapView);
-        this.con=con;
-        this.pp=point;
-        this.titleMarker =title;
-        this.contact2=contact;
-        this.n=Node;
-        this.catid=categoryid;
-        this.address=add;
-        this.referenceid=rid;
-        this.religion = religion;
     }
 
 
@@ -272,19 +244,5 @@ public class MyInfoWindow extends InfoWindow {
         }
         return concatResult;
     }
-
-
-/*
-    public static <Type> void commonOnClick(LinearLayout layout, Activity activity, BaseDBTable <Type> DB, int id, String appConstant){
-
-        layout.setVisibility(View.VISIBLE);
-
-        Type data = DB.getDataFromId(id);
-        Intent iiedu = new Intent(activity, DetailsLayoutEducation.class);
-        iiedu.putExtra(appConstant, data);
-        activity.startActivity(iiedu);
-    }
-
-*/
-
+    
 }
