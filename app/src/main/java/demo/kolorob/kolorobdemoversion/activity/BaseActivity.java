@@ -245,7 +245,8 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromOrNot);
                     editor.putString("nValue", node);
-                    editor.commit();
+                    editor.apply();
+                    finish();
 
 
                     String Longitude = pref.getString("Longitude", null);
@@ -269,6 +270,20 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
 
                 else {
                     AlertMessage.showMessage(context, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।", "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                }
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String  register = SharedPreferencesHelper.getNumber(context);
+                phone_num = register;
+                if (register.equals("")) {
+                    requestToRegister();
+                }
+                else {
+                    feedBackAlert(model);
                 }
             }
         });

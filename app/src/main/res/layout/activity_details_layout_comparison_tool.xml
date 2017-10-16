@@ -161,8 +161,7 @@
                             android:id="@+id/feedback"
                             android:layout_width="55dp"
                             android:layout_height="55dp"
-                            android:background="@drawable/ic_feedback_icon"
-                            android:onClick="verifyRegistration" />
+                            android:background="@drawable/ic_feedback_icon" />
 
 
                     </LinearLayout>
