@@ -245,7 +245,7 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
         return rootView;
     }
 
-    public void Setsubcategories(int id) {
+    public void setSubcategories(int id) {
         SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(getActivity());
         subCategoryItemNews = subCategoryTableNew.getDataListFromForeignKey(id);
 

@@ -20,7 +20,6 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityReligious;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
-import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
@@ -30,7 +29,6 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
-//import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
@@ -244,5 +242,5 @@ public class MyInfoWindow extends InfoWindow {
         }
         return concatResult;
     }
-    
+
 }

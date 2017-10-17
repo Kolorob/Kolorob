@@ -97,6 +97,7 @@ import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
@@ -135,7 +136,7 @@ import static demo.kolorob.kolorobdemoversion.R.id.compare_layoutedu;
 * got changed multiple times so it would be wise to check which part is doing what using debug*/
 
 
-public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
+public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
     private Context con;
 
@@ -220,7 +221,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     EditText searchAll, filterText;
     ListViewAdapterAllCategories adapter;
 
-    private int smal;
+    private int small;
     int value, height, width, sNumber, buttonHeight, buttonWidth;
 
 
@@ -1029,12 +1030,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.adapter = adapter;
     }
 
-    public int getSmal() {
-        return smal;
+    public int getSmall() {
+        return small;
     }
 
-    public void setSmal(int smal) {
-        this.smal = smal;
+    public void setSmall(int small) {
+        this.small = small;
     }
 
     public int getValue() {
@@ -1381,13 +1382,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             double d = buttonWidth * 0.56;
             double large = buttonWidth * 0.69;
             final int larg = (int) Math.round(large);
-            smal = (int) Math.round(d);
+            small = (int) Math.round(d);
             params.height = larg;
             compare_layout = (LinearLayout) findViewById(R.id.compare_layout);
 
 
             LinearLayout.LayoutParams com_layout = (LinearLayout.LayoutParams) compare_layout.getLayoutParams();
-            com_layout.setMargins(0, 0, 0, smal);
+            com_layout.setMargins(0, 0, 0, small);
 
             compare_layout.setLayoutParams(com_layout);
 
@@ -1402,7 +1403,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             searchButton.setLayoutParams(params2);
             Picasso.with(this)
                     .load(R.drawable.search)
-                    .resize(buttonWidth, smal)
+                    .resize(buttonWidth, small)
                     .into(searchButton);
             final LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) jobButton.getLayoutParams();
             params3.weight = 1;
@@ -1412,7 +1413,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
             Picasso.with(this)
                     .load(R.drawable.job_unselectedtab)
-                    .resize(buttonWidth, smal)
+                    .resize(buttonWidth, small)
                     .into(jobButton);
             jobButton.getHeight();
             final LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) compareButton.getLayoutParams();
@@ -1423,7 +1424,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
             Picasso.with(this)
                     .load(R.drawable.compare)
-                    .resize(buttonWidth, smal)
+                    .resize(buttonWidth, small)
                     .into(compareButton);
 
 
@@ -1609,19 +1610,19 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.map)
-                                .resize(buttonWidth, smal)
+                                .resize(buttonWidth, small)
                                 .into(mapButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.compare)
-                                .resize(buttonWidth, smal)
+                                .resize(buttonWidth, small)
                                 .into(compareButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.job_unselectedtab)
-                                .resize(buttonWidth, smal)
+                                .resize(buttonWidth, small)
                                 .into(jobButton);
 
 
@@ -1632,11 +1633,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         params2.height = larg;
                         searchButton.setLayoutParams(params2);
-                        params.height = smal;
+                        params.height = small;
                         mapButton.setLayoutParams(params);
-                        params3.height = smal;
+                        params3.height = small;
                         jobButton.setLayoutParams(params3);
-                        params4.height = smal;
+                        params4.height = small;
                         compareButton.setLayoutParams(params4);
 
                         map.setVisibility(View.GONE);
@@ -1687,28 +1688,28 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.compare)
-                                .resize(buttonWidth, smal)
+                                .resize(buttonWidth, small)
                                 .into(compareButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.job_unselectedtab)
-                                .resize(buttonWidth, smal)
+                                .resize(buttonWidth, small)
                                 .into(jobButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.search)
-                                .resize(buttonWidth, smal)
+                                .resize(buttonWidth, small)
                                 .into(searchButton);
                         params.height = larg;
                         mapButton.setLayoutParams(params);
 
-                        params2.height = smal;
+                        params2.height = small;
                         searchButton.setLayoutParams(params2);
-                        params3.height = smal;
+                        params3.height = small;
                         jobButton.setLayoutParams(params3);
-                        params4.height = smal;
+                        params4.height = small;
                         compareButton.setLayoutParams(params4);
 
 //                    subCatItemList.setVisibility(View.GONE);
@@ -1743,13 +1744,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         if (mapClicked == false || searchClicked == false || compareClicked == false) {
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.map)
-                                    .resize(buttonWidth, smal)
+                                    .resize(buttonWidth, small)
                                     .into(mapButton);
 
 
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.compare)
-                                    .resize(buttonWidth, smal)
+                                    .resize(buttonWidth, small)
                                     .into(compareButton);
 
 
@@ -1761,15 +1762,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.search)
-                                    .resize(buttonWidth, smal)
+                                    .resize(buttonWidth, small)
                                     .into(searchButton);
                             params3.height = larg;
                             jobButton.setLayoutParams(params3);
-                            params2.height = smal;
+                            params2.height = small;
                             searchButton.setLayoutParams(params2);
-                            params.height = smal;
+                            params.height = small;
                             mapButton.setLayoutParams(params);
-                            params4.height = smal;
+                            params4.height = small;
                             compareButton.setLayoutParams(params4);
 
                             map.setVisibility(View.VISIBLE);
@@ -1848,11 +1849,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                 params4.height = larg;
                                 compareButton.setLayoutParams(params4);
 
-                                params2.height = smal;
+                                params2.height = small;
                                 searchButton.setLayoutParams(params2);
-                                params.height = smal;
+                                params.height = small;
                                 mapButton.setLayoutParams(params);
-                                params.height = smal;
+                                params.height = small;
                                 jobButton.setLayoutParams(params);
 
 
@@ -1866,7 +1867,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                             toggleButton.setVisibility(View.GONE);
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.map)
-                                    .resize(buttonWidth, smal)
+                                    .resize(buttonWidth, small)
                                     .into(mapButton);
 
 
@@ -1878,13 +1879,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.job_unselectedtab)
-                                    .resize(buttonWidth, smal)
+                                    .resize(buttonWidth, small)
                                     .into(jobButton);
 
 
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.search)
-                                    .resize(buttonWidth, smal)
+                                    .resize(buttonWidth, small)
                                     .into(searchButton);
                             map.setVisibility(View.GONE);
                             llCatListHolder.setVisibility(View.GONE);
@@ -1974,12 +1975,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         healthSpecialistItemDetailses = healthSpecialistTable.getDataListFromId((Integer.parseInt(firstData)));
         healthSpecialistItemDetailses2 = healthSpecialistTable.getDataListFromId(Integer.parseInt(secondData));
 
-        String firstSpecialistItemdoc = "";
-        String secondSpecialistItemdoc = "";
-        String firstSpecialistItemspe = "";
-        String secondSpecialistItemspe = "";
-        String firstSpecialistItemvac = "";
-        String secondSpecialistItemvac = "";
+        String firstSpecialistItemdoc = "", secondSpecialistItemdoc = "", firstSpecialistItemspe = "", secondSpecialistItemspe = "", firstSpecialistItemvac = "", secondSpecialistItemvac = "";
 
         if (!healthSpecialistItemDetailses.equals("")) {
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
@@ -2043,8 +2039,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     {
                         if(!isChecked)
                         {
-                            String compare_Datas = "";
-                            compare_Datas = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String compare_Datas  = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule[] = compare_Datas.split(",");
                             compare_Datas = multipule[1];
                             id1 = multipule[0];
@@ -2059,8 +2054,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         }
 
                         else {
-                            String compare_Datac = "";
-                            compare_Datac = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String compare_Datac = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             compare_Datac = compare_Datac + "," + id1;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datac, 2);
                         }
@@ -2083,8 +2077,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             else
                 health_name2.setText("তথ্য পাওয়া যায় নি ");
 
-            String time2 = "";
-            time2 = timeConverter(healthServiceProviderItemNew.getOpeningTime());
+            String time2 = timeConverter(healthServiceProviderItemNew.getOpeningTime());
             left_part = new String [] {time2,healthServiceProviderItemNew.getInstituteType()
                     ,healthServiceProviderItemNew.getOffDay(),firstSpecialistItemdoc,firstSpecialistItemspe,firstSpecialistItemvac
                     };
@@ -2101,8 +2094,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
                     if(compareValue == 2) {
                         if(!isChecked) {
-                            String compare_Datas = "";
-                            compare_Datas = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String compare_Datas = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule [] = compare_Datas.split(",");
                             compare_Datas = multipule[0];
                             id2 = multipule[1];
@@ -2115,8 +2107,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
                         }
                         else {
-                            String compare_Data = "";
-                            compare_Data = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String compare_Data = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             compare_Data = id2 + "," + compare_Data;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
                         }
@@ -2138,9 +2129,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 health_name1.setText("তথ্য পাওয়া যায় নি ");
 
 
-
-            String time1 = "";
-            time1 = timeConverter(healthServiceProviderItemNewx.getOpeningTime()); //convert the time
+            String time1 = timeConverter(healthServiceProviderItemNewx.getOpeningTime()); //convert the time
             right_part = new String [] {time1,healthServiceProviderItemNewx.getInstituteType()
                     ,healthServiceProviderItemNewx.getOffDay(),secondSpecialistItemdoc,
                     secondSpecialistItemspe,secondSpecialistItemvac
@@ -2150,7 +2139,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         health_compare_list.setAdapter(compareAdapter);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) health_compare_list
                 .getLayoutParams();
-        layoutParams.setMargins(0, 0, 0, smal);
+        layoutParams.setMargins(0, 0, 0, small);
     }
 
 
@@ -2172,8 +2161,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     if(compareValue == 2)
                     {
                         if(!isChecked) {
-                            String compare_Data = "";
-                            compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+                            String compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
                             String multipule [] = compare_Data.split(",");
                             compare_Data = multipule[1];
                             id3 = multipule[0];
@@ -2186,8 +2174,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         }
                         else {
 
-                            String compare_Data = "";
-                            compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+                            String compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
 
                             compare_Data = compare_Data + "," + id3;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
@@ -2237,8 +2224,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, "", 0);
                         }
                         else {
-                            String compare_Data = "";
-                            compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+                            String compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
                             compare_Data = compare_Data + "," + id4;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
                         }
@@ -2266,7 +2252,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         education_compare_list.setAdapter(compareAdapter);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) education_compare_list
                 .getLayoutParams();
-        layoutParams.setMargins(0, 0, 0, smal);//
+        layoutParams.setMargins(0, 0, 0, small);//
         education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
     }
 
@@ -2326,7 +2312,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         for(int i = 0; i < filter2.size(); i++){
             rb[i] = new RadioButton(this);
             rightGroup.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
-            rb[i].setText(filter2.get(i).toString());
+            rb[i].setText(filter2.get(i));
             rb[i].setTextColor(Color.WHITE);
 
         }
@@ -2647,9 +2633,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
-                String testUser = SharedPreferencesHelper.getFeedback(PlaceDetailsActivityNewLayout.this);
-
+               
                 Float  ratings;
                 ratings = ratingBar.getRating();
                 comment=submit_review.getText().toString();
@@ -2928,7 +2912,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         mapcalledstatus = true;
 
-                        callMapFragmentWithHealth(constructHealthListItem());
+                        callMapFragment((ArrayList <ModelType>)constructHealthListItem());
 
                         break;
 
@@ -2957,8 +2941,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
 
                         mapcalledstatus = true;
-                        callMapFragmentWithEntertainment(constructEntertainmentListItem());
-
+                        callMapFragment((ArrayList <ModelType>)constructEntertainmentListItem());
                         ivIcon.setImageResource(R.drawable.ic_entertainment);
 
                         break;
@@ -2991,7 +2974,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         mapcalledstatus = true;
 
-                        callMapFragmentWithGovernment(constructGovListItem());
+                        callMapFragment((ArrayList <ModelType>)constructGovListItem());
 
 
 
@@ -3038,7 +3021,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         mapcalledstatus = true;
 
-                        callMapFragmentWithLegal(constructLegalaidListItem());
+                        callMapFragment((ArrayList <ModelType>)constructLegalaidListItem());
                         break;
 
 
@@ -3062,7 +3045,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_finance);
 
-                        callMapFragmentWithFinancial(constructFinancialListItem(),true);
+                        callMapFragment((ArrayList <ModelType>)constructFinancialListItem());
                         mapcalledstatus = true;
                         break;
 
@@ -3088,7 +3071,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_ngos);
 
-                        callMapFragmentWithNgo(constructNgoListItem());
+                        callMapFragment((ArrayList <ModelType>)constructNgoListItem());
                         mapcalledstatus = true;
                         break;
 
@@ -3113,10 +3096,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.shelter);
 
-                        callMapFragmentWithReligious(constructReligiousListItem());
+                        callMapFragment((ArrayList <ModelType>)constructReligiousListItem());
                         mapcalledstatus = true;
                         break;
-
 
 
                     default:
@@ -3250,7 +3232,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
           fragment.getMapViewController().setCenter(getLocation());
 
             fragment.setCategoryId(currentCategoryID);
-            fragment.Setsubcategories(currentCategoryID);
+            fragment.setSubcategories(currentCategoryID);
             fragment.populateIcons(educationServiceProviderItems);
 
             called = true;
@@ -3298,21 +3280,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
          return healthServiceProviderTable.getByAreaCategory(wardId, areaKeyword, AppConstants.HEALTH);
     }
 
-    private void callMapFragmentWithHealth(ArrayList <HealthNewDBModelMain> healthServiceProviderItemNews) {
-
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(15);
-        fragment.Setsubcategories(currentCategoryID);
-        fragment.setCategoryId(currentCategoryID);
-        fragment.populateIcons(healthServiceProviderItemNews);
-
-        called = true;
-
-        // EDD.clear();
-    }
-
-
     /**********************************************************Methods for entertainment*******************************************/
 
     private ArrayList<EntertainmentNewDBModel> constructEntertainmentListItem() {
@@ -3321,25 +3288,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return entNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.ENTERTAINMENT);
     }
 
-    private void callMapFragmentWithEntertainment(ArrayList <EntertainmentNewDBModel> entertainmentServiceProviderItemNews) {
-
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-
-        fragment.getMapViewController().setZoom(15);
-        fragment.getMapViewController().setCenter(getLocation());
-
-
-        fragment.setCategoryId(currentCategoryID);
-        fragment.Setsubcategories(currentCategoryID);
-
-        fragment.populateIcons(entertainmentServiceProviderItemNews);
-
-        called = true;
-
-    }
-
-
-
 
     /**********************************************************Methods for government**********************************************/
 
@@ -3347,21 +3295,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         GovNewDBTable govNewDBTable = new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
         return govNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.GOVERNMENT);
-    }
-
-    private void callMapFragmentWithGovernment(ArrayList<GovernmentNewDBModel> governmentNewItems) {
-
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(15);
-
-
-            fragment.setCategoryId(currentCategoryID);
-            fragment.Setsubcategories(currentCategoryID);
-            fragment.populateIcons(governmentNewItems);
-            called = true;
-
-
     }
 
 
@@ -3374,24 +3307,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return legalAidNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.LEGAL);
     }
 
-    private void callMapFragmentWithLegal(ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews) {
-
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(15);
-
-
-        fragment.setCategoryId(currentCategoryID);
-        fragment.Setsubcategories(currentCategoryID);
-        fragment.populateIcons(legalAidServiceProviderItemNews);
-
-        called = true;
-
-
-    }
-
-
-
 
     /**********************************************************Methods for financial**********************************************/
     private ArrayList <FinancialNewDBModel> constructFinancialListItem() {
@@ -3400,21 +3315,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return finNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.FINANCIAL);
     }
 
-
-    private void callMapFragmentWithFinancial(ArrayList<FinancialNewDBModel> financialNewItems,boolean s) {
-
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(15);
-
-
-        fragment.setCategoryId(currentCategoryID);
-        fragment.Setsubcategories(currentCategoryID);
-        fragment.populateIcons(financialNewItems);
-
-        called = true;
-
-    }
 
 
     /**********************************************************Methods for NGO***************************************************/
@@ -3425,23 +3325,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return ngoNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.NGO);
     }
 
-    private void callMapFragmentWithNgo(ArrayList<NGONewDBModel> ngoServiceProviderItemNews) {
-
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(15);
-
-
-        fragment.setCategoryId(currentCategoryID);
-        fragment.Setsubcategories(currentCategoryID);
-        fragment.populateIcons(ngoServiceProviderItemNews);
-
-        called = true;
-
-
-    }
-
-
 
     /**********************************************************Methods for Religious***************************************************/
 
@@ -3451,25 +3334,22 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return religiousNewDBTable.getByAreaCategory(wardId, areaKeyword, AppConstants.RELIGIOUS);
     }
 
-    private void callMapFragmentWithReligious(ArrayList<ReligiousNewDBModel> religiousServiceProviderItemNews) {
+
+
+    private void callMapFragment(ArrayList <ModelType> dataList) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
         fragment.getMapViewController().setZoom(15);
-
-
+        fragment.setSubcategories(currentCategoryID);
         fragment.setCategoryId(currentCategoryID);
-        fragment.Setsubcategories(currentCategoryID);
-        fragment.populateIcons(religiousServiceProviderItemNews);
+        fragment.populateIcons(dataList);
 
         called = true;
-
 
     }
 
 
-
-    /**********************************************************Methods for Bazar Loading*****************************************************/
 
 
 
@@ -3766,23 +3646,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     @Override
     protected void onResume() {
         super.onResume();
-       // callMapFragment(getMergedLocation());
-
-        //   toggleButton.setVisibility(View.VISIBLE);
-
-//
-//            map.setVisibility(View.GONE);
-
-
-
-
-        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
 
     }
 
