@@ -1475,7 +1475,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                     view = navigationView.getTouchables().get(2);
                     view2 =    navigationView.getTouchables().get(4);
 
-                    if(firstRun==false || firstRunUpdate==true)runOverlay_ContinueMethodnavigation();
+                    if(!firstRun || firstRunUpdate)runOverlay_ContinueMethodnavigation();
                     //  getSupportActionBar().setTitle("Navigation!");
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
@@ -1578,7 +1578,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
             }
 
-            if(firstRun==false || firstRunUpdate == true) runOverlay_ContinueMethod();
+            if(!firstRun || firstRunUpdate) runOverlay_ContinueMethod();
 
         /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
         * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
@@ -1606,7 +1606,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
                     populateSearch();
 
-                    if (compareClicked == false || mapClicked == false || jobClicked == false) {
+                    if (!compareClicked || !mapClicked || !jobClicked) {
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.map)
@@ -1649,7 +1649,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                         compare_layout_edu.setVisibility(View.GONE);
                         searchViewHolder.setVisibility(View.VISIBLE);
                     }
-                    if (eduClicked == true || healthClicked == true || entClicked == true || legalClicked == true || finClicked == true || govClicked == true || ngoClicked == true|| shelterClicked == true) {
+                    if (eduClicked || healthClicked || entClicked || legalClicked || finClicked || govClicked || ngoClicked || shelterClicked) {
 
                         filterHolder.setVisibility(View.VISIBLE);
                         toggleButton.setVisibility(View.VISIBLE);
@@ -1674,12 +1674,12 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                     jobClicked = false;
                     compareClicked = false;
 
-                    if (inCompare == false) {
+                    if (!inCompare) {
                         //  callMapFragment(locationNameId);
 
                     }
 
-                    if (compareClicked == false || searchClicked == false || jobClicked == false) {
+                    if (!compareClicked || !searchClicked || !jobClicked) {
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.map_selected)
                                 .resize(buttonWidth, larg)
@@ -1741,7 +1741,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                         searchViewHolder.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.VISIBLE);
 
-                        if (mapClicked == false || searchClicked == false || compareClicked == false) {
+                        if (!mapClicked || !searchClicked || !compareClicked) {
                             Picasso.with(getApplicationContext())
                                     .load(R.drawable.map)
                                     .resize(buttonWidth, small)
@@ -1844,7 +1844,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                         } else {
 
 
-                            if (mapClicked == false || searchClicked == false || jobClicked == false) {
+                            if (!mapClicked || !searchClicked || !jobClicked) {
 
                                 params4.height = larg;
                                 compareButton.setLayoutParams(params4);
@@ -2633,7 +2633,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               
+
                 Float  ratings;
                 ratings = ratingBar.getRating();
                 comment=submit_review.getText().toString();
@@ -3500,7 +3500,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
     private void calladapter(boolean status) {
         boolean instatus = status;
 
-        if(instatus==true) {
+        if(instatus) {
             int gotcatid = getFilterCategoryId();
 
             catHolders.clear();

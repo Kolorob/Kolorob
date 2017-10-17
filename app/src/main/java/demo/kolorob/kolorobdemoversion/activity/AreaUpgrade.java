@@ -18,6 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
@@ -56,15 +59,20 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
+
 /**
  * Created by HP on 2/13/2017.
  */
 /*
 this activity is for area upgrade/delete/browse. This is almost similar to data loading activity.
  */
-public class AreaUpgrade extends AppCompatActivity {
+
+
+
+public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivity {
+
     ArrayList <StoredArea> storedAreas = new ArrayList<>();
-    RadioGroup rg;
+    RadioGroup radioGroup;
     Button update,delete,browse;
     int selectedId = -1;
     Context context;
@@ -73,8 +81,8 @@ public class AreaUpgrade extends AppCompatActivity {
     ProgressDialog dialog, dialog2;
     JSONObject allData;
     StoredAreaTable storedAreaTable;
-    ArrayList<StoredArea>storedAreaArrayList = new ArrayList<>();
 
+    ArrayList<StoredArea>storedAreaArrayList = new ArrayList<>();
     ArrayList<StoredArea>storedAreaArrayList2 = new ArrayList<>();
 
     @Override
@@ -89,16 +97,16 @@ public class AreaUpgrade extends AppCompatActivity {
         storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
 
         context=this;
-        rg= (RadioGroup)findViewById(R.id.areagroup);
-        rg.setOrientation(RadioGroup.VERTICAL);
+        radioGroup = (RadioGroup)findViewById(R.id.areagroup);
+        radioGroup.setOrientation(RadioGroup.VERTICAL);
         radiobuttonsetup();
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
-              selectedId= rg.indexOfChild(findViewById(rg.getCheckedRadioButtonId()));
+              selectedId= radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
 
 
             }
@@ -202,9 +210,9 @@ public class AreaUpgrade extends AppCompatActivity {
 
     {
 
-        storedAreas=storedAreaTable.getAllData();
+        storedAreas = storedAreaTable.getAllData();
 
-        rg.clearCheck();
+        radioGroup.clearCheck();
         if(storedAreas.isEmpty()){
             ToastMessageDisplay.setText(AreaUpgrade.this,"কোন এলাকার তথ্য নামানো নেই");
             ToastMessageDisplay.showText(AreaUpgrade.this);
@@ -219,7 +227,7 @@ public class AreaUpgrade extends AppCompatActivity {
                 RadioButton ch = new RadioButton(this);
                 ch.setText(storedAreas.get(i).getAreaBn());
 
-                rg.addView(ch);
+                radioGroup.addView(ch);
 
 
             }
@@ -278,6 +286,8 @@ public class AreaUpgrade extends AppCompatActivity {
 
         });
     }
+
+    
     void SavenewEdu(JSONArray jo) {
         JSONArray Edu = jo;
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
@@ -455,9 +465,10 @@ public class AreaUpgrade extends AppCompatActivity {
         }
     }
 
-    public void deleteAll (String ward, String area) {
 
-        /*EduNewDBTableMain educationDB = new EduNewDBTableMain(AreaUpgrade.this);
+    public <TableType extends CommonDBTable> void deleteAll (String ward, String area) {
+
+        EduNewDBTableMain educationDB = new EduNewDBTableMain(AreaUpgrade.this);
         EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(AreaUpgrade.this);
         EducationResultDetailsTable resultDB = new EducationResultDetailsTable(AreaUpgrade.this);
         EduNewDBTableTraining trainingDB = new EduNewDBTableTraining(AreaUpgrade.this);
@@ -475,94 +486,79 @@ public class AreaUpgrade extends AppCompatActivity {
 
         StoredAreaTable storedAreaDB = new StoredAreaTable(AreaUpgrade.this);
 
+        ArrayList <EduNewModel> eduList = educationDB.getByAreaCategory(ward, area, AppConstants.EDUCATION);
+        ArrayList <HealthNewDBModelMain> healthList = healthDB.getByAreaCategory(ward, area, AppConstants.HEALTH);
 
 
-        ArrayList <CommonModel> commonModels = commonDB.getAllCommonByArea(ward, area);
+        HashMap <TableType, ArrayList <ModelType> > hashMap = new HashMap<>();
 
-        for(CommonModel commonModel : commonModels){
+        hashMap.put((TableType)educationDB, (ArrayList <ModelType>) eduList);
+        hashMap.put((TableType)healthDB, (ArrayList <ModelType>) healthList);
+        hashMap.put((TableType)entertainmentDB, (ArrayList <ModelType>) entertainmentDB.getByAreaCategory(ward, area, AppConstants.ENTERTAINMENT));
+        hashMap.put((TableType)financeDB, (ArrayList <ModelType>) financeDB.getByAreaCategory(ward, area, AppConstants.FINANCIAL));
+        hashMap.put((TableType)governmentDB, (ArrayList <ModelType>) governmentDB.getByAreaCategory(ward, area, AppConstants.GOVERNMENT));
+        hashMap.put((TableType)legalDB, (ArrayList <ModelType>) legalDB.getByAreaCategory(ward, area, AppConstants.LEGAL));
+        hashMap.put((TableType)ngoDB, (ArrayList <ModelType>) ngoDB.getByAreaCategory(ward, area, AppConstants.NGO));
+        hashMap.put((TableType)shelterDB, (ArrayList <ModelType>) shelterDB.getByAreaCategory(ward, area, AppConstants.RELIGIOUS));
 
-            int id = commonModel.getId();
 
-            if(educationDB.isFieldExist(id)){
+        for(EduNewModel edu : eduList){
 
-                ArrayList <EduNewSchoolModel> schools = schoolDB.getDataFromForeignKey(id);
-                ArrayList <EducationResultItemNew> results = resultDB.getDataFromForeignKey(id);
-                ArrayList <EduTrainingModel> trainings = trainingDB.getDataFromForeignKey(id);
-
-                if(schools != null){
-                    for(EduNewSchoolModel school : schools){
-                        schoolDB.delete(school.getId());
-                    }
-                }
-                if(results != null){
-                    for(EducationResultItemNew result : results){
-                        resultDB.delete(result.getEduId());
-                    }
-                }
-                if(trainings != null){
-                    for(EduTrainingModel training : trainings){
-                        trainingDB.delete(training.getEduid());
-                    }
-                }
-                educationDB.delete(id);
+            for(EduNewSchoolModel school : schoolDB.getDataListFromForeignKey(edu.getId())){
+                schoolDB.delete(school.getId());
             }
-            else if(healthDB.isFieldExist(id)){
-
-                ArrayList <HealthNewDBModelHospital> hospitals = new ArrayList<>();
-                ArrayList <HealthNewDBModelPharmacy> pharmacies = new ArrayList<>();
-
-                if(hospitals != null){
-                    for(HealthNewDBModelHospital hospital : hospitals){
-                        hospitalDB.delete(hospital.getServicecenterid());
-                    }
-                }
-                if(pharmacies != null){
-                    for(HealthNewDBModelPharmacy pharmacy : pharmacies){
-                        pharmacyDB.delete(pharmacy.getServicecenterid());
-                    }
-                }
-                healthDB.delete(id);
+            for(EducationResultItemNew result : resultDB.getDataListFromForeignKey(edu.getId())){
+                resultDB.delete(result.getId());
             }
-            else if(entertainmentDB.isFieldExist(id)){
-                entertainmentDB.delete(id);
+            for(EduTrainingModel training : trainingDB.getDataListFromForeignKey(edu.getId())){
+                trainingDB.delete(training.getId());
             }
-            else if (financeDB.isFieldExist(id)){
-                financeDB.delete(id);
-            }
-            else if(governmentDB.isFieldExist(id)){
-                governmentDB.delete(id);
-            }
-            else if(legalDB.isFieldExist(id)){
-                legalDB.delete(id);
-            }
-            else if(ngoDB.isFieldExist(id)){
-                ngoDB.delete(id);
-            }
-            else if(shelterDB.isFieldExist(id)){
-                shelterDB.delete(id);
-            }
-            commonDB.delete(id);
         }
+
+        for(HealthNewDBModelMain health : healthList){
+            for(HealthNewDBModelHospital hospital : hospitalDB.getDataListFromForeignKey(health.getId())){
+                hospitalDB.delete(hospital.getId());
+            }
+            for(HealthNewDBModelPharmacy pharmacy : pharmacyDB.getDataListFromForeignKey(health.getId())){
+                pharmacyDB.delete(pharmacy.getId());
+            }
+        }
+
+
+        Set <TableType> keySet = hashMap.keySet();
+        Iterator <TableType> keySetIterator = keySet.iterator();
+
+        while (keySetIterator.hasNext()) {
+            TableType key = keySetIterator.next();
+            deleteData(key, hashMap.get(key));
+        }
+
 
         storedAreaDB.delete(storedAreaDB.getNodeInfo(ward, area).getId());
 
 
-
-        rg.clearCheck();
+        radioGroup.clearCheck();
         dialog2.dismiss();
-        rg.removeAllViews();
+        radioGroup.removeAllViews();
 
         ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
         ToastMessageDisplay.showText(AreaUpgrade.this);
         deleted=true;
-        radiobuttonsetup();*/
+        radiobuttonsetup();
 
+    }
+
+    public static <TableType extends CommonDBTable, ModelType extends CommonModel> void deleteData(TableType table, ArrayList <ModelType> list ){
+        for(ModelType model : list){
+            if(table.isFieldExist(model.getId())){
+                table.delete(model.getId());
+            }
+        }
     }
 
     @Override
     public void onBackPressed() {
-        if(deleted)
-        {
+        if(deleted) {
             AlertMessage.showMessage(AreaUpgrade.this,"দুঃখিত","দয়া করে যে এলাকার তথ্য দেখতে চান সেটি নির্বাচন করে 'এলাকার তথ্য দেখুন' বাটন টি চাপুন");
         }
         else

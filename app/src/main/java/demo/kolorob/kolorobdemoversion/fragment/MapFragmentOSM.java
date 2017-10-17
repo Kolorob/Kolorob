@@ -45,13 +45,11 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
 
 
     List<String> listData = new ArrayList<String>();
-    String concatened;
+    String concatened = "";
     private String locationName;
     private int locationNameId;
 
-
     boolean firstRun;
-    String refid2;
 
     IMapController mapViewController;
 
@@ -168,7 +166,6 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
         mapView.setClickable(true);
-        concatened = "";
 
         mapView.setBuiltInZoomControls(false);
         mapView.setMultiTouchControls(true);
@@ -238,9 +235,7 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
             }
         });*/
 
-        SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(getActivity());
-        subCategoryItemNews = subCategoryTableNew.getDataListFromForeignKey(categoryId);
-
+        setSubcategories(categoryId);
 
         return rootView;
     }

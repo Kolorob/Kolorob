@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.helpers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -78,11 +79,11 @@ public class MyInfoWindow extends InfoWindow {
     public void onClose() {
     }
 
+
     public void onOpen(Object arg0) {
         MyInfoWindow.closeAllInfoWindowsOn(mMapView);
 
         layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
-        Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
         final TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
         txtTitle.setTextSize(20);
 
@@ -102,95 +103,77 @@ public class MyInfoWindow extends InfoWindow {
         layout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switch (catid) {
-                    case AppConstants.EDUCATION:
 
+                    case AppConstants.EDUCATION:
                         layout.setVisibility(View.VISIBLE);
                         EduNewDBTableMain educationNewTable = new EduNewDBTableMain(MyInfoWindow.this.con);
-
                         nulledu = educationNewTable.getNodeInfo(n);
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
                         iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu);
                         MyInfoWindow.this.con.startActivity(iiedu);
-
                         break;
-                    case AppConstants.GOVERNMENT:
 
+                    case AppConstants.GOVERNMENT:
                         layout.setVisibility(View.VISIBLE);
                         GovNewDBTable governmentNewTable = new GovNewDBTable(MyInfoWindow.this.con);
-
                         nullgov = governmentNewTable.getNodeInfo(n);
                         Intent iigov = new Intent(MyInfoWindow.this.con, DetailsLayoutGovernment.class);
                         iigov.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
                         MyInfoWindow.this.con.startActivity(iigov);
-
                         break;
+
                     case AppConstants.HEALTH:
-
                         layout.setVisibility(View.VISIBLE);
-
                         HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(MyInfoWindow.this.con);
                         nullhel = healthServiceProviderTable.getNodeInfo(n);
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
                         iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
-
                         break;
-                    case AppConstants.ENTERTAINMENT:
 
+                    case AppConstants.ENTERTAINMENT:
                         layout.setVisibility(View.VISIBLE);
                         EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(MyInfoWindow.this.con);
                         nullent = entertainmentServiceProviderTableNew.getNodeInfo(n);
                         Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainmentNew.class);
                         iientt.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
                         MyInfoWindow.this.con.startActivity(iientt);
-
                         break;
-                    case AppConstants.LEGAL:
 
+                    case AppConstants.LEGAL:
                         layout.setVisibility(View.VISIBLE);
                         LegalAidNewDBTable legalAidServiceProviderTableNew = new LegalAidNewDBTable(MyInfoWindow.this.con);
                         nullleg = legalAidServiceProviderTableNew.getNodeInfo(n);
                         Intent iileg = new Intent(MyInfoWindow.this.con, DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
-
                         break;
-                    case AppConstants.FINANCIAL:
 
+                    case AppConstants.FINANCIAL:
                         layout.setVisibility(View.VISIBLE);
                         FinNewDBTable financialServiceNewTable = new FinNewDBTable(MyInfoWindow.this.con);
                         nullfin = financialServiceNewTable.getNodeInfo(n);
                         Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutFinance.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
-
                         break;
 
-
                     case AppConstants.NGO:
-
                         layout.setVisibility(View.VISIBLE);
                         NGONewDBTable ngoServiceProviderTableNew = new NGONewDBTable(MyInfoWindow.this.con);
                         nullngo = ngoServiceProviderTableNew.getNodeInfo(n);
                         Intent iingo = new Intent(MyInfoWindow.this.con, DetailsInfoActivityNGO.class);
                         iingo.putExtra(AppConstants.KEY_DETAILS_NGO, nullngo);
                         MyInfoWindow.this.con.startActivity(iingo);
-
                         break;
 
-
-
-                    ////// Religious ///
-
                     case AppConstants.RELIGIOUS:
-
                         layout.setVisibility(View.VISIBLE);
                         ReligiousNewDBTable religiousServiceProviderTableNew = new ReligiousNewDBTable(MyInfoWindow.this.con);
                         nullreligious = religiousServiceProviderTableNew.getNodeInfo(n);
                         Intent iireligious = new Intent(MyInfoWindow.this.con, DetailsInfoActivityReligious.class);
                         iireligious.putExtra(AppConstants.KEY_DETAILS_RELIGIOUS, nullreligious);
                         MyInfoWindow.this.con.startActivity(iireligious);
-
                         break;
 
                 }
