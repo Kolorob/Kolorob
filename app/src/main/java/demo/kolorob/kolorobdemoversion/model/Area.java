@@ -4,13 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 /**
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class Area implements Serializable{
+public class Area extends BaseModel <Area> implements Serializable {
 
     private String area_name, area_bn, area_keyword, parentArea, lat, lon;
     private int id, ward_id;
@@ -92,7 +91,8 @@ public class Area implements Serializable{
         this.area_keyword = area_keyword;
     }
 
-    public static Area parseArea(JSONObject jo) throws JSONException {
+    public  Area parse(JSONObject jo) throws JSONException {
+
         int id = jo.getInt("id");
         String area_en = jo.getString("area_en");
         String area_bn = jo.getString("area_bn");

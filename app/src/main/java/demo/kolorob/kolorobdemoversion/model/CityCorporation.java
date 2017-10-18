@@ -3,13 +3,11 @@ package demo.kolorob.kolorobdemoversion.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 /**
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class CityCorporation {
+public class CityCorporation implements BaseImplementation <CityCorporation> {
 
     private String cityCorporation_name, cityCorporation_bn, cityCorporation_keyword;
     private int id;
@@ -55,7 +53,8 @@ public class CityCorporation {
         this.cityCorporation_keyword = cityCorporation_keyword;
     }
 
-    public static CityCorporation parseCityCorporation(JSONObject jo) throws JSONException {
+    public CityCorporation parse(JSONObject jo) throws JSONException {
+
         int id = jo.getInt("id");
         String cc_en = jo.getString("cc_en");
         String cc_bn = jo.getString("cc_bn");
