@@ -3,11 +3,14 @@ package demo.kolorob.kolorobdemoversion.model.EduNewDB;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by HP on 2/17/2017.
  */
 
-public class EduNewSchoolModel {
+public class EduNewSchoolModel extends SubModel <EduNewSchoolModel>{
+
     int id, educationId;
     String stipend, primary_fees, secondary_fees, college_fees;
 
@@ -68,7 +71,7 @@ public class EduNewSchoolModel {
         this.college_fees = college_fees;
     }
 
-    public static EduNewSchoolModel parseEduNewSchoolModel(JSONObject jo, int educationId) throws JSONException {
+    public EduNewSchoolModel parse(JSONObject jo, int educationId) throws JSONException {
         int _eduId = educationId;
         int _id = jo.getInt("id");
         String _stipend = jo.getString("stipend");

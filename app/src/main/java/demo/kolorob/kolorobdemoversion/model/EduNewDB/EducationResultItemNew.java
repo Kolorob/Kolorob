@@ -5,12 +5,15 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by israt.jahan on 7/12/2016.
  */
 
 
-public class EducationResultItemNew implements Serializable {
+public class EducationResultItemNew extends SubModel <EducationResultItemNew> implements Serializable{
+
     private int id, educationId;
     private String examname, studentno, passed, goldena, aplus;
 
@@ -80,7 +83,8 @@ public class EducationResultItemNew implements Serializable {
         this.aplus = aplus;
     }
 
-    public static EducationResultItemNew parseEducationResultItemNew(JSONObject jo, int educationId) throws JSONException {
+    public EducationResultItemNew parse(JSONObject jo, int educationId) throws JSONException {
+
         int _id = jo.getInt("id");
         //int _educationId = jo.getInt("_service_provider");
         int _educationId = educationId;
@@ -93,4 +97,5 @@ public class EducationResultItemNew implements Serializable {
         return new EducationResultItemNew(_id, _educationId,
                 _examname,_studentno,_passed,_goldena,_aplus);
     }
+
 }
