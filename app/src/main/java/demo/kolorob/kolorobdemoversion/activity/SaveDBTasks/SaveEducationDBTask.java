@@ -14,7 +14,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 
 
-class SaveEducationDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, EduNewDBTableMain, EduNewModel> {
+public class SaveEducationDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, EduNewDBTableMain, EduNewModel> {
     public SaveEducationDBTask(Context ctx) {
         super(ctx);
     }

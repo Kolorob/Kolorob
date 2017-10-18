@@ -20,7 +20,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by shamima.yasmin on 10/17/2017.
  */
 
-class SaveHealthDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, HealthNewDBTableMain, HealthNewDBModelMain> {
+public class SaveHealthDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, HealthNewDBTableMain, HealthNewDBModelMain> {
     public SaveHealthDBTask(Context ctx) {
         super(ctx);
     }
