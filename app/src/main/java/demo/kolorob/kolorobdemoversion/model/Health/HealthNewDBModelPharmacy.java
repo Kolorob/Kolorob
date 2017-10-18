@@ -3,11 +3,14 @@ package demo.kolorob.kolorobdemoversion.model.Health;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class HealthNewDBModelPharmacy {
+public class HealthNewDBModelPharmacy extends SubModel<HealthNewDBModelPharmacy> {
+
     int id, healthId;
     String docavailability, speciality, vaccineavailability;
 
@@ -61,7 +64,9 @@ public class HealthNewDBModelPharmacy {
     public void setVaccineavailability(String vaccineavailability) {
         this.vaccineavailability = vaccineavailability;
     }
-    public static HealthNewDBModelPharmacy parseHealthNewDBModelPharmacy(JSONObject jo,int sproviderkey) throws JSONException {
+
+
+    public HealthNewDBModelPharmacy parse(JSONObject jo,int sproviderkey) throws JSONException {
 
         int _id = jo.getInt("id");
         int _healthId = sproviderkey;

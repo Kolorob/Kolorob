@@ -5,11 +5,14 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class HealthNewDBModelHospital implements Serializable {
+public class HealthNewDBModelHospital extends SubModel <HealthNewDBModelHospital> implements Serializable {
+
     int id, healthId;
     String emergencyavailable, emergencynumber, ambulanceavailable, ambulancenumber, maternityavailable, maternitynumber, maternityprivacy;
 
@@ -100,7 +103,8 @@ public class HealthNewDBModelHospital implements Serializable {
         this.maternityprivacy = maternityprivacy;
     }
 
-    public static HealthNewDBModelHospital parseHealthNewDBModelHospital(JSONObject jo, int sproviderkey) throws JSONException {
+    public HealthNewDBModelHospital parse(JSONObject jo, int sproviderkey) throws JSONException {
+
         int _id = jo.getInt("id");
         int _healthId = sproviderkey;
         String _eavailable = jo.getString("emergency_availabe");
