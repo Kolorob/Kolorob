@@ -39,6 +39,9 @@ import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.BuildConfig;
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveAreaDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveCityCorporationDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveWardDBTask;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
@@ -149,14 +152,14 @@ public class SplashActivityNew extends AppCompatActivity {
                                 else {
 
                                     if (areaData.has("city_corporation")) {
-                                        new SaveCCTask(SplashActivityNew.this).execute(areaData.getJSONArray("city_corporation"));
+                                        new SaveCityCorporationDBTask(SplashActivityNew.this).execute(areaData.getJSONArray("city_corporation"));
                                     }
 
                                     if (areaData.has("ward")) {
-                                        new SaveWardTask(SplashActivityNew.this).execute(areaData.getJSONArray("ward"));
+                                        new SaveWardDBTask(SplashActivityNew.this).execute(areaData.getJSONArray("ward"));
                                     }
                                     if (areaData.has("areas")) {
-                                        new SaveAreaTask(SplashActivityNew.this).execute(areaData.getJSONArray("areas"));
+                                        new SaveAreaDBTask(SplashActivityNew.this).execute(areaData.getJSONArray("areas"));
                                     }
                                 }
                             } catch (JSONException e) {
@@ -381,99 +384,6 @@ public class SplashActivityNew extends AppCompatActivity {
             }
         } // else: We already have permissions, so handle as normal
     }
-
-    abstract class GenericSaveDBTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
-        private Context ctx;
-
-        public GenericSaveDBTask(Context ctx) {
-            this.ctx = ctx;
-        }
-
-        @Override
-        protected void onPostExecute(Result result) {
-
-        }
-
-    }
-
-    class SaveCCTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveCCTask(Context ctx) {
-            super(ctx);
-        }
-
-        @Override
-        protected Long doInBackground(JSONArray... ccArrays) {
-            JSONArray ccArray = ccArrays[0];
-            CityCorporationTable ccTable = new CityCorporationTable(SplashActivityNew.this);
-            ccTable.dropTable();
-            int count = ccArray.length();
-            for (int i = 0; i < count; i++) {
-                try {
-                    JSONObject jo = ccArray.getJSONObject(i);
-                    CityCorporation cc = CityCorporation.parseCityCorporation(jo);
-                    ccTable.insertItem(cc);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveWardTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveWardTask(Context ctx) {
-            super(ctx);
-        }
-
-        @Override
-        protected Long doInBackground(JSONArray... wardArrays) {
-            JSONArray wardArray = wardArrays[0];
-            WardTable wardTable = new WardTable(SplashActivityNew.this);
-            wardTable.dropTable();
-            int count = wardArray.length();
-            for (int i = 0; i < count; i++) {
-                try {
-                    JSONObject jo = wardArray.getJSONObject(i);
-                    Ward ward = Ward.parseWard(jo);
-                    wardTable.insertItem(ward);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveAreaTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveAreaTask(Context ctx) {
-            super(ctx);
-        }
-
-        @Override
-        protected Long doInBackground(JSONArray... areaArrays) {
-            JSONArray areaArray = areaArrays[0];
-            AreaTable areaTable = new AreaTable(SplashActivityNew.this);
-            areaTable.dropTable();
-            int count = areaArray.length();
-            for (int i = 0; i < count; i++) {
-                try {
-                    JSONObject jo = areaArray.getJSONObject(i);
-                    Area area = Area.parseArea(jo);
-                    areaTable.insertItem(area);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-
-
-
 
 
 }
