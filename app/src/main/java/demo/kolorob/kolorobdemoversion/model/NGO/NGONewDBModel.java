@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.model.NGO;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.Serializable;
+
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -89,9 +90,11 @@ public class NGONewDBModel extends CommonModel implements Serializable {
     }
 
 
-    public static NGONewDBModel parseNgoNewDBModel (JSONObject jo) throws JSONException {
+    @Override
+    public NGONewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = parseCommonModel(jo);
+        CommonModel _commonModel = null;
+        _commonModel = _commonModel.parse(jo);
 
         String _ngoSevices = jo.getString("ngo_services");
         String _ngoServicesFor = jo.getString("ngo_services_for");

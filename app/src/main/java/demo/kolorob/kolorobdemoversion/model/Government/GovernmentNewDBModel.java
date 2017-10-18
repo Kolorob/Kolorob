@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.model.Government;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.Serializable;
+
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -36,8 +37,10 @@ public class GovernmentNewDBModel extends CommonModel implements Serializable {
         this.serviceName = serviceName;
     }
 
-    public static GovernmentNewDBModel parseGovernmentNewDBModel (JSONObject jo) throws JSONException {
-        CommonModel _commonModel = parseCommonModel(jo);
+    @Override
+    public GovernmentNewDBModel parse (JSONObject jo) throws JSONException {
+        CommonModel _commonModel = null;
+        _commonModel = _commonModel.parse(jo);
         String _serviceName = jo.getString("service_name");
 
         return new GovernmentNewDBModel(_commonModel, _serviceName);

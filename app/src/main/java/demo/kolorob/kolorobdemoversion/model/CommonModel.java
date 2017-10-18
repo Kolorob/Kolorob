@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by shamima.yasmin on 9/21/2017.
  */
 
-public class CommonModel implements Serializable {
+public class CommonModel extends BaseModel <CommonModel> implements Serializable {
 
     int id;
     String nameEn, nameBn;
@@ -237,7 +237,7 @@ public class CommonModel implements Serializable {
     }
 
 
-    protected static CommonModel parseCommonModel (JSONObject jo) throws JSONException {
+    public CommonModel parse (JSONObject jo) throws JSONException {
 
         int _id = jo.getInt("id");
         String _nameEn = jo.getString("node_name");

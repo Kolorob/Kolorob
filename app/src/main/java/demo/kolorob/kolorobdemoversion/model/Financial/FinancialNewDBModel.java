@@ -49,9 +49,11 @@ public class FinancialNewDBModel extends CommonModel implements Serializable {
 
     }
 
-    public static FinancialNewDBModel parseFinancialNewDBModel (JSONObject jo) throws JSONException {
+    @Override
+    public FinancialNewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel cm = parseCommonModel(jo);
+        CommonModel cm = null;
+        cm = cm.parse(jo);
         String _finType = jo.getString("type");
         String _serviceType = jo.getString("service");
         return new FinancialNewDBModel(cm, _finType, _serviceType);

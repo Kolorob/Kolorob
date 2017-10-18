@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.model.Religious;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.Serializable;
+
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -87,9 +88,11 @@ public class ReligiousNewDBModel extends CommonModel implements Serializable {
         this.rsFee = rsFee;
     }
 
-    public static ReligiousNewDBModel parseReligiousNewDBModel (JSONObject jo) throws JSONException {
+    @Override
+    public ReligiousNewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = parseCommonModel(jo);
+        CommonModel _commonModel = null;
+        _commonModel = _commonModel.parse(jo);
 
         String _rsReligion = jo.getString("rs_religion");
         String _rsServicesFor = jo.getString("rs_services_for");

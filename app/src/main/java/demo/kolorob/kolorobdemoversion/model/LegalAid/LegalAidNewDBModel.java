@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.model.LegalAid;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.Serializable;
+
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -38,9 +39,11 @@ public class LegalAidNewDBModel extends CommonModel implements Serializable {
     }
 
 
-    public static LegalAidNewDBModel parseLegalAidNewDBModel (JSONObject jo) throws JSONException {
+    @Override
+    public LegalAidNewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = parseCommonModel(jo);
+        CommonModel _commonModel = null;
+        _commonModel = _commonModel.parse(jo);
         String _service = jo.getString("service");
 
         return new LegalAidNewDBModel(_commonModel, _service);

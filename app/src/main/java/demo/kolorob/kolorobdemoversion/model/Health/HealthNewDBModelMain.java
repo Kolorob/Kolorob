@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -38,9 +39,11 @@ public class HealthNewDBModelMain extends CommonModel implements Serializable {
         this.instituteType = instituteType;
     }
 
-    public static HealthNewDBModelMain parseHealthNewDBModelMain (JSONObject jo) throws JSONException {
+    @Override
+    public HealthNewDBModelMain parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = parseCommonModel(jo);
+        CommonModel _commonModel = null;
+        _commonModel = _commonModel.parse(jo);
         String _instituteType = jo.getString("institute_type");
 
         return new HealthNewDBModelMain(_commonModel, _instituteType);
