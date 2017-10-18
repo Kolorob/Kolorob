@@ -28,6 +28,10 @@ public class CategoryItem extends BaseModel <CategoryItem> implements Serializab
         this.nameBn = nameBn;
     }
 
+    public CategoryItem() {
+
+    }
+
     public int getId() {
         return id;
     }

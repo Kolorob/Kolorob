@@ -15,6 +15,10 @@ public class EduNewModel extends CommonModel implements Serializable {
 
     String educationType, shift, studentNo, teachersNo, averageStudentPerClass, facility;
 
+    public EduNewModel() {
+
+    }
+
 
     public String getEducationType() {
         return educationType;
@@ -95,8 +99,7 @@ public class EduNewModel extends CommonModel implements Serializable {
     @Override
     public EduNewModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = null;
-        _commonModel = _commonModel.parse(jo);
+        CommonModel _commonModel = new CommonModel().parse(jo);
         String _educationType = jo.getString("education_type");
         String _shift = jo.getString("shift");
         String _studentNo = jo.getString("no_of_students");

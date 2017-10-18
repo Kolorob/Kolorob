@@ -23,6 +23,10 @@ public class EduTrainingModel extends SubModel <EduTrainingModel> {
         this.coursename = coursename;
     }
 
+    public EduTrainingModel() {
+
+    }
+
     public int getId() {
         return id;
     }

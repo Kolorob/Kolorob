@@ -14,6 +14,10 @@ public class ReligiousNewDBModel extends CommonModel implements Serializable {
 
     String rsReligion, rsServicesFor, rsServicesForReligion, otherReligion, rsTime, rsFee;
 
+    public ReligiousNewDBModel() {
+
+    }
+
 
     public String getRsReligion() {
         return rsReligion;
@@ -91,9 +95,7 @@ public class ReligiousNewDBModel extends CommonModel implements Serializable {
     @Override
     public ReligiousNewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = null;
-        _commonModel = _commonModel.parse(jo);
-
+        CommonModel _commonModel = new CommonModel().parse(jo);
         String _rsReligion = jo.getString("rs_religion");
         String _rsServicesFor = jo.getString("rs_services_for");
         String _rsServicesForReligion = jo.getString("rs_access");

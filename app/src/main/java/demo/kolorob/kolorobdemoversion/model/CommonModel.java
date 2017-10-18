@@ -209,6 +209,10 @@ public class CommonModel extends BaseModel <CommonModel> implements Serializable
         this.ratings = ratings;
     }
 
+    public CommonModel(){
+
+    }
+
 
     public CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
         this.id = id;

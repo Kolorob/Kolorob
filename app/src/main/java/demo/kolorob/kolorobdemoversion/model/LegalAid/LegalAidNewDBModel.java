@@ -14,6 +14,10 @@ public class LegalAidNewDBModel extends CommonModel implements Serializable {
 
     String service;
 
+    public LegalAidNewDBModel() {
+
+    }
+
 
     public String getService() {
         return service;
@@ -42,8 +46,7 @@ public class LegalAidNewDBModel extends CommonModel implements Serializable {
     @Override
     public LegalAidNewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = null;
-        _commonModel = _commonModel.parse(jo);
+        CommonModel _commonModel = new CommonModel().parse(jo);
         String _service = jo.getString("service");
 
         return new LegalAidNewDBModel(_commonModel, _service);

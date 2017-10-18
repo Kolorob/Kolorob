@@ -15,6 +15,10 @@ public class HealthNewDBModelMain extends CommonModel implements Serializable {
 
     String instituteType;
 
+    public HealthNewDBModelMain() {
+
+    }
+
 
     public String getInstituteType() {
         return instituteType;
@@ -42,8 +46,7 @@ public class HealthNewDBModelMain extends CommonModel implements Serializable {
     @Override
     public HealthNewDBModelMain parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = null;
-        _commonModel = _commonModel.parse(jo);
+        CommonModel _commonModel = new CommonModel().parse(jo);
         String _instituteType = jo.getString("institute_type");
 
         return new HealthNewDBModelMain(_commonModel, _instituteType);

@@ -15,6 +15,10 @@ public class EntertainmentNewDBModel extends CommonModel implements Serializable
 
     String entType, entryFee;
 
+    public EntertainmentNewDBModel() {
+
+    }
+
     public String getEntType() {
         return entType;
     }
@@ -52,8 +56,7 @@ public class EntertainmentNewDBModel extends CommonModel implements Serializable
     @Override
     public EntertainmentNewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = null;
-        _commonModel = _commonModel.parse(jo);
+        CommonModel _commonModel = new CommonModel().parse(jo);
         String _entType = jo.getString("type");
         String _entryFee = jo.getString("entry_fee");
 

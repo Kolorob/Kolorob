@@ -14,6 +14,10 @@ public class EduNewSchoolModel extends SubModel <EduNewSchoolModel>{
     int id, educationId;
     String stipend, primary_fees, secondary_fees, college_fees;
 
+    public EduNewSchoolModel() {
+
+    }
+
     public int getId() {
         return id;
     }

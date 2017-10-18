@@ -14,6 +14,9 @@ public class NGONewDBModel extends CommonModel implements Serializable {
 
     String ngoServices, ngoServicesFor, ngoServicesOther, ngoServiceType, dropTime, ngoFee;
 
+    public NGONewDBModel() {
+
+    }
 
 
     public String getNgoServices() {
@@ -93,9 +96,7 @@ public class NGONewDBModel extends CommonModel implements Serializable {
     @Override
     public NGONewDBModel parse (JSONObject jo) throws JSONException {
 
-        CommonModel _commonModel = null;
-        _commonModel = _commonModel.parse(jo);
-
+        CommonModel _commonModel = new CommonModel().parse(jo);
         String _ngoSevices = jo.getString("ngo_services");
         String _ngoServicesFor = jo.getString("ngo_services_for");
         String _ngoServicesOther = jo.getString("ngo_services_other");

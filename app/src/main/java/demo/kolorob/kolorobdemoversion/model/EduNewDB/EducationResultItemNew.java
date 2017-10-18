@@ -27,6 +27,10 @@ public class EducationResultItemNew extends SubModel <EducationResultItemNew> im
         this.aplus = aplus;
     }
 
+    public EducationResultItemNew() {
+
+    }
+
     public int getId() {
         return id;
     }

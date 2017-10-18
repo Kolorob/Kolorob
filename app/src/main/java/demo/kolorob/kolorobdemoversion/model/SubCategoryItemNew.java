@@ -33,6 +33,10 @@ public class SubCategoryItemNew extends BaseModel <SubCategoryItemNew> implement
         this.refLabelBn = refLabelBn;
     }
 
+    public SubCategoryItemNew() {
+
+    }
+
     public int getId() {
         return id;
     }
