@@ -22,6 +22,10 @@ public class Ward extends BaseModel <Ward> {
         this.cc_id = cc_id;
     }
 
+    public Ward() {
+
+    }
+
     public int getId() {
         return id;
     }

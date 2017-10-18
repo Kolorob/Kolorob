@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class CityCorporation implements BaseImplementation <CityCorporation> {
+public class CityCorporation extends BaseModel <CityCorporation> {
 
     private String cityCorporation_name, cityCorporation_bn, cityCorporation_keyword;
     private int id;
@@ -18,6 +18,10 @@ public class CityCorporation implements BaseImplementation <CityCorporation> {
         this.cityCorporation_name = cityCorporation_name;
         this.cityCorporation_bn = cityCorporation_bn;
         this.cityCorporation_keyword = cityCorporation_keyword;
+
+    }
+
+    public CityCorporation() {
 
     }
 

@@ -25,6 +25,10 @@ public class Area extends BaseModel <Area> implements Serializable {
         this.ward_id = ward_id;
     }
 
+    public Area() {
+
+    }
+
     public int getId() {
         return id;
     }
