@@ -32,49 +32,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.*;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterWard;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
-import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
-import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
-import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
-import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
-import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
-import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
-import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -95,7 +65,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     View view = null, areaview, wardview, cityview;
     Button submit;
     Boolean firstRun, firstRunUpdate, permission = false;
-    int countofDb = 0;
+    static int countofDb = 0;
+
     JSONObject allData;
     String AreaNameBn, Location, keyword;
     private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
@@ -172,6 +143,21 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         Location = location;
     }
 
+    public static int getCountofDb() {
+        return countofDb;
+    }
+
+    public static void setCountofDb(int count) {
+        countofDb = count;
+    }
+
+    public static int getNumberOfTasks() {
+        return NUMBER_OF_TASKS;
+    }
+
+    public static void setNumberOfTasks(int numberOfTasks) {
+        NUMBER_OF_TASKS = numberOfTasks;
+    }
 
     private AnimationDrawable frameAnimation;
 
@@ -262,7 +248,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         populateRecyclerViewArea(1); // initially, populating areas of first ward of DNCC
 
 
-        if (firstRun == false || firstRunUpdate == true)
+        if (!firstRun || firstRunUpdate)
             runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
         pos = 0;
@@ -517,7 +503,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     void Servercall() {
 
-        if (firstRun == false || firstRunUpdate == true) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
+        if (!firstRun || firstRunUpdate) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
             NUMBER_OF_TASKS = 8;
         }
@@ -566,7 +552,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         frameAnimation.setOneShot(false);
         frameAnimation.start();
 
-        if (firstRun == false || firstRunUpdate == true) {
+        if (!firstRun || firstRunUpdate) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories_new?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -576,9 +562,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                                     JSONArray jo = new JSONArray(apiContent);
 
-                                    Log.d("Category", "********" + apiContent);
-
-                                    new SaveCategoryListTask(DataLoadingActivity.this).execute(jo);
+                                    new SaveCategoryDBTask(DataLoadingActivity.this).execute(jo);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -596,7 +580,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
                                     Log.d("AllData", "********" + jo);
-                                    new SaveSubCategoryNewListTask(DataLoadingActivity.this).execute(jo);
+                                    new SaveReferenceDBTask(DataLoadingActivity.this).execute(jo);
 
 
                                 } catch (JSONException e) {
@@ -608,7 +592,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             );
 
 
-            if(firstRunUpdate == true){
+            if(firstRunUpdate){
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("update_first_run", false).apply();
@@ -626,45 +610,47 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         if (allData.length() == 0) {
                             ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
-                        } else { //checking category label and parsing in different threads so that parsing time get minimised
+                        }
+
+                        else { //checking category label and parsing in different threads so that parsing time get minimised
                             if (allData.has("Education")) {
-                                new SavenewEduTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
+                                new SaveEducationDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
                             }
 
                             if (allData.has("Finance")) {
-                                new SavenewFinanceTask(DataLoadingActivity.this).execute(allData.getJSONArray("Finance"));
+                                new SaveFinancialDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Finance"));
 
                             }
 
                             if (allData.has("Health")) {
-                                new SaveHealthtDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Health"));
+                                new SaveHealthDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Health"));
 
                             }
 
                             if (allData.has("Legal")) {
-                                new SaveLegalDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Legal"));
+                                new SaveLegalDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Legal"));
 
                             }
 
 
                             if (allData.has("Government")) {
-                                new SavenewGovTask(DataLoadingActivity.this).execute(allData.getJSONArray("Government"));
+                                new SaveGovernmentDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Government"));
                             }
 
 
                             if (allData.has("NGO")) {
-                                new SaveNgoDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("NGO"));
+                                new SaveNgoDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("NGO"));
                             }
 
 
                             if (allData.has("Entertainment")) {
-                                new SaveEntertainmentDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
+                                new SaveEntertainmentDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
                             }
 
 
                             if (allData.has("Religious Shelter")) {
 
-                                new SaveReligiousDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Religious Shelter"));
+                                new SaveShelterDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Religious Shelter"));
                             }
 
                         }
@@ -693,315 +679,4 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
-
-    class SavenewEduTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SavenewEduTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonObjects) {
-            JSONArray Edu = jsonObjects[0];
-
-            EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
-            EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
-            EduNewDBTableSchool eduNewDBTableSchool = new EduNewDBTableSchool(DataLoadingActivity.this);
-            EducationResultDetailsTable resultDetailsTable = new EducationResultDetailsTable(DataLoadingActivity.this);
-
-
-            for (int i = 0; i < Edu.length(); i++) {
-                try {
-                    if (!Edu.isNull(i)) {
-                        JSONObject jsonObject2 = Edu.getJSONObject(i);
-                        EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
-                        eduNewDBTableMain.insertItem(eduNewModel);
-                        if (jsonObject2.has("training_details")) {
-
-                            JSONArray edutrain = jsonObject2.getJSONArray("training_details");
-
-                            for (int ii = 0; ii < edutrain.length(); ii++) {
-                                JSONObject train = edutrain.getJSONObject(ii);
-                                eduNewDBTableTraining.insertItem(EduTrainingModel.parseEduTrainingModel(train, eduNewModel.getId()));
-                            }
-                        }
-                        if (jsonObject2.has("result_details")) {
-
-                            JSONArray eduResult = jsonObject2.getJSONArray("result_details");
-
-                            for (int ii = 0; ii < eduResult.length(); ii++) {
-                                JSONObject result = eduResult.getJSONObject(ii);
-                                resultDetailsTable.insertItem(EducationResultItemNew.parseEducationResultItemNew(result, eduNewModel.getId()));
-                            }
-                        }
-                        if (jsonObject2.has("education_school")) {
-                            JSONObject school = jsonObject2.getJSONObject("education_school");
-                            eduNewDBTableSchool.insertItem(EduNewSchoolModel.parseEduNewSchoolModel(school, eduNewModel.getId()));
-                        }
-
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveEntertainmentDataTask extends GenericSaveDBTask <JSONArray, Integer, Long> {
-        public SaveEntertainmentDataTask(Context ctx) {
-            super(ctx);
-        }
-
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Ent = jsonArrays[0];
-
-            EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
-
-            for (int i = 0; i < Ent.length(); i++) {
-                try {
-                    if (!Ent.isNull(i)) {
-                        JSONObject jsonObject2 = Ent.getJSONObject(i);
-                        entNewDBTable.insertItem(EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-
-
-    }
-
-    class SavenewGovTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SavenewGovTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Gov = jsonArrays[0];
-            GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
-
-
-            for (int i = 0; i < Gov.length(); i++) {
-                try {
-                    if (!Gov.isNull(i)) {
-                        JSONObject jsonObject2 = Gov.getJSONObject(i);
-                        govNewDBTable.insertItem(GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveLegalDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveLegalDataTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Legal = jsonArrays[0];
-            LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
-
-
-            for (int i = 0; i < Legal.length(); i++) {
-                try {
-                    if (!Legal.isNull(i)) {
-                        JSONObject jsonObject2 = Legal.getJSONObject(i);
-                        legalAidNewDBTable.insertItem(LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2));
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-
-
-    }
-
-    class SavenewFinanceTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SavenewFinanceTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Fin = jsonArrays[0];
-            FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
-
-            for (int i = 0; i < Fin.length(); i++) {
-                try {
-                    if (!Fin.isNull(i)) {
-                        JSONObject jsonObject2 = Fin.getJSONObject(i);
-                        finNewDBTable.insertItem(FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveHealthtDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveHealthtDataTask(Context ctx) {
-            super(ctx);
-        }
-
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Hel = jsonArrays[0];
-
-            HealthNewDBTableMain healthNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
-            HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
-            HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
-
-            int Helcount = Hel.length();
-            Log.d("HealthData", "********" + Helcount);
-
-            for (int i = 0; i < Helcount; i++) {
-                try {
-                    if (!Hel.isNull(i)) {
-                        JSONObject jsonObject2 = Hel.getJSONObject(i);
-                        HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
-                        healthNewDBTable.insertItem(healthNewDBModelMain);
-
-                        if (jsonObject2.has("health_pharmacy")) {
-                            JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
-                            healthNewDBTablePharma.insertItem(HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, healthNewDBModelMain.getId()));
-                        }
-                        if (jsonObject2.has("health_hospital")) {
-                            JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
-                            healthNewDBTableHospital.insertItem(HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, healthNewDBModelMain.getId()));
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveNgoDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveNgoDataTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Ngo = jsonArrays[0];
-            NGONewDBTable ngoNewDBTable = new NGONewDBTable(DataLoadingActivity.this);
-
-            for (int i = 0; i < Ngo.length(); i++) {
-                try {
-                    if (!Ngo.isNull(i)) {
-                        JSONObject jsonObject2 = Ngo.getJSONObject(i);
-                        ngoNewDBTable.insertItem(NGONewDBModel.parseNgoNewDBModel(jsonObject2));
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-
-
-    }
-
-    class SaveReligiousDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveReligiousDataTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonArrays) {
-            JSONArray Religious = jsonArrays[0];
-            ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(DataLoadingActivity.this);
-
-            for (int i = 0; i < Religious.length(); i++) {
-                try {
-                    if (!Religious.isNull(i)) {
-                        JSONObject jsonObject2 = Religious.getJSONObject(i);
-                        religiousNewDBTable.insertItem(ReligiousNewDBModel.parseReligiousNewDBModel(jsonObject2));
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-
-
-    }
-
-    class SaveCategoryListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveCategoryListTask(Context ctx) {
-            super(ctx);
-        }
-
-        @Override
-        protected Long doInBackground(JSONArray... categoryArrays) {
-            JSONArray categoryArray = categoryArrays[0];
-            CategoryTable catTable = new CategoryTable(DataLoadingActivity.this);
-            catTable.dropTable();
-
-            for (int i = 0; i < categoryArray.length(); i++) {
-                try {
-                    JSONObject jo = categoryArray.getJSONObject(i);
-                    catTable.insertItem(CategoryItem.parseCategoryItem(jo));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-    }
-
-    class SaveSubCategoryNewListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveSubCategoryNewListTask(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... categoryArrays) {
-            JSONArray subcat = categoryArrays[0];
-            SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(DataLoadingActivity.this);
-            subCategoryTableNew.dropTable();
-
-            for (int i = 0; i < subcat.length(); i++) {
-                try {
-                    JSONObject jo = subcat.getJSONObject(i);
-                    SubCategoryItemNew et = SubCategoryItemNew.parseSubCategoryItem(jo);
-                    subCategoryTableNew.insertItem(et);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-
-
-            return new Long(0);
-        }
-    }
 }
