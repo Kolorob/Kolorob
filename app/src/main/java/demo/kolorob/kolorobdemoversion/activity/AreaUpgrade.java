@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +21,14 @@ import java.util.Iterator;
 import java.util.Set;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEducationDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEntertainmentDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveFinancialDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveGovernmentDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveHealthDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveLegalDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveNgoDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveShelterDBTask;
 import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
@@ -44,13 +50,9 @@ import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -238,9 +240,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
     void Servercall(String ward, String area) {
 
-
-
-        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward="+ward+"&area="+area, new VolleyApiCallback() {
+        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
@@ -249,25 +249,45 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
                         allData = new JSONObject(apiContent);
 
+                        if (allData.has("Education")) {
+                            new SaveEducationDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Education"));
+                        }
 
-                        if(allData.has("Education"))
-                            SavenewEdu(allData.getJSONArray("Education"));
-                        if(allData.has("Finance"))
-                            SavenewFin(allData.getJSONArray("Finance"));
-                        if(allData.has("Health"))
-                            SavenewHealth(allData.getJSONArray("Health"));
+                        if (allData.has("Finance")) {
+                            new SaveFinancialDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Finance"));
 
-                        if(allData.has("Legal"))
-                            SavenewLegal(allData.getJSONArray("Legal"));
+                        }
 
-                        if(allData.has("Government"))
-                            SavenewGov(allData.getJSONArray("Government"));
+                        if (allData.has("Health")) {
+                            new SaveHealthDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Health"));
 
-                        if(allData.has("Entertainment"))
-                            SavenewEntertainment(allData.getJSONArray("Entertainment"));
+                        }
 
-                        int p= allData.length();
-                        Log.d("Doneall",String.valueOf(p));
+                        if (allData.has("Legal")) {
+                            new SaveLegalDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Legal"));
+
+                        }
+
+                        if (allData.has("Government")) {
+                            new SaveGovernmentDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Government"));
+                        }
+
+                        if (allData.has("NGO")) {
+                            new SaveNgoDBTask(AreaUpgrade.this).execute(allData.getJSONArray("NGO"));
+                        }
+
+                        if (allData.has("Entertainment")) {
+                            new SaveEntertainmentDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Entertainment"));
+                        }
+
+                        if (allData.has("Religious Shelter")) {
+
+                            new SaveShelterDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Religious Shelter"));
+                        }
+
+
+
+                        Log.d("Doneall",String.valueOf(allData.length()));
                         dialog.dismiss();
                         ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য আপডেট হয়েছে");
                         ToastMessageDisplay.showText(AreaUpgrade.this);
@@ -287,183 +307,6 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
         });
     }
 
-    
-    void SavenewEdu(JSONArray jo) {
-        JSONArray Edu = jo;
-        EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
-        EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(AreaUpgrade.this);
-        EduNewDBTableSchool eduNewDBTableSchool = new EduNewDBTableSchool(AreaUpgrade.this);
-        EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(AreaUpgrade.this);
-
-        for (int i = 0; i < Edu.length(); i++) {
-            try {
-                if(!Edu.isNull(i)) {
-                    JSONObject jsonObject2 = Edu.getJSONObject(i);
-                    EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
-                    eduNewDBTableMain.insertItem(eduNewModel);
-                    if (jsonObject2.has("training_details")) {
-                        JSONArray edutrain = jsonObject2.getJSONArray("training_details");
-                        int lenoftrain = edutrain.length();
-                        for (int ii = 0; ii < lenoftrain; ii++) {
-                            JSONObject train = edutrain.getJSONObject(ii);
-
-                            EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train, eduNewModel.getId());
-                            eduNewDBTableTraining.insertItem(eduTrainingModel);
-                        }
-
-                    }
-                     if (jsonObject2.has("education_school")) {
-                        JSONObject school = jsonObject2.getJSONObject("education_school");
-                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, eduNewModel.getId());
-                        eduNewDBTableSchool.insertItem(eduNewSchoolModel);
-                    }
-
-                    if (jsonObject2.has("result_details")) {
-                        JSONArray eduResult = jsonObject2.getJSONArray("result_details");
-
-                        for (int ii = 0; ii < eduResult.length(); ii++) {
-                            JSONObject result = eduResult.getJSONObject(ii);
-
-                            EducationResultItemNew resultItemNew = EducationResultItemNew.parseEducationResultItemNew(result, eduNewModel.getId());
-                            educationResultDetailsTable.insertItem(resultItemNew);
-                        }
-
-                    }
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("educount", String.valueOf(i));
-        }
-    }
-    void SavenewEntertainment(JSONArray jo) {
-        JSONArray Ent = jo;
-        EntNewDBTable entNewDBTable = new EntNewDBTable(AreaUpgrade.this);
-
-
-        int Entcount = Ent.length();
-
-        for (int i = 0; i < Entcount; i++) {
-            try {
-                if(!Ent.isNull(i)) {
-                    JSONObject jsonObject2 = Ent.getJSONObject(i);
-                    EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
-                    entNewDBTable.insertItem(entertainmentNewDBModel);
-
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("entcount", String.valueOf(i));
-        }
-    }
-    void SavenewGov(JSONArray jo) {
-        JSONArray Gov = jo;
-        GovNewDBTable govNewDBTable = new GovNewDBTable(AreaUpgrade.this);
-
-
-        int Govcount = Gov.length();
-
-        for (int i = 0; i < Govcount; i++) {
-            try {
-                if(!Gov.isNull(i)) {
-                    JSONObject jsonObject2 = Gov.getJSONObject(i);
-                    GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
-                    govNewDBTable.insertItem(governmentNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("govcount", String.valueOf(i));
-        }
-    }
-    void SavenewLegal(JSONArray jo) {
-        JSONArray Legal = jo;
-        LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(AreaUpgrade.this);
-
-
-        int Legalcount = Legal.length();
-
-        for (int i = 0; i < Legalcount; i++) {
-            try {
-                if(!Legal.isNull(i)) {
-                    JSONObject jsonObject2 = Legal.getJSONObject(i);
-                    LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
-                    legalAidNewDBTable.insertItem(legalAidNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("legalcount", String.valueOf(i));
-        }
-    }
-    void SavenewFin(JSONArray jo) {
-        JSONArray Fin = jo;
-        FinNewDBTable finNewDBTable = new FinNewDBTable(AreaUpgrade.this);
-
-
-        int Fincount = Fin.length();
-
-        for (int i = 0; i < Fincount; i++) {
-            try {
-                if(!Fin.isNull(i)) {
-                    JSONObject jsonObject2 = Fin.getJSONObject(i);
-                    FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
-                    finNewDBTable.insertItem(financialNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("fcount", String.valueOf(i));
-        }
-    }
-    void SavenewHealth(JSONArray jo) {
-        JSONArray Hel = jo;
-        HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(AreaUpgrade.this);
-        HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(AreaUpgrade.this);
-        HealthNewDBTableHospital healthNewDBTableHospital=new HealthNewDBTableHospital(AreaUpgrade.this);
-        int Helcount = Hel.length();
-
-        for (int i = 0; i < Helcount; i++) {
-            try {
-                if(!Hel.isNull(i)) {
-                    JSONObject jsonObject2 = Hel.getJSONObject(i);
-                    HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
-                    govNewDBTable.insertItem(healthNewDBModelMain);
-                    if (jsonObject2.has("health_pharmacy")) {
-                        JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
-
-
-                        HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
-                        healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
-
-
-                    } if (jsonObject2.has("health_hospital")) {
-                        JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
-
-
-                        HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
-                        healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
-
-
-                    }
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("hcount", String.valueOf(i));
-        }
-    }
 
 
     public <TableType extends CommonDBTable> void deleteAll (String ward, String area) {
