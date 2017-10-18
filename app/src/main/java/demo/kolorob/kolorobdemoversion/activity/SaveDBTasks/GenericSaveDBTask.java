@@ -29,10 +29,11 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 /**
  * Created by shamima.yasmin on 10/17/2017.
+ * Methods are originally written by Israt.Mity
  */
 
 
-public abstract class GenericSaveDBTask <Params, Progress, Result, TableType extends BaseDBTable, ModelType extends BaseModel> extends AsyncTask <Params, Progress, Result> {
+public abstract class GenericSaveDBTask<Params, Progress, Result, TableType extends BaseDBTable, ModelType extends BaseModel> extends AsyncTask<Params, Progress, Result> {
 
     protected Context context;
 
@@ -79,14 +80,15 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
 
         JSONArray data = jsonArrays[0];
 
-        for (int i = 0; i < data.length(); i++) {
-            try {
-                if (!data.isNull(i)) {
-                    JSONObject jsonObject = data.getJSONObject(i);
+        if (categoryID == AppConstants.HEALTH) {
 
-                    if(categoryID == AppConstants.HEALTH){
+            for (int i = 0; i < data.length(); i++) {
 
-                        HealthNewDBModelMain health = (HealthNewDBModelMain)model.parse(jsonObject);
+                try {
+                    if (!data.isNull(i)) {
+                        JSONObject jsonObject = data.getJSONObject(i);
+
+                        HealthNewDBModelMain health = (HealthNewDBModelMain) model.parse(jsonObject);
                         table.insertItem(health);
 
                         if (jsonObject.has("health_pharmacy")) {
@@ -99,9 +101,22 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
                         }
                     }
 
-                    else if (categoryID == AppConstants.EDUCATION){
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+        }
 
-                        EduNewModel edu = (EduNewModel)model.parse(jsonObject);
+        else if (categoryID == AppConstants.EDUCATION) {
+
+            for (int i = 0; i < data.length(); i++) {
+
+                try {
+                    if (!data.isNull(i)) {
+                        JSONObject jsonObject = data.getJSONObject(i);
+
+                        EduNewModel edu = (EduNewModel) model.parse(jsonObject);
                         table.insertItem(edu);
 
                         if (jsonObject.has("training_details")) {
@@ -129,15 +144,14 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
 
                     }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
                 }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return new Long(-1);
             }
+
         }
+
         return new Long(0);
     }
-
 }
