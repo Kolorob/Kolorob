@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Israt Jahan on 26-Dec-15.
  */
 
-public class SubCategoryItemNew implements Serializable {
+public class SubCategoryItemNew extends BaseModel <SubCategoryItemNew> implements Serializable {
 
     private int id;
     private int catId;
@@ -105,16 +105,17 @@ public class SubCategoryItemNew implements Serializable {
         this.refLabelBn = refLabelBn;
     }
 
-    public static SubCategoryItemNew parseSubCategoryItem(JSONObject jo) throws JSONException {
+    public SubCategoryItemNew parse(JSONObject jo) throws JSONException {
+
         int _id = jo.getInt("ref_id");
         int cat_id = jo.getInt("cat_id");
-        String catname=jo.getString("cat_label");
+        String catname = jo.getString("cat_label");
 
         int subcatid = jo.getInt("sub_cat_id");
         String subcatLabele = jo.getString("sub_cat_label");
         String subcatLabelB = jo.getString("sub_cat_label_bn");
         int refId = jo.getInt("ref_id");
-        String refname= jo.getString("ref_label");
+        String refname = jo.getString("ref_label");
         String refnamebn = jo.getString("ref_label_bn");
         return new SubCategoryItemNew(_id, cat_id,catname,subcatid, subcatLabele,subcatLabelB,refId,refname,refnamebn);
     }
