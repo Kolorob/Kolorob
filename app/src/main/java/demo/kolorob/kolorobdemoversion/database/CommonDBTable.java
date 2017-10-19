@@ -59,6 +59,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     public abstract void updateItem(ContentValues rowValue, ModelType model);
     public abstract ArrayList <ModelType> getByArea(String ward, String area);
     public abstract ArrayList <ModelType> getByAreaCategory(String ward, String area, int category);
+    public abstract void delete(String ward, String area);
 
 
     public CommonDBTable(Context context) {

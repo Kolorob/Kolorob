@@ -311,84 +311,39 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
     public <TableType extends CommonDBTable> void deleteAll (String ward, String area) {
 
-        EduNewDBTableMain educationDB = new EduNewDBTableMain(AreaUpgrade.this);
-        EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(AreaUpgrade.this);
-        EducationResultDetailsTable resultDB = new EducationResultDetailsTable(AreaUpgrade.this);
-        EduNewDBTableTraining trainingDB = new EduNewDBTableTraining(AreaUpgrade.this);
+        ArrayList <TableType> tables = new ArrayList<>();
 
-        HealthNewDBTableMain healthDB = new HealthNewDBTableMain(AreaUpgrade.this);
-        HealthNewDBTableHospital hospitalDB = new HealthNewDBTableHospital(AreaUpgrade.this);
-        HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(AreaUpgrade.this);
+        tables.add((TableType)new EduNewDBTableMain(AreaUpgrade.this));
+        tables.add((TableType)new HealthNewDBTableMain(AreaUpgrade.this));
+        tables.add((TableType)new FinNewDBTable(AreaUpgrade.this));
+        tables.add((TableType)new GovNewDBTable(AreaUpgrade.this));
+        tables.add((TableType)new LegalAidNewDBTable(AreaUpgrade.this));
+        tables.add((TableType)new EntNewDBTable(AreaUpgrade.this));
+        tables.add((TableType)new NGONewDBTable(AreaUpgrade.this));
+        tables.add((TableType)new ReligiousNewDBTable(AreaUpgrade.this));
 
-        EntNewDBTable entertainmentDB = new EntNewDBTable(AreaUpgrade.this);
-        FinNewDBTable financeDB = new FinNewDBTable(AreaUpgrade.this);
-        GovNewDBTable governmentDB = new GovNewDBTable(AreaUpgrade.this);
-        LegalAidNewDBTable legalDB = new LegalAidNewDBTable(AreaUpgrade.this);
-        NGONewDBTable ngoDB = new NGONewDBTable(AreaUpgrade.this);
-        ReligiousNewDBTable shelterDB = new ReligiousNewDBTable(AreaUpgrade.this);
+        for(TableType table : tables){
+            delete(table, ward, area);
+        }
 
         StoredAreaTable storedAreaDB = new StoredAreaTable(AreaUpgrade.this);
-
-        ArrayList <EduNewModel> eduList = educationDB.getByAreaCategory(ward, area, AppConstants.EDUCATION);
-        ArrayList <HealthNewDBModelMain> healthList = healthDB.getByAreaCategory(ward, area, AppConstants.HEALTH);
-
-
-        HashMap <TableType, ArrayList <ModelType> > hashMap = new HashMap<>();
-
-        hashMap.put((TableType)educationDB, (ArrayList <ModelType>) eduList);
-        hashMap.put((TableType)healthDB, (ArrayList <ModelType>) healthList);
-        hashMap.put((TableType)entertainmentDB, (ArrayList <ModelType>) entertainmentDB.getByAreaCategory(ward, area, AppConstants.ENTERTAINMENT));
-        hashMap.put((TableType)financeDB, (ArrayList <ModelType>) financeDB.getByAreaCategory(ward, area, AppConstants.FINANCIAL));
-        hashMap.put((TableType)governmentDB, (ArrayList <ModelType>) governmentDB.getByAreaCategory(ward, area, AppConstants.GOVERNMENT));
-        hashMap.put((TableType)legalDB, (ArrayList <ModelType>) legalDB.getByAreaCategory(ward, area, AppConstants.LEGAL));
-        hashMap.put((TableType)ngoDB, (ArrayList <ModelType>) ngoDB.getByAreaCategory(ward, area, AppConstants.NGO));
-        hashMap.put((TableType)shelterDB, (ArrayList <ModelType>) shelterDB.getByAreaCategory(ward, area, AppConstants.RELIGIOUS));
-
-
-        for(EduNewModel edu : eduList){
-
-            for(EduNewSchoolModel school : schoolDB.getDataListFromForeignKey(edu.getId())){
-                schoolDB.delete(school.getId());
-            }
-            for(EducationResultItemNew result : resultDB.getDataListFromForeignKey(edu.getId())){
-                resultDB.delete(result.getId());
-            }
-            for(EduTrainingModel training : trainingDB.getDataListFromForeignKey(edu.getId())){
-                trainingDB.delete(training.getId());
-            }
-        }
-
-        for(HealthNewDBModelMain health : healthList){
-            for(HealthNewDBModelHospital hospital : hospitalDB.getDataListFromForeignKey(health.getId())){
-                hospitalDB.delete(hospital.getId());
-            }
-            for(HealthNewDBModelPharmacy pharmacy : pharmacyDB.getDataListFromForeignKey(health.getId())){
-                pharmacyDB.delete(pharmacy.getId());
-            }
-        }
-
-
-        Set <TableType> keySet = hashMap.keySet();
-        Iterator <TableType> keySetIterator = keySet.iterator();
-
-        while (keySetIterator.hasNext()) {
-            TableType key = keySetIterator.next();
-            deleteData(key, hashMap.get(key));
-        }
-
-
         storedAreaDB.delete(storedAreaDB.getNodeInfo(ward, area).getId());
 
 
+        
         radioGroup.clearCheck();
         dialog2.dismiss();
         radioGroup.removeAllViews();
 
         ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
         ToastMessageDisplay.showText(AreaUpgrade.this);
-        deleted=true;
+        deleted = true;
         radiobuttonsetup();
 
+    }
+
+    static <TableType extends CommonDBTable> void delete(TableType table, String ward, String area){
+        table.delete(ward, area);
     }
 
     public static <TableType extends CommonDBTable, ModelType extends CommonModel> void deleteData(TableType table, ArrayList <ModelType> list ){
