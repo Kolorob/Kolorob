@@ -91,6 +91,10 @@ public class HealthNewDBTableMain extends CommonDBTable <HealthNewDBModelMain> {
         super.delete(id, TABLE_NAME);
     }
 
+    public void delete(String ward, String area){
+        super.delete(ward, area, TABLE_NAME);
+    }
+
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }

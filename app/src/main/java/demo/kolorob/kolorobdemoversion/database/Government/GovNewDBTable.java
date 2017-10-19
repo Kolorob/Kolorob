@@ -89,6 +89,10 @@ public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
         return super.getByAreaCategory(ward, area, category, TABLE_NAME);
     }
 
+    public void delete(String ward, String area){
+        super.delete(ward, area, TABLE_NAME);
+    }
+
     public void delete(int id){
         super.delete(id, TABLE_NAME);
     }
