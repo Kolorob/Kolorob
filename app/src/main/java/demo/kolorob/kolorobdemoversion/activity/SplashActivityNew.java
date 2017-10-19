@@ -44,10 +44,12 @@ import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveCityCorporationD
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveWardDBTask;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
+import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -61,19 +63,18 @@ public class SplashActivityNew extends AppCompatActivity {
 
     Context context;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
-    View view=null;
+
 
     RelativeLayout dataload;
-    Boolean permission=false;
-    String app_ver="";
-    long install=0;
-    long install2=0;
+    String app_ver = "";
+    long install = 0, install2 = 0;
     File filesDir;
     public final static int PERM_REQUEST_CODE_DRAW_OVERLAYS = 1234;
     Boolean  firstRun, firstRunUpdate = false;
-    public int height,width;
-    Boolean registered=false;
+    public int height, width;
+    Boolean registered = false;
     JSONObject areaData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -84,16 +85,16 @@ public class SplashActivityNew extends AppCompatActivity {
 
         context = this;
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        width=displayMetrics.widthPixels;
-        height=displayMetrics.heightPixels;
-        dataload=(RelativeLayout)findViewById(R.id.splash);
+        width = displayMetrics.widthPixels;
+        height = displayMetrics.heightPixels;
+        dataload = (RelativeLayout)findViewById(R.id.splash);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Snackbar snackbar = Snackbar.make(dataload,"Please allow all the permission so that app works smoothly",Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
         String state = Environment.getExternalStorageState();
-        registered=settings.getBoolean("IFREGISTERED",false);
+        registered = settings.getBoolean("IFREGISTERED",false);
 
 // Make sure it's available
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -234,9 +235,9 @@ public class SplashActivityNew extends AppCompatActivity {
                 header.setText("ইন্টারনেট সংযোগ সচল নয়");
                 header.setTextColor(getResources().getColor(R.color.Black));
 
-                if(firstRun == false)
+                if(!firstRun)
                     bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
-                else if(firstRunUpdate == true)
+                else if(firstRunUpdate)
                     bodys.setText(" কলরব আপডেট হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
 
                 bodys.setTextColor(getResources().getColor(R.color.Black));
@@ -301,7 +302,7 @@ public class SplashActivityNew extends AppCompatActivity {
                         System.gc();
                     }
                                 /* start the activity */
-                    if(registered==true ) {
+                    if(registered == true && (new StoredAreaTable(SplashActivityNew.this).getAllData().size() > 0)) {
                         startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         finish();
@@ -385,10 +386,4 @@ public class SplashActivityNew extends AppCompatActivity {
         } // else: We already have permissions, so handle as normal
     }
 
-
 }
-
-
-
-
-
