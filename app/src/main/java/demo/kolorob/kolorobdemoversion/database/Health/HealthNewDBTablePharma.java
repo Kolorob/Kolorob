@@ -151,7 +151,7 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
         database.execSQL(
                 "DELETE * FROM " + TABLE_NAME +
-                        " WHERE " + KEY_IDENTIFIER_ID + " IN (" +
+                        " WHERE " + KEY_HEALTH_ID + " IN (" +
                         " SELECT " + HealthNewDBTableMain.KEY_IDENTIFIER_ID + " FROM " + HealthNewDBTableMain.getTableName() +
                         " WHERE " + HealthNewDBTableMain.getKeyWard() + " = '" + ward + "' AND ( " +
                         HealthNewDBTableMain.getKeyArea() + " = '" + area + "' OR " + HealthNewDBTableMain.getKeyParentArea() + " = '" + area + "' ))");
