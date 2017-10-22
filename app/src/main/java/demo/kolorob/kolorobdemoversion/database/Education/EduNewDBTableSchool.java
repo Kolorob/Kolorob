@@ -152,17 +152,7 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
     }
 
     public void delete(String ward, String area){
-        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
-        SQLiteDatabase database = databaseHelper.getWritableDatabase();
-
-        database.execSQL(
-                "DELETE * FROM " + TABLE_NAME +
-                        " WHERE " + KEY_EDUCATION_ID + " IN (" +
-                        " SELECT " + EduNewDBTableMain.KEY_IDENTIFIER_ID + " FROM " + EduNewDBTableMain.getTableName() +
-                        " WHERE " + EduNewDBTableMain.getKeyWard() + " = '" + ward + "' AND ( " +
-                        EduNewDBTableMain.getKeyArea() + " = '" + area + "' OR " + EduNewDBTableMain.getKeyParentArea() + " = '" + area + "' ))");
-
-        database.close();
+        super.delete(ward, area, TABLE_NAME, KEY_EDUCATION_ID, EduNewDBTableMain.getTableName(), EduNewDBTableMain.KEY_IDENTIFIER_ID);
     }
 
 

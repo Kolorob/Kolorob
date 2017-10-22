@@ -4,8 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
+
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 
 /**
@@ -62,6 +65,18 @@ public abstract class BaseDBTable <ModelType>  {
         DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         database.delete(TABLE_NAME, KEY_IDENTIFIER_ID + " = " + id, null);
+
+        database.close();
+    }
+
+    protected <Table extends CommonDBTable> void delete(String ward, String area, String TABLE_NAME, String foreignKey, String foreignTable, String foreignTableKey){
+        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+
+        database.delete(TABLE_NAME, foreignKey + " IN (" +
+                " SELECT " + foreignTableKey + " FROM " + foreignTable +
+                " WHERE " + Table.getKeyWard() + " = '" + ward + "' AND ( " +
+                Table.getKeyArea() + " = '" + area + "' OR " + Table.getKeyParentArea() + " = '" + area + "' ))" , null);
 
         database.close();
     }
