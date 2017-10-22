@@ -108,11 +108,6 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
 
 
 
-    public void delete(int id){
-        super.delete(id, TABLE_NAME);
-    }
-
-
     public boolean isFieldExist(int id) {
         return super.isFieldExist(id, TABLE_NAME);
     }
@@ -151,8 +146,29 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
     }
 
 
+
+    public void delete(int id){
+        super.delete(id, TABLE_NAME);
+    }
+
+    public void delete(String ward, String area){
+        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+
+        database.execSQL(
+                "DELETE * FROM " + TABLE_NAME +
+                        " WHERE " + KEY_EDUCATION_ID + " IN (" +
+                        " SELECT " + EduNewDBTableMain.KEY_IDENTIFIER_ID + " FROM " + EduNewDBTableMain.getTableName() +
+                        " WHERE " + EduNewDBTableMain.getKeyWard() + " = '" + ward + "' AND ( " +
+                        EduNewDBTableMain.getKeyArea() + " = '" + area + "' OR " + EduNewDBTableMain.getKeyParentArea() + " = '" + area + "' ))");
+
+        database.close();
+    }
+
+
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }
+
 
 }

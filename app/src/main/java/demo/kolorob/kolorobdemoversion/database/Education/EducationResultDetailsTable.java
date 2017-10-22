@@ -112,9 +112,6 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public void delete(int id){
-        super.delete(id, TABLE_NAME);
-    }
 
     public EducationResultItemNew cursorToModel(Cursor cursor) {
         int _id = cursor.getInt(0);
@@ -150,6 +147,26 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
     public ArrayList <EducationResultItemNew> getDataListFromForeignKey(int id){
         return super.getDataListFromId(id, TABLE_NAME, KEY_EDUCATION_ID);
     }
+
+
+    public void delete(int id){
+        super.delete(id, TABLE_NAME);
+    }
+
+    public void delete(String ward, String area){
+        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+
+        database.execSQL(
+                "DELETE * FROM " + TABLE_NAME +
+                        " WHERE " + KEY_EDUCATION_ID + " IN (" +
+                        " SELECT " + EduNewDBTableMain.KEY_IDENTIFIER_ID + " FROM " + EduNewDBTableMain.getTableName() +
+                        " WHERE " + EduNewDBTableMain.getKeyWard() + " = '" + ward + "' AND ( " +
+                        EduNewDBTableMain.getKeyArea() + " = '" + area + "' OR " + EduNewDBTableMain.getKeyParentArea() + " = '" + area + "' ))");
+
+        database.close();
+    }
+
 
 
     public void dropTable() {

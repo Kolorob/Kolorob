@@ -27,6 +27,9 @@ public class EduNewDBTableMain extends CommonDBTable<EduNewModel> {
     private static final String KEY_AVG_STD = "avg_std_per_class";
     private static final String KEY_FACILITY = "facility";
 
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
 
     public EduNewDBTableMain(Context context) {
         super(context);
