@@ -4,14 +4,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 
 /**
  * Created by HP on 2/13/2017.
  */
 
-public class StoredAreaTable extends BaseDBTable <StoredArea> {
+public class StoredAreaTable extends BaseDBTable<StoredArea> {
 
     private static final String TABLE_NAME = DatabaseHelper.AREASTORED;
 
@@ -47,14 +49,14 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
     }
 
 
-    public long insertItem(StoredArea storedArea){
-        if(isFieldExist(storedArea.getId())){
+    public long insertItem(StoredArea storedArea) {
+        if (isFieldExist(storedArea.getId())) {
             return updateItem(storedArea);
         }
         return insertItem(storedArea.getId(), storedArea.getWard(), storedArea.getArea(), storedArea.getAreaBn(), storedArea.getParentArea(), storedArea.getLat(), storedArea.getLon());
     }
 
-    public long updateItem(StoredArea storedArea){
+    public long updateItem(StoredArea storedArea) {
         return updateItem(storedArea.getId(), storedArea.getWard(), storedArea.getArea(), storedArea.getAreaBn(), storedArea.getParentArea(), storedArea.getLat(), storedArea.getLon());
     }
 
@@ -76,7 +78,7 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
         return ret;
     }
 
-    public ArrayList <StoredArea> getStoredLocation(String ward, String area) {
+    public ArrayList<StoredArea> getStoredLocation(String ward, String area) {
         ArrayList<StoredArea> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
@@ -97,7 +99,7 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public boolean isAreaStored(String ward, String area){
+    public boolean isAreaStored(String ward, String area) {
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + WARDID + " = '" + ward + "'" + " AND " + AREANAME + " = '" + area + "'", null);
 
@@ -147,34 +149,33 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
 
 
     public void delete(int id) {
-       super.delete(id, TABLE_NAME);
+        super.delete(id, TABLE_NAME);
     }
 
 
-   public StoredArea cursorToModel(Cursor cursor) {
+    public StoredArea cursorToModel(Cursor cursor) {
 
-       int _id = cursor.getInt(0);
-       String _ward = cursor.getString(1);
-       String _area = cursor.getString(2);
-       String _areaBn = cursor.getString(3);
-       String _parentArea = cursor.getString(4);
-       String _lat = cursor.getString(5);
-       String _lon = cursor.getString(6);
+        int _id = cursor.getInt(0);
+        String _ward = cursor.getString(1);
+        String _area = cursor.getString(2);
+        String _areaBn = cursor.getString(3);
+        String _parentArea = cursor.getString(4);
+        String _lat = cursor.getString(5);
+        String _lon = cursor.getString(6);
 
-       return new StoredArea(_id, _ward, _area, _areaBn, _parentArea, _lat, _lon);
-   }
+        return new StoredArea(_id, _ward, _area, _areaBn, _parentArea, _lat, _lon);
+    }
 
 
-
-   public ArrayList <StoredArea> getAllData() {
+    public ArrayList<StoredArea> getAllData() {
         return super.getAllData(TABLE_NAME);
-   }
+    }
 
-    public StoredArea getNodeInfo(int id){
+    public StoredArea getNodeInfo(int id) {
         return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
-    public ArrayList <StoredArea> getDataListFromId(int id) {
+    public ArrayList<StoredArea> getDataListFromId(int id) {
         return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 

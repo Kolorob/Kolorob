@@ -62,6 +62,22 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     public abstract void delete(String ward, String area);
 
 
+    public static String getKeyNameEng() {
+        return KEY_NAME_ENG;
+    }
+
+    public static String getKeyArea() {
+        return KEY_AREA;
+    }
+
+    public static String getKeyParentArea() {
+        return KEY_PARENT_AREA;
+    }
+
+    public static String getKeyWard() {
+        return KEY_WARD;
+    }
+
     public CommonDBTable(Context context) {
         super(context);
     }

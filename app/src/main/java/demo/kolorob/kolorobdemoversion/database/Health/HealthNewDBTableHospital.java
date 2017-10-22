@@ -159,6 +159,20 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
                 _ambavailable,_ambnumber,_mtravailable,_mtrnum,_mtrprivacy);
     }
 
+    public void delete(String ward, String area){
+        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+
+        database.execSQL(
+                "DELETE * FROM " + TABLE_NAME +
+                " WHERE " + KEY_IDENTIFIER_ID + " IN (" +
+                " SELECT " + HealthNewDBTableMain.KEY_IDENTIFIER_ID + " FROM " + HealthNewDBTableMain.getTableName() +
+                " WHERE " + HealthNewDBTableMain.getKeyWard() + " = '" + ward + "' AND ( " +
+                        HealthNewDBTableMain.getKeyArea() + " = '" + area + "' OR " + HealthNewDBTableMain.getKeyParentArea() + " = '" + area + "' ))");
+
+        database.close();
+    }
+
 
     public void delete(int id){
         super.delete(id, TABLE_NAME);

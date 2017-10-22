@@ -21,6 +21,10 @@ public class HealthNewDBTableMain extends CommonDBTable <HealthNewDBModelMain> {
 
     private static final String KEY_INSTITUTE_TYPE = "institute_type";
 
+    public static String getTableName() {
+        return TABLE_NAME;
+    }
+
     public HealthNewDBTableMain(Context context) {
         super(context);
     }
