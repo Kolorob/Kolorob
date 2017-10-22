@@ -16,9 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEducationDBTask;
@@ -46,13 +43,6 @@ import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -179,7 +169,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
                     dialog.show();
                     if(AppUtils.isNetConnected(getApplicationContext()))
                     {
-                        Servercall(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea());
+                        serverCall(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea());
                     }
                     else
                     {
@@ -238,7 +228,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
     }
 
 
-    void Servercall(String ward, String area) {
+    void serverCall(String ward, String area) {
 
         getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
@@ -322,6 +312,18 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
         tables.add((TableType)new NGONewDBTable(AreaUpgrade.this));
         tables.add((TableType)new ReligiousNewDBTable(AreaUpgrade.this));
 
+        EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(AreaUpgrade.this);
+        EducationResultDetailsTable resultDB = new EducationResultDetailsTable(AreaUpgrade.this);
+        EduNewDBTableTraining trainingDB = new EduNewDBTableTraining(AreaUpgrade.this);
+        HealthNewDBTableHospital hospitalDB = new HealthNewDBTableHospital(AreaUpgrade.this);
+        HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(AreaUpgrade.this);
+
+        schoolDB.delete(ward, area);
+        resultDB.delete(ward, area);
+        trainingDB.delete(ward, area);
+        hospitalDB.delete(ward, area);
+        pharmacyDB.delete(ward, area);
+
         for(TableType table : tables){
             delete(table, ward, area);
         }
@@ -330,7 +332,6 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
         storedAreaDB.delete(storedAreaDB.getNodeInfo(ward, area).getId());
 
 
-        
         radioGroup.clearCheck();
         dialog2.dismiss();
         radioGroup.removeAllViews();
