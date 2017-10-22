@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -27,12 +26,24 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.*;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveCategoryDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEducationDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEntertainmentDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveFinancialDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveGovernmentDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveHealthDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveLegalDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveNgoDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveReferenceDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveShelterDBTask;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterWard;
@@ -60,30 +71,42 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Context context;
+    static int countofDb = 0;
     private static int NUMBER_OF_TASKS = 6;
+    private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
+    Context context;
     View view = null, areaview, wardview, cityview;
     Button submit;
-    Boolean firstRun, firstRunUpdate, permission = false;
-    static int countofDb = 0;
-
+    Boolean firstRun, firstRunUpdate;
     JSONObject allData;
     String AreaNameBn, Location, keyword;
-    private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
     ImageView rotateImage;
     TextView ward, area, city;
+    ArrayList<CityCorporation> ccList = new ArrayList<>();
+    ArrayList<Ward> wardList = new ArrayList<>();
+    ArrayList<Area> areaList = new ArrayList<>();
+    String cityClicked, wardClicked, areaClicked;
     private GridLayoutManager lLayout, lLayout2;
-
     private Animation mEnterAnimation, mExitAnimation;
     private int pos, posAreaInt = -1;
-
-    ArrayList <CityCorporation> ccList = new ArrayList<>();
-    ArrayList <Ward> wardList = new ArrayList<>();
-    ArrayList <Area> areaList = new ArrayList<>();
-
-    String cityClicked, wardClicked, areaClicked;
+    private AnimationDrawable frameAnimation;
 
 
+    public static int getCountofDb() {
+        return countofDb;
+    }
+
+    public static void setCountofDb(int count) {
+        countofDb = count;
+    }
+
+    public static int getNumberOfTasks() {
+        return NUMBER_OF_TASKS;
+    }
+
+    public static void setNumberOfTasks(int numberOfTasks) {
+        NUMBER_OF_TASKS = numberOfTasks;
+    }
 
     public int getPos() {
         return pos;
@@ -125,7 +148,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         this.wardview = wardview;
     }
 
-
     public String getAreaNameBn() {
         return AreaNameBn;
     }
@@ -134,7 +156,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         AreaNameBn = areaNameBn;
     }
 
-
     public String getLocation() {
         return Location;
     }
@@ -142,25 +163,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     public void setLocation(String location) {
         Location = location;
     }
-
-    public static int getCountofDb() {
-        return countofDb;
-    }
-
-    public static void setCountofDb(int count) {
-        countofDb = count;
-    }
-
-    public static int getNumberOfTasks() {
-        return NUMBER_OF_TASKS;
-    }
-
-    public static void setNumberOfTasks(int numberOfTasks) {
-        NUMBER_OF_TASKS = numberOfTasks;
-    }
-
-    private AnimationDrawable frameAnimation;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,7 +188,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         firstRunUpdate = settings.getBoolean("update_first_run", true);
 
 
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,7 +201,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     keyword = areaList.get(getPosAreaInt()).getArea_keyword();
                     String lat = areaList.get(getPosAreaInt()).getLat();
 
-                    Log.e("", "Keyword: " + keyword + "Lat: " +lat);
+                    Log.e("", "Keyword: " + keyword + "Lat: " + lat);
 
                     if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
                         ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
@@ -209,7 +210,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
 
-                        if(storedAreaTable.isAreaStored(wardClicked, areaClicked)){
+                        if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
 
                             SharedPreferences settings = getSharedPreferences("prefs", 0);
                             SharedPreferences.Editor editor = settings.edit();
@@ -220,10 +221,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             Intent intent = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class);
                             startActivity(intent);
                             finish();
-                        }
-                        else {
+                        } else {
                             if (AppUtils.isNetConnected(getApplicationContext())) {
-                                Servercall();
+                                serverCall();
                             } else {
                                 AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপনার ডিভাইসের ইন্টারনেট চালু করুন");
                             }
@@ -260,11 +260,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerViewCity, int position, View v) {
-                         cityClicked = ccList.get(position).getCityCorporation_keyword();
-                         recyclerViewArea.setAdapter(null);
-                         Log.d("tasks", "position: " + position);
+                        cityClicked = ccList.get(position).getCityCorporation_keyword();
+                        recyclerViewArea.setAdapter(null);
+                        Log.d("tasks", "position: " + position);
 
-                         populateRecyclerViewWard(ccList.get(position).getId());
+                        populateRecyclerViewWard(ccList.get(position).getId());
 
                         if (getCityview() == null) {
                             setCityview(v);
@@ -328,7 +328,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
 
-                }
+                    }
                 });
 
         context = this;
@@ -440,7 +440,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populateRecyclerViewArea(int ward_id) {
 
 
-
         AreaTable areaTable = new AreaTable(DataLoadingActivity.this);
         areaList = areaTable.getDataListFromForeignKey(ward_id);
 
@@ -474,34 +473,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
 
-    /*
-    this function runs data loading task in asynctask
-     */
-     abstract class GenericSaveDBTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
-        protected Context context;
-
-
-        public GenericSaveDBTask(Context ctx) {
-            this.context = ctx;
-        }
-
-        @Override
-        protected void onPostExecute(Result result) {
-            if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS) { // Means the task is successful
-                countofDb++;
-                SharedPreferences settings = getSharedPreferences("prefs", 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putInt("KValue", countofDb);
-                editor.apply();
-                Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));//number of tasks equivalent to how many api data is being stored
-                ToastMessageDisplay.setText(DataLoadingActivity.this.context, "তথ্য সংগ্রহ চলছে");
-                ToastMessageDisplay.showText(DataLoadingActivity.this.context);
-            }
-        }
-
-    }
-
-    void Servercall() {
+    void serverCall() {
 
         if (!firstRun || firstRunUpdate) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
@@ -524,7 +496,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             public void run() {
 
 
-                if (DataLoadingActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
+                if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
                     overridePendingTransition(0, 0);
 
                     handler.removeCallbacks(this);
@@ -592,12 +564,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             );
 
 
-            if(firstRunUpdate){
+            if (firstRunUpdate) {
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("update_first_run", false).apply();
             }
         }
+
+        if(wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
+
         getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
@@ -610,9 +585,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         if (allData.length() == 0) {
                             ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
-                        }
-
-                        else { //checking category label and parsing in different threads so that parsing time get minimised
+                        } else { //checking category label and parsing in different threads so that parsing time get minimised
                             if (allData.has("Education")) {
                                 new SaveEducationDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
                             }
@@ -658,9 +631,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         Log.d("Doneall", String.valueOf(p));
                         StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
                         WardTable wardTable = new WardTable(DataLoadingActivity.this);
-                        Area area  = areaList.get(posAreaInt);
+                        Area area = areaList.get(posAreaInt);
 
-                        storedAreaTable.insertItem( new StoredArea(area.getId(), wardTable.getNodeInfo(area.getWard_id()).getWard_keyword(), area.getArea_keyword(), area.getArea_bn(), area.getParentArea(), area.getLat(), area.getLon()));
+                        storedAreaTable.insertItem(new StoredArea(area.getId(), wardTable.getNodeInfo(area.getWard_id()).getWard_keyword(), area.getArea_keyword(), area.getArea_bn(), area.getParentArea(), area.getLat(), area.getLon()));
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString("_ward", wardClicked);
