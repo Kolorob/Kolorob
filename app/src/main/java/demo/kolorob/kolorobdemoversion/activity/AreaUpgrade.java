@@ -98,7 +98,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
-              selectedId= radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
+              selectedId = radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
 
 
             }
@@ -312,17 +312,12 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
         tables.add((TableType)new NGONewDBTable(AreaUpgrade.this));
         tables.add((TableType)new ReligiousNewDBTable(AreaUpgrade.this));
 
-        EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(AreaUpgrade.this);
-        EducationResultDetailsTable resultDB = new EducationResultDetailsTable(AreaUpgrade.this);
-        EduNewDBTableTraining trainingDB = new EduNewDBTableTraining(AreaUpgrade.this);
-        HealthNewDBTableHospital hospitalDB = new HealthNewDBTableHospital(AreaUpgrade.this);
-        HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(AreaUpgrade.this);
+        new EduNewDBTableSchool(AreaUpgrade.this).delete(ward, area);
+        new EducationResultDetailsTable(AreaUpgrade.this).delete(ward, area);
+        new EduNewDBTableTraining(AreaUpgrade.this).delete(ward, area);
+        new HealthNewDBTableHospital(AreaUpgrade.this).delete(ward, area);
+        new HealthNewDBTablePharma(AreaUpgrade.this).delete(ward, area);
 
-        schoolDB.delete(ward, area);
-        resultDB.delete(ward, area);
-        trainingDB.delete(ward, area);
-        hospitalDB.delete(ward, area);
-        pharmacyDB.delete(ward, area);
 
         for(TableType table : tables){
             delete(table, ward, area);
