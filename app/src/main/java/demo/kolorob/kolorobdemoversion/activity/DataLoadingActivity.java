@@ -624,6 +624,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 editor.putBoolean("new_update_first_run", false).apply();
             }
         }
+        
+        if(wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
+
         getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
