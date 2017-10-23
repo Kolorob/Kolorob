@@ -469,11 +469,11 @@ void radiobuttonsetup() // database operation for getting information which area
 
     @Override
     public void onBackPressed() {
-        if(deleted)
-        {
-            AlertMessage.showMessage(AreaUpgrade.this,"দুঃখিত","দয়া করে যে এলাকার তথ্য দেখতে চান সেটি নির্বাচন করে 'এলাকার তথ্য দেখুন' বাটন টি চাপুন");
+        if(storedAreas.isEmpty()){
+            Intent em = new Intent(this, DataLoadingActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
-        else
-        super.onBackPressed();
+        else super.onBackPressed();
     }
 }
