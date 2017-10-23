@@ -106,4 +106,14 @@
     <string name="feedback_accepted">মতামতটি গ্রহন করা হয়েছে</string>
     <string name="thanks_for_feedback">মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ</string>
     <string name="feedback_failed">মতামতটি গ্রহন করা হয় নি</string>
+    <string name="ward">ওয়ার্ড</string>
+    <string name="police_station">পুলিশ স্টেশন</string>
+    <string name="contact_info">যোগাযোগ</string>
+    <string name="email">ইমেইল</string>
+    <string name="opening_time">খোলার সময়</string>
+    <string name="closing_time">বন্ধের সময়</string>
+    <string name="weekly_holiday">সাপ্তাহিক বন্ধ</string>
+    <string name="other_info">অন্যান্য তথ্য</string>
+    <string name="address">ঠিকানা</string>
+    <string name="dakshinkhan">দক্ষিণখান</string>
 </resources>

@@ -154,12 +154,12 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
 
     protected void displayCommonProperties(final ModelType model){
         CheckConcate("\n", "\n");
-        CheckConcate("ঠিকানা", concatenateAddress(model.getHouseNo(), model.getRoad(), model.getBlock(), model.getAreaBn()));
+        CheckConcate(getString(R.string.address), concatenateAddress(model.getHouseNo(), model.getRoad(), model.getBlock(), model.getAreaBn()));
         String ward = model.getWard();
         if(ward.contains("_")){
             String[] wardSplitted = ward.split("_");
             if(wardSplitted[1].equals("dakshinkhan"))
-                ward = "দক্ষিণখান";
+                ward = getString(R.string.dakshinkhan);
             else
                 ward = English_to_bengali_number_conversion(wardSplitted[1]);
         }
@@ -167,14 +167,14 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
             ward = English_to_bengali_number_conversion(ward);
 
 
-        CheckConcate("ওয়ার্ড", ward);
-        CheckConcate("পুলিশ স্টেশন", model.getPoliceStation());
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(model.getNodeContact()));
-        CheckConcate("ইমেইল", model.getNodeEmail());
-        timeProcessing("খোলার সময়", model.getOpeningTime());
-        timeProcessing("বন্ধের সময়", model.getClosingTime());
-        CheckConcate("সাপ্তাহিক বন্ধ", model.getOffDay());
-        CheckConcate("অন্যান্য তথ্য ", model.getOtherInfo());
+        CheckConcate(getString(R.string.ward), ward);
+        CheckConcate(getString(R.string.police_station), model.getPoliceStation());
+        CheckConcate(getString(R.string.contact_info), English_to_bengali_number_conversion(model.getNodeContact()));
+        CheckConcate(getString(R.string.email), model.getNodeEmail());
+        timeProcessing(getString(R.string.opening_time), model.getOpeningTime());
+        timeProcessing(getString(R.string.closing_time), model.getClosingTime());
+        CheckConcate(getString(R.string.weekly_holiday), model.getOffDay());
+        CheckConcate(getString(R.string.other_info), model.getOtherInfo());
 
         //checkConcate method will check null data and concat
 
