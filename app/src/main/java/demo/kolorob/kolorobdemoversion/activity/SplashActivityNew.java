@@ -41,6 +41,7 @@ import demo.kolorob.kolorobdemoversion.BuildConfig;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
+import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
@@ -296,7 +297,7 @@ public class SplashActivityNew extends AppCompatActivity {
                         System.gc();
                     }
                                 /* start the activity */
-                    if(registered==true ) {
+                    if(registered == true && (new StoredAreaTable(SplashActivityNew.this).getAllstored().size() > 0)) {
                         startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         finish();
@@ -311,6 +312,8 @@ public class SplashActivityNew extends AppCompatActivity {
                     finish();
                 }
             }, 3000);
+
+
 
 
 
