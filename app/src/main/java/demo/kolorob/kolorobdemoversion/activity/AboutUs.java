@@ -78,15 +78,15 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
-                    ToastMessageDisplay.setText(AboutUs.this,"দুঃখিত! ইমেইল করা যাচ্ছে না");
+                    ToastMessageDisplay.setText(AboutUs.this,getString(R.string.cant_mail));
                     ToastMessageDisplay.showText(AboutUs.this);
 
                 }
                 break;
             case R.id.btnphn:
 
-                AlertMessage.showMessage(AboutUs.this, "দুঃখিত",
-                        "ফোনে কল দেয়া সম্ভব হচ্ছে না");
+                AlertMessage.showMessage(AboutUs.this, getString(R.string.sorry),
+                        getString(R.string.cant_call));
                 break;
             default:break;
         }

@@ -61,7 +61,7 @@ this activity is for area upgrade/delete/browse. This is almost similar to data 
 
 
 
-public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivity {
+public class AreaUpgrade extends AppCompatActivity {
 
     ArrayList <StoredArea> storedAreas = new ArrayList<>();
     RadioGroup radioGroup;
@@ -111,7 +111,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
                 if(selectedId ==-1)
                 {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.select_area_first));
                     ToastMessageDisplay.showText(AreaUpgrade.this);
                 }
                 else {
@@ -132,7 +132,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
                 if(selectedId ==-1)
                 {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.select_area_first));
                     ToastMessageDisplay.showText(AreaUpgrade.this);
                 }
                 else {
@@ -159,21 +159,20 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
                 if(selectedId ==-1)
                 {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.select_area_first));
                     ToastMessageDisplay.showText(AreaUpgrade.this);
                 }
                 else {
                     dialog = new ProgressDialog(AreaUpgrade.this);
-                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setMessage(getString(R.string.please_wait));
                     dialog.setCancelable(true);
                     dialog.show();
-                    if(AppUtils.isNetConnected(getApplicationContext()))
-                    {
+
+                    if(AppUtils.isNetConnected(getApplicationContext())) {
                         serverCall(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea());
                     }
-                    else
-                    {
-                        AlertMessage.showMessage(AreaUpgrade.this, " দুঃখিত","আপনার ডিভাইসের ইন্টারনেট চালু করুন");
+                    else {
+                        AlertMessage.showMessage(AreaUpgrade.this, getString(R.string.sorry), getString(R.string.connect_to_internet));
                         dialog.cancel();
                     }
 
@@ -206,7 +205,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
         radioGroup.clearCheck();
         if(storedAreas.isEmpty()){
-            ToastMessageDisplay.setText(AreaUpgrade.this,"কোন এলাকার তথ্য নামানো নেই");
+            ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.no_downloaded_area));
             ToastMessageDisplay.showText(AreaUpgrade.this);
             Intent em = new Intent(this, DataLoadingActivity.class);
             startActivity(em);
@@ -279,7 +278,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
                         Log.d("Doneall",String.valueOf(allData.length()));
                         dialog.dismiss();
-                        ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য আপডেট হয়েছে");
+                        ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.info_updated));
                         ToastMessageDisplay.showText(AreaUpgrade.this);
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
@@ -331,7 +330,7 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
         dialog2.dismiss();
         radioGroup.removeAllViews();
 
-        ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
+        ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.info_deleted));
         ToastMessageDisplay.showText(AreaUpgrade.this);
         deleted = true;
         radiobuttonsetup();

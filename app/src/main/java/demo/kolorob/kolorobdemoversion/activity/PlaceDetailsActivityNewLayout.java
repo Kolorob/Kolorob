@@ -1797,7 +1797,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
                         header.setText("!!!");
                         header.setTextColor(getResources().getColor(R.color.Black));
-                        bodys.setText("কলরব জব পোর্টাল নতুন রূপে আসছে");
+                        bodys.setText(R.string.job_portal_coming_soon);
                         bodys.setTextColor(getResources().getColor(R.color.Black));
                         okay.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -1830,17 +1830,17 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                         inCompare = true;
 
                         if (currentCategoryID == 10000 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 0) {
-                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                    "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.no_service_selected));
                         } else if (currentCategoryID == 20000 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 0) {
-                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                    "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.no_service_selected));
                         } else if (currentCategoryID == 10000 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 1) {
-                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                    "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.select_two_services));
                         } else if (currentCategoryID == 20000 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 1) {
-                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                    "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.select_two_services));
                         } else {
 
 
@@ -1898,8 +1898,8 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                             compareTool();
                         }
                     } else
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "বর্তমান ক্যাটাগরির জন্য তুলনা সম্ভব নয়");
+                        AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                getString(R.string.incompatible_category_to_compare));
 
 
                 }
@@ -2243,7 +2243,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                     English_to_bengali_number_conversion(educationNewItem.getTeachersNo()),
                     educationNewItem.getShift(),educationNewItem.getRatings()};
             if(educationNewItem.getNameBn()==null || educationNewItem.getNameBn().equalsIgnoreCase("null")|| educationNewItem.getNameBn().equals(""))
-                edu_name1.setText("তথ্য পাওয়া যায় নি ");
+                edu_name1.setText(getString(R.string.info_not_found));
             else
                 edu_name1.setText(educationNewItem.getNameBn());
         }
@@ -2437,9 +2437,9 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("ক্যাটাগরি ")
+                        .setTitle(getString(R.string.category))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription(" সেবার ধরণ অনুযায়ী তথ্য পেতে এখান থেকে সেবা নির্বাচন করুন")
+                        .setDescription(getString(R.string.tutorial_select_category))
                         .setGravity(Gravity.RIGHT)
                 )
                 // note that there is no Overlay here, so the default one will be used
@@ -2447,45 +2447,45 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("চাকরির তথ্য")
+                        .setTitle(getString(R.string.job_info))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription(" এলাকার চাকরির খবর পেতে এখানে ক্লিক করুন")
+                        .setDescription(getString(R.string.tutorial_job))
                         .setGravity(Gravity.TOP)
                 )
                 .playLater(jobButton);
         ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("সেবা খুঁজুন")
+                        .setTitle(getString(R.string.search_for_service))
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("আপনার পরিচিত সেবা প্রতিষ্ঠানের অথবা সকল প্রতিষ্ঠানের তথ্য লিস্ট অনুসারে দেখতে ক্লিক করুন ")
+                        .setDescription(getString(R.string.tutorial_select_service))
                         .setGravity(Gravity.TOP)
                 )
                 .playLater(searchButton);
         ChainTourGuide tourGuide4 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("তুলনা ")
+                        .setTitle(getString(R.string.compare_title))
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("শিক্ষার বিস্তারিত পেজ থেকে 'তুলনা করুন' নির্বাচন করে আপনি এখানে ক্লিক করে তুলনা করতে পারবেন")
+                        .setDescription(getString(R.string.tutorial_compare))
                         .setGravity(Gravity.TOP)
                 )
                 .playLater(compareButton);
         ChainTourGuide tourGuide5 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("মেনু")
+                        .setTitle(getString(R.string.menu))
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("ইমারজেন্সি সুবিধা, টিউটোরিয়াল সহ অন্যান্য বিষয় জানতে বাঁয়ের মেনুতে ক্লিক করুন")
+                        .setDescription(getString(R.string.tutorial_emergency))
                         .setGravity(Gravity.RIGHT)
                 )
                 .playLater(upText);
         ChainTourGuide tourGuide6 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("এলাকা পাল্টান")
+                        .setTitle(getString(R.string.change_area))
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription(" এখান থেকে নতুন এলাকার তথ্য নামাতে পারবেন")
+                        .setDescription(getString(R.string.download_new_area))
                         .setGravity(Gravity.RIGHT)
                 )
                 .playLater(changeArea);
@@ -2509,9 +2509,9 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("নতুন এলাকার তথ্য")
+                        .setTitle(getString(R.string.new_area_info))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("'নতুন এলাকার তথ্য নামান' থেকে আপনি অন্যান্য এলাকার তথ্য নামাতে পারবেন")
+                        .setDescription(getString(R.string.tutorial_download_new_area))
                         .setGravity(Gravity.RIGHT)
                 )
                 // note that there is no Overlay here, so the default one will be used
@@ -2519,9 +2519,9 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
      ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("নামানো তথ্য পরিবর্তন")
+                        .setTitle(getString(R.string.change_downloaded_info))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("নামানো এলাকার তথ্য বাতিল অথবা আপডেট করতে ব্যবহার করুন")
+                        .setDescription(getString(R.string.tutorial_update_info))
                         .setGravity(Gravity.TOP)
                 )
                 .playLater(view2);
@@ -2567,7 +2567,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
            editor.apply();
        }*/
         if (!settings.getBoolean("Reviewsent", false)) help();
-        ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
+        ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,getString(R.string.press_back_to_exit));
         ToastMessageDisplay.showText(this);
         Log.d("In on Back Pressed","==========");
         this.doubleBackToExitPressedOnce = true;

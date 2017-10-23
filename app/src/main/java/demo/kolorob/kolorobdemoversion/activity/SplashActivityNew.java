@@ -222,13 +222,13 @@ public class SplashActivityNew extends AppCompatActivity {
                 final TextView bodys = (TextView) promptView.findViewById(R.id.body);
                 final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
 
-                header.setText("ইন্টারনেট সংযোগ সচল নয়");
+                header.setText(R.string.no_internet);
                 header.setTextColor(getResources().getColor(R.color.Black));
 
                 if(!firstRun)
-                    bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+                    bodys.setText(R.string.first_run_no_internet);
                 else if(firstRunUpdate)
-                    bodys.setText(" কলরব আপডেট হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+                    bodys.setText(R.string.update_no_internet);
 
                 bodys.setTextColor(getResources().getColor(R.color.Black));
                 okay.setOnClickListener(new View.OnClickListener() {

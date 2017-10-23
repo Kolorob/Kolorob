@@ -134,10 +134,10 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         long diffInMillisec = today.getTime() - lastUpdateDate.getTime();
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
 
-        if (diffInDays == 0) dateValue = " আজকের তথ্য";
+        if (diffInDays == 0) dateValue = getString(R.string.todays_info);
         else {
             dateValueBn = English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            dateValue = "" + dateValueBn + " দিন আগের তথ্য";
+            dateValue = "" + dateValueBn + " " + getString(R.string.previous_info);
         }
         ToastMessageDisplay.setText(this, dateValue);
         ToastMessageDisplay.showText(this);
@@ -194,8 +194,8 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
             @Override
             public void onClick(View v) {
                 if (model.getNodeEmail().equals("null") || model.getNodeEmail().equals("")) {
-                    AlertMessage.showMessage(context, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(context, getString(R.string.cant_mail),
+                            getString(R.string.email_not_found));
                 }
                 else{
                     //Helpes method will be used to send Email
@@ -215,12 +215,12 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
                     if (checkPermission())
                         startActivity(callIntent);
                     else {
-                        AlertMessage.showMessage(context, "ফোনে কল দেয়া সম্ভব হচ্ছে না", "ফোন নম্বর পাওয়া যায়নি");
+                        AlertMessage.showMessage(context, getString(R.string.cant_call), getString(R.string.phone_not_found));
                     }
                 } else {
 
-                    AlertMessage.showMessage(context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
+                    AlertMessage.showMessage(context, getString(R.string.cant_call),
+                            getString(R.string.phone_not_found));
                 }
             }
         });
@@ -265,11 +265,11 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
 
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showMessage(context, "জিপিএস বন্ধ করা রয়েছে!", "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(context, getString(R.string.gps_is_off), getString(R.string.gps_request));
                 }
 
                 else {
-                    AlertMessage.showMessage(context, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।", "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                    AlertMessage.showMessage(context, getString(R.string.no_internet), getString(R.string.connect_to_internet));
                 }
             }
         });
@@ -338,7 +338,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
                 alertDialog.cancel();
             }
             else {
-                ToastMessageDisplay.setText(context,"দয়া করে ইন্টারনেট চালু করুন।");
+                ToastMessageDisplay.setText(context, getString(R.string.connect_to_internet));
                 ToastMessageDisplay.showText(context);
             }
 
@@ -376,10 +376,10 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
                     try {
                         if (response.equals("true")) {
                             SharedPreferencesHelper.setIfCommentedAlready(context, String.valueOf(model.getId()), uname, "yes");
-                            AlertMessage.showMessage(context, "মতামতটি গ্রহন করা হয়েছে", "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
+                            AlertMessage.showMessage(context, getString(R.string.feedback_accepted), getString(R.string.thanks_for_feedback));
                         }
                         else
-                            AlertMessage.showMessage(context, "মতামতটি গ্রহন করা হয় নি", "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
+                            AlertMessage.showMessage(context, getString(R.string.feedback_failed), getString(R.string.try_later));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -437,7 +437,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk = (TextView)promptView.findViewById(R.id.textAsk);
-        String text = "  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text = "  মতামত দেয়ার আগে আপনাকে" + "\n" + "       রেজিস্ট্রেশন করতে হবে" + "\n" + "আপনি কি রেজিস্ট্রেশন করতে চান?";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(context))
             textAsk.setTextSize(23);

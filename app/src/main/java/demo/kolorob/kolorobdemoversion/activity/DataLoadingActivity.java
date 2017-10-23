@@ -194,7 +194,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
                 if (getPosAreaInt() == -1) {
-                    ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_area));
                     ToastMessageDisplay.showText(DataLoadingActivity.this);
                 } else {
 
@@ -204,7 +204,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     Log.e("", "Keyword: " + keyword + "Lat: " + lat);
 
                     if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
-                        ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
+                        ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.info_not_found));
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
 
@@ -225,7 +225,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             if (AppUtils.isNetConnected(getApplicationContext())) {
                                 serverCall();
                             } else {
-                                AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপনার ডিভাইসের ইন্টারনেট চালু করুন");
+                                AlertMessage.showMessage(DataLoadingActivity.this, getString(R.string.sorry), getString(R.string.connect_to_internet));
                             }
                         }
                     }
@@ -360,9 +360,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         ChainTourGuide tourGuideCity = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("১ম ধাপ")
+                        .setTitle(getString(R.string.step1))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("১ম লিস্ট থেকে আপনার সিটি কর্পোরেশন খুঁজে নিন")
+                        .setDescription(getString(R.string.tutorial_select_cc))
                         .setGravity(Gravity.BOTTOM)
                 )
                 // note that there is no Overlay here, so the default one will be used
@@ -370,18 +370,18 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         ChainTourGuide tourGuideWard = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("২য় ধাপ")
+                        .setTitle(getString(R.string.step2))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("২য় লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুঁজে নিন")
+                        .setDescription(getString(R.string.tutorial_select_ward))
                         .setGravity(Gravity.BOTTOM)
                 )
                 .playLater(ward);
 
         ChainTourGuide tourGuideArea = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("৩য় ধাপ")
+                        .setTitle(getString(R.string.step3))
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("ওয়ার্ড অনুযায়ী এলাকার লিস্ট থেকে এলাকা খুজে নিচের 'জমা দিন' বাটনটি ক্লিক করুন।")
+                        .setDescription(getString(R.string.tutorial_select_area))
                         .setGravity(Gravity.BOTTOM)
                 )
                 .playLater(area);
@@ -583,7 +583,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         allData = new JSONObject(apiContent);
                         Log.d("AllData", "*********" + allData);
                         if (allData.length() == 0) {
-                            ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
+                            ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_another_area));
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
                         } else { //checking category label and parsing in different threads so that parsing time get minimised
                             if (allData.has("Education")) {

@@ -179,14 +179,14 @@ public class PhoneRegActivity extends Activity {
                     if( uname.equals("")){
 
 
-                        name.setError( "নাম লিখুন" );
+                        name.setError( getString(R.string.write_name) );
 
                     }
                     else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
                         sendPhoneNumberToServer(phoneNumber);
                     }
                     else {
-                        ToastMessageDisplay.setText(PhoneRegActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+                        ToastMessageDisplay.setText(PhoneRegActivity.this, getString(R.string.connect_to_internet));
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
                         ToastMessageDisplay.showText(PhoneRegActivity.this);
@@ -380,8 +380,8 @@ public class PhoneRegActivity extends Activity {
 
                                 editor.putBoolean("IFREGISTERED", true);
                                 editor.apply();
-                                showMessageExisting(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
-                                        " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ",1);
+                                showMessageExisting(PhoneRegActivity.this, getString(R.string.registered_successfully),
+                                        getString(R.string.thanks_for_registering), 1);
 
 
 
@@ -390,12 +390,12 @@ public class PhoneRegActivity extends Activity {
 
                             else if(response.equals("\"Invalid Phone Number\""))
                             {
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
-                                        "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");                            }
+                                AlertMessage.showMessage(PhoneRegActivity.this, getString(R.string.invalid_number),
+                                        getString(R.string.enter_correct_number));                            }
                             else if(response.equals("\"deviceid not found\""))
                             {
-                                showMessageExisting(PhoneRegActivity.this, "দুঃখিত",
-                                        " আপনার ডিভাইস আইডি সংগ্রহের অনুমতি দিন",4);
+                                showMessageExisting(PhoneRegActivity.this, getString(R.string.sorry),
+                                        getString(R.string.request_for_imei), 4);
                             }
 
                             else if(response.contains("already registered")) {
@@ -416,7 +416,7 @@ public class PhoneRegActivity extends Activity {
 
 
                                 showMessageExisting(PhoneRegActivity.this,
-                                        " এই নাম্বার টি আগেই নিবন্ধিত হয়েছে", "আপনার ইউজার নেম " + serverusernamechanged + " এবং নাম্বারঃ " + phoneNumber, 2);
+                                        getString(R.string.already_registered), getString(R.string.your_username) + serverusernamechanged + getString(R.string.and_number) + phoneNumber, 2);
                             }
 
                             else if(response.contains("EXISTING")) /*if user is already in our db; then we are replacing new number and user name in application*/
@@ -441,19 +441,15 @@ public class PhoneRegActivity extends Activity {
                                 editor.putBoolean("IFREGISTERED", true);
                                 editor.apply();
 
-                                showMessageExisting(PhoneRegActivity.this, "আপনার ডিভাইসে নতুন করে কলরব সেটআপ হয়েছে",
-                                        "আপনার ইউজার নেম  " + serverusernamechanged + " এবং ফোন নাম্বার  " + phoneNumber, 2);
+                                showMessageExisting(PhoneRegActivity.this, getString(R.string.new_install),
+                                        getString(R.string.your_username) + " " + serverusernamechanged + getString(R.string.and_number) + " " + phoneNumber, 2);
 
                             }
 
                             else {
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
-                                        "দয়া করে পরে চেষ্টা করুন");
+                                AlertMessage.showMessage(PhoneRegActivity.this, getString(R.string.sorry),
+                                        getString(R.string.try_later));
                             }
-
-
-
-
 
 
                         } catch (Exception e) {
