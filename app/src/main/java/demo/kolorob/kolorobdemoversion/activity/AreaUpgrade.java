@@ -352,10 +352,15 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
 
     @Override
     public void onBackPressed() {
-        if(deleted) {
+        /*if(deleted) {
             AlertMessage.showMessage(AreaUpgrade.this,"দুঃখিত","দয়া করে যে এলাকার তথ্য দেখতে চান সেটি নির্বাচন করে 'এলাকার তথ্য দেখুন' বাটন টি চাপুন");
         }
-        else
+        else*/
+        if(storedAreas.isEmpty()){
+            Intent em = new Intent(this, DataLoadingActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
         super.onBackPressed();
     }
 }
