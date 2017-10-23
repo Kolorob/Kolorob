@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,8 +27,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,15 +39,8 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveAreaDBTask;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveCityCorporationDBTask;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveWardDBTask;
-import demo.kolorob.kolorobdemoversion.database.AreaTable;
-import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
-import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
-import demo.kolorob.kolorobdemoversion.model.Area;
-import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.StoredArea;
-import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
@@ -96,7 +86,7 @@ public class SplashActivityNew extends AppCompatActivity {
         String state = Environment.getExternalStorageState();
         registered = settings.getBoolean("IFREGISTERED",false);
 
-// Make sure it's available
+            // Make sure it's available
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             // We can read and write the media
             filesDir = getExternalFilesDir(null);

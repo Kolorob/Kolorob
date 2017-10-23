@@ -361,6 +361,6 @@ public class AreaUpgrade <ModelType extends CommonModel> extends AppCompatActivi
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
-        super.onBackPressed();
+        else super.onBackPressed();
     }
 }

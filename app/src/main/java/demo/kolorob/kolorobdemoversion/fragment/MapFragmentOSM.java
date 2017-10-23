@@ -45,7 +45,7 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
 
 
     List<String> listData = new ArrayList<String>();
-    String concatened = "";
+
     private String locationName;
     private int locationNameId;
 
@@ -152,8 +152,7 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
         super.onCreate(savedInstanceState);
         SharedPreferences settings = MapFragmentOSM.this.getActivity().getSharedPreferences("prefs", 0);
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        rootView = inflater.inflate(R.layout.fragment_map, container,
-                false);
+        rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
 
         mapView = (MapView) rootView.findViewById(R.id.mapview);
@@ -173,7 +172,8 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
 
         mapView.setTilesScaledToDpi(true);
         firstRun = settings.getBoolean("firstRunUp", false);
-        if (firstRun == false)//if running for first time
+
+        if (!firstRun)//if running for first time
         {
             Log.d("ss", "********" + first);
 
@@ -342,7 +342,7 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
                         break;
                     case "জৈন": marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
                         break;
-                    default: marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+                    default: marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
                         break;
 
                 }

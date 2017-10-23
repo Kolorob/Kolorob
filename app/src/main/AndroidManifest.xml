@@ -18,6 +18,7 @@
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" android:protectionLevel="signature"/>
 
     <supports-screens
         android:anyDensity="true"
@@ -106,6 +107,12 @@
         <activity
             android:name=".activity.DetailsInfoActivityLegalNew"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailsInfoActivityNGO"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.DetailsInfoActivityReligious"
+            android:screenOrientation="portrait" />
+
 
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
@@ -168,8 +175,7 @@
             android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
 
-        <activity android:name=".activity.DetailsInfoActivityNGO" />
-        <activity android:name=".activity.DetailsInfoActivityReligious"></activity>
+
     </application>
 
 </manifest>
