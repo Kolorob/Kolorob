@@ -31,11 +31,11 @@ public class DetailsLayoutFinance extends BaseActivity {
 
     public void displayUniqueProperties(){
 
-        CheckConcate("প্রতিষ্ঠানের  ধরণ",  finance.getFinType());
+        CheckConcate(getString(R.string.institution_type),  finance.getFinType());
         if(!finance.getFinType().equals(getReferences(finance))){
-            CheckConcate("বিশেষত্ব", getReferences(finance));
+            CheckConcate(getString(R.string.speciality), getReferences(finance));
         }
-        CheckConcate("সুবিধার ধরণ",  finance.getServiceType());
+        CheckConcate(getString(R.string.service_type), finance.getServiceType());
     }
 
 }

@@ -32,11 +32,11 @@ public class DetailsInfoActivityEntertainmentNew extends BaseActivity{
 
     public void displayUniqueProperties(){
 
-        CheckConcate("প্রতিষ্ঠানের  ধরণ", entertainment.getEntType());
+        CheckConcate(getString(R.string.institution_type), entertainment.getEntType());
         if(!entertainment.getEntType().equals(getReferences(entertainment))){
-            CheckConcate("বিশেষত্ব", getReferences(entertainment));
+            CheckConcate(getString(R.string.speciality), getReferences(entertainment));
         }
-        if(entertainment.getEntryFee().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
+        if(entertainment.getEntryFee().equals(true)) CheckConcate(getString(R.string.entry_fee),  getString(R.string.applicable));
 
     }
 }

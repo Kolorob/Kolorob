@@ -32,9 +32,9 @@ public class DetailsLayoutGovernment extends BaseActivity {
     }
 
     public void displayUniqueProperties(){
-        CheckConcate("সুবিধার ধরণ", government.getServiceName());
+        CheckConcate(getString(R.string.service_type), government.getServiceName());
         if(!government.getServiceName().equals(getReferences(government))){
-            CheckConcate("বিশেষত্ব", getReferences(government));
+            CheckConcate(getString(R.string.speciality), getReferences(government));
         }
     }
 }

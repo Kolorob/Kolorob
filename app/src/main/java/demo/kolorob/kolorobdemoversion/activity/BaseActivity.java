@@ -59,7 +59,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
     int width, height;
     String dateValue, dateValueBn;
     TextView service_name;
-    String username = "kolorobapp", password = "2Jm!4jFe3WgBZKEN";
+    String username = getString(R.string.uname), password = getString(R.string.password);
     Context context;
     int increment = 0;
     TextView ratingText;

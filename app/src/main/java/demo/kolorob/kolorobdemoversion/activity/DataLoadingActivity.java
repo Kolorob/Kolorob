@@ -71,8 +71,8 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    static int countofDb = 0;
-    private static int NUMBER_OF_TASKS = 6;
+    int countofDb = 0;
+    private int NUMBER_OF_TASKS = 6;
     private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
     Context context;
     View view = null, areaview, wardview, cityview;
@@ -92,19 +92,19 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private AnimationDrawable frameAnimation;
 
 
-    public static int getCountofDb() {
+    public int getCountofDb() {
         return countofDb;
     }
 
-    public static void setCountofDb(int count) {
+    public void setCountofDb(int count) {
         countofDb = count;
     }
 
-    public static int getNumberOfTasks() {
+    public int getNumberOfTasks() {
         return NUMBER_OF_TASKS;
     }
 
-    public static void setNumberOfTasks(int numberOfTasks) {
+    public void setNumberOfTasks(int numberOfTasks) {
         NUMBER_OF_TASKS = numberOfTasks;
     }
 
@@ -652,4 +652,18 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
+    public <Result> void loadData(Result result, Context context) {
+
+        if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS) { // Means the task is successful
+            countofDb++;
+
+            SharedPreferences settings = context.getSharedPreferences("prefs", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("KValue", countofDb);
+            editor.apply();
+            Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));//number of tasks equivalent to how many api data is being stored
+            ToastMessageDisplay.setText(context, context.getString(R.string.downloading_data));
+            ToastMessageDisplay.showText(context);
+        }
+    }
 }

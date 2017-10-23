@@ -29,11 +29,11 @@ public class DetailsInfoActivityReligious extends BaseActivity {
     }
 
     public void displayUniqueProperties(){
-        CheckConcate("ধর্ম", shelter.getRsReligion());
-        CheckConcate("যাদের জন্য প্রযোজ্য", shelter.getRsServicesFor());
-        CheckConcate("যেসব ধর্মের জন্য প্রযোজ্য", shelter.getRsServicesForReligion());
-        CheckConcate("অন্যান্য ধর্ম", shelter.getOtherReligion());
-        CheckConcate("অবস্থানের সময়সীমা", shelter.getRsTime());
-        CheckConcate("ফি", shelter.getRsFee());
+        CheckConcate(getString(R.string.religion), shelter.getRsReligion());
+        CheckConcate(getString(R.string.services_for), shelter.getRsServicesFor());
+        CheckConcate(getString(R.string.services_for_religion), shelter.getRsServicesForReligion());
+        CheckConcate(getString(R.string.other_religions), shelter.getOtherReligion());
+        CheckConcate(getString(R.string.drop_time_limit), shelter.getRsTime());
+        CheckConcate(getString(R.string.fee), shelter.getRsFee());
     }
 }

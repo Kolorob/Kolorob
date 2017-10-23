@@ -116,7 +116,7 @@ public class AreaUpgrade extends AppCompatActivity {
                 }
                 else {
                     dialog2 = new ProgressDialog(AreaUpgrade.this);
-                    dialog2.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog2.setMessage(getString(R.string.please_wait));
                     dialog2.setCancelable(true);
                     dialog2.show();
                     deleteAll(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea()); // to delete area stored in device

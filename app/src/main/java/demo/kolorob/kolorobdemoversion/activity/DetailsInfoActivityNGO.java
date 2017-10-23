@@ -41,17 +41,17 @@ public class DetailsInfoActivityNGO extends BaseActivity {
                 subServices = services.split(",");
             }
             if(subServices.length <= 3 || !services.contains(","))
-                CheckConcate("প্রতিষ্ঠানের ধরণ", ngo.getNgoServices());
+                CheckConcate(getString(R.string.institution_type), ngo.getNgoServices());
             else
-                CheckConcate("প্রতিষ্ঠানের ধরণ", ngo.getNgoServiceType());
+                CheckConcate(getString(R.string.institution_type), ngo.getNgoServiceType());
 
         }
 
-        CheckConcate("সেবাসমূহ", ngo.getNgoServices());
-        CheckConcate("যাদের জন্য প্রযোজ্য", ngo.getNgoServicesFor());
-        CheckConcate("অন্যান্য সেবা", ngo.getNgoServicesOther());
-        CheckConcate("অবস্থানের সময়", ngo.getDropTime());
-        CheckConcate("ফি", ngo.getNgoFee());
+        CheckConcate(getString(R.string.services), ngo.getNgoServices());
+        CheckConcate(getString(R.string.services_for), ngo.getNgoServicesFor());
+        CheckConcate(getString(R.string.other_services), ngo.getNgoServicesOther());
+        CheckConcate(getString(R.string.drop_time), ngo.getDropTime());
+        CheckConcate(getString(R.string.fee), ngo.getNgoFee());
 
     }
 }

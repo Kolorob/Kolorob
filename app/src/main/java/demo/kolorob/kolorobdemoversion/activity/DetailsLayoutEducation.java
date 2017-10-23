@@ -61,16 +61,16 @@ public class DetailsLayoutEducation extends BaseActivity {
         EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(context);
         EducationResultDetailsTable resultDB = new EducationResultDetailsTable(context);
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ ", education.getEducationType());
+        CheckConcate(getString(R.string.institution_type), education.getEducationType());
         if(!education.getEducationType().equals(getReferences(education))){
-            CheckConcate("বিশেষত্ব", getReferences(education));
+            CheckConcate(getString(R.string.speciality), getReferences(education));
         }
-        CheckConcate("শাখা", education.getShift());
+        CheckConcate(getString(R.string.shift), education.getShift());
 
-        if(!education.getStudentNo().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", English_to_bengali_number_conversion(education.getStudentNo()) + " জন");
-        if(!education.getTeachersNo().equals("null")) CheckConcate("শিক্ষক সংখ্যা",  English_to_bengali_number_conversion(education.getTeachersNo()) + " জন");
-        if(!education.getAverageStudentPerClass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  English_to_bengali_number_conversion(education.getAverageStudentPerClass()) + " জন");
-        CheckConcate("সুযোগ সুবিধা", education.getFacility());
+        if(!education.getStudentNo().equals("null")) CheckConcate(getString(R.string.num_of_students), English_to_bengali_number_conversion(education.getStudentNo()) + " " + getString(R.string.count_people));
+        if(!education.getTeachersNo().equals("null")) CheckConcate(getString(R.string.num_of_teachers),  English_to_bengali_number_conversion(education.getTeachersNo()) + " " + getString(R.string.count_people));
+        if(!education.getAverageStudentPerClass().equals("null")) CheckConcate(getString(R.string.avg_students),  English_to_bengali_number_conversion(education.getAverageStudentPerClass()) + " " + getString(R.string.count_people));
+        CheckConcate(getString(R.string.facilities), education.getFacility());
 
 
         schools = schoolDB.getDataListFromForeignKey(education.getId());
@@ -80,10 +80,10 @@ public class DetailsLayoutEducation extends BaseActivity {
 
             for (EduNewSchoolModel school : schools) {
 
-                CheckConcate("বৃত্তি সুবিধা", school.getStipend());
-                CheckConcate("প্রাইমারী লেভেলের বেতন (বার্ষিক) ", English_to_bengali_number_conversion(school.getPrimary_fees()));
-                CheckConcate("সেকেন্ডারি লেভেলের বেতন (বার্ষিক) ", English_to_bengali_number_conversion(school.getSecondary_fees()));
-                CheckConcate("কলেজের বেতন (বার্ষিক) ", English_to_bengali_number_conversion(school.getCollege_fees()));
+                CheckConcate(getString(R.string.scholarship), school.getStipend());
+                CheckConcate(getString(R.string.primary_fee), English_to_bengali_number_conversion(school.getPrimary_fees()));
+                CheckConcate(getString(R.string.secondary_fee), English_to_bengali_number_conversion(school.getSecondary_fees()));
+                CheckConcate(getString(R.string.college_fee), English_to_bengali_number_conversion(school.getCollege_fees()));
             }
         }
 
@@ -91,10 +91,10 @@ public class DetailsLayoutEducation extends BaseActivity {
         int resultSize = results.size();
         if (resultSize != 0) {
             for (EducationResultItemNew result : results)  {
-                CheckConcate(result.getExamname() + " পরীক্ষায় অংশগ্রহণকারী শিক্ষার্থীর সংখ্যা", English_to_bengali_number_conversion(result.getStudentno()));
-                CheckConcate("উত্তীর্ণ শিক্ষার্থীর সংখ্যা", English_to_bengali_number_conversion(result.getPassed()));
-                CheckConcate("জিপিএ ৫ এর সংখ্যা", English_to_bengali_number_conversion(result.getAplus()));
-                CheckConcate("গোল্ডেন জিপিএ ৫ এর সংখ্যা", English_to_bengali_number_conversion(result.getGoldena()));
+                CheckConcate(result.getExamname() + getString(R.string.num_examinee), English_to_bengali_number_conversion(result.getStudentno()));
+                CheckConcate(getString(R.string.passed), English_to_bengali_number_conversion(result.getPassed()));
+                CheckConcate(getString(R.string.gpa_5), English_to_bengali_number_conversion(result.getAplus()));
+                CheckConcate(getString(R.string.golden_5), English_to_bengali_number_conversion(result.getGoldena()));
             }
         }
 
@@ -103,10 +103,10 @@ public class DetailsLayoutEducation extends BaseActivity {
         if (trainingSize != 0) {
             for (EduTrainingModel training : trainings) {
 
-                CheckConcate("কোর্সের ব্যাপ্তিকাল (মাস) ", English_to_bengali_number_conversion(training.getCourseduration()));
-                CheckConcate("ট্রেইনিং এর নাম ", training.getTrainingname());
-                if(!training.getCost().equals("null")) CheckConcate("খরচ", English_to_bengali_number_conversion(training.getCost()) + " টাকা");
-                CheckConcate("কোর্সের নাম", training.getCoursename());
+                CheckConcate(getString(R.string.course_duration), English_to_bengali_number_conversion(training.getCourseduration()));
+                CheckConcate(getString(R.string.training_name), training.getTrainingname());
+                if(!training.getCost().equals("null")) CheckConcate(getString(R.string.cost), English_to_bengali_number_conversion(training.getCost()) + " " + getString(R.string.taka));
+                CheckConcate(getString(R.string.course_name), training.getCoursename());
 
             }
         }

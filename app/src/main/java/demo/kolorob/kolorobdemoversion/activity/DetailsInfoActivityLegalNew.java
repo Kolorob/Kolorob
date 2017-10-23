@@ -32,9 +32,9 @@ public class DetailsInfoActivityLegalNew extends BaseActivity  {
 
 
     public void displayUniqueProperties(){
-        CheckConcate("প্রতিষ্ঠানের ধরণ",  legal.getService());
+        CheckConcate(getString(R.string.institution_type),  legal.getService());
         if(!legal.getService().equals(getReferences(legal))){
-            CheckConcate("বিশেষত্ব", getReferences(legal));
+            CheckConcate(getString(R.string.speciality), getReferences(legal));
         }
     }
 }

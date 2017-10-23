@@ -72,8 +72,8 @@ import info.hoang8f.widget.FButton;
     * time to receive the code but unfortunately it could not be traced.*/
 public class PhoneRegActivity extends Activity {
 
-    String username="kolorobapp";
-    String password="!2Jm4jFe3WgBZKEN";
+    String username = getString(R.string.uname);
+    String password = getString(R.string.password_reg);
     public static int width;
     public static int height;
     private String phoneNumber,uname,emailaddress;
@@ -147,16 +147,11 @@ public class PhoneRegActivity extends Activity {
             }
         }
 
-
-
-
-
-
         phoneheader=(TextView)findViewById(R.id.phoneheader);
 
         s = String.valueOf(phone.getText().toString().trim());
-        name=(EditText)findViewById(R.id.userid) ;
-        Submit=(FButton)findViewById(R.id.submittoserver);
+        name = (EditText)findViewById(R.id.userid) ;
+        Submit = (FButton)findViewById(R.id.submittoserver);
 
 
 
@@ -174,8 +169,8 @@ public class PhoneRegActivity extends Activity {
                 PHN=settings.getString("PHN",null);
                 if(PHN!=null||!phoneNumberString.equals("")){
 
-                    phoneNumber=phone.getText().toString().trim();
-                    uname=name.getText().toString().trim();
+                    phoneNumber = phone.getText().toString().trim();
+                    uname = name.getText().toString().trim();
                     if( uname.equals("")){
 
 

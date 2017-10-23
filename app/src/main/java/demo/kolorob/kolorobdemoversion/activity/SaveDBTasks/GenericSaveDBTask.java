@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
@@ -43,17 +44,7 @@ public abstract class GenericSaveDBTask<Params, Progress, Result, TableType exte
 
     @Override
     protected void onPostExecute(Result result) {
-        if (((Long) result).longValue() == 0.0 && DataLoadingActivity.getCountofDb() < DataLoadingActivity.getNumberOfTasks()) { // Means the task is successful
-            DataLoadingActivity.setCountofDb(DataLoadingActivity.getCountofDb() + 1);
-
-            SharedPreferences settings = context.getSharedPreferences("prefs", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("KValue", DataLoadingActivity.getCountofDb());
-            editor.apply();
-            Log.d("tasks", "Tasks remaining: " + (DataLoadingActivity.getNumberOfTasks() - DataLoadingActivity.getCountofDb()));//number of tasks equivalent to how many api data is being stored
-            ToastMessageDisplay.setText(context, "তথ্য সংগ্রহ চলছে");
-            ToastMessageDisplay.showText(context);
-        }
+        DataLoadingActivity.context.loadData(result, context);
     }
 
     protected Long doInBackground(TableType table, ModelType model, JSONArray... jsonArrays) {

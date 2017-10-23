@@ -52,10 +52,10 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
         final HealthNewDBTableHospital hospitalDB = new HealthNewDBTableHospital(context);
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ",  health.getInstituteType());
+        CheckConcate(getString(R.string.institution_type),  health.getInstituteType());
 
         if(!health.getInstituteType().equals(getReferences(health))){
-            CheckConcate("বিশেষত্ব", getReferences(health));
+            CheckConcate(getString(R.string.speciality), getReferences(health));
         }
 
         hospitals = hospitalDB.getDataListFromForeignKey(health.getId());
@@ -66,30 +66,30 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
             for (HealthNewDBModelHospital hospital : hospitals) {
 
                 if(hospital.getEmergencyavailable().equals(false)) {
-                    CheckConcate("ইমারজেন্সি সুবিধা", "নেই");
+                    CheckConcate(getString(R.string.emergency_service), getString(R.string.not_available));
                 }
 
-                else CheckConcate("ইমারজেন্সি সুবিধা", "আছে");
+                else CheckConcate(getString(R.string.emergency_service), getString(R.string.available));
 
-                CheckConcate("ইমারজেন্সি নাম্বার", English_to_bengali_number_conversion(hospital.getEmergencynumber()));
+                CheckConcate(getString(R.string.emergency_number), English_to_bengali_number_conversion(hospital.getEmergencynumber()));
 
                 if(hospital.getAmbulanceavailable().equals(false)) {
-                    CheckConcate("এ্যাম্বুলেন্স সুবিধা", "নেই");
+                    CheckConcate(getString(R.string.ambulance_service), getString(R.string.not_available));
                 }
 
-                else CheckConcate("এ্যাম্বুলেন্স সুবিধা", "আছে");
+                else CheckConcate(getString(R.string.ambulance_service), getString(R.string.available));
 
 
-                CheckConcate("এ্যাম্বুলেন্স নাম্বার", English_to_bengali_number_conversion(hospital.getAmbulancenumber()));
+                CheckConcate(getString(R.string.ambulance_number), English_to_bengali_number_conversion(hospital.getAmbulancenumber()));
 
                 if(hospital.getMaternityavailable().equals(false)) {
-                    CheckConcate("মাতৃত্বজনিত সুবিধা", "নেই");
+                    CheckConcate(getString(R.string.maternity_service), getString(R.string.not_available));
                 }
 
-                else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
+                else CheckConcate(getString(R.string.maternity_service), getString(R.string.available));
 
-                CheckConcate("মাতৃসেবাসমূহ", hospital.getMaternitynumber());
-                CheckConcate("মাতৃসেবার বিশেষ ব্যবস্থা", hospital.getMaternityprivacy());
+                CheckConcate(getString(R.string.maternity_services), hospital.getMaternitynumber());
+                CheckConcate(getString(R.string.maternity_privacy), hospital.getMaternityprivacy());
 
             }
         }
@@ -104,16 +104,16 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
             for (HealthNewDBModelPharmacy pharmacy : pharmacies) {
 
                 if(pharmacy.getDocavailability().equals("false")) {
-                    CheckConcate("ডাক্তারের সুবিধা", "নেই");
+                    CheckConcate(getString(R.string.doctor_availability), getString(R.string.not_available));
                 }
-                else CheckConcate("ডাক্তারের সুবিধা", "আছে");
+                else CheckConcate(getString(R.string.doctor_availability), getString(R.string.available));
 
-                CheckConcate("বিশেষত্ব ", pharmacy.getSpeciality());
+                CheckConcate(getString(R.string.speciality), pharmacy.getSpeciality());
 
                 if(pharmacy.getVaccineavailability().equals("false")) {
-                    CheckConcate("ভ্যাক্সিন সুবিধা ", "নেই");
+                    CheckConcate(getString(R.string.vaccine_facility), getString(R.string.not_available));
                 }
-                else CheckConcate("ভ্যাক্সিন সুবিধা ", "আছে");
+                else CheckConcate(getString(R.string.vaccine_facility), getString(R.string.available));
 
             }
         }
