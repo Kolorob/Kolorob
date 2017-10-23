@@ -267,17 +267,13 @@ public class SplashActivityNew extends AppCompatActivity {
                             System.gc();
                         }
                                 /* start the activity */
-                        if(registered) {
-
+                        if(registered)
                             startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
-                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                            finish();
-                        }
-                        else {
+                        else
                             startActivity(new Intent(SplashActivityNew.this, PhoneRegActivity.class));
-                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                            finish();
-                        }
+
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        finish();
                     }
                 }, 2000);
 
@@ -291,17 +287,16 @@ public class SplashActivityNew extends AppCompatActivity {
                     if (BuildConfig.DEBUG) {
                         System.gc();
                     }
+
+
                                 /* start the activity */
-                    if(registered == true && (new StoredAreaTable(SplashActivityNew.this).getAllData().size() > 0)) {
+
+                    if(registered  && (new StoredAreaTable(SplashActivityNew.this).getAllData().size() > 0))
                         startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                        finish();
-                    }
-                    else {
+
+                    else
                         startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                        finish();
-                    }
+
 
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     finish();
