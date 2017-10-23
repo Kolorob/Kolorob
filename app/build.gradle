@@ -8,8 +8,8 @@ android {
         applicationId "demo.kolorob.kolorobdemoversion"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 39
-        versionName "2.25"
+        versionCode 41
+        versionName "2.26"
         aaptOptions.setProperty("cruncherEnabled", false)
         multiDexEnabled true
     }
