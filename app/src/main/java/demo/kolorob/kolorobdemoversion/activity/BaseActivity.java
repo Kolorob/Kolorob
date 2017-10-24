@@ -59,7 +59,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
     int width, height;
     String dateValue, dateValueBn;
     TextView service_name;
-    String username = getString(R.string.uname), password = getString(R.string.password);
+    String username = "kolorobapp", password = "2Jm!4jFe3WgBZKEN";
     Context context;
     int increment = 0;
     TextView ratingText;
@@ -437,7 +437,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk = (TextView)promptView.findViewById(R.id.textAsk);
-        String text = "  মতামত দেয়ার আগে আপনাকে" + "\n" + "       রেজিস্ট্রেশন করতে হবে" + "\n" + "আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text = "  " + getString(R.string.reg_required_part1) + "\n" + "       " + getString(R.string.registration_required) + "\n" + getString(R.string.registration_permission);
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(context))
             textAsk.setTextSize(23);

@@ -23,7 +23,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -70,16 +69,20 @@ import info.hoang8f.widget.FButton;
     /*accesstoken been initialized in application class. So if user already registered or used facebook account kit it does not appear second
     * time; if not we are validating number using account kit. Here the activities are in control of facebook. So sometimes it takes
     * time to receive the code but unfortunately it could not be traced.*/
+
+
 public class PhoneRegActivity extends Activity {
 
-    String username = getString(R.string.uname);
-    String password = getString(R.string.password_reg);
+
     public static int width;
     public static int height;
-    private String phoneNumber,uname,emailaddress;
+    private String phoneNumber, uname;
 
     String phoneNumberString = "";
-    private EditText phone,email,name;
+    private EditText phone, name;
+
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
 
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
@@ -326,22 +329,22 @@ public class PhoneRegActivity extends Activity {
     public void sendPhoneNumberToServer(final String phone)
     {
         try {
-            gotname=   URLEncoder.encode(uname.replace(" ", "%20"), "utf-8");
+            gotname = URLEncoder.encode(uname.replace(" ", "%20"), "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
             SharedPreferences settings = getSharedPreferences("prefs", 0);
 
-            IMEINumber=    settings.getString("IMEI", null);
+            IMEINumber = settings.getString("IMEI", null);
 
-            if(IMEINumber==null||IMEINumber.equals("0"))
-            {
-                IMEINumber=gotname.concat(String.valueOf(randomBox()));
+            if(IMEINumber == null || IMEINumber.equals("0")) {
+                IMEINumber = gotname.concat(String.valueOf(randomBox()));
             }
 
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
+
         String url = "http://kolorob.net/kolorob-new-demo/api/customer_reg4?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
         //  String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/" ;
 
@@ -411,7 +414,7 @@ public class PhoneRegActivity extends Activity {
 
 
                                 showMessageExisting(PhoneRegActivity.this,
-                                        getString(R.string.already_registered), getString(R.string.your_username) + serverusernamechanged + getString(R.string.and_number) + phoneNumber, 2);
+                                        getString(R.string.already_registered), getString(R.string.your_username) + " " + serverusernamechanged + " " + getString(R.string.and_number) + " " + phoneNumber, 2);
                             }
 
                             else if(response.contains("EXISTING")) /*if user is already in our db; then we are replacing new number and user name in application*/

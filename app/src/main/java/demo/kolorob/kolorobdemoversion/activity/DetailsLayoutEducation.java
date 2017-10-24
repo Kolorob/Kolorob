@@ -9,7 +9,6 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -91,7 +90,7 @@ public class DetailsLayoutEducation extends BaseActivity {
         int resultSize = results.size();
         if (resultSize != 0) {
             for (EducationResultItemNew result : results)  {
-                CheckConcate(result.getExamname() + getString(R.string.num_examinee), English_to_bengali_number_conversion(result.getStudentno()));
+                CheckConcate(result.getExamname() + " " + getString(R.string.num_examinee), English_to_bengali_number_conversion(result.getStudentno()));
                 CheckConcate(getString(R.string.passed), English_to_bengali_number_conversion(result.getPassed()));
                 CheckConcate(getString(R.string.gpa_5), English_to_bengali_number_conversion(result.getAplus()));
                 CheckConcate(getString(R.string.golden_5), English_to_bengali_number_conversion(result.getGoldena()));

@@ -71,8 +71,8 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    int countofDb = 0;
-    private int NUMBER_OF_TASKS = 6;
+    public static int countofDb = 0;
+    public static int NUMBER_OF_TASKS = 8;
     private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
     Context context;
     View view = null, areaview, wardview, cityview;
@@ -477,7 +477,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         if (!firstRun || firstRunUpdate) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
-            NUMBER_OF_TASKS = 8;
+            NUMBER_OF_TASKS = 10;
         }
         LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
@@ -586,6 +586,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_another_area));
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
                         } else { //checking category label and parsing in different threads so that parsing time get minimised
+
                             if (allData.has("Education")) {
                                 new SaveEducationDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
                             }
@@ -652,18 +653,4 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
-    public <Result> void loadData(Result result, Context context) {
-
-        if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS) { // Means the task is successful
-            countofDb++;
-
-            SharedPreferences settings = context.getSharedPreferences("prefs", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("KValue", countofDb);
-            editor.apply();
-            Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));//number of tasks equivalent to how many api data is being stored
-            ToastMessageDisplay.setText(context, context.getString(R.string.downloading_data));
-            ToastMessageDisplay.showText(context);
-        }
-    }
 }
