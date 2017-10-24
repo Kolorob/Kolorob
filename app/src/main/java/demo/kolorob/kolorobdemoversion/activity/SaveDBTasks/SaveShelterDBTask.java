@@ -3,6 +3,8 @@ package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 import android.content.Context;
 
 import org.json.JSONArray;
+
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 
@@ -15,6 +17,7 @@ public class SaveShelterDBTask extends GenericSaveDBTask <JSONArray, Integer, Lo
     public SaveShelterDBTask(Context ctx) {
         super(ctx);
     }
+
 
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new ReligiousNewDBTable(context), new ReligiousNewDBModel(), jsonArrays);

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.json.JSONArray;
 
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 
@@ -16,6 +17,7 @@ public class SaveLegalDBTask extends GenericSaveDBTask <JSONArray, Integer, Long
     public SaveLegalDBTask(Context ctx) {
         super(ctx);
     }
+
 
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new LegalAidNewDBTable(context), new LegalAidNewDBModel(), jsonArrays);

@@ -18,6 +18,7 @@ public class SaveFinancialDBTask extends GenericSaveDBTask <JSONArray, Integer, 
         super(ctx);
     }
 
+
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new FinNewDBTable(context), new FinancialNewDBModel(), jsonArrays);
     }

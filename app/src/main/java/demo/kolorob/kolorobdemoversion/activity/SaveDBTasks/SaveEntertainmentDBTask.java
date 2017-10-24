@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 import android.content.Context;
 
 import org.json.JSONArray;
+
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 

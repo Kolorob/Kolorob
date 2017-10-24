@@ -3,6 +3,8 @@ package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 import android.content.Context;
 
 import org.json.JSONArray;
+
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
 import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
 
@@ -17,6 +19,7 @@ public class SaveNgoDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, 
     public SaveNgoDBTask(Context ctx) {
         super(ctx);
     }
+
 
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new NGONewDBTable(context), new NGONewDBModel(), jsonArrays);

@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
@@ -18,6 +19,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
  */
 
 public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long, HealthNewDBTableMain, HealthNewDBModelMain> {
+
     public SaveHealthDBTask(Context ctx) {
         super(ctx);
     }
