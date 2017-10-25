@@ -24,6 +24,7 @@ public class SaveCityCorporationDBTask extends GenericSaveDBTask <JSONArray, Int
 
     }
 
+    @Override
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new CityCorporationTable(context), new CityCorporation(), jsonArrays);
     }

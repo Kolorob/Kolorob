@@ -19,6 +19,7 @@ public class SaveLegalDBTask extends GenericSaveDBTask <JSONArray, Integer, Long
     }
 
 
+    @Override
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new LegalAidNewDBTable(context), new LegalAidNewDBModel(), jsonArrays);
     }

@@ -50,6 +50,7 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
     }
 
 
+
     protected Long doInBackground(TableType table, ModelType model, JSONArray... jsonArrays) {
 
 

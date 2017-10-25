@@ -24,6 +24,7 @@ public class SaveWardDBTask extends GenericSaveDBTask <JSONArray, Integer, Long,
 
     }
 
+    @Override
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new WardTable(context), new Ward(), jsonArrays);
     }
