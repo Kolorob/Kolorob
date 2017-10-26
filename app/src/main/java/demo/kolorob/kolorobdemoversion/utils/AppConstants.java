@@ -98,4 +98,9 @@ public class AppConstants {
     public static final int NGO = 70000;
     public static final int RELIGIOUS = 80000;
 
+    public static final int MAP_BUTTON = 1;
+    public static final int JOB_BUTTON = 2;
+    public static final int SEARCH_BUTTON = 3;
+    public static final int COMPARE_BUTTON = 4;
+
 }
