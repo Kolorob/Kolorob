@@ -84,7 +84,7 @@ public class CategoryItem extends BaseModel <CategoryItem> implements Serializab
 
     @Override
     public int compareTo(CategoryItem another) {
-        int compareQuantity = ((CategoryItem) another).getId();
+        int compareQuantity = another.getId();
 
         //ascending order
         return this.id - compareQuantity;

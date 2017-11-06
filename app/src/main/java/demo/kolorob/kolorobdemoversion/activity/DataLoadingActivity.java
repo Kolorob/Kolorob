@@ -496,24 +496,27 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             public void run() {
 
 
-                if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
-                    overridePendingTransition(0, 0);
+                    if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
+                        overridePendingTransition(0, 0);
 
-                    handler.removeCallbacks(this);
-                    SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
-                    Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                        handler.removeCallbacks(this);
+                        SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
+                        Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
 
-                    frameAnimation.stop();
-                    alertDialog.cancel();
-                    startActivity(a);
-                    return;
+                        frameAnimation.stop();
+                        alertDialog.cancel();
+                        startActivity(a);
+                        return;
+
+                    }
+
+
+                    //Create a loop
+                    handler.postDelayed(this, 1000);
+                    timeCounter += 1000;
 
                 }
-                //Create a loop
-                handler.postDelayed(this, 1000);
-                timeCounter += 1000;
 
-            }
 
         };
         handler.postDelayed(runner, 1000);
@@ -533,7 +536,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 try {
 
                                     JSONArray jo = new JSONArray(apiContent);
-
                                     new SaveCategoryDBTask(DataLoadingActivity.this).execute(jo);
 
                                 } catch (JSONException e) {
@@ -606,7 +608,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                             }
 
-
                             if (allData.has("Government")) {
                                 new SaveGovernmentDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Government"));
                             }
@@ -643,6 +644,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+
                     }
 
                 }

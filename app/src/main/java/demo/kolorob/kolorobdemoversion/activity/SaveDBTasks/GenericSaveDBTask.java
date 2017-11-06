@@ -36,6 +36,8 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
 
     @Override
     protected void onPostExecute(Result result) {
+
+        Log.e(" Data collection : ",  "done " + getClass());
         if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS) { // Means the task is successful
             countofDb++;
 
@@ -53,6 +55,8 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
 
     protected Long doInBackground(TableType table, ModelType model, JSONArray... jsonArrays) {
 
+
+        Log.e(" Data collection : ",  "ongoing " + getClass());
 
         JSONArray data = jsonArrays[0];
 
@@ -74,7 +78,7 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
     @Override
 
     protected void onPreExecute(){
-        Log.e(" Data collection : ",  "done " + getClass());
+        Log.e(" Data collection : ",  "starting " + getClass());
     }
 
 
