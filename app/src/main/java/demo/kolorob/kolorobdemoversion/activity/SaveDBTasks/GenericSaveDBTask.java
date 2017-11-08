@@ -33,9 +33,16 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
 
 
     public GenericSaveDBTask(Context ctx, JSONObject json){
+        super();
         this.context = ctx;
         this.json = json;
     }
+
+    public GenericSaveDBTask(Context ctx){
+        super();
+        this.context = ctx;
+    }
+
 
     /*@Override
     protected void onPostExecute(Result result) {

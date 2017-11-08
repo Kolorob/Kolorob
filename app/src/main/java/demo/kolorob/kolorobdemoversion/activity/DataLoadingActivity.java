@@ -526,7 +526,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             if (status == AppConstants.SUCCESS_CODE) {
 
                                 try {
-
                                     JSONArray jo = new JSONArray(apiContent);
                                     new SaveCategoryDBTask(DataLoadingActivity.this).execute(jo);
 
@@ -538,11 +537,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         }
                     }
             );
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/refs? ", new VolleyApiCallback() {
+            /*getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/refs? ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
-
 
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
@@ -556,7 +554,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             }
                         }
                     }
-            );
+            );*/
 
 
             if (firstRunUpdate) {

@@ -23,4 +23,9 @@ public class SaveReferenceDBTask extends GenericSaveDBTask <JSONArray, Integer, 
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new SubCategoryTableNew(context), new SubCategoryItemNew(), jsonArrays);
     }
+
+    @Override
+    public void callNextProcess(){
+
+    }
 }
