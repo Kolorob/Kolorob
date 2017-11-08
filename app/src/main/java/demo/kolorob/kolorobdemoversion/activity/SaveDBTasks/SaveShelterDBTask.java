@@ -36,8 +36,13 @@ public class SaveShelterDBTask extends GenericSaveDBTask <JSONArray, Integer, Lo
     public void onPostExecute(Long result){
         Log.e(" Data collection : ",  "done " + getClass());
         if (result.longValue() == 0.0) { // Means the task is successful
-            Intent a = new Intent(context, PlaceDetailsActivityNewLayout.class); // Default Activity
-            context.startActivity(a);
+            callNextProcess();
         }
+    }
+
+    @Override
+    public void callNextProcess(){
+        Intent a = new Intent(context, PlaceDetailsActivityNewLayout.class); // Default Activity
+        context.startActivity(a);
     }
 }
