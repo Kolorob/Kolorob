@@ -495,7 +495,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             @Override
             public void run() {
 
-
                     if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
                         overridePendingTransition(0, 0);
 
@@ -541,6 +540,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+
                             }
                         }
                     }
@@ -628,6 +628,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 new SaveShelterDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Religious Shelter"));
                             }
 
+
                         }
                         int p = allData.length();
                         Log.d("Doneall", String.valueOf(p));
@@ -646,6 +647,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         e.printStackTrace();
 
                     }
+
 
                 }
             }

@@ -9,11 +9,8 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.model.BaseModel;
-import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.NUMBER_OF_TASKS;
 import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
@@ -46,14 +43,14 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
             editor.putInt("KValue", countofDb);
             editor.apply();
             Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));  //number of tasks equivalent to how many api data is being stored
-            ToastMessageDisplay.setText(context, context.getString(R.string.downloading_data));
-            ToastMessageDisplay.showText(context);
+            /*ToastMessageDisplay.setText(context, context.getString(R.string.downloading_data));
+            ToastMessageDisplay.showText(context);*/
         }
     }
 
 
 
-    protected Long doInBackground(TableType table, ModelType model, JSONArray... jsonArrays) {
+     protected Long doInBackground(TableType table, ModelType model, JSONArray... jsonArrays) {
 
 
         Log.e(" Data collection : ",  "ongoing " + getClass());

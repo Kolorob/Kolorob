@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 
@@ -19,11 +20,18 @@ public class SaveAreaDBTask extends GenericSaveDBTask <JSONArray, Integer, Long,
 
     @Override
     protected void onPostExecute(Long result) {
-
+        Log.e(" Data collection : ", "done " + getClass());
     }
 
     @Override
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new AreaTable(context), new Area(), jsonArrays);
     }
+
+
+    @Override
+    protected void onPreExecute(){
+        Log.e(" Data collection : ",  "starting " + getClass());
+    }
+
 }

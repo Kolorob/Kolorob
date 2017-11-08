@@ -263,14 +263,20 @@ public class SplashActivityNew extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Intent intent;
+
                         if (BuildConfig.DEBUG) {
                             System.gc();
                         }
                                 /* start the activity */
                         if(registered)
-                            startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
+                            intent = new Intent(SplashActivityNew.this, DataLoadingActivity.class);
                         else
-                            startActivity(new Intent(SplashActivityNew.this, PhoneRegActivity.class));
+                            intent = new Intent(SplashActivityNew.this, PhoneRegActivity.class);
+
+                        startActivity(intent);
+                        stopService(intent);
 
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         finish();
