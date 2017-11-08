@@ -500,11 +500,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         handler.removeCallbacks(this);
                         SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
-                        Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                     //   Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
 
                         frameAnimation.stop();
                         alertDialog.cancel();
-                        startActivity(a);
+                    //    startActivity(a);
                         return;
 
                     }
@@ -590,46 +590,13 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         } else { //checking category label and parsing in different threads so that parsing time get minimised
 
                             if (allData.has("Education")) {
-                                new SaveEducationDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
+                                new SaveEducationDBTask(DataLoadingActivity.this, allData).execute(allData.getJSONArray("Education"));
                             }
-
-                            if (allData.has("Finance")) {
-                                new SaveFinancialDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Finance"));
-
-                            }
-
-                            if (allData.has("Health")) {
-                                new SaveHealthDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Health"));
-
-                            }
-
-                            if (allData.has("Legal")) {
-                                new SaveLegalDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Legal"));
-
-                            }
-
-                            if (allData.has("Government")) {
-                                new SaveGovernmentDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Government"));
-                            }
-
-
-                            if (allData.has("NGO")) {
-                                new SaveNgoDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("NGO"));
-                            }
-
-
-                            if (allData.has("Entertainment")) {
-                                new SaveEntertainmentDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
-                            }
-
-
-                            if (allData.has("Religious Shelter")) {
-
-                                new SaveShelterDBTask(DataLoadingActivity.this).execute(allData.getJSONArray("Religious Shelter"));
-                            }
-
 
                         }
+
+
+
                         int p = allData.length();
                         Log.d("Doneall", String.valueOf(p));
                         StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);

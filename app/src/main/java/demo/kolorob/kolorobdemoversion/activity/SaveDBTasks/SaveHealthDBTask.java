@@ -20,8 +20,8 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 
 public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long, HealthNewDBTableMain, HealthNewDBModelMain> {
 
-    public SaveHealthDBTask(Context ctx) {
-        super(ctx);
+    public SaveHealthDBTask(Context ctx, JSONObject json) {
+        super(ctx, json);
     }
 
 
@@ -57,6 +57,22 @@ public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long
 
 
         return new Long(0);
+    }
+
+    @Override
+    public void onPostExecute(Long result){
+        callNextProcess();
+    }
+
+    @Override
+    void callNextProcess(){
+        if (json.has("Entertainment")) {
+            try {
+                new SaveEntertainmentDBTask(context, json).execute(json.getJSONArray("Entertainment"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -22,4 +22,6 @@ public class SaveCategoryDBTask extends GenericSaveDBTask <JSONArray, Integer, L
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new CategoryTable(context), new CategoryItem(), jsonArrays);
     }
+
+
 }

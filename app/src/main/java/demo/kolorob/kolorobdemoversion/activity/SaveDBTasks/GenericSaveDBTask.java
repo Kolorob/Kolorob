@@ -9,6 +9,8 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.model.BaseModel;
 
@@ -25,10 +27,14 @@ import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.count
 public abstract class GenericSaveDBTask <Params, Progress, Result, TableType extends BaseDBTable, ModelType extends BaseModel> extends AsyncTask<Params, Progress, Result> {
 
     protected Context context;
+    protected JSONObject json;
+
+    abstract void callNextProcess();
 
 
-    public GenericSaveDBTask(Context ctx){
+    public GenericSaveDBTask(Context ctx, JSONObject json){
         this.context = ctx;
+        this.json = json;
     }
 
     @Override
