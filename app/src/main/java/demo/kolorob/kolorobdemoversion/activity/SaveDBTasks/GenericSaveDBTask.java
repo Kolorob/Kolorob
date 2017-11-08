@@ -81,6 +81,7 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
     @Override
 
     protected void onPreExecute(){
+        super.onPreExecute();
         Log.e(" Data collection : ",  "starting " + getClass());
     }
 

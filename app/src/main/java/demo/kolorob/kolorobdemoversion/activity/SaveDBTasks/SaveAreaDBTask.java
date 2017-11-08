@@ -1,10 +1,13 @@
 package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.model.Area;
 
@@ -14,13 +17,22 @@ import demo.kolorob.kolorobdemoversion.model.Area;
 
 public class SaveAreaDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, AreaTable, Area> {
 
-    public SaveAreaDBTask(Context ctx) {
-        super(ctx);
+    public SaveAreaDBTask(Context ctx, JSONObject json) {
+        super(ctx, json);
     }
 
     @Override
     protected void onPostExecute(Long result) {
         Log.e(" Data collection : ", "done " + getClass());
+        if (result.longValue() == 0.0) {
+            callNextProcess();
+        }
+    }
+
+    @Override
+    public void callNextProcess(){
+        Intent intent = new Intent(context, DataLoadingActivity.class);
+        context.startActivity(intent);
     }
 
     @Override

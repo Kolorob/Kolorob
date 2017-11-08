@@ -143,15 +143,11 @@ public class SplashActivityNew extends AppCompatActivity {
                                 else {
 
                                     if (areaData.has("city_corporation")) {
-                                        new SaveCityCorporationDBTask(SplashActivityNew.this).execute(areaData.getJSONArray("city_corporation"));
+                                        new SaveCityCorporationDBTask(SplashActivityNew.this, areaData).execute(areaData.getJSONArray("city_corporation"));
                                     }
 
-                                    if (areaData.has("ward")) {
-                                        new SaveWardDBTask(SplashActivityNew.this).execute(areaData.getJSONArray("ward"));
-                                    }
-                                    if (areaData.has("areas")) {
-                                        new SaveAreaDBTask(SplashActivityNew.this).execute(areaData.getJSONArray("areas"));
-                                    }
+
+
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
