@@ -28,10 +28,6 @@ public class SaveGovernmentDBTask extends GenericSaveDBTask <JSONArray, Integer,
         return super.doInBackground(new GovNewDBTable(context), new GovernmentNewDBModel(), jsonArrays);
     }
 
-    @Override
-    public void onPostExecute(Long result){
-        callNextProcess();
-    }
 
     @Override
     void callNextProcess(){

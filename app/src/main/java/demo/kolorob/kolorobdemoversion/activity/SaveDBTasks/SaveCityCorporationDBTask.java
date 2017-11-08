@@ -23,10 +23,6 @@ public class SaveCityCorporationDBTask extends GenericSaveDBTask <JSONArray, Int
         super(ctx, json);
     }
 
-    @Override
-    protected void onPostExecute(Long result) {
-        callNextProcess();
-    }
 
     @Override
     public void callNextProcess(){

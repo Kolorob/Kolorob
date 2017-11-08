@@ -31,11 +31,6 @@ public class SaveWardDBTask extends GenericSaveDBTask <JSONArray, Integer, Long,
         return super.doInBackground(new WardTable(context), new Ward(), jsonArrays);
     }
 
-    @Override
-    protected void onPostExecute(Long result) {
-        Log.e(" Data collection : ", "done " + getClass());
-        callNextProcess();
-    }
 
     @Override
     public void callNextProcess(){

@@ -21,13 +21,6 @@ public class SaveAreaDBTask extends GenericSaveDBTask <JSONArray, Integer, Long,
         super(ctx, json);
     }
 
-    @Override
-    protected void onPostExecute(Long result) {
-        Log.e(" Data collection : ", "done " + getClass());
-        if (result.longValue() == 0.0) {
-            callNextProcess();
-        }
-    }
 
     @Override
     public void callNextProcess(){

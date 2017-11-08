@@ -59,10 +59,6 @@ public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long
         return new Long(0);
     }
 
-    @Override
-    public void onPostExecute(Long result){
-        callNextProcess();
-    }
 
     @Override
     void callNextProcess(){

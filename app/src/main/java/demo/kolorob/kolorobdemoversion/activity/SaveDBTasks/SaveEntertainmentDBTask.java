@@ -26,10 +26,7 @@ public class SaveEntertainmentDBTask extends GenericSaveDBTask <JSONArray, Integ
         return super.doInBackground(new EntNewDBTable(context), new EntertainmentNewDBModel(), jsonArrays);
     }
 
-    @Override
-    public void onPostExecute(Long result){
-        callNextProcess();
-    }
+
 
     @Override
     void callNextProcess(){

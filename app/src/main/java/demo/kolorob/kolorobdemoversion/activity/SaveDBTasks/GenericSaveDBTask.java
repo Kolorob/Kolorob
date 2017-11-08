@@ -37,7 +37,7 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
         this.json = json;
     }
 
-    @Override
+    /*@Override
     protected void onPostExecute(Result result) {
 
         Log.e(" Data collection : ",  "done " + getClass());
@@ -51,9 +51,16 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
             Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));  //number of tasks equivalent to how many api data is being stored
             /*ToastMessageDisplay.setText(context, context.getString(R.string.downloading_data));
             ToastMessageDisplay.showText(context);*/
+      /*  }
+    }*/
+
+    @Override
+    protected void onPostExecute(Result result) {
+        Log.e(" Data collection : ", "done " + getClass());
+        if (((Long)result).longValue() == 0.0) {
+            callNextProcess();
         }
     }
-
 
 
      protected Long doInBackground(TableType table, ModelType model, JSONArray... jsonArrays) {

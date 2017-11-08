@@ -28,10 +28,7 @@ public class SaveNgoDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, 
         return super.doInBackground(new NGONewDBTable(context), new NGONewDBModel(), jsonArrays);
     }
 
-    @Override
-    public void onPostExecute(Long result){
-        callNextProcess();
-    }
+
 
     @Override
     void callNextProcess(){

@@ -26,10 +26,6 @@ public class SaveFinancialDBTask extends GenericSaveDBTask <JSONArray, Integer, 
         return super.doInBackground(new FinNewDBTable(context), new FinancialNewDBModel(), jsonArrays);
     }
 
-    @Override
-    public void onPostExecute(Long result){
-        callNextProcess();
-    }
 
     @Override
     void callNextProcess(){

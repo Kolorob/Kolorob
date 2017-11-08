@@ -32,13 +32,6 @@ public class SaveShelterDBTask extends GenericSaveDBTask <JSONArray, Integer, Lo
         return super.doInBackground(new ReligiousNewDBTable(context), new ReligiousNewDBModel(), jsonArrays);
     }
 
-    @Override
-    public void onPostExecute(Long result){
-        Log.e(" Data collection : ",  "done " + getClass());
-        if (result.longValue() == 0.0) { // Means the task is successful
-            callNextProcess();
-        }
-    }
 
     @Override
     public void callNextProcess(){

@@ -27,12 +27,7 @@ public class SaveEducationDBTask extends GenericSaveDBTask<JSONArray, Integer, L
         super(ctx, json);
     }
 
-    @Override
-    public void onPostExecute(Long result){
 
-        callNextProcess();
-
-    }
 
     @Override
     public void callNextProcess() {
