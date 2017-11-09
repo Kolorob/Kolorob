@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveCategoryDBTask;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEducationDBTask;
-import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveReferenceDBTask;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterWard;
@@ -48,7 +47,6 @@ import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -193,10 +191,13 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("_ward", wardClicked); // store ward and area from stored area in pref
-                    //to use in next activity
+
+                    if (wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
+
+                    editor.putString("_ward", wardClicked);
                     editor.putString("areakeyword", areaClicked);
                     editor.putInt("areaID", areaList.get(getPosAreaInt()).getId());
+
                     editor.apply();
 
                     keyword = areaList.get(getPosAreaInt()).getArea_keyword();
@@ -490,26 +491,30 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             @Override
             public void run() {
 
-                    if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
-                        overridePendingTransition(0, 0);
+                Log.e("CountOfDB1: ", " " + countofDb);
 
-                        handler.removeCallbacks(this);
-                        SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
-                     //   Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
 
-                        frameAnimation.stop();
-                        alertDialog.cancel();
+                    Log.e("CountOfDB2: ", " " + countofDb);
+                    overridePendingTransition(0, 0);
+
+                    handler.removeCallbacks(this);
+                    SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
+                    //   Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+
+                    frameAnimation.stop();
+                    alertDialog.cancel();
                     //    startActivity(a);
-                        return;
-
-                    }
-
-
-                    //Create a loop
-                    handler.postDelayed(this, 1000);
-                    timeCounter += 1000;
+                    return;
 
                 }
+
+
+                //Create a loop
+                handler.postDelayed(this, 1000);
+                timeCounter += 1000;
+
+            }
 
 
         };
@@ -566,40 +571,45 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             }
         }
 
-        if(wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
 
-        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
-            @Override
-            public void onResponse(int status, String apiContent) {
-                if (status == AppConstants.SUCCESS_CODE) {
+        else {
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
 
-                    try {
+                        try {
 
-                        allData = new JSONObject(apiContent);
-                        Log.d("AllData", "*********" + allData);
-                        if (allData.length() == 0) {
-                            ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_another_area));
-                            ToastMessageDisplay.showText(DataLoadingActivity.this);
-                        } else { //checking category label and parsing in different threads so that parsing time get minimised
+                            allData = new JSONObject(apiContent);
+                            Log.d("AllData", "*********" + allData);
+                            if (allData.length() == 0) {
+                                ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_another_area));
+                                ToastMessageDisplay.showText(DataLoadingActivity.this);
+                            } else { //checking category label and parsing in different threads so that parsing time get minimised
 
-                            if (allData.has("Education")) {
-                                new SaveEducationDBTask(DataLoadingActivity.this, allData).execute(allData.getJSONArray("Education"));
+                                if (allData.has("Education")) {
+                                    new SaveEducationDBTask(DataLoadingActivity.this, allData).execute(allData.getJSONArray("Education"));
+                                }
+
                             }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
 
                         }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
 
                     }
 
 
                 }
-            }
 
-        });
 
+            });
+
+
+        }
 
     }
-
 }
