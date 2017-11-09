@@ -191,6 +191,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     ToastMessageDisplay.showText(DataLoadingActivity.this);
                 } else {
 
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("_ward", wardClicked); // store ward and area from stored area in pref
+                    //to use in next activity
+                    editor.putString("areakeyword", areaClicked);
+                    editor.putInt("areaID", areaList.get(getPosAreaInt()).getId());
+                    editor.apply();
+
                     keyword = areaList.get(getPosAreaInt()).getArea_keyword();
                     String lat = areaList.get(getPosAreaInt()).getLat();
 
@@ -205,12 +213,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
 
-                            SharedPreferences settings = getSharedPreferences("prefs", 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("_ward", wardClicked); // store ward and area from stored area in pref
-                            //to use in next activity
-                            editor.putString("areakeyword", areaClicked);
-                            editor.apply();
                             Intent intent = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class);
                             startActivity(intent);
                             finish();
@@ -585,21 +587,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             }
 
                         }
-
-
-
-                        int p = allData.length();
-                        Log.d("Doneall", String.valueOf(p));
-                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
-                        WardTable wardTable = new WardTable(DataLoadingActivity.this);
-                        Area area = areaList.get(posAreaInt);
-
-                        storedAreaTable.insertItem(new StoredArea(area.getId(), wardTable.getNodeInfo(area.getWard_id()).getWard_keyword(), area.getArea_keyword(), area.getArea_bn(), area.getParentArea(), area.getLat(), area.getLon()));
-                        SharedPreferences settings = getSharedPreferences("prefs", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("_ward", wardClicked);
-                        editor.putString("areakeyword", areaClicked);
-                        editor.apply();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
