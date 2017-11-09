@@ -266,16 +266,20 @@ public class SplashActivityNew extends AppCompatActivity {
                             System.gc();
                         }
                                 /* start the activity */
-                        if(registered)
-                            intent = new Intent(SplashActivityNew.this, DataLoadingActivity.class);
-                        else
-                            intent = new Intent(SplashActivityNew.this, PhoneRegActivity.class);
+                        if(firstRun && !firstRunUpdate) {
+                            if (registered)
+                                intent = new Intent(SplashActivityNew.this, DataLoadingActivity.class);
+                            else
+                                intent = new Intent(SplashActivityNew.this, PhoneRegActivity.class);
 
-                        startActivity(intent);
-                        stopService(intent);
+                            startActivity(intent);
+                            stopService(intent);
 
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                        finish();
+                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                            finish();
+                        }
+
+
                     }
                 }, 2000);
 

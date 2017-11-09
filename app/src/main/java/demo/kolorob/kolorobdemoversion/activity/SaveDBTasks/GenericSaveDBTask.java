@@ -63,8 +63,10 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
 
     @Override
     protected void onPostExecute(Result result) {
+
         Log.e(" Data collection : ", "done " + getClass());
         if (((Long)result).longValue() == 0.0) {
+            countofDb++;
             callNextProcess();
         }
     }

@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +44,8 @@ public class SaveEducationDBTask extends GenericSaveDBTask<JSONArray, Integer, L
 
     @Override
     public Long doInBackground(JSONArray... jsonArrays) {
+
+        Log.e(" Data collection : ",  "ongoing " + getClass());
 
         JSONArray data = jsonArrays[0];
 
