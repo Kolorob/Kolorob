@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -1470,6 +1471,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
                 /** Called when a drawer has settled in a completely open state. */
+                @SuppressLint("RestrictedApi")
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
                     view = navigationView.getTouchables().get(2);
@@ -1482,6 +1484,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
                 /** Called when a drawer has settled in a completely closed state. */
 
+                @SuppressLint("RestrictedApi")
                 public void onDrawerClosed(View view) {
                     super.onDrawerClosed(view);
                     // getSupportActionBar().setTitle(mActivityTitle);

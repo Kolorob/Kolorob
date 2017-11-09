@@ -27,6 +27,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -163,6 +165,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
+        context = this;
+
         setContentView(R.layout.place_selection_activity);
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
@@ -178,59 +182,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         firstRun = settings.getBoolean("firstRunUp", false);
         firstRunUpdate = settings.getBoolean("update_first_run", true);
 
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if (getPosAreaInt() == -1) {
-                    ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_area));
-                    ToastMessageDisplay.showText(DataLoadingActivity.this);
-                } else {
-
-                    SharedPreferences settings = getSharedPreferences("prefs", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-
-                    if (wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
-
-                    editor.putString("_ward", wardClicked);
-                    editor.putString("areakeyword", areaClicked);
-                    editor.putInt("areaID", areaList.get(getPosAreaInt()).getId());
-
-                    editor.apply();
-
-                    keyword = areaList.get(getPosAreaInt()).getArea_keyword();
-                    String lat = areaList.get(getPosAreaInt()).getLat();
-
-                    Log.e("", "Keyword: " + keyword + "Lat: " + lat);
-
-                    if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
-                        ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.info_not_found));
-                        ToastMessageDisplay.showText(DataLoadingActivity.this);
-                    } else {
-
-                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
-
-                        if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
-
-                            Intent intent = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            if (AppUtils.isNetConnected(getApplicationContext())) {
-                                serverCall();
-                            } else {
-                                AlertMessage.showMessage(DataLoadingActivity.this, getString(R.string.sorry), getString(R.string.connect_to_internet));
-                            }
-                        }
-                    }
-                }
-
-
-            }
-        });
         initViews();
+
         mEnterAnimation = new AlphaAnimation(0f, 1f);
         mEnterAnimation.setDuration(600);
         mEnterAnimation.setFillAfter(true);
@@ -327,7 +280,59 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     }
                 });
 
-        context = this;
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (getPosAreaInt() == -1) {
+                    ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_area));
+                    ToastMessageDisplay.showText(DataLoadingActivity.this);
+                } else {
+
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+
+                    if (wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
+
+                    editor.putString("_ward", wardClicked);
+                    editor.putString("areakeyword", areaClicked);
+                    editor.putInt("areaID", areaList.get(getPosAreaInt()).getId());
+
+                    editor.apply();
+
+                    keyword = areaList.get(getPosAreaInt()).getArea_keyword();
+                    String lat = areaList.get(getPosAreaInt()).getLat();
+
+                    Log.e("", "Keyword: " + keyword + "Lat: " + lat);
+
+                    if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
+                        ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.info_not_found));
+                        ToastMessageDisplay.showText(DataLoadingActivity.this);
+                    } else {
+
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+
+                        if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
+
+                            Intent intent = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            if (AppUtils.isNetConnected(getApplicationContext())) {
+                                serverCall();
+                            } else {
+                                AlertMessage.showMessage(DataLoadingActivity.this, getString(R.string.sorry), getString(R.string.connect_to_internet));
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        });
 
     }
 
@@ -540,6 +545,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                     e.printStackTrace();
                                 }
 
+                                finally{
+
+                                }
+
                             }
                         }
                     }
@@ -590,7 +599,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 if (allData.has("Education")) {
                                     new SaveEducationDBTask(DataLoadingActivity.this, allData).execute(allData.getJSONArray("Education"));
                                 }
-
                             }
 
 
@@ -599,15 +607,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         }
 
-
                     }
-
 
                 }
 
-
             });
-
 
         }
 

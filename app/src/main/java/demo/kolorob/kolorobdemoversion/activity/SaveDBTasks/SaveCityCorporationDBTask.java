@@ -7,10 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import demo.kolorob.kolorobdemoversion.activity.SplashActivityNew;
-import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
-import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 
 /**

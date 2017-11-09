@@ -2,7 +2,6 @@ package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,11 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
+
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.model.BaseModel;
 
-import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.NUMBER_OF_TASKS;
 import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
 
 

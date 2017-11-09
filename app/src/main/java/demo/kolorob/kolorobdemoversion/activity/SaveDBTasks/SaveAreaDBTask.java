@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity;
-import demo.kolorob.kolorobdemoversion.activity.SplashActivityNew;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.model.Area;
 
@@ -33,16 +32,17 @@ public class SaveAreaDBTask extends GenericSaveDBTask <JSONArray, Integer, Long,
         Intent intent;
         SharedPreferences settings = context.getSharedPreferences("prefs", 0);
         boolean registered = settings.getBoolean("IFREGISTERED",false);
+
         if (registered)
             intent = new Intent(context, DataLoadingActivity.class);
         else
             intent = new Intent(context, PhoneRegActivity.class);
 
         context.startActivity(intent);
-        context.stopService(intent);
+        //context.stopService(intent);
 
         ((Activity)context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        ((Activity) context).finish();
+        ((Activity)context).finish();
     }
 
     @Override
