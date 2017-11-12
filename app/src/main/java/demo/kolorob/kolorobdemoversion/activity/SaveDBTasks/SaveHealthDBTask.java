@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
@@ -14,6 +15,9 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
+import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
 
 /**
  * Created by shamima.yasmin on 10/17/2017.
@@ -60,6 +64,18 @@ public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long
 
 
         return new Long(0);
+    }
+
+    @Override
+    public void onPostExecute(Long result) {
+
+        Log.e(" Data collection : ", "done " + getClass());
+        ToastMessageDisplay.setText(context, context.getString(R.string.collecting_data));
+        ToastMessageDisplay.showText(context);
+        if (result == 0.0) {
+            countofDb++;
+            callNextProcess();
+        }
     }
 
 

@@ -7,8 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
+import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
 
 /**
  * Created by shamima.yasmin on 10/18/2017.
@@ -18,6 +22,17 @@ public class SaveCityCorporationDBTask extends GenericSaveDBTask <JSONArray, Int
 
     public SaveCityCorporationDBTask(Context ctx, JSONObject json) {
         super(ctx, json);
+    }
+
+
+    @Override
+    public void onPostExecute(Long result) {
+
+        Log.e(" Data collection : ", "done " + getClass());
+
+        if (result == 0.0) {
+            callNextProcess();
+        }
     }
 
 

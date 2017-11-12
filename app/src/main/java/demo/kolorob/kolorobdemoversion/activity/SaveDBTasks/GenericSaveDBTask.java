@@ -10,8 +10,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.model.BaseModel;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
 
@@ -63,6 +66,8 @@ public abstract class GenericSaveDBTask <Params, Progress, Result, TableType ext
     protected void onPostExecute(Result result) {
 
         Log.e(" Data collection : ", "done " + getClass());
+        //ToastMessageDisplay.setText(context, context.getString(R.string.collecting_data));
+        //ToastMessageDisplay.showText(context);
         if (((Long)result).longValue() == 0.0) {
             countofDb++;
             callNextProcess();

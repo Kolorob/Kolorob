@@ -169,4 +169,5 @@
     <string name="connect_internet">আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...</string>
     <string name="join_with_us">আমাদের সাথে যোগ দিন</string>
    <string name="contact">যোগাযোগ করুন</string>
+    <string name="collecting_data">তথ্য সংগ্রহ চলছে</string>
 </resources>

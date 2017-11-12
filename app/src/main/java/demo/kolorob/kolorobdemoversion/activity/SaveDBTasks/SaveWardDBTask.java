@@ -7,11 +7,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.SplashActivityNew;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.Ward;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
+import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
 
 
 /**
@@ -29,6 +33,17 @@ public class SaveWardDBTask extends GenericSaveDBTask <JSONArray, Integer, Long,
     @Override
     public Long doInBackground(JSONArray... jsonArrays){
         return super.doInBackground(new WardTable(context), new Ward(), jsonArrays);
+    }
+
+
+    @Override
+    public void onPostExecute(Long result) {
+
+        Log.e(" Data collection : ", "done " + getClass());
+
+        if (result == 0.0) {
+            callNextProcess();
+        }
     }
 
 
