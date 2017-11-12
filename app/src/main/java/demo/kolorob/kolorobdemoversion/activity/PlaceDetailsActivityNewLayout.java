@@ -2875,7 +2875,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
                         calladapter(catStatus);
 
                         mapcalledstatus = true;
-                        callMapFragmentWithEducation(constructEducationListItem());
+                        callMapFragment((ArrayList<ModelType>)constructEducationListItem());
 
 
                         ivIcon.setImageResource(R.drawable.ic_education);
@@ -3227,7 +3227,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
 /*
 * call mapfragment functions load fragments of map. based on location */
-    private void callMapFragmentWithEducation(ArrayList <EduNewModel> educationServiceProviderItems) {
+    /*private void callMapFragmentWithEducation(ArrayList <EduNewModel> educationServiceProviderItems) {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
 
@@ -3238,7 +3238,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
             fragment.setSubcategories(currentCategoryID);
             fragment.populateIcons(educationServiceProviderItems);
 
-            called = true;
+            called = true;*/
 
 
       /*  else {
@@ -3250,7 +3250,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
             fragment.Drawedu(edid,s);
         }*/
         // EDD.clear();
-    }
+    //}
     /*
     * this is the default map view based on intent location name.If user change from spinner; this is also called*/
     private void callMapFragment(String lat, String lon) {

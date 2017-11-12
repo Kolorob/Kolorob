@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -82,7 +83,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private GridLayoutManager lLayout, lLayout2;
     private Animation mEnterAnimation, mExitAnimation;
     private int pos, posAreaInt = -1;
-    private AnimationDrawable frameAnimation;
+    public static AnimationDrawable frameAnimation;
+
+    public static Handler handler;
+    public static Dialog alertDialog;
 
 
     public int getCountofDb() {
@@ -482,14 +486,17 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
         LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
-        final Dialog alertDialog = new Dialog(DataLoadingActivity.this);
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        alertDialog.setContentView(promptView);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.show();
+        if(alertDialog == null){
+            alertDialog = new Dialog(DataLoadingActivity.this);
+            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            alertDialog.setContentView(promptView);
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.show();
+
+        }
 
 
-        final Handler handler = new Handler();
+        handler = new Handler();
         Runnable runner = new Runnable() {
             int timeCounter = 0;
 
@@ -501,7 +508,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
 
                     Log.e("CountOfDB2: ", " " + countofDb);
-                    overridePendingTransition(0, 0);
+                    return;
+                   /* overridePendingTransition(0, 0);
 
                     handler.removeCallbacks(this);
                     SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
@@ -510,7 +518,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     frameAnimation.stop();
                     alertDialog.cancel();
                     //    startActivity(a);
-                    return;
+
+                    Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                    context.startActivity(a);
+                    // context.stopService(a);
+
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    finish();
+                    return;*/
 
                 }
 
@@ -616,4 +631,5 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
 
     }
+
 }
