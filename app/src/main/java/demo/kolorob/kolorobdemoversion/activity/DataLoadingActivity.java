@@ -1,6 +1,5 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -28,8 +27,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Response;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,8 +34,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.GenericSaveDBTask;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveCategoryDBTask;
 import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEducationDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveEntertainmentDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveFinancialDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveGovernmentDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveHealthDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveLegalDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveNgoDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveReferenceDBTask;
+import demo.kolorob.kolorobdemoversion.activity.SaveDBTasks.SaveShelterDBTask;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterWard;
@@ -65,9 +71,10 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static int countofDb = 0;
-    public static int NUMBER_OF_TASKS = 8;
+    private AnimationDrawable frameAnimation;
+
     private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
+    final int NUMBER_OF_TASKS = 8;
     Context context;
     View view = null, areaview, wardview, cityview;
     Button submit;
@@ -80,30 +87,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     ArrayList<Ward> wardList = new ArrayList<>();
     ArrayList<Area> areaList = new ArrayList<>();
     String cityClicked, wardClicked, areaClicked;
+    private int counter = 0;
     private GridLayoutManager lLayout, lLayout2;
     private Animation mEnterAnimation, mExitAnimation;
     private int pos, posAreaInt = -1;
-    public static AnimationDrawable frameAnimation;
-
-    public static Handler handler;
-    public static Dialog alertDialog;
-
-
-    public int getCountofDb() {
-        return countofDb;
-    }
-
-    public void setCountofDb(int count) {
-        countofDb = count;
-    }
-
-    public int getNumberOfTasks() {
-        return NUMBER_OF_TASKS;
-    }
-
-    public void setNumberOfTasks(int numberOfTasks) {
-        NUMBER_OF_TASKS = numberOfTasks;
-    }
 
     public int getPos() {
         return pos;
@@ -285,15 +272,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 });
 
 
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
                 if (getPosAreaInt() == -1) {
-                    ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_area));
-                    ToastMessageDisplay.showText(DataLoadingActivity.this);
+                    ToastMessageDisplay.setText(context, getString(R.string.select_area));
+                    ToastMessageDisplay.showText(context);
                 } else {
 
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
@@ -313,22 +299,22 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     Log.e("", "Keyword: " + keyword + "Lat: " + lat);
 
                     if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
-                        ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.info_not_found));
-                        ToastMessageDisplay.showText(DataLoadingActivity.this);
+                        ToastMessageDisplay.setText(context, getString(R.string.info_not_found));
+                        ToastMessageDisplay.showText(context);
                     } else {
 
-                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(context);
 
                         if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
 
-                            Intent intent = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class);
+                            Intent intent = new Intent(context, PlaceDetailsActivityNewLayout.class);
                             startActivity(intent);
                             finish();
                         } else {
                             if (AppUtils.isNetConnected(getApplicationContext())) {
                                 serverCall();
                             } else {
-                                AlertMessage.showMessage(DataLoadingActivity.this, getString(R.string.sorry), getString(R.string.connect_to_internet));
+                                AlertMessage.showMessage(context, getString(R.string.sorry), getString(R.string.connect_to_internet));
                             }
                         }
                     }
@@ -353,7 +339,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
         //Set RecyclerView type according to intent value
-        lLayout = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+        lLayout = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
         recyclerViewCity.setHasFixedSize(true);
         recyclerViewCity.setLayoutManager(lLayout);
 
@@ -412,10 +398,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populateRecyclerViewCity() {
 
 
-        CityCorporationTable ccTable = new CityCorporationTable(DataLoadingActivity.this);
+        CityCorporationTable ccTable = new CityCorporationTable(context);
         ccList = ccTable.getAllData();
 
-        RecyclerView_AdapterCityCorporation adapter = new RecyclerView_AdapterCityCorporation(DataLoadingActivity.this, ccList);
+        RecyclerView_AdapterCityCorporation adapter = new RecyclerView_AdapterCityCorporation(context, ccList);
         recyclerViewCity.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
@@ -425,17 +411,17 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populateRecyclerViewWard(int cc_id) {
 
 
-        WardTable wardTable = new WardTable(DataLoadingActivity.this);
+        WardTable wardTable = new WardTable(context);
         wardList = wardTable.getDataListFromForeignKey(cc_id);
 
         if (wardList.size() >= 4) {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+            lLayout2 = new GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false);
         } else {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+            lLayout2 = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
         }
         recyclerViewWard.setHasFixedSize(false);
         recyclerViewWard.setLayoutManager(lLayout2);
-        RecyclerView_AdapterWard adapter = new RecyclerView_AdapterWard(DataLoadingActivity.this, wardList);
+        RecyclerView_AdapterWard adapter = new RecyclerView_AdapterWard(context, wardList);
         recyclerViewWard.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
@@ -445,17 +431,17 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populateRecyclerViewArea(int ward_id) {
 
 
-        AreaTable areaTable = new AreaTable(DataLoadingActivity.this);
+        AreaTable areaTable = new AreaTable(context);
         areaList = areaTable.getDataListFromForeignKey(ward_id);
 
         if (areaList.size() >= 4) {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+            lLayout2 = new GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false);
         } else {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+            lLayout2 = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
         }
         recyclerViewArea.setHasFixedSize(false);
         recyclerViewArea.setLayoutManager(lLayout2);
-        RecyclerView_AdapterArea adapter = new RecyclerView_AdapterArea(DataLoadingActivity.this, areaList);
+        RecyclerView_AdapterArea adapter = new RecyclerView_AdapterArea(context, areaList);
         recyclerViewArea.setAdapter(adapter);
 
 
@@ -480,62 +466,54 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     void serverCall() {
 
-        if (!firstRun || firstRunUpdate) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
-        {
-            NUMBER_OF_TASKS = 10;
-        }
+        final int number_of_tasks_first_run = NUMBER_OF_TASKS + 2;
+
         LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
-        if(alertDialog == null){
-            alertDialog = new Dialog(DataLoadingActivity.this);
-            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            alertDialog.setContentView(promptView);
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            alertDialog.show();
-
-        }
+        final Dialog alertDialog = new Dialog(DataLoadingActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
 
 
-        handler = new Handler();
+        final Handler handler = new Handler();
         Runnable runner = new Runnable() {
             int timeCounter = 0;
-
             @Override
             public void run() {
 
-                Log.e("CountOfDB1: ", " " + countofDb);
+                boolean downloaded = false;
 
-                if (countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
+                if(!firstRun || firstRunUpdate){
+                    if(counter == number_of_tasks_first_run) downloaded = true;
+                }
+                else{
+                    if(counter == NUMBER_OF_TASKS) downloaded = true;
+                }
 
-                    Log.e("CountOfDB2: ", " " + countofDb);
-                    return;
-                   /* overridePendingTransition(0, 0);
+                if (downloaded || timeCounter > 120000) {
+                    overridePendingTransition(0, 0);
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    //  editor.putString("First", first);
 
+                    //  editor.apply();
                     handler.removeCallbacks(this);
-                    SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
-                    //   Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                    SharedPreferencesHelper.setIfCommentedAlready(context,null,SharedPreferencesHelper.getUname(context),"no");
+                    Intent a = new Intent(context, PlaceDetailsActivityNewLayout.class); // Default Activity
 
                     frameAnimation.stop();
                     alertDialog.cancel();
-                    //    startActivity(a);
-
-                    Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
-                    context.startActivity(a);
-                    // context.stopService(a);
-
-                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                    finish();
-                    return;*/
+                    startActivity(a);
+                    return;
 
                 }
-
-
                 //Create a loop
                 handler.postDelayed(this, 1000);
                 timeCounter += 1000;
 
             }
-
 
         };
         handler.postDelayed(runner, 1000);
@@ -546,38 +524,33 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         frameAnimation.setOneShot(false);
         frameAnimation.start();
 
+
         if (!firstRun || firstRunUpdate) {
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories_new?", new VolleyApiCallback() {
+            getRequest(context, "http://kolorob.net/kolorob-new-demo/api/categories_new?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
 
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
-                                    new SaveCategoryDBTask(DataLoadingActivity.this).execute(jo);
+                                    counter += new SaveCategoryDBTask(context, jo).saveItem();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                }
-
-                                finally{
-
                                 }
 
                             }
                         }
                     }
             );
-            /*getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/refs? ", new VolleyApiCallback() {
+            getRequest(context, "http://kolorob.net/kolorob-new-demo/api/refs? ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
 
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
-                                    Log.d("AllData", "********" + jo);
-                                    new SaveReferenceDBTask(DataLoadingActivity.this).execute(jo);
-
+                                    counter += new SaveReferenceDBTask(context, jo).saveItem();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -585,7 +558,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             }
                         }
                     }
-            );*/
+            );
 
 
             if (firstRunUpdate) {
@@ -596,40 +569,65 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
 
 
-        else {
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
-                @Override
-                public void onResponse(int status, String apiContent) {
-                    if (status == AppConstants.SUCCESS_CODE) {
+        getRequest(context, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
+            @Override
+            public void onResponse(int status, String apiContent) {
+                if (status == AppConstants.SUCCESS_CODE) {
 
-                        try {
+                    try {
 
-                            allData = new JSONObject(apiContent);
-                            Log.d("AllData", "*********" + allData);
-                            if (allData.length() == 0) {
-                                ToastMessageDisplay.setText(DataLoadingActivity.this, getString(R.string.select_another_area));
-                                ToastMessageDisplay.showText(DataLoadingActivity.this);
-                            } else { //checking category label and parsing in different threads so that parsing time get minimised
+                        allData = new JSONObject(apiContent);
+                        Log.d("AllData", "*********" + allData);
+                        if (allData.length() == 0) {
+                            ToastMessageDisplay.setText(context, getString(R.string.select_another_area));
+                            ToastMessageDisplay.showText(context);
+                        } else { //checking category label and parsing in different threads so that parsing time get minimised
 
-                                if (allData.has("Education")) {
-                                    new SaveEducationDBTask(DataLoadingActivity.this, allData).execute(allData.getJSONArray("Education"));
-                                }
+                            if (allData.has(AppConstants.EDU_API)) {
+                                counter += new SaveEducationDBTask(context, allData.getJSONArray("Education")).saveItem();
                             }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
+                            if(allData.has(AppConstants.HEALTH_API)){
+                                counter += new SaveHealthDBTask(context, allData.getJSONArray("Health")).saveItem();
+                            }
+                            if(allData.has(AppConstants.ENTERTAINMENT_API)){
+                                counter += new SaveEntertainmentDBTask(context, allData.getJSONArray("Entertainment")).saveItem();
+                            }
+                            if(allData.has(AppConstants.GOVERNMENT_API)){
+                                counter += new SaveGovernmentDBTask(context, allData.getJSONArray("Government")).saveItem();
+                            }
+                            if(allData.has(AppConstants.LEGAL_API)){
+                                counter += new SaveLegalDBTask(context, allData.getJSONArray("Legal")).saveItem();
+                            }
+                            if(allData.has(AppConstants.FINANCE_API)){
+                                counter += new SaveFinancialDBTask(context, allData.getJSONArray("Finance")).saveItem();
+                            }
+                            if(allData.has(AppConstants.NGO_API)){
+                                counter += new SaveNgoDBTask(context, allData.getJSONArray("NGO")).saveItem();
+                            }
+                            if(allData.has(AppConstants.SHELTER_API)){
+                                counter += new SaveShelterDBTask(context, allData.getJSONArray("Religious Shelter")).saveItem();
+                            }
                         }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
 
                     }
 
                 }
 
-            });
+            }
 
-        }
+        });
+
 
     }
+
+    /*public static <SaveTask extends GenericSaveDBTask> void downloadData(JSONObject json, String api){
+        if (json.has(api)) {
+            counter += new SaveTask(DataLoadingActivity.this, allData.getJSONArray("Education")).saveItem();
+        }
+    }*/
 
 }
