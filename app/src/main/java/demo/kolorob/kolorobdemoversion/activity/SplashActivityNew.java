@@ -53,7 +53,8 @@ public class SplashActivityNew extends AppCompatActivity {
 
     Context context;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
-
+    final private int NUMBER_OF_DATA = 3;
+    int counter = 0;
 
     RelativeLayout dataload;
     String app_ver = "";
@@ -143,10 +144,18 @@ public class SplashActivityNew extends AppCompatActivity {
                                 else {
 
                                     if (areaData.has("city_corporation")) {
-                                        new SaveCityCorporationDBTask(SplashActivityNew.this, areaData).execute(areaData.getJSONArray("city_corporation"));
+                                        counter += new SaveCityCorporationDBTask(SplashActivityNew.this, areaData.getJSONArray("city_corporation")).saveItem();
+                                    }
+                                    if(areaData.has("ward")){
+                                        counter += new SaveWardDBTask(SplashActivityNew.this, areaData.getJSONArray("ward")).saveItem();
+                                    }
+                                    if(areaData.has("areas")){
+                                        counter += new SaveAreaDBTask(SplashActivityNew.this, areaData.getJSONArray("areas")).saveItem();
                                     }
 
-
+                                    if(counter < NUMBER_OF_DATA){
+                                        ToastMessageDisplay.setText(SplashActivityNew.this, getString(R.string.try_later));
+                                    }
 
                                 }
                             } catch (JSONException e) {
