@@ -59,7 +59,7 @@ public class SaveHealthDBTask extends GenericSaveDBTask<HealthNewDBTableMain, He
         }
 
 
-        return 0;
+        return 1;
     }
 
 

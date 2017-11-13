@@ -83,7 +83,7 @@ public class SaveEducationDBTask extends GenericSaveDBTask <EduNewDBTableMain, E
         }
 
 
-        return 0;
+        return 1;
 
     }
 }

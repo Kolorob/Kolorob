@@ -40,7 +40,6 @@ public abstract class GenericSaveDBTask <TableType extends BaseDBTable, ModelTyp
 
 
         Log.e(" Data collection : ",  "ongoing " + getClass());
-
         for (int i = 0; i < json.length(); i++) {
             try {
                 if (!json.isNull(i)) {
@@ -53,7 +52,7 @@ public abstract class GenericSaveDBTask <TableType extends BaseDBTable, ModelTyp
                 return -1;
             }
         }
-        return 0;
+        return 1;
     }
 
 
