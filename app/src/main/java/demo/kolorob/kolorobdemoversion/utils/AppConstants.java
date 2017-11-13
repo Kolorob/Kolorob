@@ -103,4 +103,13 @@ public class AppConstants {
     public static final int SEARCH_BUTTON = 3;
     public static final int COMPARE_BUTTON = 4;
 
+    public static final String EDU_API = "Education";
+    public static final String HEALTH_API = "Health";
+    public static final String ENTERTAINMENT_API = "Entertainment";
+    public static final String GOVERNMENT_API = "Government";
+    public static final String LEGAL_API = "Legal";
+    public static final String FINANCE_API = "Finance";
+    public static final String NGO_API = "NGO";
+    public static final String SHELTER_API = "Religious Shelter";
+
 }
