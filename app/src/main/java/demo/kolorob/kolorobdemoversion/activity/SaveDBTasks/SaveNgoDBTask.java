@@ -3,10 +3,6 @@ package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 import android.content.Context;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
 import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
 
@@ -15,29 +11,18 @@ import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
  */
 
 
-public class SaveNgoDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, NGONewDBTable, NGONewDBModel> {
+public class SaveNgoDBTask extends GenericSaveDBTask <NGONewDBTable, NGONewDBModel> {
 
 
-    public SaveNgoDBTask(Context ctx, JSONObject json) {
+    public SaveNgoDBTask(Context ctx, JSONArray json) {
         super(ctx, json);
     }
 
 
     @Override
-    public Long doInBackground(JSONArray... jsonArrays){
-        return super.doInBackground(new NGONewDBTable(context), new NGONewDBModel(), jsonArrays);
+    public Long saveItem(){
+        return super.saveItem(new NGONewDBTable(context), new NGONewDBModel());
     }
 
 
-
-    @Override
-    void callNextProcess(){
-        if (json.has("Religious Shelter")) {
-            try {
-                new SaveShelterDBTask(context, json).execute(json.getJSONArray("Religious Shelter"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

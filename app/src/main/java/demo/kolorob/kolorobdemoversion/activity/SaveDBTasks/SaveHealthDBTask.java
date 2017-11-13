@@ -6,42 +6,36 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
-import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.countofDb;
 
 /**
  * Created by shamima.yasmin on 10/17/2017.
  */
 
-public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long, HealthNewDBTableMain, HealthNewDBModelMain> {
+public class SaveHealthDBTask extends GenericSaveDBTask<HealthNewDBTableMain, HealthNewDBModelMain> {
 
-    public SaveHealthDBTask(Context ctx, JSONObject json) {
+    public SaveHealthDBTask(Context ctx, JSONArray json) {
         super(ctx, json);
     }
 
 
     @Override
-    protected Long doInBackground(JSONArray... jsonArrays) {
+    public Long saveItem() {
 
         Log.e(" Data collection : ",  "ongoing " + getClass());
 
-        JSONArray data = jsonArrays[0];
 
-        for (int i = 0; i < data.length(); i++) {
+        for (int i = 0; i < json.length(); i++) {
 
             try {
-                if (!data.isNull(i)) {
-                    JSONObject jsonObject = data.getJSONObject(i);
+                if (!json.isNull(i)) {
+                    JSONObject jsonObject = json.getJSONObject(i);
 
                     HealthNewDBModelMain health = new HealthNewDBModelMain().parse(jsonObject);
                     new HealthNewDBTableMain(context).insertItem(health);
@@ -68,28 +62,5 @@ public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long
         return new Long(0);
     }
 
-    @Override
-    public void onPostExecute(Long result) {
-
-        Log.e(" Data collection : ", "done " + getClass());
-        ToastMessageDisplay.setText(context, context.getString(R.string.collecting_data));
-        ToastMessageDisplay.showText(context);
-        if (result == 0.0) {
-            countofDb++;
-            callNextProcess();
-        }
-    }
-
-
-    @Override
-    void callNextProcess(){
-        if (json.has("Entertainment")) {
-            try {
-                new SaveEntertainmentDBTask(context, json).execute(json.getJSONArray("Entertainment"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 }

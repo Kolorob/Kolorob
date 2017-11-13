@@ -26,49 +26,16 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
  * Created by shamima.yasmin on 10/17/2017.
  */
 
-public class SaveShelterDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, ReligiousNewDBTable, ReligiousNewDBModel> {
+public class SaveShelterDBTask extends GenericSaveDBTask <ReligiousNewDBTable, ReligiousNewDBModel> {
 
-    public SaveShelterDBTask(Context ctx, JSONObject json) {
+    public SaveShelterDBTask(Context ctx, JSONArray json) {
         super(ctx, json);
     }
 
 
     @Override
-    public Long doInBackground(JSONArray... jsonArrays){
-        return super.doInBackground(new ReligiousNewDBTable(context), new ReligiousNewDBModel(), jsonArrays);
+    public Long saveItem(){
+        return super.saveItem(new ReligiousNewDBTable(context), new ReligiousNewDBModel());
     }
 
-
-    @Override
-    public void callNextProcess(){
-
-        StoredAreaTable storedAreaTable = new StoredAreaTable(context);
-        WardTable wardTable = new WardTable(context);
-
-        SharedPreferences settings = context.getSharedPreferences("prefs", 0);
-        Area area = new AreaTable(context).getNodeInfo(settings.getInt("areaID", 0));
-
-        storedAreaTable.insertItem(new StoredArea(area.getId(), wardTable.getNodeInfo(area.getWard_id()).getWard_keyword(), area.getArea_keyword(), area.getArea_bn(), area.getParentArea(), area.getLat(), area.getLon()));
-
-        ((Activity)context).overridePendingTransition(0, 0);
-
-        //DataLoadingActivity.handler.removeCallbacks(context);
-        SharedPreferencesHelper.setIfCommentedAlready(context, null, SharedPreferencesHelper.getUname(context), "no");
-        //   Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
-
-        DataLoadingActivity.frameAnimation.stop();
-        DataLoadingActivity.alertDialog.cancel();
-        DataLoadingActivity.alertDialog = null;
-        //    startActivity(a);
-
-        Intent a = new Intent(context, PlaceDetailsActivityNewLayout.class); // Default Activity
-        context.startActivity(a);
-        // context.stopService(a);
-
-        ((Activity)context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        ((Activity)context).finish();
-      //  return;
-
-
-    }
 }

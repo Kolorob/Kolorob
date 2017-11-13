@@ -15,27 +15,15 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBMod
  */
 
 
-public class SaveEntertainmentDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, EntNewDBTable, EntertainmentNewDBModel> {
+public class SaveEntertainmentDBTask extends GenericSaveDBTask <EntNewDBTable, EntertainmentNewDBModel> {
 
-    public SaveEntertainmentDBTask(Context ctx, JSONObject json) {
+    public SaveEntertainmentDBTask(Context ctx, JSONArray json) {
         super(ctx, json);
     }
 
     @Override
-    public Long doInBackground(JSONArray... jsonArrays){
-        return super.doInBackground(new EntNewDBTable(context), new EntertainmentNewDBModel(), jsonArrays);
+    public Long saveItem(){
+        return super.saveItem(new EntNewDBTable(context), new EntertainmentNewDBModel());
     }
 
-
-
-    @Override
-    void callNextProcess(){
-        if (json.has("Government")) {
-            try {
-                new SaveGovernmentDBTask(context, json).execute(json.getJSONArray("Government"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

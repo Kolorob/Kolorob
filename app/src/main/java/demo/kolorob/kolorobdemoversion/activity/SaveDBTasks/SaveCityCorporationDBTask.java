@@ -18,45 +18,16 @@ import static demo.kolorob.kolorobdemoversion.activity.DataLoadingActivity.count
  * Created by shamima.yasmin on 10/18/2017.
  */
 
-public class SaveCityCorporationDBTask extends GenericSaveDBTask <JSONArray, Integer, Long, CityCorporationTable, CityCorporation> {
+public class SaveCityCorporationDBTask extends GenericSaveDBTask <CityCorporationTable, CityCorporation> {
 
-    public SaveCityCorporationDBTask(Context ctx, JSONObject json) {
+    public SaveCityCorporationDBTask(Context ctx, JSONArray json) {
         super(ctx, json);
     }
 
 
     @Override
-    public void onPostExecute(Long result) {
-
-        Log.e(" Data collection : ", "done " + getClass());
-
-        if (result == 0.0) {
-            callNextProcess();
-        }
-    }
-
-
-    @Override
-    public void callNextProcess(){
-        if (json.has("ward")) {
-            try {
-                new SaveWardDBTask(context, json).execute(json.getJSONArray("ward"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public Long doInBackground(JSONArray... jsonArrays){
-        return super.doInBackground(new CityCorporationTable(context), new CityCorporation(), jsonArrays);
-    }
-
-    @Override
-
-    protected void onPreExecute(){
-        super.onPreExecute();
-        Log.e(" Data collection : ",  "starting " + getClass());
+    public Long saveItem(){
+        return super.saveItem(new CityCorporationTable(context), new CityCorporation());
     }
 
 }

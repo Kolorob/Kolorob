@@ -22,38 +22,24 @@ import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
  */
 
 
-public class SaveEducationDBTask extends GenericSaveDBTask<JSONArray, Integer, Long, EduNewDBTableMain, EduNewModel> {
+public class SaveEducationDBTask extends GenericSaveDBTask <EduNewDBTableMain, EduNewModel> {
 
-    public SaveEducationDBTask(Context ctx, JSONObject json) {
+    public SaveEducationDBTask(Context ctx, JSONArray json) {
         super(ctx, json);
     }
 
 
 
     @Override
-    public void callNextProcess() {
-        if (json.has("Health")) {
-            try {
-                new SaveHealthDBTask(context, json).execute(json.getJSONArray("Health"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    @Override
-    public Long doInBackground(JSONArray... jsonArrays) {
+    public Long saveItem() {
 
         Log.e(" Data collection : ",  "ongoing " + getClass());
 
-        JSONArray data = jsonArrays[0];
-
-        for (int i = 0; i < data.length(); i++) {
+        for (int i = 0; i < json.length(); i++) {
 
             try {
-                if (!data.isNull(i)) {
-                    JSONObject jsonObject = data.getJSONObject(i);
+                if (!json.isNull(i)) {
+                    JSONObject jsonObject = json.getJSONObject(i);
 
                     EduNewModel edu = new EduNewModel().parse(jsonObject);
                     new EduNewDBTableMain(context).insertItem(edu);
