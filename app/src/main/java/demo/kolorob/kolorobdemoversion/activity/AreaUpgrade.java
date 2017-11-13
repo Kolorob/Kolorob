@@ -63,6 +63,7 @@ this activity is for area upgrade/delete/browse. This is almost similar to data 
 
 public class AreaUpgrade extends AppCompatActivity {
 
+    private final int NUMBER_OF_TASKS = 8;
     ArrayList <StoredArea> storedAreas = new ArrayList<>();
     RadioGroup radioGroup;
     Button update,delete,browse;
@@ -73,6 +74,8 @@ public class AreaUpgrade extends AppCompatActivity {
     ProgressDialog dialog, dialog2;
     JSONObject allData;
     StoredAreaTable storedAreaTable;
+
+    static int counter = 0;
 
     ArrayList<StoredArea>storedAreaArrayList = new ArrayList<>();
     ArrayList<StoredArea>storedAreaArrayList2 = new ArrayList<>();
@@ -88,7 +91,7 @@ public class AreaUpgrade extends AppCompatActivity {
         linearLayout=(LinearLayout)findViewById(R.id.linearradio);
         storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
 
-        context=this;
+        context = this;
         radioGroup = (RadioGroup)findViewById(R.id.areagroup);
         radioGroup.setOrientation(RadioGroup.VERTICAL);
         radiobuttonsetup();
@@ -229,7 +232,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
     void serverCall(String ward, String area) {
 
-        /*getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
+        getRequest(context, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
@@ -238,54 +241,50 @@ public class AreaUpgrade extends AppCompatActivity {
 
                         allData = new JSONObject(apiContent);
 
-                        if (allData.has("Education")) {
-                            new SaveEducationDBTask(AreaUpgrade.this, allData).execute(allData.getJSONArray("Education"));
+                        if (allData.has(AppConstants.EDU_API)) {
+                            counter += new SaveEducationDBTask(context, allData.getJSONArray("Education")).saveItem();
+                        }
+                        if(allData.has(AppConstants.HEALTH_API)){
+                            counter += new SaveHealthDBTask(context, allData.getJSONArray("Health")).saveItem();
+                        }
+                        if(allData.has(AppConstants.ENTERTAINMENT_API)){
+                            counter += new SaveEntertainmentDBTask(context, allData.getJSONArray("Entertainment")).saveItem();
+                        }
+                        if(allData.has(AppConstants.GOVERNMENT_API)){
+                            counter += new SaveGovernmentDBTask(context, allData.getJSONArray("Government")).saveItem();
+                        }
+                        if(allData.has(AppConstants.LEGAL_API)){
+                            counter += new SaveLegalDBTask(context, allData.getJSONArray("Legal")).saveItem();
+                        }
+                        if(allData.has(AppConstants.FINANCE_API)){
+                            counter += new SaveFinancialDBTask(context, allData.getJSONArray("Finance")).saveItem();
+                        }
+                        if(allData.has(AppConstants.NGO_API)){
+                            counter += new SaveNgoDBTask(context, allData.getJSONArray("NGO")).saveItem();
+                        }
+                        if(allData.has(AppConstants.SHELTER_API)){
+                            counter += new SaveShelterDBTask(context, allData.getJSONArray("Religious Shelter")).saveItem();
                         }
 
-                        /*if (allData.has("Finance")) {
-                            new SaveFinancialDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Finance"));
 
-                        }
-
-                        if (allData.has("Health")) {
-                            new SaveHealthDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Health"));
-
-                        }
-
-                        if (allData.has("Legal")) {
-                            new SaveLegalDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Legal"));
-
-                        }
-
-                        if (allData.has("Government")) {
-                            new SaveGovernmentDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Government"));
-                        }
-
-                        if (allData.has("NGO")) {
-                            new SaveNgoDBTask(AreaUpgrade.this).execute(allData.getJSONArray("NGO"));
-                        }
-
-                        if (allData.has("Entertainment")) {
-                            new SaveEntertainmentDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Entertainment"));
-                        }
-
-                        if (allData.has("Religious Shelter")) {
-
-                            new SaveShelterDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Religious Shelter"));
-                        }*/
-
-
-
-                      /*  Log.d("Doneall",String.valueOf(allData.length()));
+                        Log.d("Doneall",String.valueOf(allData.length()));
                         dialog.dismiss();
-                        ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.info_updated));
-                        ToastMessageDisplay.showText(AreaUpgrade.this);
-                        SharedPreferences settings = getSharedPreferences("prefs", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        settings.edit().putLong("time", System.currentTimeMillis()).apply();
-                        editor.putString("_ward", storedAreas.get(selectedId).getWard());
-                        editor.putString("areakeyword", storedAreas.get(selectedId).getArea());
-                        editor.apply();
+                        if(counter == NUMBER_OF_TASKS){
+                            ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.info_updated));
+                            ToastMessageDisplay.showText(AreaUpgrade.this);
+                            SharedPreferences settings = getSharedPreferences("prefs", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            settings.edit().putLong("time", System.currentTimeMillis()).apply();
+                            editor.putString("_ward", storedAreas.get(selectedId).getWard());
+                            editor.putString("areakeyword", storedAreas.get(selectedId).getArea());
+                            editor.apply();
+                        }
+
+                        else{
+                            ToastMessageDisplay.setText(context, getString(R.string.try_later));
+                            ToastMessageDisplay.showText(context);
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -293,7 +292,7 @@ public class AreaUpgrade extends AppCompatActivity {
                 }
             }
 
-        });*/
+        });
     }
 
 
