@@ -157,6 +157,7 @@ public class SplashActivityNew extends AppCompatActivity {
 
                                     if(counter < NUMBER_OF_DATA){
                                         ToastMessageDisplay.setText(SplashActivityNew.this, getString(R.string.try_later));
+                                        ToastMessageDisplay.showText(context);
                                     }
 
                                 }
@@ -277,7 +278,7 @@ public class SplashActivityNew extends AppCompatActivity {
                             System.gc();
                         }
                                 /* start the activity */
-                        if(firstRun && !firstRunUpdate) {
+                        if(!firstRun || firstRunUpdate) {
                             if (registered)
                                 intent = new Intent(SplashActivityNew.this, DataLoadingActivity.class);
                             else
