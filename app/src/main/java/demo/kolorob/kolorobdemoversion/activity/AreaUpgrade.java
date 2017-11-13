@@ -229,7 +229,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
     void serverCall(String ward, String area) {
 
-        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
+        /*getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
@@ -276,7 +276,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
 
 
-                        Log.d("Doneall",String.valueOf(allData.length()));
+                      /*  Log.d("Doneall",String.valueOf(allData.length()));
                         dialog.dismiss();
                         ToastMessageDisplay.setText(AreaUpgrade.this,getString(R.string.info_updated));
                         ToastMessageDisplay.showText(AreaUpgrade.this);
@@ -293,7 +293,7 @@ public class AreaUpgrade extends AppCompatActivity {
                 }
             }
 
-        });
+        });*/
     }
 
 

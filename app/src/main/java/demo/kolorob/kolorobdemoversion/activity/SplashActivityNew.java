@@ -153,6 +153,8 @@ public class SplashActivityNew extends AppCompatActivity {
                                         counter += new SaveAreaDBTask(SplashActivityNew.this, areaData.getJSONArray("areas")).saveItem();
                                     }
 
+                                    Log.e("counter: ", "Splash: " + counter);
+
                                     if(counter < NUMBER_OF_DATA){
                                         ToastMessageDisplay.setText(SplashActivityNew.this, getString(R.string.try_later));
                                     }

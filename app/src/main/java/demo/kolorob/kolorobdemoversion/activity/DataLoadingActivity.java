@@ -494,11 +494,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                 if (downloaded || timeCounter > 120000) {
                     overridePendingTransition(0, 0);
-                    SharedPreferences settings = getSharedPreferences("prefs", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    //  editor.putString("First", first);
 
-                    //  editor.apply();
                     handler.removeCallbacks(this);
                     SharedPreferencesHelper.setIfCommentedAlready(context,null,SharedPreferencesHelper.getUname(context),"no");
                     Intent a = new Intent(context, PlaceDetailsActivityNewLayout.class); // Default Activity
@@ -607,6 +603,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             if(allData.has(AppConstants.SHELTER_API)){
                                 counter += new SaveShelterDBTask(context, allData.getJSONArray("Religious Shelter")).saveItem();
                             }
+
+                            Log.e("counter: ", "DataLoading: " + counter);
+
                         }
 
 
