@@ -229,7 +229,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
     void serverCall(String ward, String area) {
 
-        /*getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
+        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
@@ -239,10 +239,10 @@ public class AreaUpgrade extends AppCompatActivity {
                         allData = new JSONObject(apiContent);
 
                         if (allData.has("Education")) {
-                            new SaveEducationDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Education"));
+                            new SaveEducationDBTask(AreaUpgrade.this, allData).execute(allData.getJSONArray("Education"));
                         }
 
-                        if (allData.has("Finance")) {
+                        /*if (allData.has("Finance")) {
                             new SaveFinancialDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Finance"));
 
                         }
@@ -272,7 +272,7 @@ public class AreaUpgrade extends AppCompatActivity {
                         if (allData.has("Religious Shelter")) {
 
                             new SaveShelterDBTask(AreaUpgrade.this).execute(allData.getJSONArray("Religious Shelter"));
-                        }
+                        }*/
 
 
 
@@ -293,7 +293,7 @@ public class AreaUpgrade extends AppCompatActivity {
                 }
             }
 
-        });*/
+        });
     }
 
 

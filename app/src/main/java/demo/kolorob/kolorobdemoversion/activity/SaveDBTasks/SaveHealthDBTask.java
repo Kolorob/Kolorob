@@ -47,10 +47,12 @@ public class SaveHealthDBTask extends GenericSaveDBTask<JSONArray, Integer, Long
                     new HealthNewDBTableMain(context).insertItem(health);
 
                     if (jsonObject.has("health_pharmacy")) {
+                        Log.e(" Health : ",  "pharmacy");
                         JSONObject pharmacy = jsonObject.getJSONObject("health_pharmacy");
                         new HealthNewDBTablePharma(context).insertItem(new HealthNewDBModelPharmacy().parse(pharmacy, health.getId()));
                     }
                     if (jsonObject.has("health_hospital")) {
+                        Log.e(" Health : ",  "hospital");
                         JSONObject hospital = jsonObject.getJSONObject("health_hospital");
                         new HealthNewDBTableHospital(context).insertItem(new HealthNewDBModelHospital().parse(hospital, health.getId()));
                     }

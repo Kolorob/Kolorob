@@ -60,6 +60,8 @@ public class SaveEducationDBTask extends GenericSaveDBTask<JSONArray, Integer, L
 
                     if (jsonObject.has("training_details")) {
 
+                        Log.e(" Edu : ",  "training details");
+
                         JSONArray trainings = jsonObject.getJSONArray("training_details");
 
                         for (int j = 0; j < trainings.length(); j++) {
@@ -69,6 +71,8 @@ public class SaveEducationDBTask extends GenericSaveDBTask<JSONArray, Integer, L
                     }
                     if (jsonObject.has("result_details")) {
 
+                        Log.e(" Edu : ",  "result details");
+
                         JSONArray results = jsonObject.getJSONArray("result_details");
 
                         for (int j = 0; j < results.length(); j++) {
@@ -77,6 +81,9 @@ public class SaveEducationDBTask extends GenericSaveDBTask<JSONArray, Integer, L
                         }
                     }
                     if (jsonObject.has("education_school")) {
+
+                        Log.e(" Edu : ",  "school details");
+
                         JSONObject school = jsonObject.getJSONObject("education_school");
                         new EduNewDBTableSchool(context).insertItem(new EduNewSchoolModel().parse(school, edu.getId()));
                     }

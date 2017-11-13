@@ -2553,6 +2553,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
 
             super.onBackPressed();
+
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
@@ -2708,7 +2709,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
 
                             try {
-                                ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,"ধন্যবাদ");
+                                ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,getString(R.string.thanks));
                                 ToastMessageDisplay.showText(PlaceDetailsActivityNewLayout.this);
 
                             } catch (Exception e) {
