@@ -26,7 +26,7 @@ public class SaveCityCorporationDBTask extends GenericSaveDBTask <CityCorporatio
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new CityCorporationTable(context), new CityCorporation());
     }
 

@@ -26,7 +26,7 @@ public class SaveHealthDBTask extends GenericSaveDBTask<HealthNewDBTableMain, He
 
 
     @Override
-    public Long saveItem() {
+    public int saveItem() {
 
         Log.e(" Data collection : ",  "ongoing " + getClass());
 
@@ -54,12 +54,12 @@ public class SaveHealthDBTask extends GenericSaveDBTask<HealthNewDBTableMain, He
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                return new Long(-1);
+                return -1;
             }
         }
 
 
-        return new Long(0);
+        return 0;
     }
 
 

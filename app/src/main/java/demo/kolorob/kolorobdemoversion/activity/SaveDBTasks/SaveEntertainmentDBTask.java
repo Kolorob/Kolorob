@@ -22,7 +22,7 @@ public class SaveEntertainmentDBTask extends GenericSaveDBTask <EntNewDBTable, E
     }
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new EntNewDBTable(context), new EntertainmentNewDBModel());
     }
 

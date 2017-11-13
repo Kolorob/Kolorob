@@ -18,7 +18,7 @@ public class SaveCategoryDBTask extends GenericSaveDBTask <CategoryTable, Catego
     }
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new CategoryTable(context), new CategoryItem());
     }
 

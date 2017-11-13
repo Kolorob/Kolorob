@@ -34,7 +34,7 @@ public class SaveShelterDBTask extends GenericSaveDBTask <ReligiousNewDBTable, R
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new ReligiousNewDBTable(context), new ReligiousNewDBModel());
     }
 

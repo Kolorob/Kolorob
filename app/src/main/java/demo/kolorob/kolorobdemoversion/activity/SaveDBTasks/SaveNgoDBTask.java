@@ -20,7 +20,7 @@ public class SaveNgoDBTask extends GenericSaveDBTask <NGONewDBTable, NGONewDBMod
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new NGONewDBTable(context), new NGONewDBModel());
     }
 

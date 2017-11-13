@@ -21,7 +21,7 @@ public class SaveFinancialDBTask extends GenericSaveDBTask <FinNewDBTable, Finan
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new FinNewDBTable(context), new FinancialNewDBModel());
     }
 

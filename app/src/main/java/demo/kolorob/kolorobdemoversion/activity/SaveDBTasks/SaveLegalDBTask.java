@@ -18,7 +18,7 @@ public class SaveLegalDBTask extends GenericSaveDBTask <LegalAidNewDBTable, Lega
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new LegalAidNewDBTable(context), new LegalAidNewDBModel());
     }
 

@@ -23,7 +23,7 @@ public abstract class GenericSaveDBTask <TableType extends BaseDBTable, ModelTyp
     protected Context context;
     protected JSONArray json;
 
-    abstract Long saveItem();
+    abstract int saveItem();
 
 
     public GenericSaveDBTask(Context ctx, JSONArray json){
@@ -36,7 +36,7 @@ public abstract class GenericSaveDBTask <TableType extends BaseDBTable, ModelTyp
     }
 
 
-     protected Long saveItem(TableType table, ModelType model) {
+     protected int saveItem(TableType table, ModelType model) {
 
 
         Log.e(" Data collection : ",  "ongoing " + getClass());
@@ -50,12 +50,11 @@ public abstract class GenericSaveDBTask <TableType extends BaseDBTable, ModelTyp
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                return new Long(-1);
+                return -1;
             }
         }
-        return new Long(0);
+        return 0;
     }
-
 
 
 }

@@ -19,7 +19,7 @@ public class SaveWardDBTask extends GenericSaveDBTask <WardTable, Ward> {
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new WardTable(context), new Ward());
     }
 

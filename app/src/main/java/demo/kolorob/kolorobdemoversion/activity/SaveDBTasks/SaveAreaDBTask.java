@@ -17,7 +17,7 @@ public class SaveAreaDBTask extends GenericSaveDBTask <AreaTable, Area> {
     }
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new AreaTable(context), new Area());
     }
 

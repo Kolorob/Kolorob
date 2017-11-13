@@ -21,7 +21,7 @@ public class SaveGovernmentDBTask extends GenericSaveDBTask <GovNewDBTable, Gove
 
 
     @Override
-    public Long saveItem(){
+    public int saveItem(){
         return super.saveItem(new GovNewDBTable(context), new GovernmentNewDBModel());
     }
 

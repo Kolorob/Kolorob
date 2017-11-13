@@ -31,7 +31,7 @@ public class SaveEducationDBTask extends GenericSaveDBTask <EduNewDBTableMain, E
 
 
     @Override
-    public Long saveItem() {
+    public int saveItem() {
 
         Log.e(" Data collection : ",  "ongoing " + getClass());
 
@@ -78,12 +78,12 @@ public class SaveEducationDBTask extends GenericSaveDBTask <EduNewDBTableMain, E
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                return new Long(-1);
+                return -1;
             }
         }
 
 
-        return new Long(0);
+        return 0;
 
     }
 }
