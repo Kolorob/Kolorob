@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -30,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.FacebookSdk;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
@@ -40,6 +42,7 @@ import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
+import com.facebook.appevents.AppEventsLogger;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -81,8 +84,8 @@ public class PhoneRegActivity extends Activity {
     String phoneNumberString = "";
     private EditText phone, name;
 
-    String username="kolorobapp";
-    String password="2Jm!4jFe3WgBZKEN";
+    String username = "kolorobapp";
+    String password = "!2Jm4jFe3WgBZKEN";
 
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
@@ -91,55 +94,57 @@ public class PhoneRegActivity extends Activity {
     TextView helname;
     Boolean registered;
     private Context con;
-    String IMEINumber,IMEI=null,PHN=null;
+    String IMEINumber, IMEI = null, PHN = null;
     FButton Submit;
     TextView phoneheader;
     String s;
-    AccessToken accessToken=null;
+    AccessToken accessToken = null;
     public static int APP_REQUEST_CODE = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AccountKit.initialize(getApplicationContext());
+        //AppEventsLogger.activateApp(this);
+        Log.e("SDK Initialized: ", "SDK: " + FacebookSdk.isInitialized() + "AccountKit: " + AccountKit.isInitialized());
+
         setContentView(R.layout.phone_reg);
-        LinearLayout first=(LinearLayout)findViewById(R.id.firstreg);
-        LinearLayout second=(LinearLayout)findViewById(R.id.secondreg);
+        LinearLayout first = (LinearLayout) findViewById(R.id.firstreg);
+        LinearLayout second = (LinearLayout) findViewById(R.id.secondreg);
         con = this;
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
-        IMEI=settings.getString("IMEI",null);
-        PHN=settings.getString("PHN",null);
-        registered=settings.getBoolean("IFREGISTERED",false);
+        IMEI = settings.getString("IMEI", null);
+        PHN = settings.getString("PHN", null);
+        registered = settings.getBoolean("IFREGISTERED", false);
         accessToken = AccountKit.getCurrentAccessToken();
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
-            if(IMEI==null)checkPermissions();
-            else if(accessToken==null)goToLogin(true); //user is using app for the first time
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (IMEI == null) checkPermissions();
+            else if (accessToken == null) goToLogin(true); //user is using app for the first time
 
-        }
-        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 
             doPermissionGrantedStuffs();
 
         }
-        if(registered) /* so that if user taps on registration page while using he/she can see an welcome page only*/
-        {
+        if (registered) /* so that if user taps on registration page while using he/she can see an welcome page only*/ {
             first.setVisibility(View.GONE);
             second.setVisibility(View.VISIBLE);
-            helname  = (TextView)findViewById(R.id.hellonaame);
+            helname = (TextView) findViewById(R.id.hellonaame);
             helname.setText(SharedPreferencesHelper.getUname(PhoneRegActivity.this));
         }
 
-        phone  = (EditText)findViewById(R.id.phone_id);
+        phone = (EditText) findViewById(R.id.phone_id);
 
         phone.setHintTextColor(getResources().getColor(R.color.blue));
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
-        if(accessToken != null ){
-            String pnumber=SharedPreferencesHelper.getNumber(con); //get number from sharedpref and set that value in phone edittext.
+        if (accessToken != null) {
+            String pnumber = SharedPreferencesHelper.getNumber(con); //get number from sharedpref and set that value in phone edittext.
             //we are not giving option to user to write down number second time once thats been validated via account kit.
-            if(pnumber.length()>0)
-            {
+            if (pnumber.length() > 0) {
                 phone.setText(pnumber.toString());
             } else {
                 PHN = settings.getString("PHN", null);
@@ -150,18 +155,14 @@ public class PhoneRegActivity extends Activity {
             }
         }
 
-        phoneheader=(TextView)findViewById(R.id.phoneheader);
+        phoneheader = (TextView) findViewById(R.id.phoneheader);
 
         s = String.valueOf(phone.getText().toString().trim());
-        name = (EditText)findViewById(R.id.userid) ;
-        Submit = (FButton)findViewById(R.id.submittoserver);
+        name = (EditText) findViewById(R.id.userid);
+        Submit = (FButton) findViewById(R.id.submittoserver);
 
 
-
-
-
-        if(SharedPreferencesHelper.isTabletDevice(con))
-        {
+        if (SharedPreferencesHelper.isTabletDevice(con)) {
             phoneheader.setTextSize(45);
         }
 
@@ -169,34 +170,32 @@ public class PhoneRegActivity extends Activity {
             @Override
             public void onClick(View v) {
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
-                PHN=settings.getString("PHN",null);
-                if(PHN!=null||!phoneNumberString.equals("")){
+                PHN = settings.getString("PHN", null);
+                if (PHN != null || !phoneNumberString.equals("")) {
 
                     phoneNumber = phone.getText().toString().trim();
                     uname = name.getText().toString().trim();
-                    if( uname.equals("")){
+                    if (uname.equals("")) {
 
 
-                        name.setError( getString(R.string.write_name) );
+                        name.setError(getString(R.string.write_name));
 
-                    }
-                    else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
+                    } else if (uname.length() <= 50 && !uname.equals("") && (AppUtils.isNetConnected(getApplicationContext()))) {
                         sendPhoneNumberToServer(phoneNumber);
-                    }
-                    else {
+                    } else {
                         ToastMessageDisplay.setText(PhoneRegActivity.this, getString(R.string.connect_to_internet));
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
                         ToastMessageDisplay.showText(PhoneRegActivity.this);
                     }
-                }
-                else {
+                } else {
 
                     goToLogin(true);
                 }
             }
         });
     }
+
     /*marshmallow permission check. These permissions are very important to make app work perfectly*/
     private void checkPermissions() {
         List<String> permissions = new ArrayList<>();
@@ -225,31 +224,53 @@ public class PhoneRegActivity extends Activity {
             //requestReadPhoneStatePermission();
         }
         if (!permissions.isEmpty()) {
-           // Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            // Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             String[] params = permissions.toArray(new String[permissions.size()]);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
             }
         } // else: We already have permissions, so handle as normal
     }
+
     public void doPermissionGrantedStuffs() {
         //Have an  object of TelephonyManager
-        TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
-        IMEINumber=tm.getDeviceId();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        IMEINumber = tm.getDeviceId();
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("IMEI", IMEINumber);
         editor.apply();
 
-        IMEI=settings.getString("IMEI",null);
-        if(accessToken == null){
+        IMEI = settings.getString("IMEI", null);
+        if (accessToken == null) {
 
 
             goToLogin(true);
         }
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -270,11 +291,21 @@ public class PhoneRegActivity extends Activity {
                 Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
                 Boolean smsstate = perms.get(Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED;
                 Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
-                if (location && storage&& phonestate &&smsstate&&accountstate) {
+                if (location && storage && phonestate && smsstate && accountstate) {
                     // All Permissions Granted
-                    TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                    TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                     //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
-                    IMEINumber=tm.getDeviceId();
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    IMEINumber = tm.getDeviceId();
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("IMEI", IMEINumber);
