@@ -2,7 +2,6 @@ package demo.kolorob.kolorobdemoversion.activity.SaveDBTasks;
 
 import android.content.Context;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.model.Area;
 

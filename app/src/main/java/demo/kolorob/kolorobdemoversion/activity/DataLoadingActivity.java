@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -56,6 +57,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -607,6 +609,47 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             Log.e("counter: ", "DataLoading: " + counter);
 
                         }
+
+                        /*int p = allData.length();
+                        Log.d("Doneall", String.valueOf(p));
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+                        String A = getAreaNameBn();
+                        String LOC = getLocation();
+                        storedAreaTable.insertItem();
+                        Log.e("ward area ", String.valueOf(wardid[getPos()]));
+                        SharedPreferences settings = getSharedPreferences("prefs", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putInt("ward", wardid[getPos()]);
+                        editor.putString("areakeyword", keyword);
+                        editor.apply();*/
+
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(context);
+                        WardTable wardTable = new WardTable(context);
+
+                        SharedPreferences settings = context.getSharedPreferences("prefs", 0);
+                        Area area = new AreaTable(context).getNodeInfo(settings.getInt("areaID", 0));
+
+                        storedAreaTable.insertItem(new StoredArea(area.getId(), wardTable.getNodeInfo(area.getWard_id()).getWard_keyword(), area.getArea_keyword(), area.getArea_bn(), area.getParentArea(), area.getLat(), area.getLon()));
+
+                        overridePendingTransition(0, 0);
+
+                        //DataLoadingActivity.handler.removeCallbacks(context);
+                        SharedPreferencesHelper.setIfCommentedAlready(context, null, SharedPreferencesHelper.getUname(context), "no");
+                        //   Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+
+                        frameAnimation.stop();
+                        alertDialog.cancel();
+
+                        //    startActivity(a);
+
+                        Intent a = new Intent(context, PlaceDetailsActivityNewLayout.class); // Default Activity
+                        startActivity(a);
+                        // context.stopService(a);
+
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        finish();
+                        //  return;
+
 
 
                     } catch (JSONException e) {
