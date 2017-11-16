@@ -143,14 +143,14 @@ public class SplashActivityNew extends AppCompatActivity {
                                 }
                                 else {
 
-                                    if (areaData.has("city_corporation")) {
-                                        counter += new SaveCityCorporationDBTask(SplashActivityNew.this, areaData.getJSONArray("city_corporation")).saveItem();
+                                    if (areaData.has(AppConstants.CC_API)) {
+                                        counter += new SaveCityCorporationDBTask(SplashActivityNew.this, areaData.getJSONArray(AppConstants.CC_API)).saveItem();
                                     }
-                                    if(areaData.has("ward")){
-                                        counter += new SaveWardDBTask(SplashActivityNew.this, areaData.getJSONArray("ward")).saveItem();
+                                    if(areaData.has(AppConstants.WARD_API)){
+                                        counter += new SaveWardDBTask(SplashActivityNew.this, areaData.getJSONArray(AppConstants.WARD_API)).saveItem();
                                     }
-                                    if(areaData.has("areas")){
-                                        counter += new SaveAreaDBTask(SplashActivityNew.this, areaData.getJSONArray("areas")).saveItem();
+                                    if(areaData.has(AppConstants.AREA_API)){
+                                        counter += new SaveAreaDBTask(SplashActivityNew.this, areaData.getJSONArray(AppConstants.AREA_API)).saveItem();
                                     }
 
                                     Log.e("counter: ", "Splash: " + counter);

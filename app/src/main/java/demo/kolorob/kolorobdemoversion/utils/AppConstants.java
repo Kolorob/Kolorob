@@ -112,4 +112,8 @@ public class AppConstants {
     public static final String NGO_API = "NGO";
     public static final String SHELTER_API = "Religious Shelter";
 
+    public static final String CC_API = "city_corporation";
+    public static final String WARD_API = "ward";
+    public static final String AREA_API = "areas";
+
 }

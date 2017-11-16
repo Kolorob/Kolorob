@@ -582,28 +582,28 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         } else { //checking category label and parsing in different threads so that parsing time get minimised
 
                             if (allData.has(AppConstants.EDU_API)) {
-                                counter += new SaveEducationDBTask(context, allData.getJSONArray("Education")).saveItem();
+                                counter += new SaveEducationDBTask(context, allData.getJSONArray(AppConstants.EDU_API)).saveItem();
                             }
                             if(allData.has(AppConstants.HEALTH_API)){
-                                counter += new SaveHealthDBTask(context, allData.getJSONArray("Health")).saveItem();
+                                counter += new SaveHealthDBTask(context, allData.getJSONArray(AppConstants.HEALTH_API)).saveItem();
                             }
                             if(allData.has(AppConstants.ENTERTAINMENT_API)){
-                                counter += new SaveEntertainmentDBTask(context, allData.getJSONArray("Entertainment")).saveItem();
+                                counter += new SaveEntertainmentDBTask(context, allData.getJSONArray(AppConstants.ENTERTAINMENT_API)).saveItem();
                             }
                             if(allData.has(AppConstants.GOVERNMENT_API)){
-                                counter += new SaveGovernmentDBTask(context, allData.getJSONArray("Government")).saveItem();
+                                counter += new SaveGovernmentDBTask(context, allData.getJSONArray(AppConstants.GOVERNMENT_API)).saveItem();
                             }
                             if(allData.has(AppConstants.LEGAL_API)){
-                                counter += new SaveLegalDBTask(context, allData.getJSONArray("Legal")).saveItem();
+                                counter += new SaveLegalDBTask(context, allData.getJSONArray(AppConstants.LEGAL_API)).saveItem();
                             }
                             if(allData.has(AppConstants.FINANCE_API)){
-                                counter += new SaveFinancialDBTask(context, allData.getJSONArray("Finance")).saveItem();
+                                counter += new SaveFinancialDBTask(context, allData.getJSONArray(AppConstants.FINANCE_API)).saveItem();
                             }
                             if(allData.has(AppConstants.NGO_API)){
-                                counter += new SaveNgoDBTask(context, allData.getJSONArray("NGO")).saveItem();
+                                counter += new SaveNgoDBTask(context, allData.getJSONArray(AppConstants.NGO_API)).saveItem();
                             }
                             if(allData.has(AppConstants.SHELTER_API)){
-                                counter += new SaveShelterDBTask(context, allData.getJSONArray("Religious Shelter")).saveItem();
+                                counter += new SaveShelterDBTask(context, allData.getJSONArray(AppConstants.SHELTER_API)).saveItem();
                             }
 
                             Log.e("counter: ", "DataLoading: " + counter);
