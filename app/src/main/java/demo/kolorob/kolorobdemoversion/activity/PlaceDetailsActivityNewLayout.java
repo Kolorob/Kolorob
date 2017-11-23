@@ -1321,9 +1321,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
         storedAreaTable = new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
         storedAreaArrayListall = storedAreaTable.getAllData();
 
-        storedAreas = storedAreaTable.getStoredLocation(wardId, areaKeyword);
-        setLat(storedAreas.get(0).getLat());
-        setLon(storedAreas.get(0).getLon());
+
 
         if(storedAreaArrayListall.size() == 0) {
 
@@ -1331,14 +1329,18 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
             startActivity(em);
             finish();
         }
-        else if (storedAreas.size()==0) {
+        /*else if (storedAreas.size()==0) {
 
             Intent em = new Intent(this, AreaUpgrade.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        }
+        }*/
         else {
+
+            storedAreas = storedAreaTable.getStoredLocation(wardId, areaKeyword);
+            setLat(storedAreas.get(0).getLat());
+            setLon(storedAreas.get(0).getLon());
 
             setAreaName(storedAreas.get(0).getAreaBn());
             setLocation(new GeoPoint(Double.parseDouble(storedAreas.get(0).getLat()), Double.parseDouble(storedAreas.get(0).getLon())));
