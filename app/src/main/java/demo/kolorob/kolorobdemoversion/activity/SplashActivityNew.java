@@ -310,8 +310,8 @@ public class SplashActivityNew extends AppCompatActivity {
                                 /* start the activity */
 
                     if(registered  && (new StoredAreaTable(SplashActivityNew.this).getAllData().size() > 0))
-                        startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
-
+                        //startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
+                        startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivity.class));
                     else
                         startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
 
