@@ -5,12 +5,8 @@ import android.app.FragmentTransaction;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.widget.FrameLayout;
+import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-
-import com.google.android.gms.maps.MapFragment;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.fragment.CommonFragment;
@@ -32,22 +28,23 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         tabLayout.setRotationX(180);
 
         mapTab = tabLayout.newTab();
-        mapTab.setIcon(R.drawable.map);
-        tabLayout.addTab(mapTab, true);
 
-        TabLayout.Tab searchTab = tabLayout.newTab();
-        searchTab.setIcon(R.drawable.search);
-        searchTab.setText("SEARCH");
-        tabLayout.addTab(searchTab);
+        View mapIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        mapIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.map);
+        tabLayout.addTab(mapTab.setCustomView(mapIconView));
 
-        TabLayout.Tab jobTab = tabLayout.newTab();
-        jobTab.setIcon(R.drawable.job_unselectedtab);
-        tabLayout.addTab(jobTab);
+        View searchIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        searchIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.search);
+        tabLayout.addTab(tabLayout.newTab().setCustomView(searchIconView));
 
-        TabLayout.Tab compareTab = tabLayout.newTab();
-        compareTab.setIcon(R.drawable.compare);
+        View jobIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        jobIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.job_unselectedtab);
+        tabLayout.addTab(tabLayout.newTab().setCustomView(jobIconView));
 
-        tabLayout.addTab(compareTab);
+        View compareIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+        compareIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.compare);
+        tabLayout.addTab(tabLayout.newTab().setCustomView(compareIconView));
+
 
 
         LinearLayout tabs = ((LinearLayout) tabLayout.getChildAt(0));
@@ -58,7 +55,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         }
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.simpleFrameLayout, new MapFragment());
+        fragmentTransaction.replace(R.id.simpleFrameLayout, new MapFragmentNew());
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
 
@@ -117,6 +114,9 @@ public class PlaceDetailsActivity extends AppCompatActivity {
             mapTab.select();
             getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+
+
     }
+
 
 }

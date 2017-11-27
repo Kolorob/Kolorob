@@ -176,7 +176,6 @@
             android:value="@string/app_name" />
 
         <activity android:name=".activity.PlaceDetailsActivity" />
-        <activity android:name=".activity.PlaceDetailsHostActivity"></activity>
     </application>
 
 </manifest>
