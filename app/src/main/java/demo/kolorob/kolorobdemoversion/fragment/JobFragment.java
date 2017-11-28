@@ -10,4 +10,5 @@ public class JobFragment extends CommonFragment {
         setLayoutId(R.layout.fragment_job);
     }
 
+
 }
