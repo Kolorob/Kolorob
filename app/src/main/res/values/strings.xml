@@ -171,4 +171,15 @@
     <string name="contact">যোগাযোগ করুন</string>
     <string name="collecting_data">তথ্য সংগ্রহ চলছে</string>
     <string name="thanks">ধন্যবাদ</string>
+    <string name="not_found">পাওয়া যায় নি</string>
+    <string name="one">১</string>
+    <string name="two">২</string>
+    <string name="three">৩</string>
+    <string name="six">৬</string>
+    <string name="four">৪</string>
+    <string name="five">৫</string>
+    <string name="eight">৮</string>
+    <string name="seven">৭</string>
+    <string name="nine">৯</string>
+    <string name="zero">০</string>
 </resources>
