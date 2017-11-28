@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/wholeLayout"
-    android:background="#00ffffff">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffffff"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,136 +12,135 @@
 
 
         <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
 
             >
 
             <FrameLayout
+                android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/map_fragment"
-                android:layout_gravity="left|top"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
-
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="left|top">
 
 
             </FrameLayout>
 
 
             <include layout="@layout/compare_screen_education" />
-            <include layout="@layout/health_compare_tool"
-                android:layout_below="@+id/searchholder"
+
+            <include
+                layout="@layout/health_compare_tool"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-
-
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/searchholder" />
 
 
             <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
 
-                <!--android:id="@+id/explist"-->
+            <!--android:id="@+id/explist"-->
 
-                <!--android:layout_height="wrap_content">-->
-                <!--<ExpandableListView-->
-                    <!--android:id="@+id/listView"-->
-                    <!--android:visibility="gone"-->
-                    <!--android:layout_marginBottom="50dp"-->
-                    <!--android:childDivider="#00000000"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<ExpandableListView-->
+            <!--android:id="@+id/listView"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_marginBottom="50dp"-->
+            <!--android:childDivider="#00000000"-->
 
 
-                    <!--android:background="@color/white"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content" >-->
-                <!--</ExpandableListView>-->
-
+            <!--android:background="@color/white"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" >-->
+            <!--</ExpandableListView>-->
 
 
             <!--</LinearLayout>-->
 
 
             <RelativeLayout
-                android:layout_width="match_parent"
                 android:id="@+id/searchholder"
-               android:visibility="gone"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/searchall"
                     android:layout_width="@dimen/searchbar"
-                    android:layout_weight="0.87"
-                    android:textColor="@color/white"
-                    android:hint="@string/search"
-                    android:textColorHint="@color/white"
-                    android:background="#000000"
                     android:layout_height="40dp"
-                    android:popupBackground="#ffffff"
-                    android:ems="10"
-                    android:layout_marginRight="@dimen/search_margin"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/search_top"
                     android:layout_alignLeft="@+id/filterholder"
-                    android:layout_alignStart="@+id/filterholder" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignStart="@+id/filterholder"
+                    android:layout_marginRight="@dimen/search_margin"
+                    android:layout_marginTop="@dimen/search_top"
+                    android:layout_weight="0.87"
+                    android:background="#000000"
+                    android:ems="10"
+                    android:hint="@string/search"
+                    android:popupBackground="#ffffff"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
                 <ListView
+                    android:id="@+id/allitem"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/listheight"
-                    android:id="@+id/allitem"
-                    android:layout_marginRight="@dimen/search_margin"
-                    android:maxHeight="80dp"
-                    android:minHeight="80dp"
-                    android:background="#F7941E"
-
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_below="@+id/searchall"
-                    android:layout_alignRight="@+id/searchall"
                     android:layout_alignEnd="@+id/searchall"
-                    android:layout_alignParentRight="true"
                     android:layout_alignLeft="@+id/searchall"
-                    android:layout_alignStart="@+id/searchall" />
-                <RelativeLayout
-                    android:layout_width="@dimen/searchbar"
-                    android:id="@+id/filterholder"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignRight="@+id/searchall"
 
-                    android:layout_marginTop="@dimen/fab_marginforsearch2"
-                    android:layout_marginLeft="@dimen/nav_header_height2"
+                    android:layout_alignStart="@+id/searchall"
+                    android:layout_below="@+id/searchall"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="@dimen/search_margin"
+                    android:layout_marginTop="20dp"
+                    android:background="#F7941E"
+                    android:maxHeight="80dp"
+                    android:minHeight="80dp" />
+
+                <RelativeLayout
+                    android:id="@+id/filterholder"
+                    android:layout_width="@dimen/searchbar"
 
                     android:layout_height="@dimen/filterheight"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_below="@+id/allitem"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="@dimen/search_margin">
+
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/allitem"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/nav_header_height2"
+                    android:layout_marginRight="@dimen/search_margin"
+                    android:layout_marginTop="@dimen/fab_marginforsearch2">
+
                     <ImageButton
+                        android:id="@+id/morebutton"
                         android:layout_width="@dimen/bwidth"
                         android:layout_height="@dimen/bwidth"
-                        android:id="@+id/morebutton"
-                        android:background="@drawable/filter"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/filter" />
 
                     <RelativeLayout
+                        android:id="@+id/categoryfilterholder"
                         android:layout_width="match_parent"
+
                         android:layout_height="450dp"
 
-                        android:id="@+id/categoryfilterholder"
-
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentLeft="false"
+                        android:layout_alignParentRight="true"
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/morebutton"
-                        android:layout_marginTop="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true">
-
+                        android:layout_marginTop="10dp">
 
 
                         <ScrollView
@@ -148,28 +148,26 @@
                             android:layout_height="300dp"
 
                             android:background="@color/semi_transparent">
+
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
-                                android:visibility="gone"
                                 android:layout_width="@dimen/searchbar"
                                 android:layout_height="wrap_content"
+                                android:background="@color/semi_transparent"
 
                                 android:orientation="horizontal"
-                                android:weightSum="2"
-                                android:background="@color/semi_transparent">
+                                android:visibility="gone"
+                                android:weightSum="2">
 
                                 <LinearLayout
                                     android:id="@+id/linearLayout1"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_gravity="left"
                                     android:layout_weight="1"
-                                    android:weightSum="10"
-                                    android:orientation="vertical"
                                     android:gravity="start|left"
-                                    android:layout_gravity="left">
-
-
-
+                                    android:orientation="vertical"
+                                    android:weightSum="10">
 
 
                                 </LinearLayout>
@@ -179,11 +177,11 @@
                                     android:id="@+id/linearLayout2"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_gravity="right"
                                     android:layout_weight="1"
-                                    android:weightSum="10"
-                                    android:orientation="vertical"
                                     android:gravity="right|end"
-                                    android:layout_gravity="right">
+                                    android:orientation="vertical"
+                                    android:weightSum="10">
 
 
                                 </LinearLayout>
@@ -196,146 +194,140 @@
                 </RelativeLayout>
 
             </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/llCategoryListHolderback"
                 android:layout_width="@dimen/sidebarwidth"
-                android:background="@drawable/sidebar_category"
                 android:layout_height="@dimen/sidebarheight"
-
-                android:layout_marginBottom="@dimen/nav_header_heightcat"
                 android:layout_above="@+id/toggle"
-                android:orientation="vertical"
-                android:focusableInTouchMode="true"
-                android:weightSum="1"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentLeft="true"
-                >
 
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="false"
+                android:layout_marginBottom="@dimen/nav_header_heightcat"
+                android:background="@drawable/sidebar_category"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:weightSum="1">
 
 
                 <ScrollView
-                android:id="@+id/svCategoryListHolder"
-                android:layout_width="wrap_content"
-
-
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_above="@+id/toggle"
-                android:layout_marginTop="@dimen/nav_header_heightcat2"
-                android:layout_marginBottom="@dimen/nav_header_heightcat"
-                android:layout_gravity="center|top">
-
-                <LinearLayout
-                    android:id="@+id/llCategoryListHolder"
+                    android:id="@+id/svCategoryListHolder"
                     android:layout_width="wrap_content"
-                    android:layout_weight="8"
+
 
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:gravity="top"
-                    android:orientation="vertical"
+                    android:layout_above="@+id/toggle"
+                    android:layout_gravity="center|top"
+                    android:layout_marginBottom="@dimen/nav_header_heightcat"
+                    android:layout_marginTop="@dimen/nav_header_heightcat2"
+                    android:layout_weight="2">
 
-                    android:focusableInTouchMode="true"
-                   >
+                    <LinearLayout
+                        android:id="@+id/llCategoryListHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="top"
+                        android:layout_weight="8"
+                        android:focusableInTouchMode="true"
+                        android:gravity="top"
+
+                        android:orientation="vertical">
 
 
-                </LinearLayout>
+                    </LinearLayout>
 
-            </ScrollView>
-                </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
 
             <ToggleButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
                 android:id="@+id/toggle"
-                android:button="@drawable/check"
-                android:background="@null"
-                android:textOn=""
-                android:textOff=""
-                android:layout_gravity="left|bottom"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linearLayout8"
                 android:layout_alignParentLeft="true"
-               android:layout_above="@+id/linearLayout8"
+                android:layout_gravity="left|bottom"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:background="@null"
+                android:button="@drawable/check"
                 android:checked="false"
-                android:layout_marginBottom="@dimen/activity_horizontal_margin" />
+                android:textOff=""
+                android:textOn="" />
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:background="@color/transparent"
 
-                android:id="@+id/linearLayout8">
+                android:orientation="horizontal">
 
                 <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:id="@+id/mapbutton"
-                  android:background="@null"
-                    android:elevation="2dp"
-                    android:layout_weight="1"
-
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="bottom" />
+                    android:layout_gravity="bottom"
+
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:elevation="2dp" />
+
                 <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:id="@+id/jobButton"
-                    android:elevation="2dp"
-                    android:background="@null"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-
-
-
-                    android:layout_toRightOf="@+id/mapbutton"
+                    android:layout_gravity="bottom"
                     android:layout_toEndOf="@+id/mapbutton"
-                    android:layout_gravity="bottom" />
+                    android:layout_toRightOf="@+id/mapbutton"
+                    android:layout_weight="1"
+
+
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    android:elevation="2dp" />
 
 
                 <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:id="@+id/searchbutton"
-                    android:elevation="2dp"
-                    android:background="@null"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:layout_alignParentBottom="true"
-
-
-                    android:layout_toRightOf="@+id/listbutton"
-                    android:layout_toEndOf="@+id/listbutton"
-                    android:layout_gravity="bottom" />
-
-                <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:id="@+id/compare"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    android:layout_toEndOf="@+id/listbutton"
+                    android:layout_toRightOf="@+id/listbutton"
                     android:layout_weight="1"
+
+
                     android:adjustViewBounds="true"
+                    android:background="@null"
+                    android:elevation="2dp" />
+
+                <ImageButton
+                    android:id="@+id/compare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-
-                    android:elevation="2dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/searchbutton"
+                    android:layout_gravity="bottom"
                     android:layout_toEndOf="@+id/searchbutton"
-                    android:layout_gravity="bottom" />
 
-
+                    android:layout_toRightOf="@+id/searchbutton"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    android:elevation="2dp" />
 
 
             </LinearLayout>
 
         </RelativeLayout>
-
-
 
 
     </RelativeLayout>
