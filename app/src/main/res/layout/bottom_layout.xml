@@ -9,6 +9,15 @@
 
 
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7941E"/>
+
+
+
     <FrameLayout
         android:id="@+id/simpleFrameLayout"
         android:background="@color/Azure"
