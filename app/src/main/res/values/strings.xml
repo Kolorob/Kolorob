@@ -175,11 +175,18 @@
     <string name="one">১</string>
     <string name="two">২</string>
     <string name="three">৩</string>
-    <string name="six">৬</string>
     <string name="four">৪</string>
     <string name="five">৫</string>
-    <string name="eight">৮</string>
+    <string name="six">৬</string>
     <string name="seven">৭</string>
+    <string name="eight">৮</string>
     <string name="nine">৯</string>
     <string name="zero">০</string>
+    <string name="job">job</string>
+    <string name="others">অন্যান্য</string>
+   <string name="emergency_services">জরুরী সেবা</string>
+   <string name="download_new">নতুন এলাকার তথ্য নামান</string>
+   <string name="tutorial">টিউটোরিয়াল</string>
+   <string name="update_or_delete">নামানো তথ্য আপডেট/ডিলিট করুন</string>
+
 </resources>

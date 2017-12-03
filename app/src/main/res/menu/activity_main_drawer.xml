@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/phone_reg"
-            android:icon="@drawable/profile_icon"
-            android:title="@string/phone_registration" />
         <!--<item-->
             <!--android:id="@+id/info_change"-->
             <!--android:icon="@drawable/profile_icon"-->
@@ -24,16 +21,16 @@
             <!--android:title="@string/know_adv" />-->
     </group>
 
-    <item android:title="অন্যান্য">
+    <item android:title="@string/others">
         <menu>
             <item
                 android:id="@+id/emergency_info"
                 android:icon="@drawable/emergency_icon"
-                android:title="জরুরী সেবা" />
+                android:title="@string/emergency_services" />
             <item
                 android:id="@+id/new_place"
                 android:icon="@drawable/advertisement"
-                android:title="নতুন এলাকার তথ্য নামান" />
+                android:title="@string/download_new" />
             <!--<item-->
                 <!--android:id="@+id/nav_share"-->
                 <!--android:icon="@drawable/advertising_icon"-->
@@ -45,11 +42,11 @@
             <item
                 android:id="@+id/tutorial"
                 android:icon="@drawable/advertisement"
-                android:title="টিউটোরিয়াল" />
+                android:title="@string/tutorial" />
             <item
                 android:id="@+id/old_place"
                 android:icon="@drawable/advertisement"
-                android:title="নামানো তথ্য আপডেট/ডিলিট করুন" />
+                android:title="@string/update_or_delete" />
             <item
                 android:id="@+id/disclaimer"
                 android:icon="@drawable/advertisement"
@@ -69,5 +66,9 @@
             <!--android:title="Help" />-->
         </menu>
     </item>
+    <item
+        android:id="@+id/phone_reg"
+        android:icon="@drawable/profile_icon"
+        android:title="@string/phone_registration" />
 
 </menu>
