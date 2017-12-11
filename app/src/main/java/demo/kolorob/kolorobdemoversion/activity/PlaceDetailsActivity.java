@@ -123,14 +123,19 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-import static demo.kolorob.kolorobdemoversion.R.id.compare_layoutedu;
+
+
+/**
+ * @author israt, arafat
+ */
+
+
+/*
+* Debug to understand this activity. It has all the codes no fragment been used for search/bazar or compare or map.Since earlier structure
+* got changed multiple times so it would be wise to check which part is doing what using debug*/
 
 
 public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-
-    static TabLayout.Tab mapTab;
-    Context context;
-    MapFragmentNew mapFragment;
 
     private static final int ANIM_INTERVAL = 150;
     public static int currentCategoryID;
@@ -144,15 +149,14 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
     ArrayList<EduNewModel> firstDataSetEdu, secondDataSetEdu;
     ArrayList<HealthNewDBModelMain> firstDataSetHealth, secondDataSetHealth;
     ArrayList<CategoryItem> categoryList;
-    ArrayList<String> headerHolder = new ArrayList<>();
-    ArrayList<String> clicked = new ArrayList<>();
+
     ArrayList<String> filter = new ArrayList<>();
     ArrayList<String> filter2 = new ArrayList<>();
     ArrayList<AllHolder> allHolders = new ArrayList<>();
     ArrayList<AllHolder> catHolders = new ArrayList<>();
     ArrayList<AllHolder> subcatHolders = new ArrayList<>();
-    TextView welcomeText, upText;
-
+    TextView topText, menuText;
+    TextView healthTextLeft, healthTextRight, eduTextLeft, eduTextRight;
     TextView tvName;
     CheckedTextView changeArea;
     int spinCount1, spinCount2;
@@ -160,52 +164,128 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
     String[] left_part, right_part, health_header;
     boolean doubleBackToExitPressedOnce, reviewGiven, selected, inCompare;
     boolean eduClicked, healthClicked, entClicked, finClicked, govClicked, legalClicked, ngoClicked, shelterClicked;
-
-    boolean catStatus, called;
+    Boolean searchClicked = false, jobClicked, compareClicked, mapClicked = true;
+    boolean filterClicked, catStatus, called;
     Boolean firstRun, firstRunUpdate;
     Boolean navigationCalled, navigationCalledOnce;
-
-    LinearLayout fHolder, fLeft, fRight;
-    RelativeLayout catHolder, searchViewHolder, filterHolder;
+    LinearLayout middleLayout, compare_layout_health, compare_layout_edu;
+    LinearLayout filterLayout, filterLeft, filterRight;
+    RelativeLayout categoryFilterHolder, searchViewHolder, filterHolder;
     ListView allItemList;
     ToggleButton toggleButton;
     Double screenSize;
-    ScrollView sv;
+    ScrollView categoryScrollView;
     CheckBox checkBox1, checkBox2, checkLeft, checkRight;
+
+    //  Fields from UI
+
+    TabLayout tabLayout;
+    TabLayout.Tab mapTab, searchTab, jobTab, compareTab;
+    View mapIconView, searchIconView, jobIconView, compareIconView;
 
     GeoPoint location;
     int[] flag2 = new int[15];
     EditText searchAll, filterText;
     ListViewAdapterAllCategories adapter;
-    int value, height, width, sNumber;
+    int value, height, width, sNumber, buttonHeight, buttonWidth;
     String id1, id2, id3, id4;
     Boolean flag;
     boolean mapFirst = true;
     String comment = "";
+    MapFragmentOSM mapFragment;
     String wardId, areaKeyword, lat, lon, areaName;
-    View view, view2;
+    View option_download, option_update;
     ActionBarDrawerToggle toggle;
-
+    RadioGroup leftGroup, rightGroup;
     NavigationView navigationView;
     StoredAreaTable storedAreaTable;
     CategoryItem categoryItem;
-    private Context con;
+    private Context context;
     private ArrayList<Subcatholder> tagHolders = new ArrayList<>();
     private int primaryIconWidth;
     private int subcategory;
-    private LinearLayout llCatListHolder, svHolder;
-
-
+    private LinearLayout category, categoryHolder;
+    private ListView health_compare_list, education_compare_list;
+    private String comapareData, firstData = "", secondData = "";
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private String placeChoice, filterWord, checkNum;
-
+    //private ImageButton mapButton, jobButton, searchButton, compareButton;
     private int small;
     private Animation mEnterAnimation, mExitAnimation;
-    private LinearLayout wholeLayout;
 
-    public Context getContext() {
-        return context;
+
+
+    public static FrameLayout getMap() {
+        return map;
+    }
+
+    public static void setMap(FrameLayout map) {
+        PlaceDetailsActivity.map = map;
+    }
+
+
+
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    public void setToolbar(Toolbar toolbar) {
+        this.toolbar = toolbar;
+    }
+
+
+
+    public GeoPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(GeoPoint location) {
+        this.location = location;
+    }
+
+
+
+    public void setFilterWord(String filterWord) {
+        this.filterWord = filterWord;
+    }
+
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getsNumber() {
+        return sNumber;
+    }
+
+    public void setsNumber(int sNumber) {
+        this.sNumber = sNumber;
+    }
+
+
+    public String getLat() {
+        return lat;
     }
 
     public void setLat(String lat) {
@@ -228,17 +308,6 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         this.areaName = areaName;
     }
 
-    public GeoPoint getLocation() {
-        return location;
-    }
-
-    public void setLocation(GeoPoint location) {
-        this.location = location;
-    }
-
-    public void setCategoryItem(CategoryItem categoryItem) {
-        this.categoryItem = categoryItem;
-    }
 
     public int getFilterCategoryId() {
         return filterCategoryId;
@@ -250,97 +319,13 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
 
 
 
+    public void setCategoryItem(CategoryItem categoryItem) {
+        this.categoryItem = categoryItem;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*super.onCreate(savedInstanceState);
-        context = this;
-
-        setContentView(R.layout.activity_place_details);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
-        tabLayout.setRotationX(180);
-
-        mapTab = tabLayout.newTab();
-
-        View mapIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
-        mapIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.map);
-        tabLayout.addTab(mapTab.setCustomView(mapIconView));
-
-        View searchIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
-        searchIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.search);
-        tabLayout.addTab(tabLayout.newTab().setCustomView(searchIconView));
-
-        View jobIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
-        jobIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.job_unselectedtab);
-        tabLayout.addTab(tabLayout.newTab().setCustomView(jobIconView));
-
-        View compareIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
-        compareIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.compare);
-        tabLayout.addTab(tabLayout.newTab().setCustomView(compareIconView));
-
-
-        LinearLayout tabs = ((LinearLayout) tabLayout.getChildAt(0));
-
-        for (int i = 0; i < tabs.getChildCount(); i++) {
-            LinearLayout item = ((LinearLayout) tabs.getChildAt(i));
-            item.setRotationX(180);
-        }
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.simpleFrameLayout, new SearchFragment());
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fragmentTransaction.commit();
-
-        tabLayout.setOnTabSelectedListener(
-                new TabLayout.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        CommonFragment fragment = null;
-
-                        switch (tab.getPosition()) {
-
-                            case 0:
-                                fragment = new MapFragmentNew();
-                                break;
-
-                            case 1:
-                                fragment = new SearchFragment();
-                                break;
-
-                            case 2:
-                                showJobDialog();
-                                break;
-
-                            case 3:
-                                fragment = new CompareFragment();
-                                break;
-                        }
-
-                        if (tab.getPosition() != 2) {
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.replace(R.id.simpleFrameLayout, fragment).addToBackStack(null);
-
-                            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                            fragmentTransaction.commit();
-
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {
-
-                    }
-
-                    @Override
-                    public void onTabReselected(TabLayout.Tab tab) {
-
-                    }
-                }
-        );*/
-
 
         super.onCreate(savedInstanceState);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
@@ -362,8 +347,13 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         storedAreaTable = new StoredAreaTable(PlaceDetailsActivity.this);
         storedAreaArrayListall = storedAreaTable.getAllData();
 
+        boolean available = false;
 
-        if (storedAreaArrayListall.size() == 0) {
+        if(storedAreaArrayListall.size() > 0){
+            available = storedAreaTable.isAreaStored(wardId, areaKeyword);
+        }
+
+        if (!available) {
 
             Intent em = new Intent(this, DataLoadingActivity.class);
             startActivity(em);
@@ -378,6 +368,8 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         }*/
         else {
 
+            // setting map location based on the selected area from storage
+
             storedAreas = storedAreaTable.getStoredLocation(wardId, areaKeyword);
             setLat(storedAreas.get(0).getLat());
             setLon(storedAreas.get(0).getLon());
@@ -385,53 +377,194 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             setAreaName(storedAreas.get(0).getAreaBn());
             setLocation(new GeoPoint(Double.parseDouble(storedAreas.get(0).getLat()), Double.parseDouble(storedAreas.get(0).getLon())));
 
+            // unused
             navigationCalled = false;
             navigationCalledOnce = false;
 
+            //
+
             value = settings.getInt("KValue", 0);
             Log.e("ASinplaceDetails", String.valueOf(value));
+
             DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
+            // unused
             width = displayMetrics.widthPixels;
             height = displayMetrics.heightPixels;
-            setContentView(R.layout.activity_place_detailnew);
-            fHolder = (LinearLayout) findViewById(R.id.LinearLayoutfilter);
-            con = this;
+            //
 
-            searchViewHolder = (RelativeLayout) findViewById(R.id.searchholder);
+            setContentView(R.layout.activity_place_detailnew);  //  complete layout
+            context = this;
+
+            tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
+            tabLayout.setRotationX(180);
+
+            mapTab = tabLayout.newTab();
+            searchTab = tabLayout.newTab();
+            jobTab = tabLayout.newTab();
+            compareTab = tabLayout.newTab();
+
+            mapIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+            mapIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.map);
+            tabLayout.addTab(mapTab.setCustomView(mapIconView));
+
+            searchIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+            searchIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.search);
+            tabLayout.addTab(searchTab.setCustomView(searchIconView));
+
+            jobIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+            jobIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.job_unselectedtab);
+            tabLayout.addTab(jobTab.setCustomView(jobIconView));
+
+            compareIconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+            compareIconView.findViewById(R.id.icon).setBackgroundResource(R.drawable.compare);
+            tabLayout.addTab(compareTab.setCustomView(compareIconView));
 
 
-            allItemList = (ListView) findViewById(R.id.allitem);
-            checkBox1 = (CheckBox) findViewById(R.id.compared);
-            checkBox2 = (CheckBox) findViewById(R.id.compared2);
+            LinearLayout tabs = ((LinearLayout) tabLayout.getChildAt(0));
+
+            for (int i = 0; i < tabs.getChildCount(); i++) {
+                LinearLayout item = ((LinearLayout) tabs.getChildAt(i));
+                item.setRotationX(180);
+            }
+
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.map_fragment, new MapFragmentNew());
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            fragmentTransaction.commit();
+
+            tabLayout.setOnTabSelectedListener(
+                    new TabLayout.OnTabSelectedListener() {
+                        @Override
+                        public void onTabSelected(TabLayout.Tab tab) {
+                            CommonFragment fragment = null;
+
+                            switch (tab.getPosition()) {
+
+                                case 0:
+                                    fragment = new MapFragmentNew();
+                                    break;
+
+                                case 1:
+                                    fragment = new SearchFragment();
+                                    break;
+
+                                case 2:
+                                    showJobDialog();
+                                    break;
+
+                                case 3:
+                                    fragment = new CompareFragment();
+                                    break;
+                            }
+
+                            if (tab.getPosition() != 2) {
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.map_fragment, fragment).addToBackStack(null);
+
+                                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                fragmentTransaction.commit();
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onTabUnselected(TabLayout.Tab tab) {
+
+                        }
+
+                        @Override
+                        public void onTabReselected(TabLayout.Tab tab) {
+
+                        }
+                    }
+            );
+
+
+            /*mapButton = (ImageButton) findViewById(R.id.mapbutton);
+            jobButton = (ImageButton) findViewById(R.id.jobButton);
+            searchButton = (ImageButton) findViewById(R.id.searchbutton);
+            compareButton = (ImageButton) findViewById(R.id.compare);*/
 
 
 
-            checkLeft = (CheckBox) findViewById(R.id.checkLeft);
-            checkRight = (CheckBox) findViewById(R.id.checkRight);
 
-            catHolder = (RelativeLayout) findViewById(R.id.categoryfilterholder);
+            /*buttonWidth = width / 4;
+            buttonHeight = height / 20;
+*/
 
+
+
+            /*final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mapButton.getLayoutParams();
+            params.weight = 1;
+            params.width = buttonWidth;
+            double d = buttonWidth * 0.56;
+            double large = buttonWidth * 0.69;
+            final int larg = (int) Math.round(large);
+            small = (int) Math.round(d);
+            params.height = larg;*/
+
+/*
+            mapButton.setLayoutParams(params);
+
+            final LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) searchButton.getLayoutParams();
+            params2.weight = 1;
+            params2.width = buttonWidth;
+            params2.height = (int) Math.round(d);
+            buttonHeight = (int) Math.round(d);
+            searchButton.setLayoutParams(params2);
+            Picasso.with(this)
+                    .load(R.drawable.search)
+                    .resize(buttonWidth, small)
+                    .into(searchButton);
+            final LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) jobButton.getLayoutParams();
+            params3.weight = 1;
+            params3.width = buttonWidth;
+            params3.height = (int) Math.round(d);
+            jobButton.setLayoutParams(params3);
+
+            Picasso.with(this)
+                    .load(R.drawable.job_unselectedtab)
+                    .resize(buttonWidth, small)
+                    .into(jobButton);
+            jobButton.getHeight();
+            final LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) compareButton.getLayoutParams();
+            params4.weight = 1;
+            params4.width = buttonWidth;
+            params4.height = (int) Math.round(d);
+            compareButton.setLayoutParams(params4);
+
+            Picasso.with(this)
+                    .load(R.drawable.compare)
+                    .resize(buttonWidth, small)
+                    .into(compareButton);
+*/
 
             mapcalledstatus = false;
+
             toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
+            topText = (TextView) findViewById(R.id.toptext);
 
-            welcomeText = (TextView) findViewById(R.id.toptext);
+            // will set compare value
             SharedPreferencesHelper.setCompareData(PlaceDetailsActivity.this, "", 0);
-            searchAll = (EditText) findViewById(R.id.searchall);
 
-
-            filterHolder = (RelativeLayout) findViewById(R.id.filterholder);
-            upText = (TextView) findViewById(R.id.textView15);
+            menuText = (TextView) findViewById(R.id.menuTextView);
             changeArea = (CheckedTextView) findViewById(R.id.changearea);
-            upText.setText(R.string.menu);
-            changeArea.setText(R.string.change_area);
+            menuText.setText(getString(R.string.menu));
+            changeArea.setText(getString(R.string.change_area));
+
             changeArea.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
 
-                    storedAreaArrayListall = storedAreaTable.getAllData();
+                /*Intent em = new Intent(PlaceDetailsActivityNewLayout.this, AreaUpgrade.class);
+                startActivity(em);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);*/
+
+                    //storedAreaArrayListall = storedAreaTable.getAllData();
 
                     Intent em = new Intent(PlaceDetailsActivity.this, DataLoadingActivity.class);
                     startActivity(em);
@@ -440,13 +573,14 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                 }
             });
 
+            // Activities of ActionBar and menu drawer
 
             setSupportActionBar(toolbar);
-            ActionBar ab = getSupportActionBar();
-            ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-            ab.setDisplayHomeAsUpEnabled(true);
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setHomeAsUpIndicator(R.drawable.menu_icon);
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
-            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout_menu);
             final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
@@ -454,8 +588,8 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                 @SuppressLint("RestrictedApi")
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
-                    view = navigationView.getTouchables().get(2);
-                    view2 = navigationView.getTouchables().get(4);
+                    option_download = navigationView.getTouchables().get(2);
+                    option_update = navigationView.getTouchables().get(4);
 
                     if (!firstRun || firstRunUpdate) runOverlay_ContinueMethodnavigation();
                     //  getSupportActionBar().setTitle("Navigation!");
@@ -482,18 +616,15 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             navigationView.setNavigationItemSelectedListener(this);
 
 
-            svHolder = (LinearLayout) findViewById(R.id.llCategoryListHolderback);
-
-            svHolder.setVisibility(View.VISIBLE);
-
-            sv = (ScrollView) findViewById(R.id.svCategoryListHolder);
-
-            sv.setVisibility(View.VISIBLE);
+            categoryHolder = (LinearLayout) findViewById(R.id.llCategoryListHolderback);
+            categoryHolder.setVisibility(View.VISIBLE);  // change visibility
+            categoryScrollView = (ScrollView) findViewById(R.id.svCategoryListHolder);
+            categoryScrollView.setVisibility(View.VISIBLE);  // change visibility based of fragment type
             screenSize = AppUtils.ScreenSize(PlaceDetailsActivity.this);
 
 
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-            wholeLayout = (LinearLayout) findViewById(R.id.wholeLayout);
+            middleLayout = (LinearLayout) findViewById(R.id.wholeLayout);
             mEnterAnimation = new AlphaAnimation(0f, 1f);
             mEnterAnimation.setDuration(600);
             mEnterAnimation.setFillAfter(true);
@@ -503,27 +634,29 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             mExitAnimation.setFillAfter(true);
             String AREA = getAreaName();
             AREA = AREA.replace(' ', '\n');
-            welcomeText.setText(AREA);
+            topText.setText(AREA);
+
+
 
 
             map = (FrameLayout) findViewById(R.id.map_fragment);
-            map.setVisibility(View.VISIBLE);
+            //map.setVisibility(View.VISIBLE);
+
             VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
 
             primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
 
-            fLeft = (LinearLayout) findViewById(R.id.linearLayout1);
-            fRight = (LinearLayout) findViewById(R.id.linearLayout2);
+
 
             //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
-            llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
+            category = (LinearLayout) findViewById(R.id.llCategoryListHolder);
 
-            llCatListHolder.setVisibility(View.VISIBLE);
+           // category.setVisibility(View.VISIBLE);
             //rlSubCatHolder.setVisibility(View.VISIBLE);
 
-            ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
+            ViewGroup.LayoutParams categoryLayoutParams = category.getLayoutParams();
 
-            final int s = lp.width = (int) (VIEW_WIDTH);
+            final int s = categoryLayoutParams.width = (int) (VIEW_WIDTH);
 
 
             /**
@@ -537,56 +670,380 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
 
-            populateHolder();
+            populateHolder();   //  calls all construction methods
+
+
             try {
-                callMapFragment(lat, lon);
+                callMapFragment(lat, lon);   //  fragment choice
             } catch (Exception e) {
 
             }
 
             if (!firstRun || firstRunUpdate) runOverlay_ContinueMethod();
 
+        /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
+        * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
+        * shown if compare/bazar clicked(ListClicked)*/
 
+            /*mapButton.setBackgroundResource(R.drawable.map_selected);
+
+            Picasso.with(this)
+                    .load(R.drawable.map_selected)
+                    .resize(buttonWidth, larg)
+                    .into(mapButton);
+
+
+            searchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    searchClicked = true;
+                    mapClicked = false;
+                    jobClicked = false;
+                    compareClicked = false;
+                    inCompare = false;
+                    middleLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivity.this, R.color.white));
+                    toolbar.setVisibility(View.VISIBLE);
+
+
+                    populateSearch();
+
+                    if (!compareClicked || !mapClicked || !jobClicked) {
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.map)
+                                .resize(buttonWidth, small)
+                                .into(mapButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.compare)
+                                .resize(buttonWidth, small)
+                                .into(compareButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.job_unselectedtab)
+                                .resize(buttonWidth, small)
+                                .into(jobButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.search_selected)
+                                .resize(buttonWidth, larg)
+                                .into(searchButton);
+
+                        params2.height = larg;
+                        searchButton.setLayoutParams(params2);
+                        params.height = small;
+                        mapButton.setLayoutParams(params);
+                        params3.height = small;
+                        jobButton.setLayoutParams(params3);
+                        params4.height = small;
+                        compareButton.setLayoutParams(params4);
+
+                        map.setVisibility(View.GONE);
+                        categoryHolder.setVisibility(View.GONE);
+                        categoryScrollView.setVisibility(View.GONE);
+
+                        toggleButton.setVisibility(View.VISIBLE);
+                        compare_layout_health.setVisibility(View.GONE);
+                        compare_layout_edu.setVisibility(View.GONE);
+                        searchViewHolder.setVisibility(View.VISIBLE);
+                    }
+                    if (eduClicked || healthClicked || entClicked || legalClicked || finClicked || govClicked || ngoClicked || shelterClicked) {
+
+                        filterHolder.setVisibility(View.VISIBLE);
+                        toggleButton.setVisibility(View.VISIBLE);
+                    } else {
+                        filterHolder.setVisibility(View.GONE);
+                    }
+
+                    categoryHolder.setVisibility(View.VISIBLE);
+                    categoryScrollView.setVisibility(View.VISIBLE);
+
+                    category.setVisibility(View.VISIBLE);
+                    toggleButton.setVisibility(View.VISIBLE);
+
+                }
+            });
+
+            mapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    searchClicked = false;
+                    mapClicked = true;
+                    jobClicked = false;
+                    compareClicked = false;
+
+                    if (!inCompare) {
+                        //  callMapFragment(locationNameId);
+
+                    }
+
+                    if (!compareClicked || !searchClicked || !jobClicked) {
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.map_selected)
+                                .resize(buttonWidth, larg)
+                                .into(mapButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.compare)
+                                .resize(buttonWidth, small)
+                                .into(compareButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.job_unselectedtab)
+                                .resize(buttonWidth, small)
+                                .into(jobButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.search)
+                                .resize(buttonWidth, small)
+                                .into(searchButton);
+                        params.height = larg;
+                        mapButton.setLayoutParams(params);
+
+                        params2.height = small;
+                        searchButton.setLayoutParams(params2);
+                        params3.height = small;
+                        jobButton.setLayoutParams(params3);
+                        params4.height = small;
+                        compareButton.setLayoutParams(params4);
+
+//                    subCatItemList.setVisibility(View.GONE);
+
+                        searchViewHolder.setVisibility(View.GONE);
+                        compare_layout_health.setVisibility(View.GONE);
+                        compare_layout_edu.setVisibility(View.GONE);
+                    }
+                    toggleButton.setVisibility(View.VISIBLE);
+                    map.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.VISIBLE);
+
+
+                }
+            });
+
+            jobButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    //if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
+
+                    searchClicked = false;
+                    mapClicked = false;
+                    inCompare = false;
+                    jobClicked = true;
+                    compareClicked = false;
+                    searchViewHolder.setVisibility(View.GONE);
+                    category.setVisibility(View.VISIBLE);
+
+                    if (!mapClicked || !searchClicked || !compareClicked) {
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.map)
+                                .resize(buttonWidth, small)
+                                .into(mapButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.compare)
+                                .resize(buttonWidth, small)
+                                .into(compareButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.job_selectedtab)
+                                .resize(buttonWidth, larg)
+                                .into(jobButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.search)
+                                .resize(buttonWidth, small)
+                                .into(searchButton);
+                        params3.height = larg;
+                        jobButton.setLayoutParams(params3);
+                        params2.height = small;
+                        searchButton.setLayoutParams(params2);
+                        params.height = small;
+                        mapButton.setLayoutParams(params);
+                        params4.height = small;
+                        compareButton.setLayoutParams(params4);
+
+                        map.setVisibility(View.VISIBLE);
+                    }
+
+                    searchViewHolder.setVisibility(View.GONE);
+                    compare_layout_health.setVisibility(View.GONE);
+                    compare_layout_edu.setVisibility(View.GONE);
+
+                    LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivity.this);
+                    View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+                    final Dialog alertDialog = new Dialog(PlaceDetailsActivity.this);
+                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    alertDialog.setContentView(promptView);
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
+
+
+                    final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                    final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                    final ImageView okay = (ImageView) promptView.findViewById(R.id.okay);
+
+                    header.setText("!!!");
+                    header.setTextColor(getResources().getColor(R.color.Black));
+                    bodys.setText(R.string.job_portal_coming_soon);
+                    bodys.setTextColor(getResources().getColor(R.color.Black));
+                    okay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.cancel();
+                        }
+                    });
+
+                    //alertDialog.setCancelable(false);
+
+                    WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+                    lp.dimAmount = 0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                    alertDialog.getWindow().setAttributes(lp);
+
+                    alertDialog.getWindow().setLayout((width * 5) / 6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+                }
+
+            });
+            compareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (currentCategoryID == 10000 || currentCategoryID == 20000) {
+                        searchClicked = false;
+                        mapClicked = false;
+                        jobClicked = false;
+                        compareClicked = true;
+                        inCompare = true;
+
+                        if (currentCategoryID == AppConstants.EDUCATION && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivity.this) == 0) {
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.no_service_selected));
+                        } else if (currentCategoryID == AppConstants.HEALTH && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivity.this) == 0) {
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.no_service_selected));
+                        } else if (currentCategoryID == AppConstants.EDUCATION && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivity.this) == 1) {
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.select_two_services));
+                        } else if (currentCategoryID == AppConstants.HEALTH && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivity.this) == 1) {
+                            AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                    getString(R.string.select_two_services));
+                        } else {
+
+
+                            if (!mapClicked || !searchClicked || !jobClicked) {
+
+                                params4.height = larg;
+                                compareButton.setLayoutParams(params4);
+
+                                params2.height = small;
+                                searchButton.setLayoutParams(params2);
+                                params.height = small;
+                                mapButton.setLayoutParams(params);
+                                params.height = small;
+                                jobButton.setLayoutParams(params);
+
+
+                            }
+                            toolbar.setVisibility(View.GONE);
+                            // compare_layout.setVisibility(View.VISIBLE);
+
+                            // @@@@arafat
+                            // need to add condition for health and add color code for health,
+                            // else educaton color code is okay
+                            toggleButton.setVisibility(View.GONE);
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.map)
+                                    .resize(buttonWidth, small)
+                                    .into(mapButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.compare_selected)
+                                    .resize(buttonWidth, larg)
+                                    .into(compareButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.job_unselectedtab)
+                                    .resize(buttonWidth, small)
+                                    .into(jobButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.search)
+                                    .resize(buttonWidth, small)
+                                    .into(searchButton);
+                            map.setVisibility(View.GONE);
+                            category.setVisibility(View.GONE);
+                            searchViewHolder.setVisibility(View.GONE);
+
+                            categoryScrollView.setVisibility(View.GONE);
+                            categoryHolder.setVisibility(View.GONE);
+                            spinCount1 = 0;
+                            spinCount2 = 0;
+                            compareTool();
+                        }
+                    } else
+                        AlertMessage.showMessage(con, getString(R.string.cant_compare),
+                                getString(R.string.incompatible_category_to_compare));
+
+
+                }
+            });*/
 
             toggleButton = (ToggleButton) findViewById(R.id.toggle);
-            toggleButton.setVisibility(View.VISIBLE);
+            //toggleButton.setVisibility(View.VISIBLE);
             toggleButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
                     if (toggleButton.isChecked()) {
 
-                        sv.setVisibility(View.GONE);
-                        svHolder.setVisibility(View.GONE);
-                        llCatListHolder.setVisibility(View.GONE);
+                        categoryScrollView.setVisibility(View.GONE);
+                        categoryHolder.setVisibility(View.GONE);
+                        category.setVisibility(View.GONE);
 
                     } else {
 
-                        sv.setVisibility(View.VISIBLE);
-                        svHolder.setVisibility(View.VISIBLE);
-                        llCatListHolder.setVisibility(View.VISIBLE);
+                        categoryScrollView.setVisibility(View.VISIBLE);
+                        categoryHolder.setVisibility(View.VISIBLE);
+                        category.setVisibility(View.VISIBLE);
 
                     }
 
+                    //Button is OFF
+                    // Do Something
                 }
             });
         }
-
-
     }
-
-
-
-
 
 
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -609,16 +1066,11 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             Intent em = new Intent(this, EmergencyActivity.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        } else if (id == R.id.new_place) {
-            storedAreaArrayListall = storedAreaTable.getAllData();
-                /*if(storedAreaArrayListall.size()>=5)
-                {
+        }
 
-                    AlertMessage.showMessagesize(PlaceDetailsActivityNewLayout.this,"দুঃখিত","আপনি ৫টি এলাকার বেশি তথ্য একবারে নামাতে পারবেন না। আগের এলাকা বাতিল করতে" +
-                            "'তথ্য আপডেট/ডিলিট করুন' অপশন টি ব্যাবহার করুন",20,15);
+        else if (id == R.id.new_place) {
 
-                }*/
-            //else {
+
             Intent em = new Intent(this, DataLoadingActivity.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
@@ -654,76 +1106,16 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_menu);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
 
-
-    public void showJobDialog() {
-
-        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivity.this);
-        View promptView = layoutInflater.inflate(R.layout.default_alert, null);
-
-
-        final Dialog alertDialog = new Dialog(PlaceDetailsActivity.this);
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        alertDialog.setContentView(promptView);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.show();
-
-
-        final TextView header = (TextView) promptView.findViewById(R.id.headers);
-        final TextView bodyText = (TextView) promptView.findViewById(R.id.body);
-        final ImageView okay = (ImageView) promptView.findViewById(R.id.okay);
-
-        header.setText("!!!");
-        header.setTextColor(getResources().getColor(R.color.Black));
-        bodyText.setText(R.string.job_portal_coming_soon);
-        bodyText.setTextColor(getResources().getColor(R.color.Black));
-        okay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.cancel();
-            }
-        });
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-
-        int width = displayMetrics.widthPixels;
-
-        //alertDialog.setCancelable(false);
-
-        WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
-        lp.dimAmount = 0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
-        alertDialog.getWindow().setAttributes(lp);
-
-        alertDialog.getWindow().setLayout((width * 2) / 3, WindowManager.LayoutParams.WRAP_CONTENT);
-    }
-
-
-    private void callMapFragment(String lat, String lon) {
-
-        FragmentManager fragmentManager = getFragmentManager();
-
-        mapFragment = new MapFragmentNew();
-        mapFragment.setLocationName(areaKeyword);
-        mapFragment.setLat(lat);
-        mapFragment.setLon(lon);
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment, "MAP");
-        fragmentTransaction.addToBackStack("MAP");
-        fragmentManager.executePendingTransactions();
-        fragmentTransaction.commit();
-
-    }
-
-
     private void runOverlay_ContinueMethod() {
         // the return handler is used to manipulate the cleanup of all the tutorial elements
 
-        /*ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle(getString(R.string.category))
                         .setBackgroundColor(Color.parseColor("#000000"))
@@ -731,7 +1123,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setGravity(Gravity.RIGHT)
                 )
                 // note that there is no Overlay here, so the default one will be used
-                .playLater(llCatListHolder);
+                .playLater(category);
 
         ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
@@ -740,7 +1132,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setDescription(getString(R.string.tutorial_job))
                         .setGravity(Gravity.TOP)
                 )
-                .playLater(jobButton);
+                .playLater(jobIconView);
         ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle(getString(R.string.search_for_service))
@@ -749,7 +1141,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setDescription(getString(R.string.tutorial_select_service))
                         .setGravity(Gravity.TOP)
                 )
-                .playLater(searchButton);
+                .playLater(searchIconView);
         ChainTourGuide tourGuide4 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle(getString(R.string.compare_title))
@@ -758,7 +1150,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setDescription(getString(R.string.tutorial_compare))
                         .setGravity(Gravity.TOP)
                 )
-                .playLater(compareButton);
+                .playLater(compareIconView);
         ChainTourGuide tourGuide5 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle(getString(R.string.menu))
@@ -767,7 +1159,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setDescription(getString(R.string.tutorial_emergency))
                         .setGravity(Gravity.RIGHT)
                 )
-                .playLater(upText);
+                .playLater(menuText);
         ChainTourGuide tourGuide6 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle(getString(R.string.change_area))
@@ -789,7 +1181,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                 .build();
 
 
-        ChainTourGuide.init(this).playInSequence(sequence);*/
+        ChainTourGuide.init(this).playInSequence(sequence);
     }
 
     private void runOverlay_ContinueMethodnavigation() {
@@ -803,7 +1195,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setGravity(Gravity.RIGHT)
                 )
                 // note that there is no Overlay here, so the default one will be used
-                .playLater(view);
+                .playLater(option_download);
 
         ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
@@ -812,7 +1204,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         .setDescription(getString(R.string.tutorial_update_info))
                         .setGravity(Gravity.TOP)
                 )
-                .playLater(view2);
+                .playLater(option_update);
 
 
         Sequence sequence2 = new Sequence.SequenceBuilder()
@@ -829,8 +1221,9 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         ChainTourGuide.init(this).playInSequence(sequence2);
     }
 
-    // need to change later
-    public void onBackPressed_init() {
+
+    @Override
+    public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
 
 
@@ -852,7 +1245,9 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
            Reviewgiven=false;
            editor.apply();
        }*/
-        if (!settings.getBoolean("Reviewsent", false)) help();
+        if (!settings.getBoolean("Reviewsent", false)){
+            feedback();
+        }
         ToastMessageDisplay.setText(PlaceDetailsActivity.this, getString(R.string.press_back_to_exit));
         ToastMessageDisplay.showText(this);
         Log.d("In on Back Pressed", "==========");
@@ -868,9 +1263,8 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         }, 2000);
     }
 
+    public void feedback() {
 
-
-    public void help() {
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivity.this);
         View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
         //   final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
@@ -964,6 +1358,69 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
 
     }
 
+    public void sendDataToserver(Float rating, String comment) {
+
+        String username = SharedPreferencesHelper.getUser(PlaceDetailsActivity.this);
+        SharedPreferencesHelper.setFeedback(PlaceDetailsActivity.this, username);
+        String phone = SharedPreferencesHelper.getNumber(PlaceDetailsActivity.this);
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+
+        if (phone.equals("")) phone.replace("", "0");
+        else {
+            String comment2 = "";
+            try {
+                comment2 = URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            String url = "http://kolorob.net/kolorob-new-demo/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.username + "&password=" + this.password;
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+
+
+                            try {
+                                ToastMessageDisplay.setText(PlaceDetailsActivity.this, getString(R.string.thanks));
+                                ToastMessageDisplay.showText(PlaceDetailsActivity.this);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            ToastMessageDisplay.setText(PlaceDetailsActivity.this, error.toString());
+                            ToastMessageDisplay.showText(PlaceDetailsActivity.this);
+                        }
+                    }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+
+                    return params;
+                }
+
+            };
+
+// Adding request to request queue
+
+            RequestQueue requestQueue = Volley.newRequestQueue(PlaceDetailsActivity.this);
+            requestQueue.add(stringRequest);
+
+
+        }
+
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -983,34 +1440,33 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
     }
 
 
-    private void constructCategoryList(ArrayList<CategoryItem> categoryList2) {
-        constructCategoryList(categoryList2, 1.0);
+    private void constructCategoryList(ArrayList<CategoryItem> categoryList) {
+        constructCategoryList(categoryList, 1.0);
     }
 
-    private void constructCategoryList(ArrayList<CategoryItem> categoryList2, double dwPercentage) {
-        llCatListHolder.removeAllViews();
-        Collections.sort(categoryList2);
-        for (CategoryItem ci : categoryList2) {
+    private void constructCategoryList(ArrayList<CategoryItem> categoryList, double dwPercentage) {
+        category.removeAllViews();
+        Collections.sort(categoryList);
+        for (CategoryItem ci : categoryList) {
             setCategoryItem(ci);
-            llCatListHolder.addView(getCategoryListItemView(ci, dwPercentage));
+            category.addView(getCategoryListItemView(ci, dwPercentage));
 
         }
     }
 
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
-
         LayoutInflater li = LayoutInflater.from(this);
-        View v;
+        View categoryIcon;
 //        if(dpi>300)
 //            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
 //        else
 
 
-        v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
-        final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
+        categoryIcon = li.inflate(R.layout.cat_side_list_item, category, false);
+        final ImageView ivIcon = (ImageView) categoryIcon.findViewById(R.id.ivIconCatList);
 
 
-        TextView tvName = (TextView) v.findViewById(R.id.cat_name);
+        TextView tvName = (TextView) categoryIcon.findViewById(R.id.cat_name);
 
 
         // BE CAREFUL :: Category ID is being mapped as to the icon serial no.
@@ -1037,17 +1493,19 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
  *
  * ************************/
 
-        v.setOnClickListener(new View.OnClickListener() {
+        categoryIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Arrays.fill(flag2, 1);
-                clicked.clear();
-                fHolder.setVisibility(View.GONE);
-                headerHolder.clear();
+
+                filterClicked = false;
+                filterLayout.setVisibility(View.GONE);
+
                 currentCategoryID = ci.getId();
 
-                for (int i = 0; i < llCatListHolder.getChildCount(); i++) {
-                    ImageView iv = (ImageView) ((ViewGroup) llCatListHolder.getChildAt(i)).getChildAt(0);
+                for (int i = 0; i < category.getChildCount(); i++) {
+                    ImageView iv = (ImageView) ((ViewGroup) category.getChildAt(i)).getChildAt(0);
 
                     // new background because something has changed
                     // check if it's not the imageView you just clicked because you don't want to change its background
@@ -1075,45 +1533,52 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
 
                         //   EDD.clear();
                         eduClicked = true;
-                        healthClicked = false;
+                        /*healthClicked = false;
                         entClicked = false;
                         legalClicked = false;
                         finClicked = false;
                         govClicked = false;
-                        ngoClicked = false;
-                        shelterClicked = false;
-
+                        jobClicked = false;*/
                         catStatus = true;
-
-                        setFilterCategoryId(currentCategoryID);
+                      //  setFilterCategoryId(currentCategoryID);
                         calladapter(catStatus);
 
                         mapcalledstatus = true;
                         callMapFragment((ArrayList<ModelType>) constructEducationListItem());
+                        //callMapFragment(constructListItem(AppConstants.EDUCATION));   //  optimized version
 
-                       // ivIcon.setImageResource(R.drawable.ic_education);
+                        //ivIcon.setImageResource(R.drawable.ic_education);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_education);
 
+
+
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
+
+
+
                         break;
-
-
                     case AppConstants.HEALTH:
 
+                        //HEL.clear();
                         healthClicked = true;
-                        eduClicked = false;
+                        /*eduClicked = false;
                         entClicked = false;
                         legalClicked = false;
                         finClicked = false;
                         govClicked = false;
-                        ngoClicked = false;
-                        shelterClicked = false;
+                        jobClicked = false;*/
                         catStatus = true;
-
                         setFilterCategoryId(currentCategoryID);
-
                         calladapter(catStatus);
 
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_health);
@@ -1122,51 +1587,62 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
 
                         callMapFragment((ArrayList<ModelType>) constructHealthListItem());
 
+                        // replace with the optimized one
+
                         break;
 
-
+                    //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
 
+                        //   ENT.clear();
                         entClicked = true;
-                        eduClicked = false;
+                        /*eduClicked = false;
                         healthClicked = false;
                         legalClicked = false;
                         finClicked = false;
                         govClicked = false;
-                        ngoClicked = false;
-                        shelterClicked = false;
-
+                        jobClicked = false;*/
                         setFilterCategoryId(currentCategoryID);
                         catStatus = true;
                         calladapter(catStatus);
 
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
+
 
                         ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.ic_entertainment);
+
+
                         mapcalledstatus = true;
                         callMapFragment((ArrayList<ModelType>) constructEntertainmentListItem());
-                        ivIcon.setImageResource(R.drawable.ic_entertainment);
 
                         break;
 
 
+                    //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
 
                         govClicked = true;
-                        entClicked = false;
+                        /*entClicked = false;
                         eduClicked = false;
                         healthClicked = false;
                         legalClicked = false;
                         finClicked = false;
-                        ngoClicked = false;
-                        shelterClicked = false;
-
+                        jobClicked = false;*/
                         setFilterCategoryId(currentCategoryID);
 
                         catStatus = true;
                         calladapter(catStatus);
 
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_government);
@@ -1176,26 +1652,46 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
 
                         callMapFragment((ArrayList<ModelType>) constructGovListItem());
 
+
+//                        toolbar.setVisibility(View.VISIBLE);
+                        // if (governmentNewItems.size()==0) {
+
+                        //  AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
+//                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+//
+//                            alertDialog2.setMessage("");
+//                            alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+//                                    new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                       alertDialog2.dismiss();
+//                                        }
+//                                    });
+//                            alertDialog2.getWindow().setLayout(200, 300);
+//                            alertDialog2.show();তঃ//////
                         break;
 
 
                     case AppConstants.LEGAL:
 
                         legalClicked = true;
-                        entClicked = false;
+                        /*entClicked = false;
                         eduClicked = false;
                         healthClicked = false;
                         finClicked = false;
                         govClicked = false;
-                        ngoClicked = false;
-                        shelterClicked = false;
-
+                        jobClicked = false;*/
                         setFilterCategoryId(currentCategoryID);
                         catStatus = true;
                         calladapter(catStatus);
 
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_legal);
+
 
                         mapcalledstatus = true;
 
@@ -1206,19 +1702,21 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                     case AppConstants.FINANCIAL:
 
                         finClicked = true;
-                        entClicked = false;
+                        /*entClicked = false;
                         eduClicked = false;
                         healthClicked = false;
                         legalClicked = false;
                         govClicked = false;
-                        ngoClicked = false;
-                        shelterClicked = false;
-
+                        jobClicked = false;
+                        */
                         setFilterCategoryId(currentCategoryID);
                         catStatus = true;
                         calladapter(catStatus);
 
-
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_finance);
 
@@ -1227,49 +1725,49 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                         break;
 
 
-
+                    /////// NGO ////
                     case AppConstants.NGO:
 
                         ngoClicked = true;
-                        entClicked = false;
+                        /*entClicked = false;
                         eduClicked = false;
                         healthClicked = false;
                         legalClicked = false;
                         govClicked = false;
-                        finClicked = false;
-                        shelterClicked = false;
-
+                        jobClicked = false;*/
                         setFilterCategoryId(currentCategoryID);
                         catStatus = true;
                         calladapter(catStatus);
 
-
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.ic_ngos);
 
                         callMapFragment((ArrayList<ModelType>) constructNgoListItem());
                         mapcalledstatus = true;
-
                         break;
-
 
                     case AppConstants.RELIGIOUS:
 
                         shelterClicked = true;
-                        ngoClicked = false;
+                        /*ngoClicked = false;
                         entClicked = false;
                         eduClicked = false;
                         healthClicked = false;
                         legalClicked = false;
                         govClicked = false;
-                        finClicked = false;
-
+                        jobClicked = false;*/
                         setFilterCategoryId(currentCategoryID);
                         catStatus = true;
                         calladapter(catStatus);
 
-
-
+                        /*if (searchClicked) {
+                            filterHolder.setVisibility(View.VISIBLE);
+                            populateFilterWords(getFilterCategoryId());
+                        }*/
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.shelter);
 
@@ -1284,13 +1782,87 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             }
         });
 
-        return v;
+        return categoryIcon;
     }
 
 
 
 
 
+
+    /*private ArrayList <SubCategoryItemNew> constructSubCategoryListItem(int cat_id, String header) {
+        ArrayList <SubCategoryItemNew> subCategoryItems;
+        SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+        subCategoryItems = subCategoryTable.getAllSubCategoriesHeader(cat_id,header);
+
+        return subCategoryItems;
+    }*/
+
+
+    /*private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
+        llSubCatListHolder.removeAllViews();
+        ArrayList<String> header = new ArrayList<>();
+        subcategory=0;
+        for (SubCategoryItem si : subCategoryList) {
+
+            if(!header.contains(si.getSubcatHeader()))
+            {
+                header.add(si.getSubcatHeader());
+                llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
+            }
+        }
+    }
+*/
+
+
+    private View getSubCategoryListItemView(final SubCategoryItemNew si, double dwPercentage, final int cat_id) {
+
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+
+        View v;
+        LayoutInflater li = LayoutInflater.from(this);
+
+
+        v = li.inflate(R.layout.subcatholderlist, null, false);
+
+        final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconSCatList);
+        tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
+        ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[subcategory++]);
+
+
+        ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
+
+        lpIv.width = (int) (primaryIconWidth * dwPercentage);
+
+
+        ivIcon.setLayoutParams(lpIv);
+        tvName.setTextColor(Color.WHITE);
+
+        tvName.setText(si.getSubCatLabelBn());
+        tvName.setTextSize(12);
+        flag = true;
+        //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+
+/**************************
+ **
+ *
+ *
+ *This OnClickListener will be called for clicking subcategory items from the right list
+ *
+ *
+ *
+ *
+ * ************************/
+
+
+        return v;
+    }
+
+    private ArrayList<SubCategoryItemNew> getSubCategoryList(int id) {
+
+        SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivity.this);
+        return subCategoryTable.getDataListFromForeignKey(id);
+    }
 
 
     private Animation slideInFromRightAnim() {
@@ -1312,6 +1884,86 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
     }
 
 
+     /* this is the default map view based on intent location name.If user change from spinner; this is also called*/
+
+     private void callMapFragment(String lat, String lon) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+
+        if (mapFirst) {
+
+            mapFragment = new MapFragmentOSM();
+            mapFragment.setLocationName(areaKeyword);
+            mapFragment.setLat(lat);
+            mapFragment.setLon(lon);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.map_fragment, mapFragment, "MAP");
+            fragmentTransaction.addToBackStack("MAP");
+            fragmentManager.executePendingTransactions();
+            fragmentTransaction.commit();
+            mapFirst = false;
+        }
+
+
+    }
+
+
+
+
+
+/*
+* call mapfragment functions load fragments of map. based on location */
+    /*private void callMapFragmentWithEducation(ArrayList <EduNewModel> educationServiceProviderItems) {
+
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+
+        fragment.getMapViewController().setZoom(15);
+          fragment.getMapViewController().setCenter(getLocation());
+
+            fragment.setCategoryId(currentCategoryID);
+            fragment.setSubcategories(currentCategoryID);
+            fragment.populateIcons(educationServiceProviderItems);
+
+            called = true;*/
+
+
+    /*  else {
+          if(mainedcalled)
+          {
+
+              mainedcalled=false;
+          }
+          fragment.Drawedu(edid,s);
+      }*/
+    // EDD.clear();
+    //}
+
+    //  Optimized method for all categories
+
+    private ArrayList <ModelType> constructListItem(int categoryId){
+
+        switch(categoryId){
+            case AppConstants.EDUCATION:
+                return (ArrayList <ModelType> ) new EduNewDBTableMain(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.HEALTH:
+                return (ArrayList <ModelType> ) new HealthNewDBTableMain(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.ENTERTAINMENT:
+                return (ArrayList <ModelType> ) new EntNewDBTable(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.GOVERNMENT:
+                return (ArrayList <ModelType> ) new GovNewDBTable(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.LEGAL:
+                return (ArrayList <ModelType> ) new LegalAidNewDBTable(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.FINANCIAL:
+                return (ArrayList <ModelType> ) new FinNewDBTable(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.NGO:
+                return (ArrayList <ModelType> ) new NGONewDBTable(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            case AppConstants.RELIGIOUS:
+                return (ArrayList <ModelType> ) new ReligiousNewDBTable(PlaceDetailsActivity.this).getByAreaCategory(wardId, areaKeyword, categoryId);
+            default:
+                return null;
+        }
+    }
+
     /*********************************************************methods for education**********************************************/
 
 
@@ -1321,6 +1973,10 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         return educationNewTable.getByAreaCategory(wardId, areaKeyword, AppConstants.EDUCATION);
 
     }
+
+
+
+    /***********************************************************Methods for Health*************************************************/
 
 
     private ArrayList<HealthNewDBModelMain> constructHealthListItem() {
@@ -1485,9 +2141,9 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             if (hour >= 6 && hour < 12)
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = "দুপুর " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = "দুপুর " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 15 && hour < 18)
                 timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
@@ -1497,7 +2153,7 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " টা ";
         } catch (Exception e) {
 
         }
@@ -1554,9 +2210,9 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
                 }
             }
 
-            /*if (filterClicked) {
+            if (filterClicked) {
                 checkNum = String.valueOf(getsNumber());
-            } else checkNum = String.valueOf(0);*/
+            } else checkNum = String.valueOf(0);
 
             if (Integer.parseInt(checkNum) != 0) {
                 subcatHolders.clear();
@@ -1607,6 +2263,49 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
         allItemList.setFastScrollEnabled(false);
         allItemList.setFastScrollEnabled(true);
     }
+
+
+    public void showJobDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivity.this);
+        View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+        final Dialog alertDialog = new Dialog(PlaceDetailsActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+
+        final TextView header = (TextView) promptView.findViewById(R.id.headers);
+        final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+        final ImageView okay = (ImageView) promptView.findViewById(R.id.okay);
+
+        header.setText("!!!");
+        header.setTextColor(getResources().getColor(R.color.Black));
+        bodys.setText(R.string.job_portal_coming_soon);
+        bodys.setTextColor(getResources().getColor(R.color.Black));
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+
+        int width = displayMetrics.widthPixels;
+
+        //alertDialog.setCancelable(false);
+
+        WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+        lp.dimAmount = 0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+        alertDialog.getWindow().setAttributes(lp);
+
+        alertDialog.getWindow().setLayout((width * 2) / 3, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
+
 
 
     @Override
@@ -1674,90 +2373,5 @@ public class PlaceDetailsActivity <ModelType extends CommonModel> extends AppCom
     protected void onDestroy() {
         super.onDestroy();
     }
-
-
-
-
-
-
-
-    public void sendDataToserver(Float rating, String comment) {
-        String username = SharedPreferencesHelper.getUser(PlaceDetailsActivity.this);
-        SharedPreferencesHelper.setFeedback(PlaceDetailsActivity.this, username);
-        String phone = SharedPreferencesHelper.getNumber(PlaceDetailsActivity.this);
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-
-
-        if (phone.equals("")) phone.replace("", "0");
-        else {
-            String comment2 = "";
-            try {
-                comment2 = URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            String url = "http://kolorob.net/kolorob-new-demo/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.username + "&password=" + this.password;
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
-
-
-                            try {
-                                ToastMessageDisplay.setText(PlaceDetailsActivity.this, getString(R.string.thanks));
-                                ToastMessageDisplay.showText(PlaceDetailsActivity.this);
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            ToastMessageDisplay.setText(PlaceDetailsActivity.this, error.toString());
-                            ToastMessageDisplay.showText(PlaceDetailsActivity.this);
-                        }
-                    }) {
-
-                @Override
-                protected Map<String, String> getParams() {
-
-                    Map<String, String> params = new HashMap<>();
-
-                    return params;
-                }
-
-            };
-
-// Adding request to request queue
-
-            RequestQueue requestQueue = Volley.newRequestQueue(PlaceDetailsActivity.this);
-            requestQueue.add(stringRequest);
-
-
-        }
-
-
-    }
-
-
-    @Override
-    public void onBackPressed() {
-
-
-        if (getFragmentManager().findFragmentById(R.id.simpleFrameLayout) instanceof MapFragmentNew) {
-            super.onBackPressed();
-        } else {
-            mapTab.select();
-            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-
-
-    }
-
 
 }
