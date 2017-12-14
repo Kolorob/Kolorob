@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wholeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#00ffffff"
+    android:layout_height="0dp"
+    android:layout_weight="10"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -37,8 +38,7 @@
 
             <include layout="@layout/compare_screen_education" />
 
-            <include
-                layout="@layout/health_compare_tool"
+            <include layout="@layout/health_compare_tool"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/searchholder" />
@@ -122,7 +122,7 @@
                     android:layout_marginTop="@dimen/fab_marginforsearch2">
 
                     <ImageButton
-                        android:id="@+id/morebutton"
+                        android:id="@+id/filterButton"
                         android:layout_width="@dimen/bwidth"
                         android:layout_height="@dimen/bwidth"
                         android:layout_alignParentTop="true"
@@ -139,7 +139,7 @@
                         android:layout_alignParentLeft="false"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/morebutton"
+                        android:layout_below="@+id/filterButton"
                         android:layout_marginTop="10dp">
 
 
@@ -160,7 +160,7 @@
                                 android:weightSum="2">
 
                                 <LinearLayout
-                                    android:id="@+id/linearLayout1"
+                                    android:id="@+id/filterLayoutLeft"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="left"
@@ -174,7 +174,7 @@
 
 
                                 <LinearLayout
-                                    android:id="@+id/linearLayout2"
+                                    android:id="@+id/filterLayoutRight"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="right"
@@ -195,6 +195,9 @@
 
             </RelativeLayout>
 
+
+
+
             <LinearLayout
                 android:id="@+id/llCategoryListHolderback"
                 android:layout_width="@dimen/sidebarwidth"
@@ -204,6 +207,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="false"
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
+                android:layout_marginTop="@dimen/nav_header_heightcat"
                 android:background="@drawable/sidebar_category"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
@@ -265,7 +269,7 @@
 
                 android:orientation="horizontal">
 
-                <ImageButton
+                <!--<ImageButton
                     android:id="@+id/mapbutton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -322,7 +326,7 @@
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:background="@null"
-                    android:elevation="2dp" />
+                    android:elevation="2dp" />-->
 
 
             </LinearLayout>

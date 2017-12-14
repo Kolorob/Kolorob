@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="মতামত"
+        android:text="@string/opinion"
         android:textColor="@color/orange"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal"
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="কলরব সম্পর্কে লিখুন"
+        android:text="@string/write_about_kolorob"
         android:textColor="@color/orange"
 
         android:layout_gravity="center_horizontal"
@@ -49,7 +49,7 @@
         android:id="@+id/submit_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="মতামত"
+        android:hint="@string/opinion"
         android:gravity="center"
         android:lines="4"
         />

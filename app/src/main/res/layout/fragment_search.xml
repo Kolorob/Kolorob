@@ -1,6 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchholder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible">
+
+    <EditText
+        android:id="@+id/searchall"
+        android:layout_width="@dimen/searchbar"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/filterholder"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/filterholder"
+        android:layout_marginRight="@dimen/search_margin"
+        android:layout_marginTop="@dimen/search_top"
+        android:layout_weight="0.87"
+        android:background="#000000"
+        android:ems="10"
+        android:hint="@string/search"
+        android:popupBackground="#ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <ListView
+        android:id="@+id/allitem"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listheight"
+        android:layout_alignEnd="@+id/searchall"
+        android:layout_alignLeft="@+id/searchall"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/searchall"
+
+        android:layout_alignStart="@+id/searchall"
+        android:layout_below="@+id/searchall"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="@dimen/search_margin"
+        android:layout_marginTop="20dp"
+        android:background="#F7941E"
+        android:maxHeight="80dp"
+        android:minHeight="80dp" />
+
+    <RelativeLayout
+        android:id="@+id/filterholder"
+        android:layout_width="@dimen/searchbar"
+
+        android:layout_height="@dimen/filterheight"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/allitem"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/nav_header_height2"
+        android:layout_marginRight="@dimen/search_margin"
+        android:layout_marginTop="@dimen/fab_marginforsearch2">
+
+        <ImageButton
+            android:id="@+id/filterButton"
+            android:layout_width="@dimen/bwidth"
+            android:layout_height="@dimen/bwidth"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/filter" />
+
+        <RelativeLayout
+            android:id="@+id/categoryfilterholder"
+            android:layout_width="match_parent"
+
+            android:layout_height="450dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/filterButton"
+            android:layout_marginTop="10dp">
+
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+
+                android:background="@color/semi_transparent">
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutfilter"
+                    android:layout_width="@dimen/searchbar"
+                    android:layout_height="wrap_content"
+                    android:background="@color/semi_transparent"
+
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/filterLayoutLeft"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
+                        android:gravity="start|left"
+                        android:orientation="vertical"
+                        android:weightSum="10">
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/filterLayoutRight"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:gravity="right|end"
+                        android:orientation="vertical"
+                        android:weightSum="10">
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/categorytoolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="#F7941E"
 
-    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:local="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/categorytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#F7941E"
 
+        local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
         <RelativeLayout
@@ -40,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/uptext"
-                    android:id="@+id/textView15"
+                    android:id="@+id/menuTextView"
                     android:layout_centerVertical="true"
 
                     android:textColor="#ffffff" />

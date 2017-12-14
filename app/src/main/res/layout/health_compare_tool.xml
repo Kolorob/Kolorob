@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:id="@+id/compare_layout"
+        android:id="@+id/compare_layout_health"
         android:visibility="gone"
         android:orientation="vertical"
 
@@ -18,12 +18,6 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
-
-
-
-
 
         </LinearLayout>
 
@@ -46,7 +40,7 @@
                 android:layout_height="match_parent">
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/compared"
+                    android:id="@+id/leftCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -60,7 +54,7 @@
                     app:buttonTint="@color/white" />
 
                 <TextView
-                    android:id="@+id/health_name2"
+                    android:id="@+id/health_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -80,7 +74,7 @@
                 android:layout_height="match_parent">
 
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/compared2"
+                    android:id="@+id/rightCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -96,7 +90,7 @@
                     app:buttonTint="@color/white" />
 
                 <TextView
-                    android:id="@+id/health_name3"
+                    android:id="@+id/health_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
