@@ -3,7 +3,7 @@
     আমাদের ফেসবুকে ইনবক্স করুন অথবা ওয়েবসাইটে দেখুন!***</string>
     <string name="app_id">696685267147178</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">1b5cd2884253af0674285d8e0448bd4d</string>
- <string name="jobsave">কলরবে দেয়া চাকরির বিজ্ঞপ্তিসমুহ মিরপুর এলাকার নানাবিধ উৎস থেকে সংগৃহীত। এখানে উল্লেখ্য যে, সেভ দি চিলড্রেন বাংলাদেশ কখনই শিশু শ্রমকে উৎসাহিত করে না এবং সংগৃহীত চাকরির তথ্যের সত্যতা যাচাই এর দায়ভার বহন করবে না।
+    <string name="jobsave">কলরবে দেয়া চাকরির বিজ্ঞপ্তিসমুহ মিরপুর এলাকার নানাবিধ উৎস থেকে সংগৃহীত। এখানে উল্লেখ্য যে, সেভ দি চিলড্রেন বাংলাদেশ কখনই শিশু শ্রমকে উৎসাহিত করে না এবং সংগৃহীত চাকরির তথ্যের সত্যতা যাচাই এর দায়ভার বহন করবে না।
 </string>
     <string name="ak_login_protocol_scheme">ak696685267147178</string>
     <string name="uptext">কোথায়\nখুঁজতে চান?</string>
@@ -166,9 +166,31 @@
     <string name="registration_permission">আপনি কি রেজিস্ট্রেশন করতে চান?</string>
     <string name="registration_required">রেজিস্ট্রেশন করতে হবে</string>
     <string name="reg_required_part1">মতামত দেয়ার আগে আপনাকে</string>
-    <string name="connect_internet">আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...</string>
+    <string name="connect_internet">আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। </string>
     <string name="join_with_us">আমাদের সাথে যোগ দিন</string>
-   <string name="contact">যোগাযোগ করুন</string>
+    <string name="contact">যোগাযোগ করুন</string>
     <string name="collecting_data">তথ্য সংগ্রহ চলছে</string>
     <string name="thanks">ধন্যবাদ</string>
+    <string name="not_found">পাওয়া যায় নি</string>
+    <string name="one">১</string>
+    <string name="two">২</string>
+    <string name="three">৩</string>
+    <string name="four">৪</string>
+    <string name="five">৫</string>
+    <string name="six">৬</string>
+    <string name="seven">৭</string>
+    <string name="eight">৮</string>
+    <string name="nine">৯</string>
+    <string name="zero">০</string>
+    <string name="job">job</string>
+    <string name="others">অন্যান্য</string>
+    <string name="emergency_services">জরুরী সেবা</string>
+    <string name="download_new">নতুন এলাকার তথ্য নামান</string>
+    <string name="tutorial">টিউটোরিয়াল</string>
+    <string name="update_or_delete">নামানো তথ্য আপডেট/ডিলিট করুন</string>
+    <string name="type_of_service">সেবার ধরন</string>
+    <string name="opinion">মতামত</string>
+    <string name="write_about_kolorob">কলরব সম্পর্কে লিখুন</string>
+
+
 </resources>
