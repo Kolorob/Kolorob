@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 
 
 /**
@@ -66,15 +65,15 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         return KEY_NAME_ENG;
     }
 
-    public static String getKeyArea() {
+    static String getKeyArea() {
         return KEY_AREA;
     }
 
-    public static String getKeyParentArea() {
+    static String getKeyParentArea() {
         return KEY_PARENT_AREA;
     }
 
-    public static String getKeyWard() {
+    static String getKeyWard() {
         return KEY_WARD;
     }
 
@@ -83,7 +82,9 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     }
 
     protected String createTableQuery(String TABLE_NAME){
-        String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
+
+
+        return "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_IDENTIFIER_ID + " INTEGER PRIMARY KEY, "
                 + KEY_NAME_ENG + "  TEXT, "
@@ -112,9 +113,6 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
                 + KEY_SUBCATEGORY_ID + " TEXT, "
                 + KEY_REFERENCE + " TEXT, "
                 + KEY_RATINGS + " TEXT, ";
-
-
-        return CREATE_TABLE_SQL;
     }
 
 
@@ -317,7 +315,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         }
         cursor.close();
         closeDB();
-        return (commonModel instanceof CommonModel) ? (ModelType) commonModel : null;
+        return (commonModel != null) ? (ModelType) commonModel : null;
     }
 
 
