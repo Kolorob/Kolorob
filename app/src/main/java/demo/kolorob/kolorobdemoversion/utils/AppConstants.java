@@ -89,7 +89,7 @@ public class AppConstants {
     public static final String KEY_DETAILS_NGO = "ngoprovider";
     public static final String KEY_DETAILS_RELIGIOUS = "religiousprovider";
 
-    public static final int EDUCATION= 10000;
+    public static final int EDUCATION = 10000;
     public static final int HEALTH = 20000;
     public static final int ENTERTAINMENT = 30000;
     public static final int GOVERNMENT = 40000;
@@ -111,6 +111,13 @@ public class AppConstants {
     public static final String FINANCE_API = "Finance";
     public static final String NGO_API = "NGO";
     public static final String SHELTER_API = "Religious Shelter";
+
+    public static final String SCHOOL_API = "education_school";
+    public static final String RESULT_API = "result_details";
+    public static final String TRAINING_API = "training_details";
+
+    public static final String HOSPITAL_API = "health_hospital";
+    public static final String PHARMACY_API = "health_pharmacy";
 
     public static final String CC_API = "city_corporation";
     public static final String WARD_API = "ward";
