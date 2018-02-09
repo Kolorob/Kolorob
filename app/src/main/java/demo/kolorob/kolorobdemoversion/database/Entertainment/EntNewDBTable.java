@@ -80,8 +80,8 @@ public class EntNewDBTable extends CommonDBTable <EntertainmentNewDBModel> {
     public EntertainmentNewDBModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _service_type = cursor.getString(23);
-        String _entry_fee = cursor.getString(24);
+        String _service_type = cursor.getString(24);
+        String _entry_fee = cursor.getString(25);
 
         return new EntertainmentNewDBModel(_commonModel, _service_type, _entry_fee);
     }

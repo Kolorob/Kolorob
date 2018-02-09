@@ -78,7 +78,7 @@ public class HealthNewDBTableMain extends CommonDBTable <HealthNewDBModelMain> {
     public HealthNewDBModelMain cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _institute_type = cursor.getString(23);
+        String _institute_type = cursor.getString(24);
 
         return new HealthNewDBModelMain(_commonModel, _institute_type);
     }

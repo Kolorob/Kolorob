@@ -90,12 +90,12 @@ public class NGONewDBTable extends CommonDBTable<NGONewDBModel> {
     public NGONewDBModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _services = cursor.getString(23);
-        String _services_for = cursor.getString(24);
-        String _services_other = cursor.getString(25);
-        String _service_type = cursor.getString(26);
-        String _drop_time = cursor.getString(27);
-        String _ngo_fee = cursor.getString(28);
+        String _services = cursor.getString(24);
+        String _services_for = cursor.getString(25);
+        String _services_other = cursor.getString(26);
+        String _service_type = cursor.getString(27);
+        String _drop_time = cursor.getString(28);
+        String _ngo_fee = cursor.getString(29);
 
         return new NGONewDBModel(_commonModel, _services, _services_for, _services_other, _service_type, _drop_time, _ngo_fee);
     }

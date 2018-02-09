@@ -94,12 +94,12 @@ public class ReligiousNewDBTable extends CommonDBTable <ReligiousNewDBModel> {
     public ReligiousNewDBModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _rs_religion = cursor.getString(23);
-        String _rs_services_for = cursor.getString(24);
-        String _rs_services_for_religion = cursor.getString(25);
-        String _rs_other_religion = cursor.getString(26);
-        String _rs_time = cursor.getString(27);
-        String _rs_fee = cursor.getString(28);
+        String _rs_religion = cursor.getString(24);
+        String _rs_services_for = cursor.getString(25);
+        String _rs_services_for_religion = cursor.getString(26);
+        String _rs_other_religion = cursor.getString(27);
+        String _rs_time = cursor.getString(28);
+        String _rs_fee = cursor.getString(29);
 
         return new ReligiousNewDBModel(_commonModel, _rs_religion, _rs_services_for, _rs_services_for_religion, _rs_other_religion, _rs_time, _rs_fee);
     }

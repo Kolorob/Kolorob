@@ -22,7 +22,7 @@ public class CommonModel extends BaseModel <CommonModel> implements Serializable
     String lat, lon;
 
     int categoryId;
-    String subcat, refNum, ratings;
+    String subcat, refNum, ratings, comment;
 
 
     public int getId() {
@@ -209,12 +209,20 @@ public class CommonModel extends BaseModel <CommonModel> implements Serializable
         this.ratings = ratings;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public CommonModel(){
 
     }
 
 
-    public CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
+    public CommonModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment) {
         this.id = id;
         this.nameEn = nameEn;
         this.nameBn = nameBn;
@@ -238,6 +246,7 @@ public class CommonModel extends BaseModel <CommonModel> implements Serializable
         this.subcat = subcat;
         this.refNum = refNum;
         this.ratings = ratings;
+        this.comment = comment;
     }
 
 
@@ -278,12 +287,13 @@ public class CommonModel extends BaseModel <CommonModel> implements Serializable
         String _refNum = referenceString.substring(1, referenceString.length() - 1);
 
         String _rating = jo.getString("rating");
+        String _comment = jo.getString("comments");
 
         return new CommonModel(_id, _nameEn, _nameBn,
                 _houseNo, _block, _road, _area, _areaBn, _parentArea, _ward, _policeStation,
                 _nodeContact, _nodeEmail, _otherInfo,
                 _openingTime, _closingTime, _offDay,
                 _lat, _lon,
-                _catid, _subCat, _refNum, _rating);
+                _catid, _subCat, _refNum, _rating, _comment);
     }
 }

@@ -52,6 +52,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     private static final String KEY_SUBCATEGORY_ID = "subcat_id";
     private static final String KEY_REFERENCE = "reference";
     private static final String KEY_RATINGS = "rating";
+    private static final String KEY_COMMENT = "comment";
 
 
     public abstract void insertItem(ContentValues rowValue, ModelType model);
@@ -112,7 +113,8 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
                 + KEY_CATEGORY_ID + " INTEGER, "
                 + KEY_SUBCATEGORY_ID + " TEXT, "
                 + KEY_REFERENCE + " TEXT, "
-                + KEY_RATINGS + " TEXT, ";
+                + KEY_RATINGS + " TEXT, "
+                + KEY_COMMENT + " TEXT, ";
     }
 
 
@@ -122,14 +124,14 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
                     model.getHouseNo(), model.getBlock(), model.getRoad(), model.getArea(), model.getAreaBn(), model.getParentArea(), model.getWard(), model.getPoliceStation(), model.getNodeContact(), model.getNodeEmail(), model.getOtherInfo(),
                     model.getOpeningTime(), model.getClosingTime(), model.getOffDay(),
                     model.getLat(), model.getLon(),
-                    model.getCategoryId(), model.getSubcat(), model.getRefNum(), model.getRatings());
+                    model.getCategoryId(), model.getSubcat(), model.getRefNum(), model.getRatings(), model.getComment());
         }
         else {
             return updateItem(TABLE_NAME, model, model.getId(), model.getNameEn(), model.getNameBn(),
                     model.getHouseNo(), model.getBlock(), model.getRoad(), model.getArea(), model.getAreaBn(), model.getParentArea(), model.getWard(), model.getPoliceStation(), model.getNodeContact(), model.getNodeEmail(), model.getOtherInfo(),
                     model.getOpeningTime(), model.getClosingTime(), model.getOffDay(),
                     model.getLat(), model.getLon(),
-                    model.getCategoryId(), model.getSubcat(), model.getRefNum(), model.getRatings());
+                    model.getCategoryId(), model.getSubcat(), model.getRefNum(), model.getRatings(), model.getComment());
         }
     }
 
@@ -139,12 +141,12 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
                 model.getHouseNo(), model.getBlock(), model.getRoad(), model.getArea(), model.getAreaBn(), model.getParentArea(), model.getWard(), model.getPoliceStation(), model.getNodeContact(), model.getNodeEmail(), model.getOtherInfo(),
                 model.getOpeningTime(), model.getClosingTime(), model.getOffDay(),
                 model.getLat(), model.getLon(),
-                model.getCategoryId(), model.getSubcat(), model.getRefNum(), model.getRatings());
+                model.getCategoryId(), model.getSubcat(), model.getRefNum(), model.getRatings(), model.getComment());
     }
 
 
 
-    protected long insertItem(String TABLE_NAME, ModelType model, int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
+    protected long insertItem(String TABLE_NAME, ModelType model, int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment) {
 
         ContentValues rowValue = new ContentValues();
 
@@ -175,6 +177,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         rowValue.put(KEY_SUBCATEGORY_ID, subcat);
         rowValue.put(KEY_REFERENCE, refNum);
         rowValue.put(KEY_RATINGS, ratings);
+        rowValue.put(KEY_COMMENT, comment);
 
         insertItem(rowValue, model);
 
@@ -187,7 +190,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
     }
 
 
-    private long updateItem(String TABLE_NAME, ModelType model, int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings) {
+    private long updateItem(String TABLE_NAME, ModelType model, int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment) {
 
         ContentValues rowValue = new ContentValues();
 
@@ -218,6 +221,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         rowValue.put(KEY_SUBCATEGORY_ID, subcat);
         rowValue.put(KEY_REFERENCE, refNum);
         rowValue.put(KEY_RATINGS, ratings);
+        rowValue.put(KEY_COMMENT, comment);
 
         updateItem(rowValue, model);
 
@@ -310,7 +314,7 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
                         cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13),
                         cursor.getString(14), cursor.getString(15), cursor.getString(16),
                         cursor.getString(17), cursor.getString(18),
-                        cursor.getInt(19), cursor.getString(20), cursor.getString(21), cursor.getString(22));
+                        cursor.getInt(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -348,13 +352,14 @@ public abstract class CommonDBTable <ModelType extends CommonModel> extends Base
         String _subCat = cursor.getString(20);
         String _refNum = cursor.getString(21);
         String _ratings = cursor.getString(22);
+        String _comment = cursor.getString(23);
 
 
         return (ModelType) new CommonModel(_id, _nameEn, _nameBn,
                 _houseNo, _block, _road, _area, _areaBn, _parentArea, _ward, _policeStation, _nodeContact, _nodeEmail, _otherInfo,
                 _openingTime, _closingTime, _offDay,
                 _lat, _lon,
-                _catId, _subCat, _refNum, _ratings);
+                _catId, _subCat, _refNum, _ratings, _comment);
 
     }
 

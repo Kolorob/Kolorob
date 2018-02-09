@@ -96,12 +96,12 @@ public class EduNewDBTableMain extends CommonDBTable<EduNewModel> {
     public EduNewModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _edu_type = cursor.getString(23);
-        String _shift = cursor.getString(24);
-        String _student_no = cursor.getString(25);
-        String _teachers_no = cursor.getString(26);
-        String _avg_std_per_class = cursor.getString(27);
-        String _facility = cursor.getString(28);
+        String _edu_type = cursor.getString(24);
+        String _shift = cursor.getString(25);
+        String _student_no = cursor.getString(26);
+        String _teachers_no = cursor.getString(27);
+        String _avg_std_per_class = cursor.getString(28);
+        String _facility = cursor.getString(29);
 
         return new EduNewModel(_commonModel, _edu_type, _shift, _student_no, _teachers_no, _avg_std_per_class, _facility);
     }

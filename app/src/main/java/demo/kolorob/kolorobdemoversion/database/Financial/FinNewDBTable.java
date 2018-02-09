@@ -81,8 +81,8 @@ public class FinNewDBTable extends CommonDBTable <FinancialNewDBModel> {
     public FinancialNewDBModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _type = cursor.getString(23);
-        String _service = cursor.getString(24);
+        String _type = cursor.getString(24);
+        String _service = cursor.getString(25);
 
         return new FinancialNewDBModel(_commonModel, _type, _service);
     }

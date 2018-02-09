@@ -76,7 +76,7 @@ public class GovNewDBTable extends CommonDBTable <GovernmentNewDBModel> {
     public GovernmentNewDBModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _serviceName = cursor.getString(23);
+        String _serviceName = cursor.getString(24);
 
         return new GovernmentNewDBModel(_commonModel, _serviceName);
     }

@@ -175,6 +175,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         timeProcessing(getString(R.string.closing_time), model.getClosingTime());
         CheckConcate(getString(R.string.weekly_holiday), model.getOffDay());
         CheckConcate(getString(R.string.other_info), model.getOtherInfo());
+        CheckConcate(getString(R.string.comment), model.getComment());
 
         //checkConcate method will check null data and concat
 

@@ -76,7 +76,7 @@ public class LegalAidNewDBTable extends CommonDBTable<LegalAidNewDBModel> {
     public LegalAidNewDBModel cursorToModel(Cursor cursor) {
 
         CommonModel _commonModel = super.cursorToModel(cursor);
-        String _service = cursor.getString(23);
+        String _service = cursor.getString(24);
 
         return new LegalAidNewDBModel(_commonModel, _service);
     }
