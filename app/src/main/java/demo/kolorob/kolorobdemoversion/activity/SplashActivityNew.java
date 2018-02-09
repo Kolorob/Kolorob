@@ -42,11 +42,13 @@ import demo.kolorob.kolorobdemoversion.BuildConfig;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
+import demo.kolorob.kolorobdemoversion.database.DistrictTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.District;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -414,6 +416,36 @@ public class SplashActivityNew extends AppCompatActivity {
         }
 
     }
+
+
+    private static class SaveDistrictTask extends GenericSaveTask<JSONArray, Integer, Long> {
+
+        SaveDistrictTask(SplashActivityNew activity){
+            super(activity);
+        }
+
+        @Override
+        protected Long doInBackground(JSONArray... jsonArray) {
+
+            SplashActivityNew activity = activityReference.get();
+            JSONArray districtArray = jsonArray[0];
+            DistrictTable districtTable = new DistrictTable(activity.context);
+            districtTable.dropTable();
+
+            for (int i = 0; i < districtArray.length(); i++) {
+
+                try {
+                    JSONObject jsonObject = districtArray.getJSONObject(i);
+                    districtTable.insertItem(new District().parse(jsonObject));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+
 
     private static class SaveCityCorporationTask extends GenericSaveTask<JSONArray, Integer, Long> {
 
