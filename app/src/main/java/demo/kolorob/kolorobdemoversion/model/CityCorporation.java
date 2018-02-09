@@ -10,14 +10,15 @@ import org.json.JSONObject;
 public class CityCorporation extends BaseModel <CityCorporation> {
 
     private String cityCorporation_name, cityCorporation_bn, cityCorporation_keyword;
-    private int id;
+    private int id, districtId;
 
 
-    public CityCorporation(int id, String cityCorporation_name, String cityCorporation_bn, String cityCorporation_keyword) {
+    public CityCorporation(int id, String cityCorporation_name, String cityCorporation_bn, String cityCorporation_keyword, int districtId) {
         this.id = id;
         this.cityCorporation_name = cityCorporation_name;
         this.cityCorporation_bn = cityCorporation_bn;
         this.cityCorporation_keyword = cityCorporation_keyword;
+        this.districtId = districtId;
 
     }
 
@@ -57,15 +58,24 @@ public class CityCorporation extends BaseModel <CityCorporation> {
         this.cityCorporation_keyword = cityCorporation_keyword;
     }
 
+    public int getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(int districtId) {
+        this.districtId = districtId;
+    }
+
     public CityCorporation parse(JSONObject jo) throws JSONException {
 
         int id = jo.getInt("id");
         String cc_en = jo.getString("cc_en");
         String cc_bn = jo.getString("cc_bn");
         String cc_keyword = jo.getString("cc_keyword");
+        int districtId = jo.getInt("_district");
 
 
-        return new CityCorporation(id, cc_en, cc_bn, cc_keyword);
+        return new CityCorporation(id, cc_en, cc_bn, cc_keyword, districtId);
     }
 
 

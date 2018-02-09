@@ -21,6 +21,7 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
     private static final String KEY_CC_EN = "cc_en";
     private static final String KEY_CC_BN = "cc_bn";
     private static final String KEY_CC_KEYWORD = "cc_keyword";
+    private static final String KEY_DISTRICT_ID = "district_id";
 
 
     public CityCorporationTable(Context context) {
@@ -36,7 +37,8 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
                 + KEY_IDENTIFIER_ID + " INTEGER PRIMARY KEY, "
                 + KEY_CC_EN + " TEXT, "
                 + KEY_CC_BN + " TEXT, "
-                + KEY_CC_KEYWORD + " TEXT "
+                + KEY_CC_KEYWORD + " TEXT, "
+                + KEY_DISTRICT_ID + " INTEGER "
                 + " )";
 
         db.execSQL(CREATE_TABLE_SQL);
@@ -53,7 +55,8 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
                     cityCorporation.getId(),
                     cityCorporation.getCityCorporation_name(),
                     cityCorporation.getCityCorporation_bn(),
-                    cityCorporation.getCityCorporation_keyword()
+                    cityCorporation.getCityCorporation_keyword(),
+                    cityCorporation.getDistrictId()
         );
 
     }
@@ -62,10 +65,11 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         return updateItem(cityCorporation.getId(),
                 cityCorporation.getCityCorporation_name(),
                 cityCorporation.getCityCorporation_bn(),
-                cityCorporation.getCityCorporation_keyword());
+                cityCorporation.getCityCorporation_keyword(),
+                cityCorporation.getDistrictId());
     }
 
-    private long insertItem(int id, String cc_name, String cc_bn, String cc_keyword) {
+    private long insertItem(int id, String cc_name, String cc_bn, String cc_keyword, int district_id) {
 
         ContentValues rowValue = new ContentValues();
 
@@ -73,6 +77,7 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         rowValue.put(KEY_CC_EN, cc_name);
         rowValue.put(KEY_CC_BN, cc_bn);
         rowValue.put(KEY_CC_KEYWORD, cc_keyword);
+        rowValue.put(KEY_DISTRICT_ID, district_id);
 
 
         SQLiteDatabase db = openDB();
@@ -86,13 +91,13 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    private long updateItem(int id, String cc_en, String cc_bn, String cc_keyword) {
+    private long updateItem(int id, String cc_en, String cc_bn, String cc_keyword, int district_id) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_IDENTIFIER_ID, id);
         rowValue.put(KEY_CC_EN, cc_en);
         rowValue.put(KEY_CC_BN, cc_bn);
         rowValue.put(KEY_CC_KEYWORD, cc_keyword);
-
+        rowValue.put(KEY_DISTRICT_ID, district_id);
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
@@ -109,6 +114,10 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
+    public ArrayList <CityCorporation> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_DISTRICT_ID);
+    }
+
 
     public ArrayList <CityCorporation> getAllData() {
         return super.getAllData(TABLE_NAME);
@@ -120,8 +129,9 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         String cc_en = cursor.getString(1);
         String cc_bn = cursor.getString(2);
         String cc_keyword = cursor.getString(3);
+        int district_id = cursor.getInt(4);
 
-        return new CityCorporation(id, cc_en, cc_bn, cc_keyword);
+        return new CityCorporation(id, cc_en, cc_bn, cc_keyword, district_id);
     }
 
     public void delete(int id){
