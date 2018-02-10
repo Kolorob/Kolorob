@@ -35,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String HEALTH_NEW_DB_MAIN= "hel_ndb_main";
     public static final String HEALTH_NEW_DB_PHARMA= "hel_ndb_pharma";
     public static final String HEALTH_NEW_DB_HOS= "hel_ndb_hos";
+    public static final String HEALTH_NEW_DB_CHAMBER = "health_chamber";
 
 
     public static final String LEGALAIDNEWDBTABLE="legal_aid_main";
@@ -126,6 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_MAIN);
             db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_HOS);
             db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_PHARMA);
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_CHAMBER);
 
             db.execSQL("DROP TABLE IF EXISTS " + ENT_PROVIDER_TABLE_DBNEW);
             db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_NEWDB);

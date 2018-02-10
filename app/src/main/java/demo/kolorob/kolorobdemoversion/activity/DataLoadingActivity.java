@@ -54,6 +54,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetails
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableChamber;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
@@ -75,6 +76,7 @@ import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthModelChamber;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
@@ -807,6 +809,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             Log.e(" Health : ", "hospital");
                             JSONObject hospital = jsonObject.getJSONObject(AppConstants.HOSPITAL_API);
                             new HealthNewDBTableHospital(activity.context).insertItem(new HealthNewDBModelHospital().parse(hospital, health.getId()));
+                        }
+                        if(jsonObject.has(AppConstants.CHAMBER_API)){
+                            Log.e("Health : ", "chamber");
+                            JSONObject chamber = jsonObject.getJSONObject(AppConstants.CHAMBER_API);
+                            new HealthNewDBTableChamber(activity.context).insertItem(new HealthModelChamber().parse(chamber, health.getId()));
                         }
                     }
 

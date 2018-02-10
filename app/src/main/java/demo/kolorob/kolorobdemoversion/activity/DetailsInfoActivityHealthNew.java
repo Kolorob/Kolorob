@@ -6,8 +6,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableChamber;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthModelChamber;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
@@ -25,6 +27,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
     HealthNewDBModelMain health;
     ArrayList <HealthNewDBModelPharmacy> pharmacies;
     ArrayList <HealthNewDBModelHospital> hospitals;
+    ArrayList <HealthModelChamber> chambers;
     private CheckBox checkBox = null;
     private String compare_Data = "";
     int compareValue;
@@ -59,9 +62,8 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
         }
 
         hospitals = hospitalDB.getDataListFromForeignKey(health.getId());
-        int hospitalSize = hospitals.size();
 
-        if (hospitalSize != 0) {
+        if (hospitals.size() != 0) {
 
             for (HealthNewDBModelHospital hospital : hospitals) {
 
@@ -98,22 +100,34 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
         HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(context);
         pharmacies = pharmacyDB.getDataListFromForeignKey(health.getId());
 
-        int pharmacySize = pharmacies.size();
 
-        if (pharmacySize != 0) {
+        if (pharmacies.size() != 0) {
             for (HealthNewDBModelPharmacy pharmacy : pharmacies) {
 
-                if(pharmacy.getDocavailability().equals("false")) {
+                if(pharmacy.getDocAvailability().equals("false")) {
                     CheckConcate(getString(R.string.doctor_availability), getString(R.string.not_available));
                 }
                 else CheckConcate(getString(R.string.doctor_availability), getString(R.string.available));
 
                 CheckConcate(getString(R.string.speciality), pharmacy.getSpeciality());
 
-                if(pharmacy.getVaccineavailability().equals("false")) {
+                if(pharmacy.getVaccineAvailability().equals("false")) {
                     CheckConcate(getString(R.string.vaccine_facility), getString(R.string.not_available));
                 }
                 else CheckConcate(getString(R.string.vaccine_facility), getString(R.string.available));
+
+            }
+        }
+
+        HealthNewDBTableChamber dbTableChamber = new HealthNewDBTableChamber(context);
+        chambers = dbTableChamber.getDataListFromForeignKey(health.getId());
+
+
+
+        if (chambers.size()!= 0) {
+            for (HealthModelChamber chamber : chambers) {
+
+                CheckConcate(getString(R.string.speciality), chamber.getSpeciality());
 
             }
         }

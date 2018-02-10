@@ -1982,7 +1982,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         if (!healthSpecialistItemDetailses.equals("")) {
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
-                if(healthSpecialistItemDetails.getDocavailability().equals("false")) {
+                if(healthSpecialistItemDetails.getDocAvailability().equals("false")) {
                     firstSpecialistItemdoc = firstSpecialistItemdoc + "ডাক্তার বসেন না";
                 }
                 else firstSpecialistItemdoc = firstSpecialistItemdoc +  "ডাক্তার বসেন" ;
@@ -1991,7 +1991,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         if (!healthSpecialistItemDetailses2.equals("")){
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
-                if(healthSpecialistItemDetails.getDocavailability().equals("false")) {
+                if(healthSpecialistItemDetails.getDocAvailability().equals("false")) {
                     secondSpecialistItemdoc = secondSpecialistItemdoc + "ডাক্তার বসেন না";
                 }
                 else secondSpecialistItemdoc = secondSpecialistItemdoc + "ডাক্তার বসেন" ;
@@ -2012,7 +2012,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         if (!healthSpecialistItemDetailses.equals("")) {
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
-                if(healthSpecialistItemDetails.getVaccineavailability().equals("false"))
+                if(healthSpecialistItemDetails.getVaccineAvailability().equals("false"))
                 {
                     firstSpecialistItemvac=firstSpecialistItemvac + "ভ্যাকসিন সুবিধা নেই ";
                 }
@@ -2022,7 +2022,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         if (!healthSpecialistItemDetailses2.equals("")){
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
-                if(healthSpecialistItemDetails.getVaccineavailability().equals("false"))
+                if(healthSpecialistItemDetails.getVaccineAvailability().equals("false"))
                 {
                     secondSpecialistItemvac=secondSpecialistItemvac + "ভ্যাকসিন সুবিধা নেই ";
                 }
