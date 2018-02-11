@@ -58,9 +58,9 @@ public class District extends BaseModel <District>{
     public District parse(JSONObject jo) throws JSONException {
 
         int id = jo.getInt("id");
-        String district_en = jo.getString("cc_en");
-        String district_bn = jo.getString("cc_bn");
-        String district_keyword = jo.getString("cc_keyword");
+        String district_en = jo.getString("district_en");
+        String district_bn = jo.getString("district_bn");
+        String district_keyword = jo.getString("district_keyword");
 
         return new District(id, district_en, district_bn, district_keyword);
     }

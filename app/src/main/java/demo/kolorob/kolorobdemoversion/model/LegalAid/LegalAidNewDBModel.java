@@ -12,7 +12,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 public class LegalAidNewDBModel extends CommonModel implements Serializable {
 
-    String service;
+    private String service;
 
     public LegalAidNewDBModel() {
 
@@ -27,8 +27,8 @@ public class LegalAidNewDBModel extends CommonModel implements Serializable {
         this.service = service;
     }
 
-    public LegalAidNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String service) {
-        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+    public LegalAidNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment, String service) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings, comment);
         this.service = service;
     }
 
@@ -38,7 +38,7 @@ public class LegalAidNewDBModel extends CommonModel implements Serializable {
                 cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
                 cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
                 cm.getLat(), cm.getLon(),
-                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings(), cm.getComment());
         this.service = service;
     }
 

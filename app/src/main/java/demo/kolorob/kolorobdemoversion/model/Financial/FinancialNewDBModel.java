@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class FinancialNewDBModel extends CommonModel implements Serializable {
 
 
-    String finType, serviceType;
+    private String finType, serviceType;
 
     public FinancialNewDBModel() {
 
@@ -35,8 +35,8 @@ public class FinancialNewDBModel extends CommonModel implements Serializable {
         this.serviceType = serviceType;
     }
 
-    public FinancialNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String finType, String serviceType) {
-        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+    public FinancialNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment, String finType, String serviceType) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings, comment);
         this.finType = finType;
         this.serviceType = serviceType;
     }
@@ -47,7 +47,7 @@ public class FinancialNewDBModel extends CommonModel implements Serializable {
                 cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
                 cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
                 cm.getLat(), cm.getLon(),
-                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings(), cm.getComment());
         this.finType = finType;
         this.serviceType = serviceType;
 

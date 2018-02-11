@@ -12,7 +12,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 public class NGONewDBModel extends CommonModel implements Serializable {
 
-    String ngoServices, ngoServicesFor, ngoServicesOther, ngoServiceType, dropTime, ngoFee;
+    private String ngoServices, ngoServicesFor, ngoServicesOther, ngoServiceType, dropTime, ngoFee;
 
     public NGONewDBModel() {
 
@@ -67,8 +67,8 @@ public class NGONewDBModel extends CommonModel implements Serializable {
         this.ngoFee = ngoFee;
     }
 
-    public NGONewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String ngoServices, String ngoServicesFor, String ngoServicesOther, String ngoServiceType, String dropTime, String ngoFee) {
-        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+    public NGONewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment, String ngoServices, String ngoServicesFor, String ngoServicesOther, String ngoServiceType, String dropTime, String ngoFee) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings, comment);
         this.ngoServices = ngoServices;
         this.ngoServicesFor = ngoServicesFor;
         this.ngoServicesOther = ngoServicesOther;
@@ -83,7 +83,7 @@ public class NGONewDBModel extends CommonModel implements Serializable {
                 cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
                 cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
                 cm.getLat(), cm.getLon(),
-                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings(), cm.getComment());
         this.ngoServices = ngoServices;
         this.ngoServicesFor = ngoServicesFor;
         this.ngoServicesOther = ngoServicesOther;

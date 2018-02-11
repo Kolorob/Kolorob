@@ -12,7 +12,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 public class ReligiousNewDBModel extends CommonModel implements Serializable {
 
-    String rsReligion, rsServicesFor, rsServicesForReligion, otherReligion, rsTime, rsFee;
+    private String rsReligion, rsServicesFor, rsServicesForReligion, otherReligion, rsTime, rsFee;
 
     public ReligiousNewDBModel() {
 
@@ -67,8 +67,8 @@ public class ReligiousNewDBModel extends CommonModel implements Serializable {
         this.rsFee = rsFee;
     }
 
-    public ReligiousNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String rsReligion, String rsServicesFor, String rsServicesForReligion, String otherReligion, String rsTime, String rsFee) {
-        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+    public ReligiousNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment, String rsReligion, String rsServicesFor, String rsServicesForReligion, String otherReligion, String rsTime, String rsFee) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings, comment);
         this.rsReligion = rsReligion;
         this.rsServicesFor = rsServicesFor;
         this.rsServicesForReligion = rsServicesForReligion;
@@ -83,7 +83,7 @@ public class ReligiousNewDBModel extends CommonModel implements Serializable {
                 cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
                 cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
                 cm.getLat(), cm.getLon(),
-                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings(), cm.getComment());
         this.rsReligion = rsReligion;
         this.rsServicesFor = rsServicesFor;
         this.rsServicesForReligion = rsServicesForReligion;

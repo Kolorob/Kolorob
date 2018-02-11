@@ -13,7 +13,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 public class EduNewModel extends CommonModel implements Serializable {
 
-    String educationType, shift, studentNo, teachersNo, averageStudentPerClass, facility;
+    private String educationType, shift, studentNo, teachersNo, averageStudentPerClass, facility;
 
     public EduNewModel() {
 
@@ -68,8 +68,8 @@ public class EduNewModel extends CommonModel implements Serializable {
         this.facility = facility;
     }
 
-    public EduNewModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
-        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+    public EduNewModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings, comment);
         this.educationType = educationType;
         this.shift = shift;
         this.studentNo = studentNo;
@@ -85,7 +85,7 @@ public class EduNewModel extends CommonModel implements Serializable {
                 cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
                 cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
                 cm.getLat(), cm.getLon(),
-                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings(), cm.getComment());
         this.educationType = educationType;
         this.shift = shift;
         this.studentNo = studentNo;

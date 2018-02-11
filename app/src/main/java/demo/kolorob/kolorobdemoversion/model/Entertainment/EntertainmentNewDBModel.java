@@ -13,7 +13,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 public class EntertainmentNewDBModel extends CommonModel implements Serializable {
 
-    String entType, entryFee;
+    private String entType, entryFee;
 
     public EntertainmentNewDBModel() {
 
@@ -35,8 +35,8 @@ public class EntertainmentNewDBModel extends CommonModel implements Serializable
         this.entryFee = entryFee;
     }
 
-    public EntertainmentNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String entType, String entryFee) {
-        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings);
+    public EntertainmentNewDBModel(int id, String nameEn, String nameBn, String houseNo, String block, String road, String area, String areaBn, String parentArea, String ward, String policeStation, String nodeContact, String nodeEmail, String otherInfo, String openingTime, String closingTime, String offDay, String lat, String lon, int categoryId, String subcat, String refNum, String ratings, String comment, String entType, String entryFee) {
+        super(id, nameEn, nameBn, houseNo, block, road, area, areaBn, parentArea, ward, policeStation, nodeContact, nodeEmail, otherInfo, openingTime, closingTime, offDay, lat, lon, categoryId, subcat, refNum, ratings, comment);
         this.entType = entType;
         this.entryFee = entryFee;
     }
@@ -47,7 +47,7 @@ public class EntertainmentNewDBModel extends CommonModel implements Serializable
                 cm.getNodeContact(), cm.getNodeEmail(), cm.getOtherInfo(),
                 cm.getOpeningTime(), cm.getClosingTime(), cm.getOffDay(),
                 cm.getLat(), cm.getLon(),
-                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings());
+                cm.getCategoryId(), cm.getSubcat(), cm.getRefNum(), cm.getRatings(), cm.getComment());
         this.entType = entType;
         this.entryFee = entryFee;
     }
