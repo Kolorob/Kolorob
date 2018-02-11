@@ -45,15 +45,16 @@
     <string name="no_internet">দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়</string>
     <string name="first_run_no_internet">কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।</string>
     <string name="update_no_internet">কলরব আপডেট হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।</string>
-    <string name="select_area">এলাকা নির্বাচন করুন</string>
     <string name="info_not_found">তথ্য পাওয়া যায় নি</string>
     <string name="sorry">দুঃখিত</string>
     <string name="connect_to_internet">আপনার ডিভাইসের ইন্টারনেট চালু করুন</string>
     <string name="step1">১ম ধাপ</string>
-    <string name="tutorial_select_cc">১ম লিস্ট থেকে আপনার সিটি কর্পোরেশন খুঁজে নিন</string>
+    <string name="tutorial_select_district">১ম লিস্ট থেকে আপনার জেলা খুঁজে নিন</string>
+    <string name="tutorial_select_cc">২য় লিস্ট থেকে আপনার সিটি কর্পোরেশন খুঁজে নিন</string>
     <string name="step2">২য় ধাপ</string>
-    <string name="tutorial_select_ward">২য় লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুঁজে নিন</string>
+    <string name="tutorial_select_ward">লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুঁজে নিন</string>
     <string name="step3">৩য় ধাপ</string>
+    <string name="step4">৪র্থ ধাপ</string>
     <string name="select_another_area">তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন</string>
     <string name="tutorial_select_area">ওয়ার্ড অনুযায়ী এলাকার লিস্ট থেকে এলাকা খুজে নিচের \'এলাকার তথ্য নামান\' বাটনটি ক্লিক করুন।</string>
     <string name="cant_mail">দুঃখিত! ইমেইল করা যাচ্ছে না</string>
@@ -192,6 +193,11 @@
     <string name="opinion">মতামত</string>
     <string name="write_about_kolorob">কলরব সম্পর্কে লিখুন</string>
     <string name="comment">মন্তব্য</string>
+    <string name="select_ward">ওয়ার্ড নির্বাচন করুন</string>
+    <string name="select_area">এলাকা নির্বাচন করুন</string>
+    <string name="download_area">এলাকার তথ্য নামান</string>
+    <string name="select_cc">সিটি কর্পোরেশন নির্বাচন করুন</string>
+    <string name="select_district">জেলা নির্বাচন করুন</string>
 
 
 </resources>

@@ -120,6 +120,7 @@ public class AppConstants {
     public static final String PHARMACY_API = "health_pharmacy";
     public static final String CHAMBER_API = "health_chamber";
 
+    public static final String DISTRICT_API = "district";
     public static final String CC_API = "city_corporation";
     public static final String WARD_API = "ward";
     public static final String AREA_API = "areas";

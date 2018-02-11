@@ -40,12 +40,41 @@
                 android:padding="@dimen/paddingforplacetext">
 
                 <TextView
-                    android:id="@+id/ccorporation"
+                    android:id="@+id/chooseDistrict"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|top"
                     android:paddingBottom="@dimen/paddingforplacetext"
-                    android:text=" সিটি কর্পোরেশন নির্বাচন করুন"
+                    android:text="@string/select_district"
+                    android:textSize="@dimen/offercounterbtn" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#000000"
+                    android:padding="3dp" />
+
+
+                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/districtRecycler_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#000000"
+                    android:padding="3dp" />
+
+
+                <TextView
+                    android:id="@+id/ccorporation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|top"
+                    android:paddingTop="@dimen/paddingforplacetext"
+                    android:paddingBottom="@dimen/paddingforplacetext"
+                    android:text="@string/select_cc"
                     android:textSize="@dimen/offercounterbtn" />
 
                 <View
@@ -71,8 +100,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|top"
-                    android:padding="@dimen/paddingforplacetext"
-                    android:text=" ওয়ার্ড নির্বাচন করুন"
+                    android:paddingTop="@dimen/paddingforplacetext"
+                    android:paddingBottom="@dimen/paddingforplacetext"
+                    android:text="@string/select_ward"
                     android:textSize="@dimen/offercounterbtn" />
 
 
@@ -101,8 +131,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:padding="@dimen/paddingforplacetext"
-                    android:text=" এলাকা নির্বাচন করুন"
+                    android:paddingTop="@dimen/paddingforplacetext"
+                    android:paddingBottom="@dimen/paddingforplacetext"
+                    android:text="@string/select_area"
                     android:textSize="@dimen/offercounterbtn" />
 
                 <View
@@ -140,7 +171,7 @@
                         android:background="@color/colorPrimary"
 
                         android:padding="@dimen/regsubbtn"
-                        android:text=" এলাকার তথ্য নামান "
+                        android:text="@string/download_area"
                         android:textColor="@color/White"
                         android:textSize="@dimen/offercounterbtn" />
                 </RelativeLayout>
