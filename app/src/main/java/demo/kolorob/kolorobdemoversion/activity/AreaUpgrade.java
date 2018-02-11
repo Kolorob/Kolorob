@@ -234,7 +234,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
     void serverCall(String ward, String area) {
 
-        getRequest(context, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
+        getRequest(context, "http://kolorob.net/kolorob-new-live/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {

@@ -367,7 +367,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
             rating = 5;
 
 
-        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating2/" + model.getId() + "?" + "phone=" + phone_num + "&name=" + uname + "&rating=" + rating + "&username=" + username + "&password=" + password + "";
+        String url = "http://kolorob.net/kolorob-new-live/api/sp_rating2/" + model.getId() + "?" + "phone=" + phone_num + "&name=" + uname + "&rating=" + rating + "&username=" + username + "&password=" + password + "";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
             new Response.Listener<String>() {

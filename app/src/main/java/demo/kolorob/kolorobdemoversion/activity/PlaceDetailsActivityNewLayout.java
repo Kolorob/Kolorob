@@ -2699,7 +2699,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            String url = "http://kolorob.net/kolorob-new-demo/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.username + "&password=" + this.password;
+            String url = "http://kolorob.net/kolorob-new-live/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.username + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {

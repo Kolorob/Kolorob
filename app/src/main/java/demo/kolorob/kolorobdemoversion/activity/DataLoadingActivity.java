@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,10 +42,12 @@ import demo.kolorob.kolorobdemoversion.R;
 
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
+import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterDistrict;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterWard;
 import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
+import demo.kolorob.kolorobdemoversion.database.DistrictTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
@@ -69,6 +70,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.District;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -102,21 +104,25 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     private AnimationDrawable frameAnimation;
 
-    private RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
+    private RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity, recyclerViewDistrict;
 
     final int NUMBER_OF_TASKS = 8;
     Context context;
-    View areaview, wardview, cityview;
+    private View areaView, wardView, cityView, districtView;
     Button submit;
     Boolean firstRun, firstRunUpdate;
     JSONObject allData;
     String Location, keyword;
     ImageView rotateImage;
-    TextView ward, area, city;
+    TextView ward, area, city, district;
+
+    ArrayList<District> districtList = new ArrayList<>();
     ArrayList<CityCorporation> ccList = new ArrayList<>();
     ArrayList<Ward> wardList = new ArrayList<>();
     ArrayList<Area> areaList = new ArrayList<>();
-    String cityClicked, wardClicked, areaClicked;
+
+    String districtClicked, cityClicked, wardClicked, areaClicked;
+
     private int counter = 0;
     private GridLayoutManager lLayout2;
     private Animation mEnterAnimation, mExitAnimation;
@@ -136,28 +142,36 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         this.posAreaInt = posAreaInt;
     }
 
-    public View getCityview() {
-        return cityview;
+    public View getDistrictView() {
+        return districtView;
     }
 
-    public void setCityview(View cityview) {
-        this.cityview = cityview;
+    public void setDistrictView(View districtView) {
+        this.districtView = districtView;
     }
 
-    public View getAreaview() {
-        return areaview;
+    public View getCityView() {
+        return cityView;
     }
 
-    public void setAreaview(View areaview) {
-        this.areaview = areaview;
+    public void setCityView(View cityView) {
+        this.cityView = cityView;
     }
 
-    public View getWardview() {
-        return wardview;
+    public View getAreaView() {
+        return areaView;
     }
 
-    public void setWardview(View wardview) {
-        this.wardview = wardview;
+    public void setAreaView(View areaView) {
+        this.areaView = areaView;
+    }
+
+    public View getWardView() {
+        return wardView;
+    }
+
+    public void setWardView(View wardView) {
+        this.wardView = wardView;
     }
 
 
@@ -180,6 +194,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         context = this;
 
         setContentView(R.layout.place_selection_activity);
+
+        district = (TextView) findViewById(R.id.chooseDistrict);
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
         city = (TextView) findViewById(R.id.ccorporation);
@@ -204,7 +220,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
 
-        populateRecyclerViewCity();  // city
+        populateRecyclerViewDistrict(); // district
+        populateRecyclerViewCity(1);  // initially, populating CCs of Dhaka
         populateRecyclerViewWard(1); // initially, populating wards for DNCC
         populateRecyclerViewArea(1); // initially, populating areas of first ward of DNCC
 
@@ -215,26 +232,55 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         pos = 0;
 
 
+        ItemClickSupport.addTo(recyclerViewDistrict)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        districtClicked = districtList.get(position).getDistrict_keyword();
+
+                        recyclerViewWard.setAdapter(null);
+                        recyclerViewArea.setAdapter(null);
+                        Log.d("tasks", "position: " + position);
+
+                        populateRecyclerViewCity(districtList.get(position).getId());
+
+                        if (getDistrictView() == null) {
+                            setDistrictView(v);
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        } else if (getDistrictView() != v) {
+                            ((CardView) getDistrictView()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            setDistrictView(v);
+                        } else
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+
+                    }
+                });
+
+
+
+
         //first recyclerview for city
 
         ItemClickSupport.addTo(recyclerViewCity)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
-                    public void onItemClicked(RecyclerView recyclerViewCity, int position, View v) {
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         cityClicked = ccList.get(position).getCityCorporation_keyword();
                         recyclerViewArea.setAdapter(null);
                         Log.d("tasks", "position: " + position);
 
                         populateRecyclerViewWard(ccList.get(position).getId());
 
-                        if (getCityview() == null) {
-                            setCityview(v);
+                        if (getCityView() == null) {
+                            setCityView(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        } else if (getCityview() != v) {
-                            ((CardView) getCityview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+                        } else if (getCityView() != v) {
+                            ((CardView) getCityView()).setCardBackgroundColor(Color.parseColor("#7f000000"));
 
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                            setCityview(v);
+                            setCityView(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
 
@@ -254,14 +300,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         populateRecyclerViewArea(wardList.get(position).getId());
 
-                        if (getWardview() == null) {
-                            setWardview(v);
+                        if (getWardView() == null) {
+                            setWardView(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        } else if (getWardview() != v) {
-                            ((CardView) getWardview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+                        } else if (getWardView() != v) {
+                            ((CardView) getWardView()).setCardBackgroundColor(Color.parseColor("#7f000000"));
 
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                            setWardview(v);
+                            setWardView(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
 
@@ -278,14 +324,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         setPosAreaInt(position);
                         areaClicked = areaList.get(position).getArea_keyword();
 
-                        if (getAreaview() == null) {
-                            setAreaview(v);
+                        if (getAreaView() == null) {
+                            setAreaView(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        } else if (getAreaview() != v) {
-                            ((CardView) getAreaview()).setCardBackgroundColor(Color.WHITE);
+                        } else if (getAreaView() != v) {
+                            ((CardView) getAreaView()).setCardBackgroundColor(Color.WHITE);
 
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                            setAreaview(v);
+                            setAreaView(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
 
@@ -349,20 +395,19 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     private void initViews() {
 
-        recyclerViewCity = (RecyclerView)
-                findViewById(R.id.cityrecycler_view);
+        recyclerViewDistrict = (RecyclerView) findViewById(R.id.districtRecycler_view);
 
-        recyclerViewWard = (RecyclerView)
-                findViewById(R.id.recycler_view);
+        recyclerViewCity = (RecyclerView) findViewById(R.id.cityrecycler_view);
 
-        recyclerViewArea = (RecyclerView)
-                findViewById(R.id.recycler_view2);
+        recyclerViewWard = (RecyclerView) findViewById(R.id.recycler_view);
+
+        recyclerViewArea = (RecyclerView) findViewById(R.id.recycler_view2);
 
 
         //Set RecyclerView type according to intent value
         GridLayoutManager lLayout = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
-        recyclerViewCity.setHasFixedSize(true);
-        recyclerViewCity.setLayoutManager(lLayout);
+        recyclerViewDistrict.setHasFixedSize(true);
+        recyclerViewDistrict.setLayoutManager(lLayout);
 
 
     }
@@ -370,9 +415,20 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void runOverlay_ContinueMethod() {
         // the return handler is used to manipulate the cleanup of all the tutorial elements
 
-        ChainTourGuide tourGuideCity = ChainTourGuide.init(this)
+        ChainTourGuide tourGuideDistrict = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle(getString(R.string.step1))
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription(getString(R.string.tutorial_select_district))
+                        .setGravity(Gravity.BOTTOM)
+                )
+                // note that there is no Overlay here, so the default one will be used
+                .playLater(district);
+
+
+        ChainTourGuide tourGuideCity = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle(getString(R.string.step2))
                         .setBackgroundColor(Color.parseColor("#000000"))
                         .setDescription(getString(R.string.tutorial_select_cc))
                         .setGravity(Gravity.BOTTOM)
@@ -382,7 +438,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         ChainTourGuide tourGuideWard = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle(getString(R.string.step2))
+                        .setTitle(getString(R.string.step3))
                         .setBackgroundColor(Color.parseColor("#000000"))
                         .setDescription(getString(R.string.tutorial_select_ward))
                         .setGravity(Gravity.BOTTOM)
@@ -391,7 +447,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         ChainTourGuide tourGuideArea = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle(getString(R.string.step3))
+                        .setTitle(getString(R.string.step4))
                         .setBackgroundColor(Color.parseColor("#000000"))
                         .setDescription(getString(R.string.tutorial_select_area))
                         .setGravity(Gravity.BOTTOM)
@@ -400,7 +456,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
         Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuideCity, tourGuideWard, tourGuideArea)
+                .add(tourGuideDistrict, tourGuideCity, tourGuideWard, tourGuideArea)
                 .setDefaultOverlay(new Overlay()
                         .setEnterAnimation(mEnterAnimation)
                         .setExitAnimation(mExitAnimation)
@@ -416,11 +472,26 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     // populate the list view by adding data to arraylist
 
-    private void populateRecyclerViewCity() {
+
+    private void populateRecyclerViewDistrict() {
 
 
+        DistrictTable districtTable = new DistrictTable(context);
+        districtList = districtTable.getAllData();
+
+        RecyclerView_AdapterDistrict adapter = new RecyclerView_AdapterDistrict(context, districtList);
+        recyclerViewDistrict.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void populateRecyclerViewCity(int district_id) {
+
+
+        Log.e("District Id", " " + district_id);
         CityCorporationTable ccTable = new CityCorporationTable(context);
-        ccList = ccTable.getAllData();
+        ccList = ccTable.getDataListFromForeignKey(district_id);
 
         RecyclerView_AdapterCityCorporation adapter = new RecyclerView_AdapterCityCorporation(context, ccList);
         recyclerViewCity.setAdapter(adapter);
@@ -543,7 +614,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
         if (!firstRun || firstRunUpdate) {
-            getRequest(context, "http://kolorob.net/kolorob-new-demo/api/categories_new?", new VolleyApiCallback() {
+            getRequest(context, "http://kolorob.net/kolorob-new-live/api/categories_new?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -559,7 +630,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         }
                     }
             );
-            getRequest(context, "http://kolorob.net/kolorob-new-demo/api/refs? ", new VolleyApiCallback() {
+            getRequest(context, "http://kolorob.net/kolorob-new-live/api/refs? ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -584,7 +655,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
 
 
-        getRequest(context, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
+        getRequest(context, "http://kolorob.net/kolorob-new-live/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {

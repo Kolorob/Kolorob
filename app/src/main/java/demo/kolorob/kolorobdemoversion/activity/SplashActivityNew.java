@@ -61,7 +61,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 public class SplashActivityNew extends AppCompatActivity {
 
     Context context;
-    final private int NUMBER_OF_TASKS = 3;
+    final private int NUMBER_OF_TASKS = 4;
     private int counter = 0;
 
     RelativeLayout dataload;
@@ -139,7 +139,7 @@ public class SplashActivityNew extends AppCompatActivity {
 
 
             if (!firstRun || firstRunUpdate) {
-                getRequest(SplashActivityNew.this, "http://kolorob.net/kolorob-new-demo/api/getAreaList?", new VolleyApiCallback() {
+                getRequest(SplashActivityNew.this, "http://kolorob.net/kolorob-new-live/api/getAreaList?", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
 
@@ -156,6 +156,10 @@ public class SplashActivityNew extends AppCompatActivity {
                                     ToastMessageDisplay.showText(context);
 
                                 } else {
+
+                                    if(areaData.has(AppConstants.DISTRICT_API)){
+                                        new SaveDistrictTask(SplashActivityNew.this).execute(areaData.getJSONArray(AppConstants.DISTRICT_API));
+                                    }
 
                                     if (areaData.has(AppConstants.CC_API)) {
                                         new SaveCityCorporationTask(SplashActivityNew.this).execute(areaData.getJSONArray(AppConstants.CC_API));

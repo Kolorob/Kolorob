@@ -103,10 +103,12 @@ public class PhoneRegActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AccountKit.initialize(getApplicationContext());
+
         //AppEventsLogger.activateApp(this);
         Log.e("SDK Initialized: ", "SDK: " + FacebookSdk.isInitialized() + "AccountKit: " + AccountKit.isInitialized());
 
@@ -376,7 +378,7 @@ public class PhoneRegActivity extends Activity {
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
 
-        String url = "http://kolorob.net/kolorob-new-demo/api/customer_reg4?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
+        String url = "http://kolorob.net/kolorob-new-live/api/customer_reg4?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
         //  String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
