@@ -41,13 +41,8 @@ public class RecyclerView_AdapterArea extends
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         final Area area = areaList.get(position);
 
-        RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
-
-
-        // bitmap
-
         // setting title
-        mainHolder.title.setText(area.getArea_bn());
+        holder.title.setText(area.getArea_bn());
     /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,8 +63,7 @@ public class RecyclerView_AdapterArea extends
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
                 R.layout.data_loading_area, viewGroup, false);
-        RecyclerViewHolder listHolder = new RecyclerViewHolder(mainGroup);
-        return listHolder;
+        return new RecyclerViewHolder(mainGroup);
 
     }
 
