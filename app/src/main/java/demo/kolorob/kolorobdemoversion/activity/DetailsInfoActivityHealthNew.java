@@ -38,6 +38,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_layout_comparison_tool);
         context = this;
+        checkBox = (CheckBox) findViewById(R.id.compare);
         Intent intent = getIntent();
         if (null != intent) {
             health = (HealthNewDBModelMain) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
@@ -131,10 +132,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
             }
         }
-    }
 
-
-    public void compare(){
 
         compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
         compareValue = SharedPreferencesHelper.getComapreValueHealth(context);
@@ -153,54 +151,55 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-            compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
+                compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
 
-            if (compareValue >= 2) {
+                if (compareValue >= 2) {
 
-                if(isChecked) {
+                    if(isChecked) {
 
-                    String new_compare_Data = "";
-                    compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
-                    String multipule[] = compare_Data.split(",");
-                    new_compare_Data = multipule[1] + "," + health.getId();
-                    SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 2);
-                }
-                else {
-                    String compare_Data = "";
-                    String new_compare_Data="";
-                    compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
-                    String multipule[] = compare_Data.split(",");
-                    new_compare_Data = multipule[0];
-                    SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 1);
-                }
-
-            }
-
-            else if (compareValue == 0) {
-                if(isChecked)
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, String.valueOf(health.getId()), 1);
-
-            }
-            else if (compareValue == 1) {
-
-                if(isChecked) {
-
-                    String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreDataHealth(context);
-                    previous_node = previous_node + "," + health.getId();
-                    SharedPreferencesHelper.setCompareDataHealth(context, previous_node, 2);
+                        String new_compare_Data = "";
+                        compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
+                        String multipule[] = compare_Data.split(",");
+                        new_compare_Data = multipule[1] + "," + health.getId();
+                        SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 2);
+                    }
+                    else {
+                        String compare_Data = "";
+                        String new_compare_Data="";
+                        compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
+                        String multipule[] = compare_Data.split(",");
+                        new_compare_Data = multipule[0];
+                        SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 1);
+                    }
 
                 }
-                else {
-                    SharedPreferencesHelper.setCompareDataHealth(context, "", 0);
-                }
 
-            }
+                else if (compareValue == 0) {
+                    if(isChecked)
+                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, String.valueOf(health.getId()), 1);
+
+                }
+                else if (compareValue == 1) {
+
+                    if(isChecked) {
+
+                        String previous_node;
+                        previous_node = SharedPreferencesHelper.getComapreDataHealth(context);
+                        previous_node = previous_node + "," + health.getId();
+                        SharedPreferencesHelper.setCompareDataHealth(context, previous_node, 2);
+
+                    }
+                    else {
+                        SharedPreferencesHelper.setCompareDataHealth(context, "", 0);
+                    }
+
+                }
 
 
             }
         });
 
     }
+
 
 }

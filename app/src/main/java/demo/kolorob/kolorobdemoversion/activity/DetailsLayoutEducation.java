@@ -40,6 +40,9 @@ public class DetailsLayoutEducation extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_layout_comparison_tool);
+
+        checkBox = (CheckBox) findViewById(R.id.compare);
+
         context = this;
         Intent intent = getIntent();
         if (null != intent) {
@@ -87,10 +90,11 @@ public class DetailsLayoutEducation extends BaseActivity {
         }
 
         results = resultDB.getDataListFromForeignKey(education.getId());
-        int resultSize = results.size();
-        if (resultSize != 0) {
+
+        if (results.size() != 0) {
             for (EducationResultItemNew result : results)  {
-                CheckConcate(result.getExamname() + " " + getString(R.string.num_examinee), English_to_bengali_number_conversion(result.getStudentno()));
+                String label = result.getExamname() + " " + getString(R.string.num_examinee);
+                CheckConcate(label, English_to_bengali_number_conversion(result.getStudentno()));
                 CheckConcate(getString(R.string.passed), English_to_bengali_number_conversion(result.getPassed()));
                 CheckConcate(getString(R.string.gpa_5), English_to_bengali_number_conversion(result.getAplus()));
                 CheckConcate(getString(R.string.golden_5), English_to_bengali_number_conversion(result.getGoldena()));
@@ -98,8 +102,8 @@ public class DetailsLayoutEducation extends BaseActivity {
         }
 
         trainings = trainingDB.getDataListFromForeignKey(education.getId());
-        int trainingSize = trainings.size();
-        if (trainingSize != 0) {
+
+        if (trainings.size() != 0) {
             for (EduTrainingModel training : trainings) {
 
                 CheckConcate(getString(R.string.course_duration), English_to_bengali_number_conversion(training.getCourseduration()));
@@ -110,10 +114,6 @@ public class DetailsLayoutEducation extends BaseActivity {
             }
         }
 
-    }
-
-
-    public void compare(){
         compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this); //check function
         previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this); //check function
         String multipule[] = previous_node.split(",");
@@ -178,3 +178,4 @@ public class DetailsLayoutEducation extends BaseActivity {
 
 
 }
+
