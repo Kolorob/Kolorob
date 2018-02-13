@@ -125,4 +125,7 @@ public class AppConstants {
     public static final String WARD_API = "ward";
     public static final String AREA_API = "areas";
 
+    public static final String DISTRICT_1 = "Dhaka";
+    public static final String DISTRICT_2 = "Rajshahi";
+
 }

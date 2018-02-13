@@ -3344,7 +3344,13 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(15);
+
+        if(wardId.startsWith("rcc")){
+            fragment.getMapViewController().setZoom(14);
+        }
+        else{
+            fragment.getMapViewController().setZoom(15);
+        }
         fragment.setSubcategories(currentCategoryID);
         fragment.setCategoryId(currentCategoryID);
         fragment.populateIcons(dataList);
