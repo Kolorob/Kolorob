@@ -609,11 +609,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == PackageManager.PERMISSION_GRANTED;
 
     }
 

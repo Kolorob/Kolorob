@@ -28,6 +28,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -112,7 +113,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     Button submit;
     Boolean firstRun, firstRunUpdate;
     JSONObject allData;
-    String Location, keyword;
+    String Location;
     ImageView rotateImage;
     TextView ward, area, city, district;
 
@@ -126,8 +127,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private int counter = 0;
     private GridLayoutManager lLayout2;
     private Animation mEnterAnimation, mExitAnimation;
-    private int pos, posAreaInt = -1;
+    private int pos, posAreaInt = -1, ward_position = -1;
     boolean downloaded = false;
+    private LinearLayout districtLayout, ccLayout, wardLayout, areaLayout;
 
 
     public void setPos(int pos) {
@@ -195,6 +197,12 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         setContentView(R.layout.place_selection_activity);
 
+        districtLayout = (LinearLayout) findViewById(R.id.districtLayout);
+        ccLayout = (LinearLayout) findViewById(R.id.ccLayout);
+        wardLayout = (LinearLayout) findViewById(R.id.wardLayout);
+        areaLayout = (LinearLayout) findViewById(R.id.areaLayout);
+
+
         district = (TextView) findViewById(R.id.chooseDistrict);
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
@@ -221,10 +229,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         mExitAnimation.setFillAfter(true);
 
         populateRecyclerViewDistrict(); // district
-        populateRecyclerViewCity(1);  // initially, populating CCs of Dhaka
+        /*populateRecyclerViewCity(1);  // initially, populating CCs of Dhaka
         populateRecyclerViewWard(1); // initially, populating wards for DNCC
         populateRecyclerViewArea(1); // initially, populating areas of first ward of DNCC
-
+        */
 
         if (!firstRun || firstRunUpdate)
             runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
@@ -242,7 +250,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         recyclerViewArea.setAdapter(null);
                         Log.d("tasks", "position: " + position);
 
-                        populateRecyclerViewCity(districtList.get(position).getId());
+                        if(districtClicked.equals(AppConstants.DISTRICT_2)){
+
+                            ccLayout.setVisibility(View.GONE);
+                            populateRecyclerViewWard(4);
+                        }
+                        else{
+                            ccLayout.setVisibility(View.VISIBLE);
+                            populateRecyclerViewCity(districtList.get(position).getId());
+                        }
 
                         if (getDistrictView() == null) {
                             setDistrictView(v);
@@ -298,7 +314,17 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         wardClicked = wardList.get(position).getWard_keyword();
                         setPos(position);
 
-                        populateRecyclerViewArea(wardList.get(position).getId());
+                        if(districtClicked.equals(AppConstants.DISTRICT_2)){
+                            ward_position = position;
+                            areaLayout.setVisibility(View.GONE);
+                            submit.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            areaLayout.setVisibility(View.VISIBLE);
+                            populateRecyclerViewArea(wardList.get(position).getId());
+                        }
+
+
 
                         if (getWardView() == null) {
                             setWardView(v);
@@ -319,6 +345,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                        submit.setVisibility(View.VISIBLE);
 
                         ((CardView) v).setCardBackgroundColor(Color.WHITE);
                         setPosAreaInt(position);
@@ -343,8 +371,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             @Override
             public void onClick(View v) {
 
+                int areaId;
+                Area areaSelected;
 
-                if (getPosAreaInt() == -1) {
+
+                if (getPosAreaInt() == -1 && !districtClicked.equals(AppConstants.DISTRICT_2)) {
                     ToastMessageDisplay.setText(context, getString(R.string.select_area));
                     ToastMessageDisplay.showText(context);
                 } else {
@@ -354,18 +385,29 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     if (wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
 
+
+                    if(districtClicked.equals(AppConstants.DISTRICT_2)){
+                        areaSelected = new AreaTable(context).getDataListFromForeignKey(wardList.get(ward_position).getId()).get(0);
+                        areaClicked = areaSelected.getArea_keyword();
+                        areaId = areaSelected.getId();
+                    }
+                    else{
+                        areaSelected = areaList.get(getPosAreaInt());
+                        areaId = areaList.get(getPosAreaInt()).getId();
+                    }
+
+
                     editor.putString("_ward", wardClicked);
                     editor.putString("areakeyword", areaClicked);
-                    editor.putInt("areaID", areaList.get(getPosAreaInt()).getId());
+                    editor.putInt("areaID", areaId);
 
                     editor.apply();
 
-                    keyword = areaList.get(getPosAreaInt()).getArea_keyword();
-                    String lat = areaList.get(getPosAreaInt()).getLat();
 
-                    Log.e("", "Keyword: " + keyword + "Lat: " + lat);
+                    String lat = areaSelected.getLat();
 
-                    if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
+
+                    if (lat.length() <= 1 || areaClicked.length() < 1 || lat.equalsIgnoreCase("null")) { //no data available for these areas
                         ToastMessageDisplay.setText(context, getString(R.string.info_not_found));
                         ToastMessageDisplay.showText(context);
                     } else {
@@ -476,9 +518,23 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populateRecyclerViewDistrict() {
 
 
+        districtLayout.setVisibility(View.VISIBLE);
+        ccLayout.setVisibility(View.GONE);
+        wardLayout.setVisibility(View.GONE);
+        areaLayout.setVisibility(View.GONE);
+        submit.setVisibility(View.GONE);
+
         DistrictTable districtTable = new DistrictTable(context);
         districtList = districtTable.getAllData();
 
+        if (districtList.size() >= 4) {
+            lLayout2 = new GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false);
+        } else {
+            lLayout2 = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
+        }
+        recyclerViewCity.setLayoutManager(lLayout2);
+
+        recyclerViewDistrict.setHasFixedSize(false);
         RecyclerView_AdapterDistrict adapter = new RecyclerView_AdapterDistrict(context, districtList);
         recyclerViewDistrict.setAdapter(adapter);
 
@@ -490,9 +546,21 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
         Log.e("District Id", " " + district_id);
+        ccLayout.setVisibility(View.VISIBLE);
+        wardLayout.setVisibility(View.GONE);
+        areaLayout.setVisibility(View.GONE);
+        submit.setVisibility(View.GONE);
+
         CityCorporationTable ccTable = new CityCorporationTable(context);
         ccList = ccTable.getDataListFromForeignKey(district_id);
 
+        if (ccList.size() >= 4) {
+            lLayout2 = new GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false);
+        } else {
+            lLayout2 = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
+        }
+        recyclerViewCity.setLayoutManager(lLayout2);
+        recyclerViewCity.setHasFixedSize(false);
         RecyclerView_AdapterCityCorporation adapter = new RecyclerView_AdapterCityCorporation(context, ccList);
         recyclerViewCity.setAdapter(adapter);
 
@@ -502,6 +570,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     private void populateRecyclerViewWard(int cc_id) {
 
+
+        wardLayout.setVisibility(View.VISIBLE);
+        areaLayout.setVisibility(View.GONE);
+        submit.setVisibility(View.GONE);
 
         WardTable wardTable = new WardTable(context);
         wardList = wardTable.getDataListFromForeignKey(cc_id);
@@ -523,6 +595,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populateRecyclerViewArea(int ward_id) {
 
 
+        areaLayout.setVisibility(View.VISIBLE);
+        submit.setVisibility(View.GONE);
         AreaTable areaTable = new AreaTable(context);
         areaList = areaTable.getDataListFromForeignKey(ward_id);
 
@@ -561,7 +635,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         final int NUMBER_OF_TASKS_FIRST_RUN = NUMBER_OF_TASKS + 2;
 
         LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
-        final View promptView = layoutInflater.inflate(R.layout.activity_waiting, (ViewGroup) null);
+        final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
         final Dialog alertDialog = new Dialog(DataLoadingActivity.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setContentView(promptView);
@@ -761,17 +835,26 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         @Override
         protected void onPostExecute(Result result) {
 
+            boolean done = false;
+
             DataLoadingActivity activity = activityReference.get();
 
             if (activity == null) return;
 
-            if (((Long) result).longValue() == 0.0 && activity.counter < activity.NUMBER_OF_TASKS) { // Means the task is successful
+            if(!activity.firstRun || activity.firstRunUpdate){
+                done = ((Long) result).longValue() == 0.0 && activity.counter < activity.NUMBER_OF_TASKS;
+            }
+            else{
+                done = ((Long) result).longValue() == 0.0 && activity.counter < activity.NUMBER_OF_TASKS + 2;
+            }
+
+            if (done) { // Means the task is successful
                 activity.counter++;
                 SharedPreferences settings = activity.getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("KValue", activity.counter);
                 editor.apply();
-                Log.d("tasks", "Tasks remaining: " + (activity.NUMBER_OF_TASKS - activity.counter));//number of tasks equivalent to how many api data is being stored
+               // Log.d("tasks", "Tasks remaining: " + (activity.NUMBER_OF_TASKS - activity.counter));//number of tasks equivalent to how many api data is being stored
                 ToastMessageDisplay.setText(activity.context, activity.getString(R.string.downloading_data));
                 ToastMessageDisplay.showText(activity.context);
             }
