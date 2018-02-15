@@ -198,6 +198,9 @@
     <string name="download_area">এলাকার তথ্য নামান</string>
     <string name="select_cc">সিটি কর্পোরেশন নির্বাচন করুন</string>
     <string name="select_district">জেলা নির্বাচন করুন</string>
+    <string name="search_hint">এখানে এলাকার নাম লিখে খুঁজুন</string>
+   <string name="time_label">সময়</string>
+   <string name="open_all_time"> ২৪ ঘণ্টা খোলা থাকে</string>
 
 
 </resources>

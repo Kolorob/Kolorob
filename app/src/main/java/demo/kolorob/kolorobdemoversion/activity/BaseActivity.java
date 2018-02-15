@@ -171,8 +171,16 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         CheckConcate(getString(R.string.police_station), model.getPoliceStation());
         CheckConcate(getString(R.string.contact_info), English_to_bengali_number_conversion(model.getNodeContact()));
         CheckConcate(getString(R.string.email), model.getNodeEmail());
-        timeProcessing(getString(R.string.opening_time), model.getOpeningTime());
-        timeProcessing(getString(R.string.closing_time), model.getClosingTime());
+
+        if(model.getOpeningTime().equals("00:00:00") && model.getClosingTime().equals("00:00:00")){
+            CheckConcate(getString(R.string.time_label), getString(R.string.open_all_time));
+        }
+        else{
+            timeProcessing(getString(R.string.opening_time), model.getOpeningTime());
+            timeProcessing(getString(R.string.closing_time), model.getClosingTime());
+        }
+
+
         CheckConcate(getString(R.string.weekly_holiday), model.getOffDay());
         CheckConcate(getString(R.string.other_info), model.getOtherInfo());
         CheckConcate(getString(R.string.comment), model.getComment());
