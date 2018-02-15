@@ -154,7 +154,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
 
     protected void displayCommonProperties(final ModelType model){
         CheckConcate("\n", "\n");
-        CheckConcate(getString(R.string.address), concatenateAddress(model.getHouseNo(), model.getRoad(), model.getBlock(), model.getAreaBn()));
+        CheckConcate(getString(R.string.address), concatenateAddress(model.getHouseNo(), model.getBlock(),  model.getRoad(), model.getAreaBn()));
         String ward = model.getWard();
         if(ward.contains("_")){
             String[] wardSplitted = ward.split("_");
