@@ -52,7 +52,7 @@ public class DetailsLayoutEducation extends BaseActivity {
         viewBaseLayout(education);
         displayUniqueProperties();
         displayCommonProperties(education);
-      //  compare();
+
     }
 
 
@@ -93,8 +93,10 @@ public class DetailsLayoutEducation extends BaseActivity {
 
         if (results.size() != 0) {
             for (EducationResultItemNew result : results)  {
-                String label = result.getExamname() + " " + getString(R.string.num_examinee);
-                CheckConcate(label, English_to_bengali_number_conversion(result.getStudentno()));
+                //String label = String.format("%s %s", result.getExamname(), getString(R.string.num_examinee));
+
+                CheckConcate(result.getExamname(), " ");
+                CheckConcate(getString(R.string.num_examinee), English_to_bengali_number_conversion(result.getStudentno()));
                 CheckConcate(getString(R.string.passed), English_to_bengali_number_conversion(result.getPassed()));
                 CheckConcate(getString(R.string.gpa_5), English_to_bengali_number_conversion(result.getAplus()));
                 CheckConcate(getString(R.string.golden_5), English_to_bengali_number_conversion(result.getGoldena()));
