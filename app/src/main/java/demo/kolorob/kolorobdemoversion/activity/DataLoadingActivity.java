@@ -16,9 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,9 +28,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -41,6 +46,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 
 
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterDistrict;
@@ -92,6 +98,7 @@ import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.Lg;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import tourguide.tourguide.ChainTourGuide;
@@ -101,21 +108,27 @@ import tourguide.tourguide.ToolTip;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
-public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     private AnimationDrawable frameAnimation;
 
     private RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity, recyclerViewDistrict;
 
-    final int NUMBER_OF_TASKS = 8;
+    int NUMBER_OF_TASKS = 8;
     Context context;
     private View areaView, wardView, cityView, districtView;
-    Button submit;
+    //Button submit;
     Boolean firstRun, firstRunUpdate;
     JSONObject allData;
     String Location;
     ImageView rotateImage;
     TextView ward, area, city, district;
+
+
+    ListView listView;
+    ListViewAdapter listViewAdapter;
+    ArrayList<Area> areaArrayList = new ArrayList<>();
+
 
     ArrayList<District> districtList = new ArrayList<>();
     ArrayList<CityCorporation> ccList = new ArrayList<>();
@@ -124,13 +137,23 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     String districtClicked, cityClicked, wardClicked, areaClicked;
 
-    private int counter = 0;
+    private Integer counter = new Integer(0);
     private GridLayoutManager lLayout2;
     private Animation mEnterAnimation, mExitAnimation;
     private int pos, posAreaInt = -1, ward_position = -1;
     boolean downloaded = false;
-    private LinearLayout districtLayout, ccLayout, wardLayout, areaLayout;
+    private LinearLayout seletctionLayout, districtLayout, ccLayout, wardLayout, areaLayout;
+    private RelativeLayout searchLayout;
+    private SearchView searchView;
 
+
+    public void setCounter(int counter){
+        this.counter = counter;
+    }
+
+    public Integer getCounter(){
+        return counter;
+    }
 
     public void setPos(int pos) {
         this.pos = pos;
@@ -186,6 +209,50 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
     @Override
+    public void onBackPressed() {
+       finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode != KeyEvent.KEYCODE_BACK && super.onKeyDown(keyCode, event);
+    }
+
+
+
+
+        /*if (doubleBackToExitPressedOnce) {
+
+
+            super.onBackPressed();
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        }
+
+
+
+
+        ToastMessageDisplay.setText(context, getString(R.string.press_back_to_exit));
+        ToastMessageDisplay.showText(this);
+        Log.d("In on Back Pressed","==========");
+        this.doubleBackToExitPressedOnce = true;
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);*/
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         //start download now
@@ -197,17 +264,81 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         setContentView(R.layout.place_selection_activity);
 
+        searchLayout = (RelativeLayout) findViewById(R.id.searchLayout);
+        seletctionLayout = (LinearLayout) findViewById(R.id.selectionLayout);
+
+
         districtLayout = (LinearLayout) findViewById(R.id.districtLayout);
         ccLayout = (LinearLayout) findViewById(R.id.ccLayout);
         wardLayout = (LinearLayout) findViewById(R.id.wardLayout);
         areaLayout = (LinearLayout) findViewById(R.id.areaLayout);
+
+// start
+
+
+        listView = (ListView) findViewById(R.id.listview);
+        areaArrayList = new AreaTable(context).getAllData();
+
+
+        listViewAdapter = new ListViewAdapter(this, areaArrayList);
+
+        // Binds the Adapter to the ListView
+        listView.setAdapter(listViewAdapter);
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                Area areaSelected = areaArrayList.get(i);
+                Ward wardSelected = new WardTable(context).getNodeInfo(areaSelected.getWard_id());
+
+                wardClicked = wardSelected.getWard_keyword();
+                areaClicked = areaSelected.getArea_keyword();
+
+                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                SharedPreferences.Editor editor = settings.edit();
+
+                editor.putString("_ward", wardClicked);
+                editor.putString("areakeyword", areaClicked);
+                editor.putInt("areaID", areaSelected.getId());
+
+                editor.apply();
+
+
+                StoredAreaTable storedAreaTable = new StoredAreaTable(context);
+
+                if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
+
+                    Intent intent = new Intent(context, PlaceDetailsActivityNewLayout.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    if (AppUtils.isNetConnected(getApplicationContext())) {
+                        serverCall();
+                    } else {
+                        AlertMessage.showMessage(context, getString(R.string.sorry), getString(R.string.connect_to_internet));
+                    }
+                }
+            }
+        });
+
+        // Locate the EditText in listview_main.xml
+        searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setQueryHint(getString(R.string.search_hint));
+        searchView.setOnQueryTextListener(this);
 
 
         district = (TextView) findViewById(R.id.chooseDistrict);
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
         city = (TextView) findViewById(R.id.ccorporation);
-        submit = (Button) findViewById(R.id.submittoserverarea);
+        //submit = (Button) findViewById(R.id.submittoserverarea);
+
+        searchView = (SearchView) findViewById(R.id.searchView); // inititate a search view
+        CharSequence query = searchView.getQuery(); // get the query string currently in the text field
 
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -235,9 +366,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         */
 
         if (!firstRun || firstRunUpdate)
-            runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
+            // runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
-        pos = 0;
+            pos = 0;
 
 
         ItemClickSupport.addTo(recyclerViewDistrict)
@@ -250,12 +381,12 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         recyclerViewArea.setAdapter(null);
                         Log.d("tasks", "position: " + position);
 
-                        if(districtClicked.equals(AppConstants.DISTRICT_2)){
+
+                        if (districtClicked.equals(AppConstants.DISTRICT_2)) {
 
                             ccLayout.setVisibility(View.GONE);
                             populateRecyclerViewWard(4);
-                        }
-                        else{
+                        } else {
                             ccLayout.setVisibility(View.VISIBLE);
                             populateRecyclerViewCity(districtList.get(position).getId());
                         }
@@ -273,8 +404,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     }
                 });
-
-
 
 
         //first recyclerview for city
@@ -314,16 +443,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         wardClicked = wardList.get(position).getWard_keyword();
                         setPos(position);
 
-                        if(districtClicked.equals(AppConstants.DISTRICT_2)){
+                        if (districtClicked.equals(AppConstants.DISTRICT_2)) {
                             ward_position = position;
                             areaLayout.setVisibility(View.GONE);
-                            submit.setVisibility(View.VISIBLE);
-                        }
-                        else{
+                            //submit.setVisibility(View.VISIBLE);
+                        } else {
                             areaLayout.setVisibility(View.VISIBLE);
                             populateRecyclerViewArea(wardList.get(position).getId());
                         }
-
 
 
                         if (getWardView() == null) {
@@ -337,6 +464,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
 
+
+                        if (districtClicked.equals(AppConstants.DISTRICT_2)) {
+                            download();
+                        }
+
                     }
                 });
 
@@ -346,7 +478,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-                        submit.setVisibility(View.VISIBLE);
+                        //submit.setVisibility(View.VISIBLE);
 
                         ((CardView) v).setCardBackgroundColor(Color.WHITE);
                         setPosAreaInt(position);
@@ -360,14 +492,17 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                             setAreaView(v);
-                        } else
+                        } else {
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        }
 
+
+                        download();
                     }
+
                 });
 
-
-        submit.setOnClickListener(new View.OnClickListener() {
+        /*submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -386,12 +521,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     if (wardClicked == null) wardClicked = wardList.get(0).getWard_keyword();
 
 
-                    if(districtClicked.equals(AppConstants.DISTRICT_2)){
+                    if (districtClicked.equals(AppConstants.DISTRICT_2)) {
                         areaSelected = new AreaTable(context).getDataListFromForeignKey(wardList.get(ward_position).getId()).get(0);
                         areaClicked = areaSelected.getArea_keyword();
                         areaId = areaSelected.getId();
-                    }
-                    else{
+                    } else {
                         areaSelected = areaList.get(getPosAreaInt());
                         areaId = areaList.get(getPosAreaInt()).getId();
                     }
@@ -431,18 +565,75 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
             }
-        });
+        });*/
 
+    }
+
+    private void download() {
+        int areaId;
+        Area areaSelected;
+
+
+        if (getPosAreaInt() == -1 && !districtClicked.equals(AppConstants.DISTRICT_2)) {
+            ToastMessageDisplay.setText(context, getString(R.string.select_area));
+            ToastMessageDisplay.showText(context);
+        } else {
+
+            SharedPreferences settings = getSharedPreferences("prefs", 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            if (wardClicked == null)
+                wardClicked = wardList.get(0).getWard_keyword();
+
+
+            if (districtClicked.equals(AppConstants.DISTRICT_2)) {
+                areaSelected = new AreaTable(context).getDataListFromForeignKey(wardList.get(ward_position).getId()).get(0);
+                areaClicked = areaSelected.getArea_keyword();
+                areaId = areaSelected.getId();
+            } else {
+                areaSelected = areaList.get(getPosAreaInt());
+                areaId = areaList.get(getPosAreaInt()).getId();
+            }
+
+
+            editor.putString("_ward", wardClicked);
+            editor.putString("areakeyword", areaClicked);
+            editor.putInt("areaID", areaId);
+
+            editor.apply();
+
+
+            String lat = areaSelected.getLat();
+
+
+            if (lat.length() <= 1 || areaClicked.length() < 1 || lat.equalsIgnoreCase("null")) { //no data available for these areas
+                ToastMessageDisplay.setText(context, getString(R.string.info_not_found));
+                ToastMessageDisplay.showText(context);
+            } else {
+
+                StoredAreaTable storedAreaTable = new StoredAreaTable(context);
+
+                if (storedAreaTable.isAreaStored(wardClicked, areaClicked)) {
+
+                    Intent intent = new Intent(context, PlaceDetailsActivityNewLayout.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    if (AppUtils.isNetConnected(getApplicationContext())) {
+                        serverCall();
+                    } else {
+                        AlertMessage.showMessage(context, getString(R.string.sorry), getString(R.string.connect_to_internet));
+                    }
+                }
+            }
+        }
     }
 
     private void initViews() {
 
         recyclerViewDistrict = (RecyclerView) findViewById(R.id.districtRecycler_view);
-
         recyclerViewCity = (RecyclerView) findViewById(R.id.cityrecycler_view);
-
         recyclerViewWard = (RecyclerView) findViewById(R.id.recycler_view);
-
         recyclerViewArea = (RecyclerView) findViewById(R.id.recycler_view2);
 
 
@@ -511,7 +702,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         ChainTourGuide.init(this).playInSequence(sequence);
     }
 
-
     // populate the list view by adding data to arraylist
 
 
@@ -522,7 +712,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         ccLayout.setVisibility(View.GONE);
         wardLayout.setVisibility(View.GONE);
         areaLayout.setVisibility(View.GONE);
-        submit.setVisibility(View.GONE);
+        // submit.setVisibility(View.GONE);
 
         DistrictTable districtTable = new DistrictTable(context);
         districtList = districtTable.getAllData();
@@ -549,7 +739,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         ccLayout.setVisibility(View.VISIBLE);
         wardLayout.setVisibility(View.GONE);
         areaLayout.setVisibility(View.GONE);
-        submit.setVisibility(View.GONE);
+        //submit.setVisibility(View.GONE);
 
         CityCorporationTable ccTable = new CityCorporationTable(context);
         ccList = ccTable.getDataListFromForeignKey(district_id);
@@ -573,7 +763,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         wardLayout.setVisibility(View.VISIBLE);
         areaLayout.setVisibility(View.GONE);
-        submit.setVisibility(View.GONE);
+        //submit.setVisibility(View.GONE);
 
         WardTable wardTable = new WardTable(context);
         wardList = wardTable.getDataListFromForeignKey(cc_id);
@@ -596,7 +786,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
         areaLayout.setVisibility(View.VISIBLE);
-        submit.setVisibility(View.GONE);
+        //submit.setVisibility(View.GONE);
         AreaTable areaTable = new AreaTable(context);
         areaList = areaTable.getDataListFromForeignKey(ward_id);
 
@@ -629,10 +819,32 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         return false;
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String text) {
+        if (text.length() > 0) {
+            seletctionLayout.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            listViewAdapter.filter(text);
+        } else {
+            listView.setVisibility(View.GONE);
+            seletctionLayout.setVisibility(View.VISIBLE);
+        }
+
+        return false;
+    }//end
+
 
     void serverCall() {
 
-        final int NUMBER_OF_TASKS_FIRST_RUN = NUMBER_OF_TASKS + 2;
+        if(!firstRun || firstRunUpdate){
+            NUMBER_OF_TASKS = NUMBER_OF_TASKS + 2;
+        }
 
         LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
@@ -652,13 +864,16 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             public void run() {
 
 
-                if (!firstRun || firstRunUpdate) {
+                /*if (!firstRun || firstRunUpdate) {
                     if (counter == NUMBER_OF_TASKS_FIRST_RUN) downloaded = true;
                 } else {
                     if (counter == NUMBER_OF_TASKS) downloaded = true;
-                }
+                }*/
 
-                if (downloaded || timeCounter > 120000) {
+                if (counter >= NUMBER_OF_TASKS || timeCounter > 120000) {
+
+                    Lg.e("downloaded: ", "" + (counter >= NUMBER_OF_TASKS));
+                    Lg.e("timeCounter", "" + (timeCounter > 120000));
                     overridePendingTransition(0, 0);
 
                     handler.removeCallbacks(this);
@@ -832,7 +1047,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             activityReference = new WeakReference<>(activity);
         }
 
-        @Override
+
+        /*@Override
         protected void onPostExecute(Result result) {
 
             boolean done = false;
@@ -841,22 +1057,39 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
             if (activity == null) return;
 
-            if(!activity.firstRun || activity.firstRunUpdate){
-                done = ((Long) result).longValue() == 0.0 && activity.counter < activity.NUMBER_OF_TASKS;
-            }
-            else{
-                done = ((Long) result).longValue() == 0.0 && activity.counter < activity.NUMBER_OF_TASKS + 2;
+            if (!activity.firstRun || activity.firstRunUpdate) {
+                done = ((Long) result).longValue() == 0.0 && activity.getCounter() == activity.NUMBER_OF_TASKS;
+            } else {
+                done = ((Long) result).longValue() == 0.0 && activity.getCounter() == activity.NUMBER_OF_TASKS + 2;
             }
 
             if (done) { // Means the task is successful
-                activity.counter++;
+                activity.setCounter(activity.getCounter()+1);
+                Lg.e("Class", "" + getClass());
+                Lg.e("Counter", "" + activity.getCounter());
                 SharedPreferences settings = activity.getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putInt("KValue", activity.counter);
+                editor.putInt("KValue", activity.getCounter());
                 editor.apply();
-               // Log.d("tasks", "Tasks remaining: " + (activity.NUMBER_OF_TASKS - activity.counter));//number of tasks equivalent to how many api data is being stored
+                // Log.d("tasks", "Tasks remaining: " + (activity.NUMBER_OF_TASKS - activity.counter));//number of tasks equivalent to how many api data is being stored
                 ToastMessageDisplay.setText(activity.context, activity.getString(R.string.downloading_data));
                 ToastMessageDisplay.showText(activity.context);
+            }
+        }*/
+
+        @Override
+        protected void onPostExecute(Result result) {
+
+            DataLoadingActivity activity = activityReference.get();
+
+            if (activity == null) return;
+
+            if (((Long) result).longValue() == 0.0 && activity.getCounter() < activity.NUMBER_OF_TASKS) { // Means the task is successful
+                activity.setCounter(activity.getCounter()+1);
+
+                Log.d("tasks", "Tasks remaining: " + (activity.NUMBER_OF_TASKS - activity.getCounter()));//number of tasks equivalent to how many api data is being stored
+                /*ToastMessageDisplay.setText(activity.context, activity.context.getString(R.string.downloading_data));
+                ToastMessageDisplay.showText(activity.context);*/
             }
         }
 
@@ -964,7 +1197,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             JSONObject hospital = jsonObject.getJSONObject(AppConstants.HOSPITAL_API);
                             new HealthNewDBTableHospital(activity.context).insertItem(new HealthNewDBModelHospital().parse(hospital, health.getId()));
                         }
-                        if(jsonObject.has(AppConstants.CHAMBER_API)){
+                        if (jsonObject.has(AppConstants.CHAMBER_API)) {
                             Log.e("Health : ", "chamber");
                             JSONObject chamber = jsonObject.getJSONObject(AppConstants.CHAMBER_API);
                             new HealthNewDBTableChamber(activity.context).insertItem(new HealthModelChamber().parse(chamber, health.getId()));
@@ -1200,5 +1433,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             return new Long(0);
         }
     }
+
 
 }
