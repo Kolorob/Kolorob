@@ -12,11 +12,11 @@
     android:orientation="vertical"
     tools:context="demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity">
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:src="@drawable/menu_image_360" />
+        android:src="@drawable/menu_image_360" />-->
 
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="15dp"
-            android:text=" রেজিস্ট্রেশন করুন "
+            android:text="@string/create_account"
             android:textColor="@color/white"
 
             android:textSize="@dimen/regtext"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/user"
             android:drawablePadding="10dp"
-            android:hint="নাম লিখুন"
+            android:hint="@string/write_name"
             app:met_baseColor="@color/white"
             app:met_floatingLabel="highlight"
             app:met_textColorHint="@color/white" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/phonereceiver"
             android:drawablePadding="10dp"
-            android:hint="ফোন নাম্বার"
+            android:hint="@string/phone_number"
             android:inputType="none"
             android:padding="5dp"
             app:met_baseColor="@color/white"
