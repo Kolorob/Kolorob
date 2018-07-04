@@ -92,7 +92,7 @@ public class PhoneRegActivity extends Activity {
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     String gotname;
     TextView helname;
-    Boolean registered;
+    boolean registered;
     private Context con;
     String IMEINumber, IMEI = null, PHN = null;
     FButton Submit;
@@ -147,11 +147,11 @@ public class PhoneRegActivity extends Activity {
             String pnumber = SharedPreferencesHelper.getNumber(con); //get number from sharedpref and set that value in phone edittext.
             //we are not giving option to user to write down number second time once thats been validated via account kit.
             if (pnumber.length() > 0) {
-                phone.setText(pnumber.toString());
+                phone.setText(pnumber);
             } else {
                 PHN = settings.getString("PHN", null);
                 if (PHN != null) {
-                    phone.setText(PHN.toString());
+                    phone.setText(PHN);
                 }
 
             }

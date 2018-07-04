@@ -199,7 +199,10 @@
     <string name="select_cc">সিটি কর্পোরেশন নির্বাচন করুন</string>
     <string name="select_district">জেলা নির্বাচন করুন</string>
     <string name="search_hint">এখানে এলাকার নাম লিখে খুঁজুন</string>
-   <string name="time_label">সময়</string>
-   <string name="open_all_time"> ২৪ ঘণ্টা খোলা থাকে</string>
+    <string name="time_label">সময়</string>
+    <string name="open_all_time"> ২৪ ঘণ্টা খোলা থাকে</string>
+    <string name="kindly_wait">দয়া করে অপেক্ষা করুন</string>
+    <string name="create_account">রেজিস্ট্রেশন করুন</string>
+    <string name="phone_number">ফোন নাম্বার</string>
 
 </resources>

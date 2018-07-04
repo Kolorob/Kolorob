@@ -54,7 +54,7 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 public abstract class BaseActivity <ModelType extends CommonModel> extends AppCompatActivity{
 
     LinearLayout upperHand, service_center_name, left_way, middle_phone, right_email, bottom_bar;
-    ImageView route_icon, phone_icon, email_icon, comment_icon, email_btn;
+    ImageView phone_icon, email_icon, comment_icon, routing_icon, feedback;
     ArrayList <SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
     int width, height;
     String dateValue, dateValueBn;
@@ -63,7 +63,7 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
     Context context;
     int increment = 0;
     TextView ratingText;
-    ImageView routing_icon,feedback;
+
     RadioGroup feedRadio;
     RadioButton rb1;
     String status = "", phone_num = "", uname = "";
@@ -91,15 +91,14 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
         phone_icon = (ImageView) findViewById(R.id.phone_middl);
         email_icon = (ImageView) findViewById(R.id.right_side_email);
-        route_icon = (ImageView) findViewById(R.id.distance_left);
+        routing_icon = (ImageView) findViewById(R.id.distance_left);
         ratingText = (TextView) findViewById(R.id.ratingText);
         service_data = (ListView) findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data.getLayoutParams();
         mlp.setMargins(width / 100, 0, width / 990, width / 8); //set margin in main info block
 
-        routing_icon = (ImageView) findViewById(R.id.distance_left); //routing icon
-        email_btn = (ImageView) findViewById(R.id.right_side_email);  //email icon
+
         feedback = (ImageView) findViewById(R.id.feedback);          //feedback icon
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
@@ -124,8 +123,8 @@ public abstract class BaseActivity <ModelType extends CommonModel> extends AppCo
         phone_icon.getLayoutParams().width = width / 8;
         email_icon.getLayoutParams().height = width / 8;
         email_icon.getLayoutParams().width = width / 8;
-        route_icon.getLayoutParams().height = width / 8;
-        route_icon.getLayoutParams().width = width / 8;
+        routing_icon.getLayoutParams().height = width / 8;
+        routing_icon.getLayoutParams().width = width / 8;
 
 
         // Last date of updating data will be displayed here via toast message

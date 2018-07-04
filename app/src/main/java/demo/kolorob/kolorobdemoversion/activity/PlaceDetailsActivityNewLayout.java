@@ -1322,25 +1322,26 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
         storedAreaArrayListall = storedAreaTable.getAllData();
 
         storedAreas = storedAreaTable.getStoredLocation(wardId, areaKeyword);
-        setLat(storedAreas.get(0).getLat());
-        setLon(storedAreas.get(0).getLon());
 
-        if(storedAreaArrayListall.size() == 0) {
+        if(storedAreaArrayListall.size() == 0 || storedAreas.size() == 0) {
 
             Intent em = new Intent(this, DataLoadingActivity.class);
             startActivity(em);
             finish();
         }
-        else if (storedAreas.size()==0) {
+       /* else if (storedAreas.size()==0) {
 
             Intent em = new Intent(this, AreaUpgrade.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        }
+        }*/
         else {
 
             setAreaName(storedAreas.get(0).getAreaBn());
+            setLat(storedAreas.get(0).getLat());
+            setLon(storedAreas.get(0).getLon());
+
             setLocation(new GeoPoint(Double.parseDouble(storedAreas.get(0).getLat()), Double.parseDouble(storedAreas.get(0).getLon())));
 
             navigationCalled = false;
@@ -1440,8 +1441,8 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
             filterHolder = (RelativeLayout) findViewById(R.id.filterholder);
             upText = (TextView)findViewById(R.id.textView15);
             changeArea = (CheckedTextView)findViewById(R.id.changearea);
-            upText.setText("মেনু");
-            changeArea.setText("এলাকা পাল্টান");
+            upText.setText(R.string.menu);
+            changeArea.setText(R.string.change_area);
             changeArea.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -1455,7 +1456,9 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
                 Intent em = new Intent(PlaceDetailsActivityNewLayout.this, DataLoadingActivity.class);
                 startActivity(em);
+                finish();
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
 
                 }
             });
@@ -2391,6 +2394,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
             //else {
                     Intent em = new Intent(this, DataLoadingActivity.class);
                     startActivity(em);
+                    finish();
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                //}
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
@@ -3258,7 +3262,7 @@ public class PlaceDetailsActivityNewLayout <ModelType extends CommonModel> exten
 
         FragmentManager fragmentManager = getFragmentManager();
 
-        if(mapFirst) {
+        if(mapFirst && lat != null && lon != null) {
 
             mapFragment = new MapFragmentOSM();
             mapFragment.setLocationName(areaKeyword);

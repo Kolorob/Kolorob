@@ -132,6 +132,10 @@ public class WardTable extends BaseDBTable <Ward>{
         return super.getDataListFromId(id, TABLE_NAME, KEY_WARD_CCID);
     }
 
+    public ArrayList <Ward> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
     public void delete(int id){
         super.delete(id, TABLE_NAME);
     }

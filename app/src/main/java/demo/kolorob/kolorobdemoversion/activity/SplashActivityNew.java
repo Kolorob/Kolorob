@@ -62,17 +62,25 @@ public class SplashActivityNew extends AppCompatActivity {
 
     Context context;
     final private int NUMBER_OF_TASKS = 4;
-    private int counter = 0;
+    private Integer counter = new Integer(0);
 
     RelativeLayout dataload;
     String app_ver = "";
     long install = 0, install2 = 0;
     File filesDir;
     public final static int PERM_REQUEST_CODE_DRAW_OVERLAYS = 1234;
-    Boolean firstRun, firstRunUpdate = false;
+    boolean firstRun = false, firstRunUpdate = false;
     public int height, width;
-    Boolean registered = false;
+    boolean registered = false;
     JSONObject areaData;
+
+    public void setCounter(int counter){
+        this.counter = counter;
+    }
+
+    public Integer getCounter(){
+        return counter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +147,7 @@ public class SplashActivityNew extends AppCompatActivity {
 
 
             if (!firstRun || firstRunUpdate) {
+                Log.e("", "First run if: " + firstRun + " First run update: " + firstRunUpdate);
                 getRequest(SplashActivityNew.this, "http://kolorob.net/kolorob-new-live/api/getAreaList?", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
@@ -169,15 +178,14 @@ public class SplashActivityNew extends AppCompatActivity {
                                     }
                                     if (areaData.has(AppConstants.AREA_API)) {
                                         new SaveAreaTask(SplashActivityNew.this).execute(areaData.getJSONArray(AppConstants.AREA_API));
-                                    }
+                                }
 
                                     Log.e("counter: ", "Splash: " + counter);
 
-                                    if (counter < NUMBER_OF_TASKS) {
+                                    /*if (counter < NUMBER_OF_TASKS) {
                                         ToastMessageDisplay.setText(SplashActivityNew.this, getString(R.string.try_later));
                                         ToastMessageDisplay.showText(context);
-                                    }
-
+                                    }*/
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -188,6 +196,10 @@ public class SplashActivityNew extends AppCompatActivity {
                 });
 
 
+            }
+
+            else{
+                Log.e("", "First run else: " + firstRun + " First run update: " + firstRunUpdate);
             }
             if (currentVersion > previousVersion) {
                 //SharedPreferences.Editor editor = settings.edit();
@@ -414,8 +426,8 @@ public class SplashActivityNew extends AppCompatActivity {
 
             if (activity == null) return;
 
-            if (((Long) result).longValue() == 0.0 && activity.counter < activity.NUMBER_OF_TASKS) { // Means the task is successful
-                activity.counter++;
+            if (((Long) result).longValue() == 0.0 && activity.getCounter() < activity.NUMBER_OF_TASKS) { // Means the task is successful
+                activity.setCounter(activity.getCounter()+1);
             }
         }
 

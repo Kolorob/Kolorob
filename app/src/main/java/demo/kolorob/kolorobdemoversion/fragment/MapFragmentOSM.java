@@ -200,6 +200,7 @@ public class MapFragmentOSM <ModelType extends CommonModel> extends Fragment imp
         mapViewController.setZoom(15);
       
         Log.e("", "Lat: " + getLat() +" " + "Lon: " + getLon());
+
         mapViewController.setCenter(new GeoPoint(Float.parseFloat(getLat()), Float.parseFloat(getLon())));
         result = new StringBuilder();
 

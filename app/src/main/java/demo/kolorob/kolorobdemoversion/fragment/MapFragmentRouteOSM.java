@@ -36,6 +36,7 @@ import com.google.android.gms.location.LocationServices;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.KOLOROBRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -51,6 +52,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -91,7 +94,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     double roadlength;
 
 
-    //private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
+
     GeoPoint markerlocation, userlocation;
     Marker usermarker;
 
@@ -136,7 +139,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         dialog.setCancelable(true);
         dialog.show();
 
- roadManager =new KOLOROBRoadManager(this);
+        roadManager =new KOLOROBRoadManager(this);
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         width = metrics.widthPixels;
@@ -295,7 +298,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         TextView disttext,Bustext,Ricksawtext,Cngtext,Walkingtext,headtext;
         //trlayout=(RelativeLayout)rootView.findViewById(R.id.transportdetailslayout);
 
-      //  trlayout.setVisibility(View.VISIBLE);
+        //  trlayout.setVisibility(View.VISIBLE);
         headlayout=(RelativeLayout)findViewById(R.id.headerlayout);
         headlayout.setVisibility(View.VISIBLE);
         headtext=(TextView)findViewById(R.id.headtext);
@@ -307,7 +310,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         Bustext=(TextView)findViewById(R.id.bustext);
         Ricksawtext=(TextView)findViewById(R.id.ricksawtext);
         Walkingtext=(TextView)findViewById(R.id.walkingtext);
-      String bdistance= EtoBconversion(distance);
+        String bdistance= EtoBconversion(distance);
         disttext.setText(getString(R.string.distance) +": " +bdistance+ " কি.মি" );
         disttext.setVisibility(View.VISIBLE);
         String Busfare= EtoBconversion(String.valueOf((int) Math.round(roadlength*1.7)));
@@ -435,7 +438,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         // Getting reference to TextView tv_longitude
         if (statusofservice == false) {
             mapView.getOverlays().remove(usermarker);
-          //  Toast.makeText(this, "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(this, "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
             usermarker = new Marker(mapView);
             laat = location.getLatitude();
             longg = location.getLongitude();
@@ -456,7 +459,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
             usermarker.setTitle("১ম অবস্থান");
             mapView.getOverlays().add(usermarker);
-          //  Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -510,7 +513,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             Drawroute(userlocation, markerlocation);
 
         }
-       // Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
     }
 
     @Override
