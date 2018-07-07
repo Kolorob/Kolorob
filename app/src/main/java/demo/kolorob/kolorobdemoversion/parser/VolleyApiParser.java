@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.http.VolleySingleton;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -81,7 +83,7 @@ public class VolleyApiParser {
         if (!AppUtils.isNetConnected(ctx)) {
 
 
-            ToastMessageDisplay.setText(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+            ToastMessageDisplay.setText(ctx, ctx.getString(R.string.connect_internet));
             ToastMessageDisplay.showText(ctx);
             return;
         }
@@ -149,7 +151,7 @@ public class VolleyApiParser {
                                   final Request.Priority priority) {
         if (!AppUtils.isNetConnected(ctx)) {
 
-            ToastMessageDisplay.setText(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+            ToastMessageDisplay.setText(ctx,ctx.getString(R.string.connect_internet));
             ToastMessageDisplay.showText(ctx);
 
         return;
@@ -211,6 +213,14 @@ public class VolleyApiParser {
                 return VOLLEY_TAG;
             }
         };
+
+
+        strReq.setRetryPolicy(new DefaultRetryPolicy(
+                35000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
         VolleySingleton.getInstance(ctx).addToRequestQueue(strReq);
     }
 

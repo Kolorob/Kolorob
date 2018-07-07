@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "kolorobupdatedv2.db";
 
     public static  String DB_PATH ;
-    public static final int DB_VERSION = 4;   // changed here
+    public static final int DB_VERSION = 6;   // changed here
 
     public static final String AREASTORED= "areastored";
 
@@ -35,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String HEALTH_NEW_DB_MAIN= "hel_ndb_main";
     public static final String HEALTH_NEW_DB_PHARMA= "hel_ndb_pharma";
     public static final String HEALTH_NEW_DB_HOS= "hel_ndb_hos";
+    public static final String HEALTH_NEW_DB_CHAMBER = "health_chamber";
 
 
     public static final String LEGALAIDNEWDBTABLE="legal_aid_main";
@@ -46,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String AREAS = "areas";
     public static final String WARDS = "wards";
     public static final String CITYCORPORATIONS = "city_corporations";
+    public static final String DISTRICTS = "districts";
 
 
 
@@ -117,29 +119,37 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             Log.e("", "NEW version: " + newVersion + "old: " +oldVersion);
 
 
-
+            db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_MAIN);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_SCHOOL);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_TRAINING);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_PROVIDER_RESULT_TABLE);
+
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_MAIN);
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_HOS);
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_PHARMA);
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_CHAMBER);
+
             db.execSQL("DROP TABLE IF EXISTS " + ENT_PROVIDER_TABLE_DBNEW);
             db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_NEWDB);
             db.execSQL("DROP TABLE IF EXISTS " + GOV_NEW);
-            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_HOS);
-            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_MAIN);
-            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_PHARMA);
-            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_ADVERTISEMENT_TABLE);
-            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TABLE);
-            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TYPE);
             db.execSQL("DROP TABLE IF EXISTS " + LEGALAIDNEWDBTABLE);
             db.execSQL("DROP TABLE IF EXISTS " + NGONEWDBTABLE);
             db.execSQL("DROP TABLE IF EXISTS " + RELIGIOUSNEWDBTABLE);
-            db.execSQL("DROP TABLE IF EXISTS " + AREASTORED);
+
+
+            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_ADVERTISEMENT_TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TYPE);
+
             db.execSQL("DROP TABLE IF EXISTS " + SERVICE_CATEGORY);
-            db.execSQL("DROP TABLE IF EXISTS " + AREAS);
-            db.execSQL("DROP TABLE IF EXISTS " + WARDS);
-            db.execSQL("DROP TABLE IF EXISTS " + CITYCORPORATIONS);
             db.execSQL("DROP TABLE IF EXISTS " + SUB_CATEGORY_NEW);
-            db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_MAIN);
+
+            db.execSQL("DROP TABLE IF EXISTS " + DISTRICTS);
+            db.execSQL("DROP TABLE IF EXISTS " + CITYCORPORATIONS);
+            db.execSQL("DROP TABLE IF EXISTS " + WARDS);
+            db.execSQL("DROP TABLE IF EXISTS " + AREAS);
+            db.execSQL("DROP TABLE IF EXISTS " + AREASTORED);
+
 
 
             //  db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_SERVICE_PROVIDER_TABLE);

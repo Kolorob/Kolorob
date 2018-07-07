@@ -4,11 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,12 +20,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableChamber;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
@@ -36,16 +37,21 @@ import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthModelChamber;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -54,176 +60,181 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
+
 /**
  * Created by HP on 2/13/2017.
  */
 /*
 this activity is for area upgrade/delete/browse. This is almost similar to data loading activity.
  */
+
+
+
 public class AreaUpgrade extends AppCompatActivity {
-ArrayList<StoredArea>storedAreas=new ArrayList<>();
-    RadioGroup rg;
-    Button update,delete,browse;
-    int selectedId=-1;
+
+    private final int NUMBER_OF_TASKS = 8;
+    ArrayList<StoredArea> storedAreas = new ArrayList<>();
+    RadioGroup radioGroup;
+    Button update, delete, browse;
+    int selectedId = -1;
     Context context;
-    Boolean deleted=false;
+    Boolean deleted = false;
     LinearLayout linearLayout;
-    ProgressDialog dialog,dialog2;
-    ArrayList<HealthNewDBModelMain>healthNewDBModelMains=new ArrayList<>();
+    ProgressDialog dialog, dialog2;
     JSONObject allData;
     StoredAreaTable storedAreaTable;
-    ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
 
-    ArrayList<StoredArea>storedAreaArrayList2=new ArrayList<>();
+    static int counter = 0;
+
+    ArrayList<StoredArea> storedAreaArrayList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.areas);
+        context = this;
 
-        update= (Button) findViewById(R.id.updatearea);
-        delete= (Button) findViewById(R.id.deletearea);
-        browse= (Button) findViewById(R.id.browsearea);
-        linearLayout=(LinearLayout)findViewById(R.id.linearradio);
- storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
+        update = (Button) findViewById(R.id.updatearea);
+        delete = (Button) findViewById(R.id.deletearea);
+        browse = (Button) findViewById(R.id.browsearea);
+        linearLayout = (LinearLayout) findViewById(R.id.linearradio);
+        storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
 
-context=this;
-        rg= (RadioGroup)findViewById(R.id.areagroup);
-        rg.setOrientation(RadioGroup.VERTICAL);
-     radiobuttonsetup();
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radioGroup = (RadioGroup) findViewById(R.id.areagroup);
+        radioGroup.setOrientation(RadioGroup.VERTICAL);
+        radiobuttonsetup();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
 
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-              selectedId= rg.indexOfChild(findViewById(rg.getCheckedRadioButtonId()));
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                selectedId = radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
 
 
             }
         });
-delete.setOnClickListener(new View.OnClickListener() {
 
-    @Override
-    public void onClick(View v) {
+        delete.setOnClickListener(new View.OnClickListener() {
 
-        if(selectedId ==-1)
-        {
-            ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
-            ToastMessageDisplay.showText(AreaUpgrade.this);
-        }
-        else {
-            dialog2 = new ProgressDialog(AreaUpgrade.this);
-            dialog2.setMessage("দয়া করে অপেক্ষা করুন");
-            dialog2.setCancelable(true);
-            dialog2.show();
-           deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid()); // to delete area stored in device
+            @Override
+            public void onClick(View v) {
 
-        }
-    }}
-);
+                if (selectedId == -1) {
+                    ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.select_area_first));
+                    ToastMessageDisplay.showText(AreaUpgrade.this);
+                } else {
+                    dialog2 = new ProgressDialog(AreaUpgrade.this);
+                    dialog2.setMessage(getString(R.string.please_wait));
+                    dialog2.setCancelable(true);
+                    dialog2.show();
+                    deleteAll(storedAreas.get(selectedId).getWard(), storedAreas.get(selectedId).getArea()); // to delete area stored in device
+
+                }
+            }
+        });
+
         browse.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                if(selectedId ==-1)
-                {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
+                if (selectedId == -1) {
+                    ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.select_area_first));
                     ToastMessageDisplay.showText(AreaUpgrade.this);
-                }
-                else {
+                } else {
 
-                    storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+                    storedAreaArrayList = RetriveLocation(storedAreas.get(selectedId).getWard(), storedAreas.get(selectedId).getArea());
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("_ward", storedAreaArrayList2.get(0).getWardid()); // store ward and area from stored area in pref
+                    editor.putString("_ward", storedAreaArrayList.get(0).getWard()); // store ward and area from stored area in pref
                     //to use in next activity
-                    editor.putString("areakeyword", storedAreaArrayList2.get(0).getAreaid());
+                    editor.putString("areakeyword", storedAreaArrayList.get(0).getArea());
                     editor.apply();
                     Intent a = new Intent(AreaUpgrade.this, PlaceDetailsActivityNewLayout.class); // Default Activity
                     startActivity(a);
                     finish();
                 }
-            }}
-        );
+            }
+        });
+
+
         update.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
+              @Override
+              public void onClick(View v) {
 
-                if(selectedId ==-1)
-                {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
-                    ToastMessageDisplay.showText(AreaUpgrade.this);
-                }
-                else {
-                    dialog = new ProgressDialog(AreaUpgrade.this);
-                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
-                    dialog.setCancelable(true);
-                    dialog.show();
-                    if(AppUtils.isNetConnected(getApplicationContext()))
-                    {
-                        Servercall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
-                    }
-                    else
-                    {
-                        AlertMessage.showMessage(AreaUpgrade.this, " দুঃখিত","আপনার ডিভাইসের ইন্টারনেট চালু করুন");
-                        dialog.cancel();
-                    }
+                  if (selectedId == -1) {
+                      ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.select_area_first));
+                      ToastMessageDisplay.showText(AreaUpgrade.this);
+                  } else {
+                      dialog = new ProgressDialog(AreaUpgrade.this);
+                      dialog.setMessage(getString(R.string.please_wait));
+                      dialog.setCancelable(true);
+                      dialog.show();
 
-                }
-            }}
-        );
+                      if (AppUtils.isNetConnected(getApplicationContext())) {
+                          serverCall(storedAreas.get(selectedId).getWard(), storedAreas.get(selectedId).getArea());
+                      } else {
+                          AlertMessage.showMessage(AreaUpgrade.this, getString(R.string.sorry), getString(R.string.connect_to_internet));
+                          dialog.cancel();
+                      }
+
+                  }
+              }
+        });
 
     }
-    public ArrayList<StoredArea> RetriveLocation(String ward,String area) //last existing location er jonno
+
+    public ArrayList<StoredArea> RetriveLocation(String ward, String area) //last existing location er jonno
     {
-        storedAreaArrayList=storedAreaTable.getstoredlocation(ward,area);
-        return storedAreaArrayList;
+        return storedAreaTable.getStoredLocation(ward, area);
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();
 
     }
-void radiobuttonsetup() // database operation for getting information which areas are stored in devices and store those in an arraylist
 
-{
+    void radiobuttonsetup() // database operation for getting information which areas are stored in devices and store those in an arraylist
 
-    storedAreas=storedAreaTable.getAllstored();
+    {
 
-    rg.clearCheck();
-    if(storedAreas.isEmpty()){
-        ToastMessageDisplay.setText(AreaUpgrade.this,"কোন এলাকার তথ্য নামানো নেই");
-        ToastMessageDisplay.showText(AreaUpgrade.this);
-        Intent em = new Intent(this, DataLoadingActivity.class);
-        startActivity(em);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        storedAreas = storedAreaTable.getAllData();
 
-    } else {
-        for (int i = 0; i < storedAreas.size(); i++) {
+        radioGroup.clearCheck();
+        if (storedAreas.isEmpty()) {
+            ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.no_downloaded_area));
+            ToastMessageDisplay.showText(AreaUpgrade.this);
+            Intent em = new Intent(this, DataLoadingActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else {
+            for (int i = 0; i < storedAreas.size(); i++) {
 
 
-            RadioButton ch = new RadioButton(this);
-            ch.setText(storedAreas.get(i).getAreaBn());
+                RadioButton radioButton = new RadioButton(this);
+                radioButton.setText(storedAreas.get(i).getAreaBn());
 
-            rg.addView(ch);
+                radioGroup.addView(radioButton);
 
+
+            }
 
         }
-
     }
-}
-    void Servercall(String ward, String area) {
 
 
+    void serverCall(String ward, String area) {
 
-        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward="+ward+"&area="+area, new VolleyApiCallback() {
+        getRequest(context, "http://kolorob.net/kolorob-new-live/api/getspbyarea?ward=" + ward + "&area=" + area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
@@ -232,34 +243,66 @@ void radiobuttonsetup() // database operation for getting information which area
 
                         allData = new JSONObject(apiContent);
 
+                        /*if(allData.has(AppConstants.EDU_API)){
+                            counter += new SaveEducationDBTask(context, allData.getJSONArray("Education")).saveItem();
+                        }
+                        if(allData.has(AppConstants.HEALTH_API)){
+                            counter += new SaveHealthDBTask(context, allData.getJSONArray("Health")).saveItem();
+                        }
+                        if(allData.has(AppConstants.ENTERTAINMENT_API)){
+                            counter += new SaveEntertainmentDBTask(context, allData.getJSONArray("Entertainment")).saveItem();
+                        }
+                        if(allData.has(AppConstants.GOVERNMENT_API)){
+                            counter += new SaveGovernmentDBTask(context, allData.getJSONArray("Government")).saveItem();
+                        }
+                        if(allData.has(AppConstants.LEGAL_API)){
+                            counter += new SaveLegalDBTask(context, allData.getJSONArray("Legal")).saveItem();
+                        }
+                        if(allData.has(AppConstants.FINANCE_API)){
+                            counter += new SaveFinancialDBTask(context, allData.getJSONArray("Finance")).saveItem();
+                        }
+                        if(allData.has(AppConstants.NGO_API)){
+                            counter += new SaveNgoDBTask(context, allData.getJSONArray("NGO")).saveItem();
+                        }
+                        if(allData.has(AppConstants.SHELTER_API)){
+                            counter += new SaveShelterDBTask(context, allData.getJSONArray("Religious Shelter")).saveItem();
+                        }
+                        */
 
-                        if(allData.has("Education"))
-                            SavenewEdu(allData.getJSONArray("Education"));
-                        if(allData.has("Finance"))
-                            SavenewFin(allData.getJSONArray("Finance"));
-                        if(allData.has("Health"))
-                            SavenewHealth(allData.getJSONArray("Health"));
+                        if (allData.has(AppConstants.EDU_API))
+                            upgradeEducation(allData.getJSONArray(AppConstants.EDU_API));
+                        if (allData.has(AppConstants.HEALTH_API))
+                            upgradeHealth(allData.getJSONArray(AppConstants.HEALTH_API));
+                        if (allData.has(AppConstants.ENTERTAINMENT_API))
+                            upgradeEntertainment(allData.getJSONArray(AppConstants.ENTERTAINMENT_API));
+                        if (allData.has(AppConstants.GOVERNMENT_API))
+                            upgradeGovernment(allData.getJSONArray(AppConstants.GOVERNMENT_API));
+                        if (allData.has(AppConstants.LEGAL_API))
+                            upgradeLegal(allData.getJSONArray(AppConstants.LEGAL_API));
+                        if (allData.has(AppConstants.FINANCE_API))
+                            upgradeFinancial(allData.getJSONArray(AppConstants.FINANCE_API));
+                        if (allData.has(AppConstants.NGO_API))
+                            upgradeNGO(allData.getJSONArray(AppConstants.SHELTER_API));
+                        if (allData.has(AppConstants.SHELTER_API))
+                            upgradeShelter(allData.getJSONArray(AppConstants.SHELTER_API));
 
-                        if(allData.has("Legal"))
-                            SavenewLegal(allData.getJSONArray("Legal"));
 
-                        if(allData.has("Government"))
-                            SavenewGov(allData.getJSONArray("Government"));
-
-                        if(allData.has("Entertainment"))
-                            SavenewEntertainment(allData.getJSONArray("Entertainment"));
-
-                        int p= allData.length();
-                        Log.d("Doneall",String.valueOf(p));
+                        Log.d("Done", String.valueOf(allData.length()));
                         dialog.dismiss();
-                        ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য আপডেট হয়েছে");
-                        ToastMessageDisplay.showText(AreaUpgrade.this);
-                        SharedPreferences settings = getSharedPreferences("prefs", 0);
-                        SharedPreferences.Editor editor = settings.edit();
-                        settings.edit().putLong("time", System.currentTimeMillis()).apply();
-                        editor.putString("_ward", storedAreas.get(selectedId).getWardid());
-                        editor.putString("areakeyword", storedAreas.get(selectedId).getAreaid());
-                        editor.apply();
+                        if (counter == NUMBER_OF_TASKS) {
+                            ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.info_updated));
+                            ToastMessageDisplay.showText(AreaUpgrade.this);
+                            SharedPreferences settings = getSharedPreferences("prefs", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            settings.edit().putLong("time", System.currentTimeMillis()).apply();
+                            editor.putString("_ward", storedAreas.get(selectedId).getWard());
+                            editor.putString("areakeyword", storedAreas.get(selectedId).getArea());
+                            editor.apply();
+                        } else {
+                            ToastMessageDisplay.setText(context, getString(R.string.try_later));
+                            ToastMessageDisplay.showText(context);
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -269,211 +312,258 @@ void radiobuttonsetup() // database operation for getting information which area
 
         });
     }
-    void SavenewEdu(JSONArray jo) {
-        JSONArray Edu = jo;
-        EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
-        EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(AreaUpgrade.this);
-        EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(AreaUpgrade.this);
-        int Govcount = Edu.length();
 
-        for (int i = 0; i < Govcount; i++) {
+    void upgradeEducation(JSONArray jsonArray) {
+
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+
             try {
-                if(!Edu.isNull(i)) {
-                    JSONObject jsonObject2 = Edu.getJSONObject(i);
-                    EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
-                    eduNewDBTableMain.insertItem(eduNewModel);
-                    if (jsonObject2.has("training_details")) {
-                        JSONArray edutrain = jsonObject2.getJSONArray("training_details");
-                        int lenoftrain = edutrain.length();
-                        for (int ii = 0; ii < lenoftrain; ii++) {
-                            JSONObject train = edutrain.getJSONObject(ii);
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                    EduNewModel edu = new EduNewModel().parse(jsonObject);
+                    new EduNewDBTableMain(context).insertItem(edu);
 
-                            EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
-                            eduNewDBTableTraining.insertItem(eduTrainingModel);
+                    if (jsonObject.has(AppConstants.TRAINING_API)) {
+
+                        Log.e(" Edu : ", "training details");
+
+                        JSONArray trainings = jsonObject.getJSONArray(AppConstants.TRAINING_API);
+
+                        for (int j = 0; j < trainings.length(); j++) {
+                            JSONObject training = trainings.getJSONObject(j);
+                            new EduNewDBTableTraining(context).insertItem(new EduTrainingModel().parse(training, edu.getId()));
                         }
-
-                    }
-                     if (jsonObject2.has("education_school")) {
-                        JSONObject school = jsonObject2.getJSONObject("education_school");
-                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
-                        eduNewDBTableSchool.insertItem(eduNewSchoolModel);
                     }
 
-                }
+                    if (jsonObject.has(AppConstants.RESULT_API)) {
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                        Log.e(" Edu : ", "result details");
 
-            }
-            Log.d("educount", String.valueOf(i));
-        }
-    }
-    void SavenewEntertainment(JSONArray jo) {
-        JSONArray Ent = jo;
-        EntNewDBTable entNewDBTable = new EntNewDBTable(AreaUpgrade.this);
+                        JSONArray results = jsonObject.getJSONArray(AppConstants.RESULT_API);
 
+                        for (int j = 0; j < results.length(); j++) {
+                            JSONObject result = results.getJSONObject(j);
+                            new EducationResultDetailsTable(context).insertItem(new EducationResultItemNew().parse(result, edu.getId()));
+                        }
+                    }
 
-        int Entcount = Ent.length();
+                    if (jsonObject.has(AppConstants.SCHOOL_API)) {
 
-        for (int i = 0; i < Entcount; i++) {
-            try {
-                if(!Ent.isNull(i)) {
-                    JSONObject jsonObject2 = Ent.getJSONObject(i);
-                    EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
-                    entNewDBTable.insertItem(entertainmentNewDBModel);
+                        Log.e(" Edu : ", "school details");
 
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("entcount", String.valueOf(i));
-        }
-    }
-    void SavenewGov(JSONArray jo) {
-        JSONArray Gov = jo;
-        GovNewDBTable govNewDBTable = new GovNewDBTable(AreaUpgrade.this);
-
-
-        int Govcount = Gov.length();
-
-        for (int i = 0; i < Govcount; i++) {
-            try {
-                if(!Gov.isNull(i)) {
-                    JSONObject jsonObject2 = Gov.getJSONObject(i);
-                    GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
-                    govNewDBTable.insertItem(governmentNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("govcount", String.valueOf(i));
-        }
-    }
-    void SavenewLegal(JSONArray jo) {
-        JSONArray Legal = jo;
-        LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(AreaUpgrade.this);
-
-
-        int Legalcount = Legal.length();
-
-        for (int i = 0; i < Legalcount; i++) {
-            try {
-                if(!Legal.isNull(i)) {
-                    JSONObject jsonObject2 = Legal.getJSONObject(i);
-                    LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
-                    legalAidNewDBTable.insertItem(legalAidNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("legalcount", String.valueOf(i));
-        }
-    }
-    void SavenewFin(JSONArray jo) {
-        JSONArray Fin = jo;
-        FinNewDBTable finNewDBTable = new FinNewDBTable(AreaUpgrade.this);
-
-
-        int Fincount = Fin.length();
-
-        for (int i = 0; i < Fincount; i++) {
-            try {
-                if(!Fin.isNull(i)) {
-                    JSONObject jsonObject2 = Fin.getJSONObject(i);
-                    FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
-                    finNewDBTable.insertItem(financialNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("fcount", String.valueOf(i));
-        }
-    }
-    void SavenewHealth(JSONArray jo) {
-        JSONArray Hel = jo;
-        HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(AreaUpgrade.this);
-        HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(AreaUpgrade.this);
-        HealthNewDBTableHospital healthNewDBTableHospital=new HealthNewDBTableHospital(AreaUpgrade.this);
-        int Helcount = Hel.length();
-
-        for (int i = 0; i < Helcount; i++) {
-            try {
-                if(!Hel.isNull(i)) {
-                    JSONObject jsonObject2 = Hel.getJSONObject(i);
-                    HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
-                    govNewDBTable.insertItem(healthNewDBModelMain);
-                    if (jsonObject2.has("health_pharmacy")) {
-                        JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
-
-
-                        HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
-                        healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
-
-
-                    } if (jsonObject2.has("health_hospital")) {
-                        JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
-
-
-                        HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
-                        healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
-
-
+                        JSONObject school = jsonObject.getJSONObject(AppConstants.SCHOOL_API);
+                        new EduNewDBTableSchool(context).insertItem(new EduNewSchoolModel().parse(school, edu.getId()));
                     }
 
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
 
             }
-            Log.d("hcount", String.valueOf(i));
+
         }
+        counter++;
     }
-    public void deleteall(String ward,String area)
-    {
-        HealthNewDBTableMain healthNewDBTableMain = new HealthNewDBTableMain(AreaUpgrade.this);
-        FinNewDBTable finNewDBTable = new FinNewDBTable(AreaUpgrade.this);
-        LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(AreaUpgrade.this);
-        GovNewDBTable govNewDBTable = new GovNewDBTable(AreaUpgrade.this);
-        EntNewDBTable entNewDBTable = new EntNewDBTable(AreaUpgrade.this);
-        EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
-        NGONewDBTable ngoNewDBTable = new NGONewDBTable(AreaUpgrade.this);
-        ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(AreaUpgrade.this);
-        StoredAreaTable storedAreaTable=new StoredAreaTable(AreaUpgrade.this);
 
-        healthNewDBTableMain.delete(ward,area);
-        eduNewDBTableMain.delete(ward,area);
-        entNewDBTable.delete(ward,area);
-        legalAidNewDBTable.delete(ward,area);
-        finNewDBTable.delete(ward,area);
-        govNewDBTable.delete(ward,area);
-        ngoNewDBTable.delete(ward,area);
-        religiousNewDBTable.delete(ward,area);
-        storedAreaTable.delete(ward,area);
 
-        rg.clearCheck();
+    void upgradeHealth(JSONArray jsonArray) {
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    HealthNewDBModelMain health = new HealthNewDBModelMain().parse(jsonObject);
+                    new HealthNewDBTableMain(context).insertItem(health);
+
+                    if (jsonObject.has(AppConstants.PHARMACY_API)) {
+                        Log.e(" Health : ", "pharmacy");
+                        JSONObject pharmacy = jsonObject.getJSONObject(AppConstants.PHARMACY_API);
+                        new HealthNewDBTablePharma(context).insertItem(new HealthNewDBModelPharmacy().parse(pharmacy, health.getId()));
+                    }
+                    if (jsonObject.has(AppConstants.HOSPITAL_API)) {
+                        Log.e(" Health : ", "hospital");
+                        JSONObject hospital = jsonObject.getJSONObject(AppConstants.HOSPITAL_API);
+                        new HealthNewDBTableHospital(context).insertItem(new HealthNewDBModelHospital().parse(hospital, health.getId()));
+                    }
+                    if(jsonObject.has(AppConstants.CHAMBER_API)){
+                        Log.e("Health : ", "chamber");
+                        JSONObject chamber = jsonObject.getJSONObject(AppConstants.CHAMBER_API);
+                        new HealthNewDBTableChamber(context).insertItem(new HealthModelChamber().parse(chamber, health.getId()));
+                    }
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+    void upgradeEntertainment(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    new EntNewDBTable(context).insertItem(new EntertainmentNewDBModel().parse(jsonObject));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+    void upgradeGovernment(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    new GovNewDBTable(context).insertItem(new GovernmentNewDBModel().parse(jsonObject));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+    void upgradeLegal(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    new LegalAidNewDBTable(context).insertItem(new LegalAidNewDBModel().parse(jsonObject));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+    void upgradeFinancial(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    new FinNewDBTable(context).insertItem(new FinancialNewDBModel().parse(jsonObject));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+    void upgradeNGO(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    new NGONewDBTable(context).insertItem(new NGONewDBModel().parse(jsonObject));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+    void upgradeShelter(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                if (!jsonArray.isNull(i)) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    new ReligiousNewDBTable(context).insertItem(new ReligiousNewDBModel().parse(jsonObject));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        counter++;
+    }
+
+
+    public <TableType extends CommonDBTable> void deleteAll(String ward, String area) {
+
+        ArrayList<TableType> tables = new ArrayList<>();
+
+        tables.add((TableType) new EduNewDBTableMain(AreaUpgrade.this));
+        tables.add((TableType) new HealthNewDBTableMain(AreaUpgrade.this));
+        tables.add((TableType) new FinNewDBTable(AreaUpgrade.this));
+        tables.add((TableType) new GovNewDBTable(AreaUpgrade.this));
+        tables.add((TableType) new LegalAidNewDBTable(AreaUpgrade.this));
+        tables.add((TableType) new EntNewDBTable(AreaUpgrade.this));
+        tables.add((TableType) new NGONewDBTable(AreaUpgrade.this));
+        tables.add((TableType) new ReligiousNewDBTable(AreaUpgrade.this));
+
+        new EduNewDBTableSchool(AreaUpgrade.this).delete(ward, area);
+        new EducationResultDetailsTable(AreaUpgrade.this).delete(ward, area);
+        new EduNewDBTableTraining(AreaUpgrade.this).delete(ward, area);
+        new HealthNewDBTableHospital(AreaUpgrade.this).delete(ward, area);
+        new HealthNewDBTablePharma(AreaUpgrade.this).delete(ward, area);
+
+
+        for (TableType table : tables) {
+            delete(table, ward, area);
+        }
+
+        StoredAreaTable storedAreaDB = new StoredAreaTable(AreaUpgrade.this);
+        storedAreaDB.delete(storedAreaDB.getNodeInfo(ward, area).getId());
+
+
+        radioGroup.clearCheck();
         dialog2.dismiss();
-        rg.removeAllViews();
+        radioGroup.removeAllViews();
 
-        ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
+        ToastMessageDisplay.setText(AreaUpgrade.this, getString(R.string.info_deleted));
         ToastMessageDisplay.showText(AreaUpgrade.this);
-        deleted=true;
+        deleted = true;
         radiobuttonsetup();
 
     }
 
+    static <TableType extends CommonDBTable> void delete(TableType table, String ward, String area) {
+        table.delete(ward, area);
+    }
+
+    public static <TableType extends CommonDBTable, ModelType extends CommonModel> void deleteData(TableType table, ArrayList<ModelType> list) {
+        for (ModelType model : list) {
+            if (table.isFieldExist(model.getId())) {
+                table.delete(model.getId());
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
-        if(storedAreas.isEmpty()){
+        /*if(deleted) {
+            AlertMessage.showMessage(AreaUpgrade.this,"দুঃখিত","দয়া করে যে এলাকার তথ্য দেখতে চান সেটি নির্বাচন করে 'এলাকার তথ্য দেখুন' বাটন টি চাপুন");
+        }
+        else*/
+        if (storedAreas.isEmpty()) {
             Intent em = new Intent(this, DataLoadingActivity.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        }
-        else super.onBackPressed();
+        } else super.onBackPressed();
     }
 }

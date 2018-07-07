@@ -3,11 +3,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
+    android:layout_height="match_parent"
+    android:background="@color/WhiteSmoke"
     android:orientation="vertical"
-    android:padding="2dp"
-    android:layout_height="match_parent">
+    android:padding="2dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,111 +40,208 @@
                 android:orientation="vertical"
                 android:padding="@dimen/paddingforplacetext">
 
-                <TextView
-                    android:id="@+id/ccorporation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left|top"
-                    android:paddingBottom="@dimen/paddingforplacetext"
-                    android:text=" সিটি কর্পোরেশন নির্বাচন করুন"
-                    android:textSize="@dimen/offercounterbtn" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#000000"
-                    android:padding="3dp" />
-
-
-                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/cityrecycler_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#000000"
-                    android:padding="3dp" />
-
-                <TextView
-                    android:id="@+id/chooseward"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left|top"
-                    android:padding="@dimen/paddingforplacetext"
-                    android:text=" ওয়ার্ড নির্বাচন করুন"
-                    android:textSize="@dimen/offercounterbtn" />
-
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#000000"
-                    android:padding="3dp" />
-
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#000000"
-                    android:padding="3dp" />
-
-                <TextView
-                    android:id="@+id/choosearea"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:padding="@dimen/paddingforplacetext"
-                    android:text=" এলাকা নির্বাচন করুন"
-                    android:textSize="@dimen/offercounterbtn" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#000000"
-                    android:padding="3dp" />
-
-                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/recycler_view2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none" />
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#000000"
-                    android:padding="3dp" />
-
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:padding="@dimen/defaultpadding">
 
-                    <Button
+                    android:id="@+id/searchLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
 
-                        android:id="@+id/submittoserverarea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerInParent="true"
-                        android:background="@color/colorPrimary"
+                    <android.support.v7.widget.SearchView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/searchView"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="left"
+                        android:hint="@string/search_hint"
+                        android:textSize="@dimen/offercounterbtn"
+                        app:defaultQueryHint="@string/search_hint"
+                        app:iconifiedByDefault="false"
+                        app:searchIcon="@null"
+                        android:layout_alignParentEnd="true" />
 
-                        android:padding="@dimen/regsubbtn"
-                        android:text=" এলাকার তথ্য নামান "
-                        android:textColor="@color/White"
-                        android:textSize="@dimen/offercounterbtn" />
+                    <requestFocus/>
+
+
+
+                    <ListView
+                        android:id="@+id/listview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="400dp"
+                        android:visibility="gone"
+                        android:layout_below="@+id/searchView" />
+
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/selectionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:id="@+id/districtLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/chooseDistrict"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|top"
+                            android:paddingBottom="@dimen/paddingforplacetext"
+                            android:text="@string/select_district"
+                            android:textSize="@dimen/offercounterbtn" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/districtRecycler_view"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none"
+                            tools:minHeight="300dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ccLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+
+                        <TextView
+                            android:id="@+id/ccorporation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|top"
+                            android:paddingBottom="@dimen/paddingforplacetext"
+                            android:paddingTop="@dimen/paddingforplacetext"
+                            android:text="@string/select_cc"
+                            android:textSize="@dimen/offercounterbtn" />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/cityrecycler_view"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/wardLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+
+                        <TextView
+                            android:id="@+id/chooseward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|top"
+                            android:paddingBottom="@dimen/paddingforplacetext"
+                            android:paddingTop="@dimen/paddingforplacetext"
+                            android:text="@string/select_ward"
+                            android:textSize="@dimen/offercounterbtn" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none" />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/areaLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+
+                        <TextView
+                            android:id="@+id/choosearea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:paddingBottom="@dimen/paddingforplacetext"
+                            android:paddingTop="@dimen/paddingforplacetext"
+                            android:text="@string/select_area"
+                            android:textSize="@dimen/offercounterbtn" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/recycler_view2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#000000"
+                            android:padding="3dp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

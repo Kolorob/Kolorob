@@ -18,9 +18,19 @@
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" android:protectionLevel="signature"/>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:resizeable="true" />
 
     <application
-        android:name=".google_analytics.MyApplication"
+
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@drawable/kolorob_logo"
         android:label="@string/app_name"
@@ -70,9 +80,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".activity.DisplayAllJobsActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activity.DetailsInfoActivityEntertainmentNew"
             android:screenOrientation="portrait"
@@ -100,6 +108,12 @@
         <activity
             android:name=".activity.DetailsInfoActivityLegalNew"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailsInfoActivityNGO"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.DetailsInfoActivityReligious"
+            android:screenOrientation="portrait" />
+
 
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
@@ -132,15 +146,13 @@
             android:name=".activity.AboutUs"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.OfferActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".activity.Disclaimer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.EmergencyActivity" />
+
         <activity
             android:name="com.facebook.accountkit.ui.AccountKitActivity"
             android:theme="@style/AppLoginTheme"
@@ -165,8 +177,7 @@
             android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
 
-        <activity android:name=".activity.DetailsInfoActivityNGO" />
-        <activity android:name=".activity.DetailsInfoActivityReligious"></activity>
+
     </application>
 
 </manifest>

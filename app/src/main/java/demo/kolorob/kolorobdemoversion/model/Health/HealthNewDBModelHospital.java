@@ -5,25 +5,23 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class HealthNewDBModelHospital implements Serializable {
-    int servicecenterid;
-    String emergencyavailable;
-    String emergencynumber;
-    String ambulanceavailable;
-    String ambulancenumber;
-    String maternityavailable;
-    String maternitynumber;
-    String maternityprivacy;
+public class HealthNewDBModelHospital extends SubModel <HealthNewDBModelHospital> implements Serializable {
+
+    int id, healthId;
+    String emergencyavailable, emergencynumber, ambulanceavailable, ambulancenumber, maternityavailable, maternitynumber, maternityprivacy;
 
     public HealthNewDBModelHospital() {
     }
 
-    public HealthNewDBModelHospital(int servicecenterid, String emergencyavailable, String emergencynumber, String ambulanceavailable, String ambulancenumber, String maternityavailable, String maternitynumber, String maternityprivacy) {
-        this.servicecenterid = servicecenterid;
+    public HealthNewDBModelHospital(int id, int healthId, String emergencyavailable, String emergencynumber, String ambulanceavailable, String ambulancenumber, String maternityavailable, String maternitynumber, String maternityprivacy) {
+        this.id = id;
+        this.healthId = healthId;
         this.emergencyavailable = emergencyavailable;
         this.emergencynumber = emergencynumber;
         this.ambulanceavailable = ambulanceavailable;
@@ -33,12 +31,20 @@ public class HealthNewDBModelHospital implements Serializable {
         this.maternityprivacy = maternityprivacy;
     }
 
-    public int getServicecenterid() {
-        return servicecenterid;
+    public int getId(){
+        return id;
     }
 
-    public void setServicecenterid(int servicecenterid) {
-        this.servicecenterid = servicecenterid;
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getHealthId() {
+        return healthId;
+    }
+
+    public void setHealthId(int healthId) {
+        this.healthId = healthId;
     }
 
     public String getMaternityavailable() {
@@ -97,17 +103,19 @@ public class HealthNewDBModelHospital implements Serializable {
         this.maternityprivacy = maternityprivacy;
     }
 
-    public static HealthNewDBModelHospital parseHealthNewDBModelHospital(JSONObject jo, int sproviderkey) throws JSONException {
-       int _servicecenterid=sproviderkey;
+    public HealthNewDBModelHospital parse(JSONObject jo, int sproviderkey) throws JSONException {
+
+        int _id = jo.getInt("id");
+        int _healthId = sproviderkey;
         String _eavailable = jo.getString("emergency_availabe");
         String _enumber = jo.getString("emergency_num");
-        String _ambavailable=jo.getString("ambulance_available");
+        String _ambavailable = jo.getString("ambulance_available");
         String _ambnumber = jo.getString("ambulance_num");
         String _mtravailable = jo.getString("maternity_available");
-        String _mtrnum=jo.getString("maternity_num");
+        String _mtrnum = jo.getString("maternity_num");
         String _mtrprivacy = jo.getString("maternity_privacy");
 
-        return new HealthNewDBModelHospital(_servicecenterid,_eavailable,_enumber,
+        return new HealthNewDBModelHospital(_id, _healthId,_eavailable,_enumber,
                 _ambavailable,_ambnumber,_mtravailable,_mtrnum,_mtrprivacy);
     }
 }

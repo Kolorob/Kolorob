@@ -5,32 +5,21 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by israt.jahan on 7/12/2016.
  */
 
 
-public class EducationResultItemNew implements Serializable {
-    private int eduId;
-    private int serviceproviderId;
-    private String examname;
-    private String studentno;
-    private String passed;
-    private String goldena;
-    private String aplus;
+public class EducationResultItemNew extends SubModel <EducationResultItemNew> implements Serializable{
 
-    public int getServiceproviderId() {
-        return serviceproviderId;
-    }
+    private int id, educationId;
+    private String examname, studentno, passed, goldena, aplus;
 
-    public void setServiceproviderId(int serviceproviderId) {
-        this.serviceproviderId = serviceproviderId;
-    }
-
-    public EducationResultItemNew(int eduId, int serviceproviderId, String examname, String studentno,
-                                  String passed, String goldena, String aplus) {
-        this.eduId = eduId;
-        this.serviceproviderId = serviceproviderId;
+    public EducationResultItemNew(int id, int educationId, String examname, String studentno, String passed, String goldena, String aplus) {
+        this.id = id;
+        this.educationId = educationId;
         this.examname = examname;
         this.studentno = studentno;
         this.passed = passed;
@@ -38,12 +27,24 @@ public class EducationResultItemNew implements Serializable {
         this.aplus = aplus;
     }
 
-    public int getEduId() {
-        return eduId;
+    public EducationResultItemNew() {
+
     }
 
-    public void setEduId(int eduId) {
-        this.eduId = eduId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEducationId() {
+        return educationId;
+    }
+
+    public void setEducationId(int educationId) {
+        this.educationId = educationId;
     }
 
     public String getExamname() {
@@ -86,16 +87,19 @@ public class EducationResultItemNew implements Serializable {
         this.aplus = aplus;
     }
 
-    public static EducationResultItemNew parseEducationResultItemNew(JSONObject jo) throws JSONException {
-        int _eduId = jo.getInt("id");
-        int _sproviderid = jo.getInt("_service_provider");
+    public EducationResultItemNew parse(JSONObject jo, int educationId) throws JSONException {
+
+        int _id = jo.getInt("id");
+        //int _educationId = jo.getInt("_service_provider");
+        int _educationId = educationId;
         String _examname = jo.getString("exam_names");
         String _studentno = jo.getString("student_no");
         String _passed = jo.getString("passed");
         String _goldena = jo.getString("golden_a");
         String _aplus = jo.getString("a_plus");
 
-        return new EducationResultItemNew(_eduId,_sproviderid,
+        return new EducationResultItemNew(_id, _educationId,
                 _examname,_studentno,_passed,_goldena,_aplus);
     }
+
 }

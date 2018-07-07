@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="আমাদের সাথে যোগ দিন "
+            android:text="@string/join_with_us"
 
             android:layout_gravity="center|top"
             android:textSize="@dimen/abttext"
@@ -146,7 +146,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="যোগাযোগ করুন"
+                android:text="@string/contact"
 
                 android:layout_gravity="center_horizontal|top"
                 android:textSize="@dimen/abttext"

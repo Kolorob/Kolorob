@@ -283,7 +283,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/listbutton"
+                    android:id="@+id/jobButton"
                     android:elevation="2dp"
                     android:background="@null"
                     android:layout_weight="1"

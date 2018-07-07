@@ -4,201 +4,171 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
+
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
-public class HealthNewDBTableHospital {
-    private static final String TAG = HealthNewDBTableHospital.class.getSimpleName();
+
+
+public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospital> {
+
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_NEW_DB_HOS;
-    private static final String KEY_SERVICE_ID = "_servicecenterid";
-    private static final String KEY_EMERGENCY_AVAIL = "_eavailable";
-    private static final String KEY_EMERGENCY_NO = "_enumber";
-    private static final String KEY_AMBULANCE_AVAIL = "_ambavailable";
-    private static final String KEY_AMBULANCE_NO = "_ambnumber";
-    private static final String KEY_MATER_AVAIL = "_mtravailable";
-    private static final String KEY_MATER_NO = "_mtrnum";
-    private static final String KEY_MATER_PRIVACY= "_mtrprivacy"; //
 
+    private static final String KEY_HEALTH_ID = "health_id";
+    private static final String KEY_EMERGENCY_AVAILABLE = "emergency_available";
+    private static final String KEY_EMERGENCY_NO = "emergency_number";
+    private static final String KEY_AMBULANCE_AVAILABLE = "ambulance_available";
+    private static final String KEY_AMBULANCE_NO = "ambulance_number";
+    private static final String KEY_MATERNITY_AVAILABLE = "maternity_available";
+    private static final String KEY_MATERNITY_SERVICES = "maternity_sevices";
+    private static final String KEY_MATERNITY_PRIVACY = "maternity_privacy";
 
-
-
-    private Context tContext;
 
     public HealthNewDBTableHospital(Context context) {
-        tContext = context;
-        createTable();
+        super(context);
     }
-    private void createTable() {
+
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_SERVICE_ID + " INTEGER , "
-                + KEY_EMERGENCY_AVAIL + "  TEXT  , " // 0 - int "
+                + KEY_IDENTIFIER_ID + " INTEGER , "
+                + KEY_HEALTH_ID + " INTEGER , "
+                + KEY_EMERGENCY_AVAILABLE + "  TEXT  , "
                 + KEY_EMERGENCY_NO + "  TEXT , "
-                + KEY_AMBULANCE_AVAIL + "  TEXT  , " // 0 - int "
+                + KEY_AMBULANCE_AVAILABLE + "  TEXT  , "
                 + KEY_AMBULANCE_NO + "  TEXT , "
-                + KEY_MATER_AVAIL + "  TEXT  , " // 0 - int "
-                + KEY_MATER_NO + "  TEXT , "
-                + KEY_MATER_PRIVACY + "  TEXT , PRIMARY KEY(" + KEY_SERVICE_ID + "))";
+                + KEY_MATERNITY_AVAILABLE + "  TEXT  , "
+                + KEY_MATERNITY_SERVICES + "  TEXT , "
+                + KEY_MATERNITY_PRIVACY + "  TEXT , PRIMARY KEY (" + KEY_IDENTIFIER_ID + "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
 
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
-
-    public long insertItem(HealthNewDBModelHospital healthNewDBModelHospital) {
-        if (!isFieldExist(healthNewDBModelHospital.getServicecenterid())) {
+    public long insertItem(HealthNewDBModelHospital hospital) {
+        if (!isFieldExist(hospital.getId())) {
             return insertItem(
-                    healthNewDBModelHospital.getServicecenterid(), healthNewDBModelHospital.getEmergencyavailable(),
-                    healthNewDBModelHospital.getEmergencynumber(), healthNewDBModelHospital.getAmbulanceavailable(), healthNewDBModelHospital.getAmbulancenumber(),
-                    healthNewDBModelHospital.getMaternityavailable(), healthNewDBModelHospital.getMaternitynumber(), healthNewDBModelHospital.getMaternityprivacy()
+                    hospital.getId(), hospital.getHealthId(), hospital.getEmergencyavailable(),
+                    hospital.getEmergencynumber(), hospital.getAmbulanceavailable(), hospital.getAmbulancenumber(),
+                    hospital.getMaternityavailable(), hospital.getMaternitynumber(), hospital.getMaternityprivacy()
 
             );
         }
-        else {
-            return updateItem(
-                    healthNewDBModelHospital.getServicecenterid(), healthNewDBModelHospital.getEmergencyavailable(),
-                    healthNewDBModelHospital.getEmergencynumber(), healthNewDBModelHospital.getAmbulanceavailable(), healthNewDBModelHospital.getAmbulancenumber(),
-                    healthNewDBModelHospital.getMaternityavailable(), healthNewDBModelHospital.getMaternitynumber(), healthNewDBModelHospital.getMaternityprivacy()
-
-            );
-        }
+        else return updateItem(hospital);
     }
 
-    public long insertItem(int serviceproviderId, String eavail, String enumber,String ambavail,String ambnumber,
+    public long insertItem(int id, int healthId, String eavail, String enumber,String ambavail,String ambnumber,
                            String materavail,String maternumber,String materprivacy) {
-        if (isFieldExist(serviceproviderId)) {
-            return updateItem(
-                   serviceproviderId,
-                    eavail,
-                    enumber,
-                    ambavail,
-                    ambnumber,
-                    materavail,
-                    maternumber,materprivacy);
 
-        }
         ContentValues rowValue = new ContentValues();
 
-        rowValue.put(KEY_SERVICE_ID, serviceproviderId);
-        rowValue.put(KEY_EMERGENCY_AVAIL, eavail);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(KEY_HEALTH_ID, healthId);
+        rowValue.put(KEY_EMERGENCY_AVAILABLE, eavail);
         rowValue.put(KEY_EMERGENCY_NO, enumber);
-        rowValue.put(KEY_AMBULANCE_AVAIL, ambavail);
+        rowValue.put(KEY_AMBULANCE_AVAILABLE, ambavail);
         rowValue.put(KEY_AMBULANCE_NO, ambnumber);
-        rowValue.put(KEY_MATER_AVAIL, materavail);
-        rowValue.put(KEY_MATER_NO, maternumber);
-        rowValue.put(KEY_MATER_PRIVACY, materprivacy);
-
+        rowValue.put(KEY_MATERNITY_AVAILABLE, materavail);
+        rowValue.put(KEY_MATERNITY_SERVICES, maternumber);
+        rowValue.put(KEY_MATERNITY_PRIVACY, materprivacy);
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
-        return ret;}
+        return ret;
+    }
 
 
-    private long updateItem(int serviceproviderId, String eavail, String enumber,String ambavail,String ambnumber,
+    public long updateItem(HealthNewDBModelHospital hospital){
+        return updateItem(
+                hospital.getId(), hospital.getHealthId(), hospital.getEmergencyavailable(),
+                hospital.getEmergencynumber(), hospital.getAmbulanceavailable(), hospital.getAmbulancenumber(),
+                hospital.getMaternityavailable(), hospital.getMaternitynumber(), hospital.getMaternityprivacy()
+        );
+    }
+
+
+    public long updateItem(int id, int healthId, String eavail, String enumber,String ambavail,String ambnumber,
                             String materavail,String maternumber,String materprivacy) {
 
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_SERVICE_ID, serviceproviderId);
-        rowValue.put(KEY_EMERGENCY_AVAIL, eavail);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(KEY_HEALTH_ID, healthId);
+        rowValue.put(KEY_EMERGENCY_AVAILABLE, eavail);
         rowValue.put(KEY_EMERGENCY_NO, enumber);
-        rowValue.put(KEY_AMBULANCE_AVAIL, ambavail);
+        rowValue.put(KEY_AMBULANCE_AVAILABLE, ambavail);
         rowValue.put(KEY_AMBULANCE_NO, ambnumber);
-        rowValue.put(KEY_MATER_AVAIL, materavail);
-        rowValue.put(KEY_MATER_NO, maternumber);
-        rowValue.put(KEY_MATER_PRIVACY, materprivacy);
-
-
+        rowValue.put(KEY_MATERNITY_AVAILABLE, materavail);
+        rowValue.put(KEY_MATERNITY_SERVICES, maternumber);
+        rowValue.put(KEY_MATERNITY_PRIVACY, materprivacy);
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_SERVICE_ID + " = ?  ",
-                new String[]{serviceproviderId + ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?  ",
+                new String[]{id + ""});
         closeDB();
         return ret;
 
     }
 
-    public ArrayList<HealthNewDBModelHospital> getHealthSpecialistData(int node_id) {
-        ArrayList<HealthNewDBModelHospital> subCatList = new ArrayList<>();
-        //System.out.println(cat_id+"  "+sub_cat_id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SERVICE_ID +" = "+node_id, null);
+    public HealthNewDBModelHospital getNodeInfo(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
-        if (cursor.moveToFirst()) {
-            do {
-                //System.out.println("abc="+cursor.getString(4));
-                subCatList.add(cursorToSubCatList(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return subCatList;
+    public ArrayList <HealthNewDBModelHospital> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public HealthNewDBModelHospital getNodeFromForeignKey(int id){
+        return super.getNodeInfo(id, TABLE_NAME, KEY_HEALTH_ID);
+    }
+
+    public ArrayList <HealthNewDBModelHospital> getDataListFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_HEALTH_ID);
     }
 
 
-
-    public boolean isFieldExist(int nodeid) {
-        //Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        int s=cursor.getCount();
-        if (cursor.moveToFirst()) {
-            do {
-                if (cursor.getInt(0) == nodeid ) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+    public ArrayList <HealthNewDBModelHospital> getAllData(){
+        return super.getAllData(TABLE_NAME);
     }
 
-    private HealthNewDBModelHospital cursorToSubCatList(Cursor cursor) {
-        int _servicecenterid = cursor.getInt(0);
-        String _eavailable = cursor.getString(1);
-        String _enumber= cursor.getString(2);
-        String _ambavailable = cursor.getString(3);
-        String _ambnumber = cursor.getString(4);
-        String _mtravailable= cursor.getString(5);
-        String _mtrnum = cursor.getString(6);
-        String _mtrprivacy = cursor.getString(7);
 
+    public boolean isFieldExist(int id) {
+        return super.isFieldExist(id, TABLE_NAME);
+    }
 
+    public HealthNewDBModelHospital cursorToModel(Cursor cursor) {
+        int _id = cursor.getInt(0);
+        int _healthId = cursor.getInt(1);
+        String _eavailable = cursor.getString(2);
+        String _enumber= cursor.getString(3);
+        String _ambavailable = cursor.getString(4);
+        String _ambnumber = cursor.getString(5);
+        String _mtravailable= cursor.getString(6);
+        String _mtrnum = cursor.getString(7);
+        String _mtrprivacy = cursor.getString(8);
 
-
-
-        return new HealthNewDBModelHospital(_servicecenterid,_eavailable,_enumber,
+        return new HealthNewDBModelHospital(_id, _healthId,_eavailable,_enumber,
                 _ambavailable,_ambnumber,_mtravailable,_mtrnum,_mtrprivacy);
     }
 
+    public void delete(String ward, String area){
+        super.delete(ward, area, TABLE_NAME, KEY_HEALTH_ID, HealthNewDBTableMain.getTableName(), HealthNewDBTableMain.KEY_IDENTIFIER_ID);
+    }
+
+    public void delete(int id){
+        super.delete(id, TABLE_NAME);
+    }
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 
 }

@@ -1,11 +1,8 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,9 +10,11 @@ import android.widget.ImageButton;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
 /*
 this activity for showing kolorob details in app.Basically it has 4 buttons and different kind of actions ( check switch case)
 * */
+
 public class AboutUs extends AppCompatActivity implements View.OnClickListener {
     ImageButton fb, tw, wb, insta, phnus, emailus;
 
@@ -79,15 +78,15 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
-                    ToastMessageDisplay.setText(AboutUs.this,"দুঃখিত! ইমেইল করা যাচ্ছে না");
+                    ToastMessageDisplay.setText(AboutUs.this,getString(R.string.cant_mail));
                     ToastMessageDisplay.showText(AboutUs.this);
 
                 }
                 break;
             case R.id.btnphn:
 
-                AlertMessage.showMessage(AboutUs.this, "দুঃখিত",
-                        "ফোনে কল দেয়া সম্ভব হচ্ছে না");
+                AlertMessage.showMessage(AboutUs.this, getString(R.string.sorry),
+                        getString(R.string.cant_call));
                 break;
             default:break;
         }

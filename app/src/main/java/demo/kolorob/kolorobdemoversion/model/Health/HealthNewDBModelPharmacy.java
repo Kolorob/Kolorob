@@ -3,40 +3,50 @@ package demo.kolorob.kolorobdemoversion.model.Health;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import demo.kolorob.kolorobdemoversion.model.SubModel;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class HealthNewDBModelPharmacy {
-    int servicecenterid;
-    String docavailability;
-    String speciality;
-    String vaccineavailability;
+public class HealthNewDBModelPharmacy extends SubModel<HealthNewDBModelPharmacy> {
+
+    private int id, healthId;
+    private String docAvailability, speciality, vaccineAvailability;
 
     public HealthNewDBModelPharmacy() {
     }
 
-    public HealthNewDBModelPharmacy(int servicecenterid, String docavailability, String speciality, String vaccineavailability) {
-        this.servicecenterid = servicecenterid;
-        this.docavailability = docavailability;
+    public HealthNewDBModelPharmacy(int id, int healthId, String docAvailability, String speciality, String vaccineAvailability) {
+        this.id = id;
+        this.healthId = healthId;
+        this.docAvailability = docAvailability;
         this.speciality = speciality;
-        this.vaccineavailability = vaccineavailability;
+        this.vaccineAvailability = vaccineAvailability;
     }
 
-    public int getServicecenterid() {
-        return servicecenterid;
+    public int getId() {
+        return id;
     }
 
-    public void setServicecenterid(int servicecenterid) {
-        this.servicecenterid = servicecenterid;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDocavailability() {
-        return docavailability;
+    public int getHealthId() {
+        return healthId;
     }
 
-    public void setDocavailability(String docavailability) {
-        this.docavailability = docavailability;
+    public void setHealthId(int healthId) {
+        this.healthId = healthId;
+    }
+
+    public String getDocAvailability() {
+        return docAvailability;
+    }
+
+    public void setDocAvailability(String docAvailability) {
+        this.docAvailability = docAvailability;
     }
 
     public String getSpeciality() {
@@ -47,21 +57,24 @@ public class HealthNewDBModelPharmacy {
         this.speciality = speciality;
     }
 
-    public String getVaccineavailability() {
-        return vaccineavailability;
+    public String getVaccineAvailability() {
+        return vaccineAvailability;
     }
 
-    public void setVaccineavailability(String vaccineavailability) {
-        this.vaccineavailability = vaccineavailability;
+    public void setVaccineAvailability(String vaccineAvailability) {
+        this.vaccineAvailability = vaccineAvailability;
     }
-    public static HealthNewDBModelPharmacy parseHealthNewDBModelPharmacy(JSONObject jo,int sproviderkey) throws JSONException {
-       int _servicecenterid=sproviderkey;
-        String _davailable = jo.getString("doctor_available");
+
+
+    public HealthNewDBModelPharmacy parse(JSONObject jo,int _healthId) throws JSONException {
+
+        int _id = jo.getInt("id");
+        String doctorAvailable = jo.getString("doctor_available");
         String _speciality = jo.getString("speciality");
 
-        String _vaccineavailable = jo.getString("vaccine_available");
+        String vaccineAvailable = jo.getString("vaccine_available");
 
-        return new HealthNewDBModelPharmacy(_servicecenterid,_davailable,
-                _speciality,_vaccineavailable);
+        return new HealthNewDBModelPharmacy(_id, _healthId,doctorAvailable,
+                _speciality,vaccineAvailable);
     }
 }

@@ -13,212 +13,175 @@ import demo.kolorob.kolorobdemoversion.model.StoredArea;
  * Created by HP on 2/13/2017.
  */
 
-public class StoredAreaTable {
-    private static final String TAG = StoredAreaTable.class.getSimpleName();
+public class StoredAreaTable extends BaseDBTable<StoredArea> {
 
     private static final String TABLE_NAME = DatabaseHelper.AREASTORED;
 
-    private static final String WARDID = "_ward_id"; // 0 -integer
-    private static final String AREANAME = "_area_name"; // 1 - text
-    private static final String AREANAMEBN = "_area_nameBn"; // 1 - text
-    private static final String LAT = "_lat";
-    private static final String LON = "_lon";
+    private static final String WARDID = "_ward_id";
+    private static final String AREANAME = "name_en";
+    private static final String AREANAMEBN = "name_bn";
+    private static final String PARENTAREA = "parent_area";
+    private static final String LAT = "lat";
+    private static final String LON = "lon";
 
-    // : But boolean value,
-    // for simplicity of the local table
-    // structure it's kept as string.
-
-    private Context tContext;
 
     public StoredAreaTable(Context context) {
-        tContext = context;
-        createTable();
+        super(context);
     }
 
-    private void createTable() {
+    public void createTable() {
+
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + WARDID + " TEXT, " // 0 - int
+                + KEY_IDENTIFIER_ID + " INTEGER PRIMARY KEY, "
+                + WARDID + " TEXT, "
                 + AREANAME + " TEXT, "
                 + AREANAMEBN + " TEXT, "
-                + LAT + " TEXT, " // 1 - tex// 2 - text
-                + LON + " TEXT, "
+                + PARENTAREA + " TEXT, "
+                + LAT + " TEXT, "
+                + LON + " TEXT "
+                + " )";
 
-                + " PRIMARY KEY("+WARDID+","+AREANAME+"))";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
 
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
-
-    public long insertItem(StoredArea categoryItem){
-        return insertItem(
-                categoryItem.getWardid(),
-                categoryItem.getAreaid(),categoryItem.getAreaBn(),categoryItem.getLat(),categoryItem.getLon()
-
-        );
-    }
-
-    public long insertItem(String id, String name,String areabn,String lat, String lon) {
-        if (isFieldExist(id,name)) {
-            return updateItem(id, name, areabn, lat, lon);
+    public long insertItem(StoredArea storedArea) {
+        if (isFieldExist(storedArea.getId())) {
+            return updateItem(storedArea);
         }
+        return insertItem(storedArea.getId(), storedArea.getWard(), storedArea.getArea(), storedArea.getAreaBn(), storedArea.getParentArea(), storedArea.getLat(), storedArea.getLon());
+    }
+
+    public long updateItem(StoredArea storedArea) {
+        return updateItem(storedArea.getId(), storedArea.getWard(), storedArea.getArea(), storedArea.getAreaBn(), storedArea.getParentArea(), storedArea.getLat(), storedArea.getLon());
+    }
+
+    private long insertItem(int id, String ward, String area, String areaBn, String parentArea, String lat, String lon) {
+
         ContentValues rowValue = new ContentValues();
-        rowValue.put(WARDID, id);
-        rowValue.put(AREANAME, name);
-        rowValue.put(AREANAMEBN, areabn);
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(WARDID, ward);
+        rowValue.put(AREANAME, area);
+        rowValue.put(AREANAMEBN, areaBn);
+        rowValue.put(PARENTAREA, parentArea);
         rowValue.put(LAT, lat);
         rowValue.put(LON, lon);
+
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
         return ret;
     }
-    public ArrayList<String> getAllCatNames() {
-        ArrayList<String> ciList = new ArrayList<>();
+
+    public ArrayList<StoredArea> getStoredLocation(String ward, String area) {
+        ArrayList<StoredArea> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + WARDID + " = '" + ward + "' AND " + AREANAME + " = '" + area + "'", null);
 
         if (cursor.moveToFirst()) {
             do {
-
-                String name = cursor.getString(1);
-                ciList.add(name);
+                siList.add(cursorToModel(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return ciList;
+        return siList;
     }
 
-    public boolean isFieldExist(String id,String key) {
-        // Lg.d(TAG, "isFieldExist : inside, id=" + id);
+
+    public boolean isFieldExist(int id) {
+        return super.isFieldExist(id, TABLE_NAME);
+    }
+
+    public boolean isAreaStored(String ward, String area) {
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (id.equals(cursor.getString(0))&& key.equals(cursor.getString(1))) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + WARDID + " = '" + ward + "'" + " AND " + AREANAME + " = '" + area + "'", null);
+
+        boolean stored = cursor.moveToFirst();
+
         cursor.close();
         closeDB();
-        return false;
+        return stored;
     }
 
-    public boolean isAreaStored(String ward, String area){
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = '" + ward + "'" + " AND "+ AREANAME+" = '"+area+"'", null);
+    private long updateItem(int id, String ward, String area, String areaBn, String parentArea, String lat, String lon) {
 
-        if (cursor.moveToFirst()) {
-            do {
-                if (ward.equals(cursor.getString(0)) && area.equals(cursor.getString(1))) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
-    }
-
-    private long updateItem(String id, String name,String areabn,String lat, String lon) {
         ContentValues rowValue = new ContentValues();
-        rowValue.put(WARDID, id);
-        rowValue.put(AREANAME, name);
-        rowValue.put(AREANAMEBN, areabn);
+
+        rowValue.put(KEY_IDENTIFIER_ID, id);
+        rowValue.put(WARDID, ward);
+        rowValue.put(AREANAME, area);
+        rowValue.put(AREANAMEBN, areaBn);
+        rowValue.put(PARENTAREA, parentArea);
         rowValue.put(LAT, lat);
         rowValue.put(LON, lon);
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, WARDID + " = ? AND "+AREANAME+ " =?",
-                new String[]{id + "",name+ ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
+                new String[]{id + ""});
         closeDB();
         return ret;
     }
-    public ArrayList<StoredArea> getAllstored() {
-        ArrayList<StoredArea> siList = new ArrayList<>();
+
+
+    public StoredArea getNodeInfo(String ward, String area) {
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+        StoredArea storedArea = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + WARDID + " = '" + ward + "' AND (" + AREANAME + " = '" + area + "' OR " + PARENTAREA + " = '" + area + "' )", null);
 
         if (cursor.moveToFirst()) {
             do {
-                siList.add(cursorToArea(cursor));
+                storedArea = new StoredArea(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return siList;
-    }
-    public ArrayList<StoredArea> getstoredlocation(String ward,String area) {
-        ArrayList<StoredArea> siList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = '" + ward + "'" + " AND "+ AREANAME+" = '"+area+"'", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                siList.add(cursorToArea(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList;
-    }
-    public void delete(String ward,String area)
-    {
-        DatabaseHelper databaseHelper=new DatabaseHelper(StoredAreaTable.this.tContext);
-        SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, WARDID + " = '" + ward + "' and " + AREANAME + "= '"+ area +"'", null);
-        database.close();
-    }
-   /* public ArrayList<CategoryItem> getAllCategories() {
-        ArrayList<CategoryItem> ciList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                ciList.add(cursorToCategory(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return ciList;
+        return storedArea;
     }
 
-    */
-   private StoredArea cursorToArea(Cursor cursor) {
 
-       String wardid = cursor.getString(0);
-       String areaname = cursor.getString(1);
-       String areanamebn = cursor.getString(2);
-       String lat = cursor.getString(3);
-       String lon = cursor.getString(4);
-       return new StoredArea(wardid,areaname,areanamebn,lat,lon);
-   }
+    public void delete(int id) {
+        super.delete(id, TABLE_NAME);
+    }
+
+
+    public StoredArea cursorToModel(Cursor cursor) {
+
+        int _id = cursor.getInt(0);
+        String _ward = cursor.getString(1);
+        String _area = cursor.getString(2);
+        String _areaBn = cursor.getString(3);
+        String _parentArea = cursor.getString(4);
+        String _lat = cursor.getString(5);
+        String _lon = cursor.getString(6);
+
+        return new StoredArea(_id, _ward, _area, _areaBn, _parentArea, _lat, _lon);
+    }
+
+
+    public ArrayList<StoredArea> getAllData() {
+        return super.getAllData(TABLE_NAME);
+    }
+
+    public StoredArea getNodeInfo(int id) {
+        return super.getNodeInfo(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList<StoredArea> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        //Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
+
 }

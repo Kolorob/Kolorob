@@ -19,7 +19,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
     }
 }
 
@@ -27,11 +27,15 @@ apply plugin: 'com.android.library'
 
 repositories {
     jcenter()
+    maven {
+        url 'https://maven.google.com'
+    }
+    google()
 }
 
 android {
     compileSdkVersion 21
-    buildToolsVersion = '25.0.0'
+    buildToolsVersion = '26.0.2'
 }
 
 apply from: 'rules.gradle'

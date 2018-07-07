@@ -37,9 +37,7 @@ public class RecyclerView_AdapterCityCorporation extends RecyclerView.Adapter<Re
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         final CityCorporation cc = ccList.get(position);
 
-        RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
-
-        mainHolder.title.setText(cc.getCityCorporation_bn());
+        holder.title.setText(cc.getCityCorporation_bn());
 
     }
 
@@ -49,10 +47,9 @@ public class RecyclerView_AdapterCityCorporation extends RecyclerView.Adapter<Re
         // This method will inflate the custom layout and return as viewholder
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
-        ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
-                R.layout.data_loading_area, viewGroup, false);
-        RecyclerViewHolder listHolder = new RecyclerViewHolder(mainGroup);
-        return listHolder;
+        ViewGroup mainGroup = (ViewGroup) mInflater.inflate(R.layout.data_loading_area, viewGroup, false);
+
+        return new RecyclerViewHolder(mainGroup);
 
     }
 }

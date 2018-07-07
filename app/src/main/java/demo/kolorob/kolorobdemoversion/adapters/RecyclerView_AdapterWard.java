@@ -38,13 +38,9 @@ public class RecyclerView_AdapterWard extends RecyclerView.Adapter<RecyclerViewH
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         final Ward ward = wardList.get(position);
 
-        RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
-
-
-        // bitmap
 
         // setting title
-        mainHolder.title.setText(ward.getWard_bn());
+        holder.title.setText(ward.getWard_bn());
     /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +61,7 @@ public class RecyclerView_AdapterWard extends RecyclerView.Adapter<RecyclerViewH
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
                 R.layout.data_loading_area, viewGroup, false);
-        RecyclerViewHolder listHolder = new RecyclerViewHolder(mainGroup);
-        return listHolder;
+        return new RecyclerViewHolder(mainGroup);
 
     }
 

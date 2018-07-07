@@ -3,13 +3,11 @@ package demo.kolorob.kolorobdemoversion.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 /**
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class Ward {
+public class Ward extends BaseModel <Ward> {
 
     private String ward_name, ward_bn, ward_keyword;
     private int id, cc_id;
@@ -22,6 +20,10 @@ public class Ward {
         this.ward_bn = ward_bn;
         this.ward_keyword = ward_keyword;
         this.cc_id = cc_id;
+    }
+
+    public Ward() {
+
     }
 
     public int getId() {
@@ -64,13 +66,14 @@ public class Ward {
         this.ward_keyword = ward_keyword;
     }
 
-    public static Ward parseWard(JSONObject jo) throws JSONException {
+
+    public Ward parse(JSONObject jo) throws JSONException {
+
         int id = jo.getInt("id");
         String ward_en = jo.getString("ward_en");
         String ward_bn = jo.getString("ward_bn");
         String ward_keyword = jo.getString("ward_keyword");
         int cc_id = jo.getInt("_city_corporation");
-
 
         return new Ward(id, ward_en, ward_bn, ward_keyword, cc_id);
     }
